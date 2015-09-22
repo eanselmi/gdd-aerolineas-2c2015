@@ -1,6 +1,6 @@
-﻿namespace AerolineaFrba.Abm_Rol
+﻿namespace AerolineaFrba
 {
-    partial class Form1
+    partial class Principal
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.SuspendLayout();
+            // 
+            // Principal
+            // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.IsMdiContainer = true;
+            this.Name = "Principal";
+            this.Text = "Aerolineas FRBA";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Principal_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
