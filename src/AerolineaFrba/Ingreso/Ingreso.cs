@@ -33,6 +33,11 @@ namespace AerolineaFrba.Ingreso
             this.textPassword.Clear();
         }
 
+        private void textUsuario_TextChanged(object sender, System.EventArgs e)
+        {
+            
+        }
+
     
     }
 }
