@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba.Canje_Millas
 {
-    public partial class Form1 : Form
+    public partial class vistaCanjesRealizados : Form
     {
-        public Form1()
+        public vistaCanjesRealizados()
         {
             InitializeComponent();
         }

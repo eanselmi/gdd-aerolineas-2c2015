@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Compra
+namespace AerolineaFrba.Tarjeta
 {
-    public partial class Form1 : Form
+    public partial class vistaEliminarTarjeta : Form
     {
-        public Form1()
+        public vistaEliminarTarjeta()
         {
             InitializeComponent();
         }

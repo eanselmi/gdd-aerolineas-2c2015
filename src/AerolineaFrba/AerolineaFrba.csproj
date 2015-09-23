@@ -65,23 +65,53 @@
     <Compile Include="Abm Ruta\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Canje Millas\Form1.cs">
+    <Compile Include="Canje Millas\vistaCanjesRealizados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Canje Millas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Canje Millas\vistaCanjesRealizados.Designer.cs">
+      <DependentUpon>vistaCanjesRealizados.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\Form1.cs">
+    <Compile Include="Canje Millas\vistaRealizarCanjeMillas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Canje Millas\vistaRealizarCanjeMillas.Designer.cs">
+      <DependentUpon>vistaRealizarCanjeMillas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Consulta Millas\Form1.cs">
+    <Compile Include="Compra\vistaCancelarEncomienda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Consulta Millas\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Compra\vistaCancelarEncomienda.Designer.cs">
+      <DependentUpon>vistaCancelarEncomienda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra\vistaComprarPasajesPropios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\vistaComprarPasajesPropios.Designer.cs">
+      <DependentUpon>vistaComprarPasajesPropios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra\vistaComprarPasajeTerceros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\vistaComprarPasajeTerceros.Designer.cs">
+      <DependentUpon>vistaComprarPasajeTerceros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra\vistaDarDeBajaPasajes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\vistaDarDeBajaPasajes.Designer.cs">
+      <DependentUpon>vistaDarDeBajaPasajes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra\vistaRealizarEncomienda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\vistaRealizarEncomienda.Designer.cs">
+      <DependentUpon>vistaRealizarEncomienda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Consulta Millas\vistaConsultaMillas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Consulta Millas\vistaConsultaMillas.Designer.cs">
+      <DependentUpon>vistaConsultaMillas.cs</DependentUpon>
     </Compile>
     <Compile Include="Devolucion\Form1.cs">
       <SubType>Form</SubType>
@@ -89,6 +119,7 @@
     <Compile Include="Devolucion\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="funcionesComunes.cs" />
     <Compile Include="Generacion Viaje\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +158,33 @@
     <Compile Include="Registro Llegada Destino\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tarjeta\vistaAgregarTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tarjeta\vistaAgregarTarjeta.Designer.cs">
+      <DependentUpon>vistaAgregarTarjeta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tarjeta\vistaEliminarTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tarjeta\vistaEliminarTarjeta.Designer.cs">
+      <DependentUpon>vistaEliminarTarjeta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios\vistaAdministrador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Usuarios\vistaAdministrador.Designer.cs">
+      <DependentUpon>vistaAdministrador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Usuarios\vistaInvitado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Usuarios\vistaInvitado.Designer.cs">
+      <DependentUpon>vistaInvitado.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Consulta Millas\vistaConsultaMillas.resx">
+      <DependentUpon>vistaConsultaMillas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ingreso\Ingreso.resx">
       <DependentUpon>Ingreso.cs</DependentUpon>
     </EmbeddedResource>
@@ -142,6 +200,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Usuarios\vistaInvitado.resx">
+      <DependentUpon>vistaInvitado.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
