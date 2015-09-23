@@ -1,0 +1,582 @@
+-----------------------------------------------------------------------
+-- MASTER TABLE
+USE GD2C2015;
+
+-----------------------------------------------------------------------
+-- SCHEMA
+
+IF NOT EXISTS (
+    SELECT schema_name 
+    FROM information_schema.schemata 
+    WHERE schema_name = 'AERO' 
+    )
+
+BEGIN
+    EXEC sp_executesql N'CREATE SCHEMA AERO;';
+END
+
+-- DROPS
+
+IF OBJECT_ID('AERO.aeronaves') IS NOT NULL
+BEGIN
+DROP TABLE AERO.aeronaves;
+END;
+
+-----------------------------------------------------------------------
+-- DROP TABLES
+
+IF OBJECT_ID('AERO.aeronaves') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.aeronaves;
+END;
+
+IF OBJECT_ID('AERO.fabricantes') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.fabricantes;
+END;
+
+IF OBJECT_ID('AERO.tipos_de_servicios') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.tipos_de_servicios;
+END;
+
+IF OBJECT_ID('AERO.butacas') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.butacas;
+END;
+
+IF OBJECT_ID('AERO.pasajes') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.pasajes;
+END;
+
+IF OBJECT_ID('AERO.clientes') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.clientes;
+END;
+
+IF OBJECT_ID('AERO.boletos_de_compra') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.boletos_de_compra;
+END;
+
+IF OBJECT_ID('AERO.roles') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.roles;
+END;
+
+IF OBJECT_ID('AERO.funcionalidades') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.funcionalidades;
+END;
+
+IF OBJECT_ID('AERO.funcionalidades_por_rol') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.funcionalidades_por_rol;
+END;
+
+IF OBJECT_ID('AERO.administradores') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.administradores;
+END;
+
+IF OBJECT_ID('AERO.productos') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.productos;
+END;
+
+IF OBJECT_ID('AERO.periodos_de_inactividad') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.periodos_de_inactividad;
+END;
+
+IF OBJECT_ID('AERO.aeronaves_por_periodos') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.aeronaves_por_periodos;
+END;
+
+IF OBJECT_ID('AERO.servicios_por_rutas') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.servicios_por_rutas;
+END;
+
+IF OBJECT_ID('AERO.aeropuertos') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.aeropuertos;
+END;
+
+IF OBJECT_ID('AERO.vuelos') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.vuelos;
+END;
+
+IF OBJECT_ID('AERO.rutas') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.rutas;
+END;
+
+IF OBJECT_ID('AERO.encomiendas') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.encomiendas;
+END;
+
+IF OBJECT_ID('AERO.ciudades') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.ciudades;
+END;
+
+IF OBJECT_ID('AERO.paquetes') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.paquetes;
+END;
+
+IF OBJECT_ID('AERO.canjes') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.canjes;
+END;
+
+IF OBJECT_ID('AERO.tarjetas_de_credito') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.tarjetas_de_credito;
+END;
+
+IF OBJECT_ID('AERO.cancelaciones') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.cancelaciones;
+END;
+
+
+-----------------------------------------------------------------------
+-- TABLES
+
+CREATE TABLE AERO.aeronaves (
+    ID  INT   IDENTITY(1,1)    PRIMARY KEY,
+    MATRICULA        NVARCHAR(255)    UNIQUE NOT NULL,
+    MODELO        NVARCHAR(255),
+    KG_DISPONIBLES    NUMERIC(18,0)    NOT NULL,
+    FABRICANTE_ID    INT            NOT NULL,
+    TIPO_SERVICIO_ID    INT            NOT NULL,
+    BAJA            NVARCHAR(255),
+    FECHA_ALTA      DATETIME        NOT NULL,
+    CANT_BUTACAS    INT            NOT NULL,
+    FECHA_BAJA    DATETIME,
+    CONSTRAINT CK001 CHECK (BAJA IN ('DEFINITIVA', 'POR PERIODO'))
+)
+
+CREATE TABLE AERO.fabricantes (
+    ID  INT  IDENTITY(1,1)    PRIMARY KEY,
+    NOMBRE        NVARCHAR(255)    NOT NULL
+)
+
+CREATE TABLE AERO.tipos_de_servicios (
+    ID INT   IDENTITY(1,1)    PRIMARY KEY,
+    NOMBRE        NVARCHAR(255)    NOT NULL
+)
+
+CREATE TABLE AERO.butacas (
+    ID  INT     IDENTITY(1,1)    PRIMARY KEY,
+    NUMERO        NUMERIC(18,0)    NOT NULL,
+    TIPO            NVARCHAR(255),
+    PISO            NUMERIC(18,0),
+    AERONAVE_ID    INT            NOT NULL,
+    ESTADO        NVARCHAR(255),
+    CONSTRAINT CK002 CHECK (TIPO IN ('VENTANILLA', 'PASILLO')),
+    CONSTRAINT CK003 CHECK (ESTADO IN ('LIBRE', 'COMPRADO'))
+)
+
+CREATE TABLE AERO.pasajes (
+    ID    INT    IDENTITY(1,1)    PRIMARY KEY,
+    FECHA_COMPRA    DATETIME        NOT NULL,
+    PRECIO        NUMERIC(18,2),
+    CODIGO        NUMERIC(18,0)    UNIQUE NOT NULL,
+    BUTACA_ID        INT            NOT NULL,
+    CLIENTE_ID        INT            NOT NULL,
+    BOLETO_COMPRA_ID INT
+)
+
+CREATE TABLE AERO.clientes (
+    ID   INT     IDENTITY(1,1)    PRIMARY KEY,
+    ROL_ID        INT            NOT NULL,
+    NOMBRE        NVARCHAR(255)    NOT NULL,
+    APELLIDO        NVARCHAR(255),
+    DNI            NUMERIC(18,0)    UNIQUE NOT NULL,
+    DIRECCION        NVARCHAR(255),
+    TELEFONO        NUMERIC(18,0),
+    MAIL            NVARCHAR(255),
+    FECHA_NACIMIENTO DATETIME,
+    MILLAS_ACUMULADAS INT
+)
+
+CREATE TABLE AERO.boletos_de_compra (
+    ID INT IDENTITY(1,1)    PRIMARY KEY,
+    CODIGO_COMPRA    NUMERIC(18,0)    NOT NULL,
+    FECHA_COMPRA    DATETIME,
+    PRECIO_COMPRA    NUMERIC(18,2),
+    TIPO_COMPRA    INT, --BOOLEAN
+    CLIENTE_ID        INT            NOT NULL
+)
+
+CREATE TABLE AERO.roles (
+    ID    INT    IDENTITY(1,1)    PRIMARY KEY
+)
+
+CREATE TABLE AERO.funcionalidades (
+    ID INT IDENTITY(1,1)    PRIMARY KEY,
+    DETALLES        NVARCHAR(255)
+)
+
+CREATE TABLE AERO.funcionalidades_por_rol (
+	ROL_ID    INT,
+	FUNCIONALIDAD_ID INT, 
+	PRIMARY KEY(ROL_ID,FUNCIONALIDAD_ID)
+)
+
+CREATE TABLE AERO.administradores (
+    ID INT IDENTITY(1,1)    PRIMARY KEY,
+    ROL_ID        INT            NOT NULL ,
+    USERNAME        NVARCHAR(255)    UNIQUE NOT NULL,
+    PASSWORD        NVARCHAR(255)    
+)
+
+CREATE TABLE AERO.productos (
+    ID  INT  IDENTITY(1,1)    PRIMARY KEY,
+    NOMBRE        NVARCHAR(255)    UNIQUE,
+    MILAS_REQUERIDAS INT,
+    STOCK        INT        
+)
+
+CREATE TABLE AERO.periodos_de_inactividad (
+    ID    INT     IDENTITY(1,1)    PRIMARY KEY,
+    DESDE        DATETIME,
+    HASTA        DATETIME
+)
+
+CREATE TABLE AERO.aeronaves_por_periodos (
+    AERONAVE_ID INT,
+    PERIODO_ID  INT,
+    PRIMARY KEY(AERONAVE_ID,PERIODO_ID)
+)
+
+CREATE TABLE AERO.servicios_por_rutas (
+	TIPO_SERVICIO_ID   INT  ,
+    RUTA_ID   INT,
+    PRIMARY KEY(TIPO_SERVICIO_ID, RUTA_ID)
+)
+
+CREATE TABLE AERO.aeropuertos (
+    ID  INT    IDENTITY(1,1)    PRIMARY KEY,
+    NOMBRE        NVARCHAR(255),
+    CIUDAD_ID        INT             NOT NULL
+)
+
+CREATE TABLE AERO.vuelos (
+    ID     INT    IDENTITY(1,1)     PRIMARY KEY,
+    FECHA_SALIDA     DATETIME,
+    FECHA_LLEGADA     DATETIME,
+    FECHA_LLEGADA_ESTIMADA DATETIME,
+    AERONAVE_ID     INT            NOT NULL,
+    RUTA_ID         INT            NOT NULL
+)
+
+CREATE TABLE AERO.rutas (
+    ID     INT     IDENTITY(1,1)     PRIMARY KEY,
+    CODIGO         NUMERIC(18,0)    UNIQUE NOT NULL,
+    PRECIO_BASE_KG     NUMERIC(18,2),
+    PRECIO_BASE_PASAJE NUMERIC(18,2),
+    ORIGEN_ID        INT            NOT NULL,
+    DESTINO_ID        INT            NOT NULL,
+    TIPO_SERVICIO_ID    INT            NOT NULL
+)
+
+CREATE TABLE AERO.encomiendas (
+    ID  INT    IDENTITY(1,1)    PRIMARY KEY,
+    BOLETO_COMPRA_ID INT,
+    VUELO_ID         INT
+)
+
+CREATE TABLE AERO.ciudades (
+    ID     INT     IDENTITY(1,1)     PRIMARY KEY,
+    NOMBRE         NVARCHAR(255)    NOT NULL
+)
+
+CREATE TABLE AERO.paquetes(
+    ID   INT  IDENTITY(1,1)     PRIMARY KEY,
+    CODIGO         NUMERIC(18,0)    UNIQUE NOT NULL,
+    PRECIO         NUMERIC(18,2),
+    KG             NUMERIC(18,0),
+    FECHA         DATETIME,
+    ENCOMIENDA_ID     INT
+)
+
+CREATE TABLE AERO.canjes (
+    ID     INT    IDENTITY(1,1)     PRIMARY KEY,
+    CLIENTE_ID         INT             NOT NULL,
+    PRODUCTO_ID     INT             NOT NULL,
+    CANTIDAD         INT,
+    FECHA         DATETIME
+)
+
+CREATE TABLE AERO.tarjetas_de_credito (
+    ID   INT   IDENTITY(1,1)     PRIMARY KEY,
+    TIPO             NVARCHAR(255),
+    NUMERO         NUMERIC(18,0)    UNIQUE NOT NULL,
+    CODIGO_SEGURIDAD NUMERIC(18,0)    NOT NULL,
+    FECHA_VTO         DATETIME        NOT NULL,
+    CLIENTE_ID         INT            NOT NULL
+)
+
+CREATE TABLE AERO.cancelaciones (
+    ID   INT   IDENTITY(1,1)     PRIMARY KEY,
+    FECHA_DEVOLUCION DATETIME,
+    BOLETO_COMPRA_ID INT            NOT NULL,
+    MOTIVO         NVARCHAR(255)
+)
+
+-----------------------------------------------------------------------
+-- FOREIGN KEYS && INDEXES
+
+ALTER TABLE AERO.aeronaves
+ADD CONSTRAINT AERONAVES_FK01 FOREIGN KEY
+(FABRICANTE_ID) REFERENCES AERO.fabricantes (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'AERO_FABRIC' AND object_id = OBJECT_ID('AERO.aeronaves'))
+    BEGIN
+       CREATE INDEX AERO_FABRIC ON AERO.aeronaves (FABRICANTE_ID);
+    END
+
+ALTER TABLE AERO.aeronaves
+ADD CONSTRAINT AERONAVES_FK02 FOREIGN KEY
+(TIPO_SERVICIO_ID) REFERENCES AERO.tipos_de_servicio (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'AERO_TIPO_SERV' AND object_id = OBJECT_ID('AERO.aeronaves'))
+    BEGIN
+       CREATE INDEX AERO_TIPO_SERV ON AERO.aeronaves (TIPO_SERVICIO_ID);
+    END
+
+ALTER TABLE AERO.butacas
+ADD CONSTRAINT BUTACAS_FK01 FOREIGN KEY
+(AERONAVE_ID) REFERENCES AERO.aeronaves (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'BUTAC_AERO' AND object_id = OBJECT_ID('AERO.butacas'))
+    BEGIN
+       CREATE INDEX BUTAC_AERO ON AERO.butacas (AERONAVE_ID);
+    END
+
+ALTER TABLE AERO.pasajes
+ADD CONSTRAINT PASAJES_FK01 FOREIGN KEY
+(BUTACA_ID) REFERENCES AERO.butacas (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'PASAJ_BUTAC' AND object_id = OBJECT_ID('AERO.pasajes'))
+    BEGIN
+       CREATE INDEX PASAJ_BUTAC ON AERO.pasajes (BUTACA_ID);
+    END
+
+ALTER TABLE AERO.pasajes
+ADD CONSTRAINT PASAJES_FK02 FOREIGN KEY
+(CLIENTE_ID) REFERENCES AERO.clientes (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'PASAJ_CLIENT' AND object_id = OBJECT_ID('AERO.pasajes'))
+    BEGIN
+       CREATE INDEX PASAJ_CLIENT ON AERO.pasajes (CLIENTE_ID);
+    END
+
+ALTER TABLE AERO.pasajes
+ADD CONSTRAINT PASAJES_FK03 FOREIGN KEY
+(BOLETO_COMPRA_ID) REFERENCES AERO.boletos_de_compra (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'PASAJ_BOL_COMP' AND object_id = OBJECT_ID('AERO.pasajes'))
+    BEGIN
+       CREATE INDEX PASAJ_BOL_COMP ON AERO.pasajes (BOLETO_COMPRA_ID);
+    END
+
+ALTER TABLE AERO.clientes
+ADD CONSTRAINT CLIENTES_FK01 FOREIGN KEY
+(ROL_ID) REFERENCES AERO.roles (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'CLIENT_ROLES' AND object_id = OBJECT_ID('AERO.clientes'))
+    BEGIN
+       CREATE INDEX CLIENT_ROLES ON AERO.clientes (ROL_ID);
+    END
+
+ALTER TABLE AERO.boletos_de_compra
+ADD CONSTRAINT BOLETOS_DE_COMPRA_FK01 FOREIGN KEY
+(CLIENTE_ID) REFERENCES AERO.clientes (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_BOL_COMP_CLIENT' AND object_id = OBJECT_ID('AERO.boletos_de_compra'))
+    BEGIN
+       CREATE INDEX FKI_BOL_COMP_CLIENT ON AERO.boletos_de_compra (CLIENTE_ID);
+    END
+
+ALTER TABLE AERO.funcionalidades_por_rol
+ADD CONSTRAINT FUNCIONALIDADES_POR_ROL_FK01 FOREIGN KEY
+(ROL_ID) REFERENCES AERO.roles (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_FUNCXROL_ROL' AND object_id = OBJECT_ID('AERO.funcionalidades_por_rol'))
+    BEGIN
+       CREATE INDEX FKI_FUNCXROL_ROL ON AERO.funcionalidades_por_rol (ROL_ID);
+    END
+
+ALTER TABLE AERO.funcionalidades_por_rol
+ADD CONSTRAINT FUNCIONALIDADES_POR_ROL_FK02 FOREIGN KEY
+(FUNCIONALIDAD_ID) REFERENCES AERO.funcionalidades (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_FUNCXROL_FUNC' AND object_id = OBJECT_ID('AERO.funcionalidades_por_rol'))
+    BEGIN
+       CREATE INDEX FKI_FUNCXROL_FUNC ON AERO.funcionalidades_por_rol (FUNCIONALIDAD_ID);
+    END
+
+ALTER TABLE AERO.administradores
+ADD CONSTRAINT ADMINISTRADORES_FK01 FOREIGN KEY
+(ROL_ID) REFERENCES AERO.roles (ID_ROL)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_ADM_ROL' AND object_id = OBJECT_ID('AERO.administradores'))
+    BEGIN
+       CREATE INDEX FKI_ADM_ROL ON AERO.administradores (ROL_ID);
+    END
+
+ALTER TABLE AERO.aeronaves_por_periodos
+ADD CONSTRAINT AERONAVES_POR_PERIODOS_FK01 FOREIGN KEY
+(AERONAVE_ID) REFERENCES AERO.aeronaves (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_AEROXPER_AERO' AND object_id = OBJECT_ID('AERO.aeronaves_por_periodos'))
+    BEGIN
+       CREATE INDEX FKI_AEROXPER_AERO ON AERO.aeronaves_por_periodos (AERONAVE_ID);
+    END
+
+ALTER TABLE AERO.aeronaves_por_periodos
+ADD CONSTRAINT AERONAVES_POR_PERIODOS_FK02 FOREIGN KEY
+(PERIODO_ID) REFERENCES AERO.periodos_de_inactividad (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_AEROXPER_PERXINAC' AND object_id = OBJECT_ID('AERO.aeronaves_por_periodos'))
+    BEGIN
+       CREATE INDEX FKI_AEROXPER_PERXINAC ON AERO.aeronaves_por_periodos (PERIODO_ID);
+    END
+
+ALTER TABLE AERO.servicios_por_rutas
+ADD CONSTRAINT SERVICIOS_POR_RUTAS_FK01 FOREIGN KEY
+(TIPO_SERVICIO_ID) REFERENCES AERO.tipos_de_servicios (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_SERVXRUT_TIPOSERV' AND object_id = OBJECT_ID('AERO.servicios_por_rutas'))
+    BEGIN
+       CREATE INDEX FKI_SERVXRUT_TIPOSERV ON AERO.servicios_por_rutas (TIPO_SERVICIO_ID);
+    END
+
+ALTER TABLE AERO.servicios_por_rutas
+ADD CONSTRAINT SERVICIOS_POR_RUTAS_FK02 FOREIGN KEY
+(RUTA_ID) REFERENCES AERO.rutas (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_SERVXRUT_RUT' AND object_id = OBJECT_ID('AERO.servicios_por_rutas'))
+    BEGIN
+       CREATE INDEX FKI_SERVXRUT_RUT ON AERO.servicios_por_rutas (RUTA_ID);
+    END
+
+ALTER TABLE AERO.aeropuertos
+ADD CONSTRAINT AEROPUERTOS_FK01 FOREIGN KEY
+(CIUDAD_ID) REFERENCES AERO.ciudades (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_AERO_CIUD' AND object_id = OBJECT_ID('AERO.aeropuertos'))
+    BEGIN
+       CREATE INDEX FKI_AERO_CIUD ON AERO.aeropuertos (CIUDAD_ID);
+    END
+
+ALTER TABLE AERO.vuelos
+ADD CONSTRAINT VUELOS_FK01 FOREIGN KEY
+(AERONAVE_ID) REFERENCES AERO.aeronaves (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_VUEL_AERO' AND object_id = OBJECT_ID('AERO.vuelos'))
+    BEGIN
+       CREATE INDEX FKI_VUEL_AERO ON AERO.vuelos (AERONAVE_ID);
+    END
+
+ALTER TABLE AERO.vuelos
+ADD CONSTRAINT VUELOS_FK02 FOREIGN KEY
+(RUTA_ID) REFERENCES AERO.rutas (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_VUEL_RUT' AND object_id = OBJECT_ID('AERO.vuelos'))
+    BEGIN
+       CREATE INDEX FKI_VUEL_RUT ON AERO.vuelos (RUTA_ID);
+    END
+
+ALTER TABLE AERO.rutas
+ADD CONSTRAINT RUTAS_FK01 FOREIGN KEY
+(TIPO_SERVICIO_ID) REFERENCES AERO.tipos_de_servicio (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_RUT_TIPOSERV' AND object_id = OBJECT_ID('AERO.rutas'))
+    BEGIN
+       CREATE INDEX FKI_RUT_TIPOSERV ON AERO.rutas (TIPO_SERVICIO_ID);
+    END
+
+ALTER TABLE AERO.rutas
+ADD CONSTRAINT RUTAS_FK02 FOREIGN KEY
+(ORIGEN_ID) REFERENCES AERO.aeropuertos (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_RUT_AERO' AND object_id = OBJECT_ID('AERO.rutas'))
+    BEGIN
+       CREATE INDEX FKI_RUT_AERO ON AERO.rutas (ORIGEN_ID);
+    END
+
+ALTER TABLE AERO.encomiendas
+ADD CONSTRAINT ENCOMIENDAS_FK01 FOREIGN KEY
+(BOLETO_COMPRA_ID) REFERENCES AERO.boletos_de_compra (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_ENCO_BOLDECOMP' AND object_id = OBJECT_ID('AERO.encomiendas'))
+    BEGIN
+       CREATE INDEX FKI_ENCO_BOLDECOMP ON AERO.encomiendas (BOLETO_COMPRA_ID);
+    END
+
+ALTER TABLE AERO.encomiendas
+ADD CONSTRAINT ENCOMIENDAS_FK02 FOREIGN KEY
+(VUELO_ID) REFERENCES AERO.vuelos (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_ENCO_VUEL' AND object_id = OBJECT_ID('AERO.encomiendas'))
+    BEGIN
+       CREATE INDEX FKI_ENCO_VUEL ON AERO.encomiendas (VUELO_ID);
+    END
+
+ALTER TABLE AERO.paquetes
+ADD CONSTRAINT PAQUETES_FK01 FOREIGN KEY
+(ENCOMIENDA_ID) REFERENCES AERO.encomiendas (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_PAQ_ENCO' AND object_id = OBJECT_ID('AERO.paquetes'))
+    BEGIN
+       CREATE INDEX FKI_PAQ_ENCO ON AERO.paquetes (ENCOMIENDA_ID);
+    END
+
+ALTER TABLE AERO.canjes
+ADD CONSTRAINT CANJES_FK01 FOREIGN KEY
+(PRODUCTO_ID) REFERENCES AERO.productos (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_CANJ_PROD' AND object_id = OBJECT_ID('AERO.canjes'))
+    BEGIN
+       CREATE INDEX FKI_CANJ_PROD ON AERO.canjes (PRODUCTO_ID);
+    END
+
+ALTER TABLE AERO.canjes
+ADD CONSTRAINT CANJES_FK02 FOREIGN KEY
+(CLIENTE_ID) REFERENCES AERO.clientes (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_CANJ_CLIE' AND object_id = OBJECT_ID('AERO.canjes'))
+    BEGIN
+       CREATE INDEX FKI_CANJ_CLIE ON AERO.canjes (CLIENTE_ID);
+    END
+
+ALTER TABLE AERO.tarjetas_de_credito
+ADD CONSTRAINT TARJETAS_DE_CREDITO_FK01 FOREIGN KEY
+(CLIENTE_ID) REFERENCES AERO.clientes (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_TARJCRED_CLIE' AND object_id = OBJECT_ID('AERO.tarjetas_de_credito'))
+    BEGIN
+       CREATE INDEX FKI_TARJCRED_CLIE ON AERO.tarjetas_de_credito (CLIENTE_ID);
+    END
+
+ALTER TABLE AERO.cancelaciones
+ADD CONSTRAINT CANCELACIONES_FK01 FOREIGN KEY
+(BOLETO_COMPRA_ID) REFERENCES AERO.boletos_de_compra (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_CANC_BOLCOMP' AND object_id = OBJECT_ID('AERO.cancelaciones'))
+    BEGIN
+       CREATE INDEX FKI_CANC_BOLCOMP ON AERO.cancelaciones (BOLETO_COMPRA_ID);
+    END
+
+-----------------------------------------------------------------------
+-- TRIGGERS
