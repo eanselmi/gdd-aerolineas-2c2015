@@ -13,6 +13,7 @@ namespace AerolineaFrba.Usuarios
 {
     public partial class vistaInvitado : Form
     {
+        Form formularioAnterior;
         funcionesComunes funciones;
         public vistaInvitado()
         {
@@ -20,17 +21,25 @@ namespace AerolineaFrba.Usuarios
             funciones = new funcionesComunes();
         }
 
-        private void vistaInvitado_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void botonConsultarMillas_Click(object sender, EventArgs e)
         {
             //Abre el formulario para consultar millas
             Consulta_Millas.vistaConsultaMillas frmMillas = new Consulta_Millas.vistaConsultaMillas();
+            frmMillas.setFormularioAnterior(this);
             funciones.abrirNuevaVista(frmMillas,this);
             
+        }
+
+        private void botonVolver_Click(object sender, EventArgs e)
+        {
+            formularioAnterior.Show();
+            this.Close();
+        }
+
+        public void setearFormularioAnterior(Form formulario)
+        {
+            formularioAnterior = formulario;
         }
 
   

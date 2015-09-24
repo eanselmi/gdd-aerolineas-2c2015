@@ -33,6 +33,7 @@ namespace AerolineaFrba.Ingreso
         {
             //Apertura formulario Invitado
             Usuarios.vistaInvitado frmInvitado = new Usuarios.vistaInvitado();
+            frmInvitado.setearFormularioAnterior(this);
             funciones.abrirNuevaVista(frmInvitado, this);
         }
 

@@ -39,6 +39,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.botonEliminarTarjeta = new System.Windows.Forms.Button();
             this.botonAgregarTarjeta = new System.Windows.Forms.Button();
+            this.botonVolver = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -171,19 +172,31 @@
             this.botonAgregarTarjeta.Text = "Agregar Tarjeta";
             this.botonAgregarTarjeta.UseVisualStyleBackColor = true;
             // 
+            // botonVolver
+            // 
+            this.botonVolver.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonVolver.Location = new System.Drawing.Point(264, 418);
+            this.botonVolver.Name = "botonVolver";
+            this.botonVolver.Size = new System.Drawing.Size(140, 42);
+            this.botonVolver.TabIndex = 8;
+            this.botonVolver.Text = "Volver";
+            this.botonVolver.UseVisualStyleBackColor = true;
+            this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
+            // 
             // vistaInvitado
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(676, 419);
+            this.ClientSize = new System.Drawing.Size(676, 472);
             this.ControlBox = false;
+            this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Name = "vistaInvitado";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bienvenido";
-            this.Load += new System.EventHandler(this.vistaInvitado_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -204,5 +217,6 @@
         private System.Windows.Forms.Button botonEliminarTarjeta;
         private System.Windows.Forms.Button botonAgregarTarjeta;
         private System.Windows.Forms.Button botonConsultarMillas;
+        private System.Windows.Forms.Button botonVolver;
     }
 }

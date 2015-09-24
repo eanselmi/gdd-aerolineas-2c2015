@@ -11,9 +11,8 @@ namespace AerolineaFrba
     {
         public void abrirNuevaVista(System.Windows.Forms.Form vista,System.Windows.Forms.Form padre){
             vista.MdiParent = Principal.ActiveForm;
-            //vista.Parent = padre;
             vista.Show();
-            padre.Close();
+            padre.Hide();
         }
     }
 }
