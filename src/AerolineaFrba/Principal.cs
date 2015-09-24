@@ -15,20 +15,19 @@ namespace AerolineaFrba
     
     public partial class Principal : Form
     {
-        funcionesComunes funciones;
+  
         
         public Principal()
         {
             InitializeComponent();
-            funciones = new funcionesComunes();
+            
         }
 
         private void Principal_Load(object sender, EventArgs e)
         {
-           
-            Ingreso.Ingreso frmIngreso = new Ingreso.Ingreso();
-            frmIngreso.MdiParent = this;
-            frmIngreso.Show();
+
+            funcionesComunes.ventanaInicial(new Ingreso.Ingreso());
+     
         }
     }
 }

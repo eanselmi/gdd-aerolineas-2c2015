@@ -7,16 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba;
 
 namespace AerolineaFrba.Ingreso
 {
     public partial class Ingreso : Form
     {
-        funcionesComunes funciones;
+   
         public Ingreso()
         {
             InitializeComponent();
-            funciones = new funcionesComunes();
         }
 
         private void botonIngresar_Click(object sender, EventArgs e)
@@ -25,16 +25,14 @@ namespace AerolineaFrba.Ingreso
            //Si valida correctamente ingresa
            //Apertura formulario Administrador
             Usuarios.vistaAdministrador frmAdministrador = new Usuarios.vistaAdministrador();
-            funciones.abrirNuevaVista(frmAdministrador,this);
-            this.Close();
         }
 
         private void botonInvitado_Click(object sender, EventArgs e)
         {
             //Apertura formulario Invitado
-            Usuarios.vistaInvitado frmInvitado = new Usuarios.vistaInvitado();
-            frmInvitado.setearFormularioAnterior(this);
-            funciones.abrirNuevaVista(frmInvitado, this);
+            funcionesComunes.deshabilitarVentanaYAbrirNueva(new Usuarios.vistaInvitado());
+            
+          
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)
@@ -43,13 +41,6 @@ namespace AerolineaFrba.Ingreso
             this.textPassword.Clear();
         }
 
-        private void Ingreso_Load(object sender, EventArgs e)
-        {
-
-        }
-
-   
-
-    
+ 
     }
 }
