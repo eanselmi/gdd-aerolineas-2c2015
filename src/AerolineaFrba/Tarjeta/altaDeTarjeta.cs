@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba;
 
-namespace AerolineaFrba.Abm_Ciudad
+namespace AerolineaFrba.Tarjeta
 {
-    public partial class Form1 : Form
+    public partial class altaDeTarjeta : Form
     {
-        public Form1()
+        public altaDeTarjeta()
         {
             InitializeComponent();
+        }
+
+        private void botonCancelar_Click(object sender, EventArgs e)
+        {
+            funcionesComunes.habilitarAnterior();
         }
     }
 }

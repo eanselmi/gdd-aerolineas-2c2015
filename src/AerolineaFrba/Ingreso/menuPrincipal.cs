@@ -46,6 +46,15 @@ namespace AerolineaFrba.Ingreso
                 case "Alta de Cliente":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Registro_de_Usuario.altaDeCliente());
                     break;
+                case "Alta de Aeronave":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Aeronave.altaDeAeronave());
+                    break;
+                case "Alta de Ciudad":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ciudad.altaDeCiudad());
+                    break;
+                case "Alta de Tarjeta de Crédito":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Tarjeta.altaDeTarjeta());
+                    break;
             }
         }
 

@@ -47,17 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abm Aeronave\Form1.cs">
+    <Compile Include="Abm Aeronave\altaDeAeronave.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Aeronave\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Aeronave\altaDeAeronave.Designer.cs">
+      <DependentUpon>altaDeAeronave.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ciudad\Form1.cs">
+    <Compile Include="Abm Ciudad\altaDeCiudad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ciudad\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Ciudad\altaDeCiudad.Designer.cs">
+      <DependentUpon>altaDeCiudad.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Ruta\Form1.cs">
       <SubType>Form</SubType>
@@ -164,18 +164,18 @@
     <Compile Include="Registro Llegada Destino\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tarjeta\vistaAgregarTarjeta.cs">
+    <Compile Include="Tarjeta\altaDeTarjeta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tarjeta\vistaAgregarTarjeta.Designer.cs">
-      <DependentUpon>vistaAgregarTarjeta.cs</DependentUpon>
+    <Compile Include="Tarjeta\altaDeTarjeta.Designer.cs">
+      <DependentUpon>altaDeTarjeta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tarjeta\vistaEliminarTarjeta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Tarjeta\vistaEliminarTarjeta.Designer.cs">
-      <DependentUpon>vistaEliminarTarjeta.cs</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="Abm Aeronave\altaDeAeronave.resx">
+      <DependentUpon>altaDeAeronave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ciudad\altaDeCiudad.resx">
+      <DependentUpon>altaDeCiudad.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Consulta Millas\vistaConsultaMillas.resx">
       <DependentUpon>vistaConsultaMillas.cs</DependentUpon>
     </EmbeddedResource>
@@ -199,6 +199,9 @@
     </Compile>
     <EmbeddedResource Include="Registro de Usuario\altaDeCliente.resx">
       <DependentUpon>altaDeCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tarjeta\altaDeTarjeta.resx">
+      <DependentUpon>altaDeTarjeta.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -130,11 +130,15 @@
             this.comboBoxFuncionalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFuncionalidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxFuncionalidad.Items.AddRange(new object[] {
-            "Consultar Millas",
-            "Alta de Cliente"});
+            "Alta de Aeronave",
+            "Alta de Ciudad",
+            "Alta de Cliente",
+            "Alta de Tarjeta de Crédito",
+            "Consultar Millas"});
             this.comboBoxFuncionalidad.Location = new System.Drawing.Point(6, 45);
             this.comboBoxFuncionalidad.Name = "comboBoxFuncionalidad";
             this.comboBoxFuncionalidad.Size = new System.Drawing.Size(258, 28);
+            this.comboBoxFuncionalidad.Sorted = true;
             this.comboBoxFuncionalidad.TabIndex = 6;
             // 
             // botonAceptar

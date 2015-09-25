@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba;
 
-namespace AerolineaFrba.Tarjeta
+namespace AerolineaFrba.Abm_Aeronave
 {
-    public partial class vistaAgregarTarjeta : Form
+    public partial class altaDeAeronave : Form
     {
-        public vistaAgregarTarjeta()
+        public altaDeAeronave()
         {
             InitializeComponent();
+        }
+
+        private void botonCancelar_Click(object sender, EventArgs e)
+        {
+            funcionesComunes.habilitarAnterior();
         }
     }
 }
