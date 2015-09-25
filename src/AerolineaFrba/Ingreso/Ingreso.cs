@@ -23,14 +23,15 @@ namespace AerolineaFrba.Ingreso
         {
            //Validar campos ingresados y buscar en la BD
            //Si valida correctamente ingresa
-           //Apertura formulario Administrador
-            Usuarios.vistaAdministrador frmAdministrador = new Usuarios.vistaAdministrador();
+           //Apertura formulario menu para administrador
+            funcionesComunes.deshabilitarVentanaYAbrirNueva(new menuPrincipal());
+           
         }
 
         private void botonInvitado_Click(object sender, EventArgs e)
         {
-            //Apertura formulario Invitado
-            funcionesComunes.deshabilitarVentanaYAbrirNueva(new Usuarios.vistaInvitado());
+            //Apertura formulario menu para invitado
+            funcionesComunes.deshabilitarVentanaYAbrirNueva(new menuPrincipal());
             
           
         }
