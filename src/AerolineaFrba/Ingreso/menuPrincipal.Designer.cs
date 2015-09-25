@@ -130,7 +130,8 @@
             this.comboBoxFuncionalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFuncionalidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxFuncionalidad.Items.AddRange(new object[] {
-            "Consultar Millas"});
+            "Consultar Millas",
+            "Alta de Cliente"});
             this.comboBoxFuncionalidad.Location = new System.Drawing.Point(6, 45);
             this.comboBoxFuncionalidad.Name = "comboBoxFuncionalidad";
             this.comboBoxFuncionalidad.Size = new System.Drawing.Size(258, 28);

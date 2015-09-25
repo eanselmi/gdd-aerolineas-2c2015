@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba;
 
 namespace AerolineaFrba.Registro_de_Usuario
 {
-    public partial class Form1 : Form
+    public partial class altaDeCliente : Form
     {
-        public Form1()
+        public altaDeCliente()
         {
             InitializeComponent();
+        }
+
+        private void botonCancelar_Click(object sender, EventArgs e)
+        {
+            funcionesComunes.habilitarAnterior();
         }
     }
 }

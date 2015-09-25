@@ -43,6 +43,9 @@ namespace AerolineaFrba.Ingreso
                 case "Consultar Millas":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Consulta_Millas.vistaConsultaMillas());
                     break;
+                case "Alta de Cliente":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Registro_de_Usuario.altaDeCliente());
+                    break;
             }
         }
 
