@@ -65,6 +65,7 @@
     <Compile Include="Abm Ruta\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Base.cs" />
     <Compile Include="Canje Millas\vistaCanjesRealizados.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +165,7 @@
     <Compile Include="Registro Llegada Destino\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="SqlConnector.cs" />
     <Compile Include="Tarjeta\altaDeTarjeta.cs">
       <SubType>Form</SubType>
     </Compile>
