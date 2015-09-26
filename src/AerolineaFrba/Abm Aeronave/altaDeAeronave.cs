@@ -47,5 +47,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 this.textBoxModelo.Clear();//este lo puse para poder poner el else (despues lo sacamos)
             else MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+      
     }
 }

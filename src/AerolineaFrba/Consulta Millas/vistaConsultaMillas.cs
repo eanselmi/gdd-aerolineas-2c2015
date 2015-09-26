@@ -34,8 +34,8 @@ namespace AerolineaFrba.Consulta_Millas
         private void botonConsultar_Click(object sender, EventArgs e)
         {
             String dni = this.textBoxDNI.Text;
-            if(dni != "")
-                this.labelCantidad.Text = "300";
+            if (dni != "") { }
+               
             else MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }

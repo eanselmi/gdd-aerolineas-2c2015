@@ -159,8 +159,9 @@
             // 
             // timePickerAlta
             // 
+            this.timePickerAlta.CustomFormat = "dd/MM/yyyy";
             this.timePickerAlta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timePickerAlta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.timePickerAlta.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.timePickerAlta.Location = new System.Drawing.Point(88, 358);
             this.timePickerAlta.Name = "timePickerAlta";
             this.timePickerAlta.Size = new System.Drawing.Size(258, 26);

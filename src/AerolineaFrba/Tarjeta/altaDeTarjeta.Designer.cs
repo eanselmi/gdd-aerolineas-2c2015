@@ -36,9 +36,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxNumero = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBoxCodigo = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.timePickerVencimiento = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
@@ -134,47 +131,17 @@
             this.textBoxNumero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxNumero.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxNumero.Location = new System.Drawing.Point(76, 135);
+            this.textBoxNumero.MaxLength = 16;
             this.textBoxNumero.Name = "textBoxNumero";
             this.textBoxNumero.Size = new System.Drawing.Size(261, 26);
             this.textBoxNumero.TabIndex = 25;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(340, 187);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(15, 20);
-            this.label6.TabIndex = 30;
-            this.label6.Text = "*";
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(72, 164);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(136, 20);
-            this.label7.TabIndex = 29;
-            this.label7.Text = "Código Seguridad";
-            // 
-            // textBoxCodigo
-            // 
-            this.textBoxCodigo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCodigo.Location = new System.Drawing.Point(76, 187);
-            this.textBoxCodigo.Name = "textBoxCodigo";
-            this.textBoxCodigo.Size = new System.Drawing.Size(261, 26);
-            this.textBoxCodigo.TabIndex = 28;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Red;
-            this.label13.Location = new System.Drawing.Point(340, 239);
+            this.label13.Location = new System.Drawing.Point(340, 187);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(15, 20);
             this.label13.TabIndex = 33;
@@ -185,7 +152,7 @@
             this.timePickerVencimiento.CustomFormat = "MM/yy";
             this.timePickerVencimiento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timePickerVencimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.timePickerVencimiento.Location = new System.Drawing.Point(76, 239);
+            this.timePickerVencimiento.Location = new System.Drawing.Point(76, 187);
             this.timePickerVencimiento.Name = "timePickerVencimiento";
             this.timePickerVencimiento.Size = new System.Drawing.Size(258, 26);
             this.timePickerVencimiento.TabIndex = 32;
@@ -195,7 +162,7 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(72, 216);
+            this.label9.Location = new System.Drawing.Point(72, 164);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(146, 20);
             this.label9.TabIndex = 31;
@@ -242,7 +209,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.Red;
-            this.label14.Location = new System.Drawing.Point(194, 268);
+            this.label14.Location = new System.Drawing.Point(194, 216);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(140, 16);
             this.label14.TabIndex = 34;
@@ -250,9 +217,11 @@
             // 
             // textBoxDni
             // 
+            this.textBoxDni.AcceptsReturn = true;
             this.textBoxDni.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxDni.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxDni.Location = new System.Drawing.Point(76, 32);
+            this.textBoxDni.MaxLength = 8;
             this.textBoxDni.Name = "textBoxDni";
             this.textBoxDni.Size = new System.Drawing.Size(261, 26);
             this.textBoxDni.TabIndex = 18;
@@ -270,9 +239,6 @@
             this.Controls.Add(this.label13);
             this.Controls.Add(this.timePickerVencimiento);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBoxCodigo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBoxNumero);
@@ -300,9 +266,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxNumero;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBoxCodigo;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.DateTimePicker timePickerVencimiento;
         private System.Windows.Forms.Label label9;

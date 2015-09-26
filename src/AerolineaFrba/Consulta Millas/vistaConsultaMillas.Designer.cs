@@ -31,10 +31,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxDNI = new System.Windows.Forms.TextBox();
             this.botonConsultar = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.labelCantidad = new System.Windows.Forms.Label();
             this.botonVolver = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
+            this.dataGridConsultaMillas = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textBoxTotal = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridConsultaMillas)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -51,9 +56,11 @@
             // 
             this.textBoxDNI.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxDNI.Location = new System.Drawing.Point(184, 60);
+            this.textBoxDNI.MaxLength = 8;
             this.textBoxDNI.Name = "textBoxDNI";
             this.textBoxDNI.Size = new System.Drawing.Size(191, 31);
             this.textBoxDNI.TabIndex = 1;
+            this.textBoxDNI.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // botonConsultar
             // 
@@ -66,32 +73,10 @@
             this.botonConsultar.UseVisualStyleBackColor = true;
             this.botonConsultar.Click += new System.EventHandler(this.botonConsultar_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(138, 185);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(192, 25);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Millas Disponibles:";
-            // 
-            // labelCantidad
-            // 
-            this.labelCantidad.AutoSize = true;
-            this.labelCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelCantidad.ForeColor = System.Drawing.Color.Red;
-            this.labelCantidad.Location = new System.Drawing.Point(336, 185);
-            this.labelCantidad.Name = "labelCantidad";
-            this.labelCantidad.Size = new System.Drawing.Size(98, 25);
-            this.labelCantidad.TabIndex = 4;
-            this.labelCantidad.Text = "Cantidad";
-            // 
             // botonVolver
             // 
             this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonVolver.Location = new System.Drawing.Point(184, 257);
+            this.botonVolver.Location = new System.Drawing.Point(184, 416);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(191, 34);
             this.botonVolver.TabIndex = 5;
@@ -110,22 +95,77 @@
             this.botonLimpiar.UseVisualStyleBackColor = true;
             this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
             // 
+            // dataGridConsultaMillas
+            // 
+            this.dataGridConsultaMillas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridConsultaMillas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridConsultaMillas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3});
+            this.dataGridConsultaMillas.Location = new System.Drawing.Point(52, 144);
+            this.dataGridConsultaMillas.Name = "dataGridConsultaMillas";
+            this.dataGridConsultaMillas.RowHeadersVisible = false;
+            this.dataGridConsultaMillas.Size = new System.Drawing.Size(464, 202);
+            this.dataGridConsultaMillas.TabIndex = 7;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Fecha";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Motivo";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Millas";
+            this.Column3.Name = "Column3";
+            // 
+            // textBoxTotal
+            // 
+            this.textBoxTotal.BackColor = System.Drawing.Color.White;
+            this.textBoxTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTotal.ForeColor = System.Drawing.Color.Red;
+            this.textBoxTotal.Location = new System.Drawing.Point(441, 352);
+            this.textBoxTotal.Name = "textBoxTotal";
+            this.textBoxTotal.ReadOnly = true;
+            this.textBoxTotal.Size = new System.Drawing.Size(75, 31);
+            this.textBoxTotal.TabIndex = 8;
+            this.textBoxTotal.Text = "0";
+            this.textBoxTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(376, 355);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(60, 25);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Total";
+            // 
             // vistaConsultaMillas
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(564, 303);
+            this.ClientSize = new System.Drawing.Size(564, 462);
             this.ControlBox = false;
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.textBoxTotal);
+            this.Controls.Add(this.dataGridConsultaMillas);
             this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.botonVolver);
-            this.Controls.Add(this.labelCantidad);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.botonConsultar);
             this.Controls.Add(this.textBoxDNI);
             this.Controls.Add(this.label1);
             this.Name = "vistaConsultaMillas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta de Millas";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridConsultaMillas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,9 +176,13 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxDNI;
         private System.Windows.Forms.Button botonConsultar;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label labelCantidad;
         private System.Windows.Forms.Button botonVolver;
         private System.Windows.Forms.Button botonLimpiar;
+        private System.Windows.Forms.DataGridView dataGridConsultaMillas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.TextBox textBoxTotal;
+        private System.Windows.Forms.Label label2;
     }
 }

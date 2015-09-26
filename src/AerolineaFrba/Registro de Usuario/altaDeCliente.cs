@@ -39,9 +39,12 @@ namespace AerolineaFrba.Registro_de_Usuario
             String nombre = this.textBoxNombre.Text;
             String direccion = this.textBoxDireccion.Text;
             String telefono = this.textBoxTelefono.Text;
-            if (apellido != "" && nombre != "" && direccion != "" && telefono != "")
+            String dni = this.textBoxDNI.Text;
+            //Acordarse de validar que la fecha sea anteior a hoy y que la edad sea > 18
+            if (apellido != "" && nombre != "" && direccion != "" && telefono != "" && dni != "")
                 this.textBoxNombre.Clear(); //de nuevo: este lo pongo para que funcione, despues lo modificamos
             else MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
     }
 }
