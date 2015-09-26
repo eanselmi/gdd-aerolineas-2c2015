@@ -15,69 +15,12 @@ BEGIN
     EXEC sp_executesql N'CREATE SCHEMA AERO;';
 END
 
--- DROPS
-
-IF OBJECT_ID('AERO.aeronaves') IS NOT NULL
-BEGIN
-DROP TABLE AERO.aeronaves;
-END;
-
 -----------------------------------------------------------------------
 -- DROP TABLES
 
-IF OBJECT_ID('AERO.aeronaves') IS NOT NULL
+IF OBJECT_ID('AERO.cancelaciones') IS NOT NULL
 BEGIN
-    DROP TABLE AERO.aeronaves;
-END;
-
-IF OBJECT_ID('AERO.fabricantes') IS NOT NULL
-BEGIN
-    DROP TABLE AERO.fabricantes;
-END;
-
-IF OBJECT_ID('AERO.tipos_de_servicios') IS NOT NULL
-BEGIN
-    DROP TABLE AERO.tipos_de_servicios;
-END;
-
-IF OBJECT_ID('AERO.butacas') IS NOT NULL
-BEGIN
-    DROP TABLE AERO.butacas;
-END;
-
-IF OBJECT_ID('AERO.pasajes') IS NOT NULL
-BEGIN
-    DROP TABLE AERO.pasajes;
-END;
-
-IF OBJECT_ID('AERO.clientes') IS NOT NULL
-BEGIN
-    DROP TABLE AERO.clientes;
-END;
-
-IF OBJECT_ID('AERO.boletos_de_compra') IS NOT NULL
-BEGIN
-    DROP TABLE AERO.boletos_de_compra;
-END;
-
-IF OBJECT_ID('AERO.roles') IS NOT NULL
-BEGIN
-    DROP TABLE AERO.roles;
-END;
-
-IF OBJECT_ID('AERO.funcionalidades') IS NOT NULL
-BEGIN
-    DROP TABLE AERO.funcionalidades;
-END;
-
-IF OBJECT_ID('AERO.funcionalidades_por_rol') IS NOT NULL
-BEGIN
-    DROP TABLE AERO.funcionalidades_por_rol;
-END;
-
-IF OBJECT_ID('AERO.usuarios') IS NOT NULL
-BEGIN
-    DROP TABLE AERO.usuarios;
+    DROP TABLE AERO.cancelaciones;
 END;
 
 IF OBJECT_ID('AERO.productos') IS NOT NULL
@@ -85,9 +28,9 @@ BEGIN
     DROP TABLE AERO.productos;
 END;
 
-IF OBJECT_ID('AERO.periodos_de_inactividad') IS NOT NULL
+IF OBJECT_ID('AERO.canjes') IS NOT NULL
 BEGIN
-    DROP TABLE AERO.periodos_de_inactividad;
+    DROP TABLE AERO.canjes;
 END;
 
 IF OBJECT_ID('AERO.aeronaves_por_periodos') IS NOT NULL
@@ -95,14 +38,44 @@ BEGIN
     DROP TABLE AERO.aeronaves_por_periodos;
 END;
 
+IF OBJECT_ID('AERO.periodos_de_inactividad') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.periodos_de_inactividad;
+END;
+
+IF OBJECT_ID('AERO.funcionalidades_por_rol') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.funcionalidades_por_rol;
+END;
+
+IF OBJECT_ID('AERO.funcionalidades') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.funcionalidades;
+END;
+
+IF OBJECT_ID('AERO.usuarios') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.usuarios;
+END;
+
+IF OBJECT_ID('AERO.tarjetas_de_credito') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.tarjetas_de_credito;
+END;
+
+IF OBJECT_ID('AERO.paquetes') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.paquetes;
+END;
+
 IF OBJECT_ID('AERO.servicios_por_rutas') IS NOT NULL
 BEGIN
     DROP TABLE AERO.servicios_por_rutas;
 END;
 
-IF OBJECT_ID('AERO.aeropuertos') IS NOT NULL
+IF OBJECT_ID('AERO.encomiendas') IS NOT NULL
 BEGIN
-    DROP TABLE AERO.aeropuertos;
+    DROP TABLE AERO.encomiendas;
 END;
 
 IF OBJECT_ID('AERO.vuelos') IS NOT NULL
@@ -115,9 +88,9 @@ BEGIN
     DROP TABLE AERO.rutas;
 END;
 
-IF OBJECT_ID('AERO.encomiendas') IS NOT NULL
+IF OBJECT_ID('AERO.aeropuertos') IS NOT NULL
 BEGIN
-    DROP TABLE AERO.encomiendas;
+    DROP TABLE AERO.aeropuertos;
 END;
 
 IF OBJECT_ID('AERO.ciudades') IS NOT NULL
@@ -125,26 +98,45 @@ BEGIN
     DROP TABLE AERO.ciudades;
 END;
 
-IF OBJECT_ID('AERO.paquetes') IS NOT NULL
+IF OBJECT_ID('AERO.pasajes') IS NOT NULL
 BEGIN
-    DROP TABLE AERO.paquetes;
+    DROP TABLE AERO.pasajes;
 END;
 
-IF OBJECT_ID('AERO.canjes') IS NOT NULL
+IF OBJECT_ID('AERO.butacas') IS NOT NULL
 BEGIN
-    DROP TABLE AERO.canjes;
+    DROP TABLE AERO.butacas;
 END;
 
-IF OBJECT_ID('AERO.tarjetas_de_credito') IS NOT NULL
+IF OBJECT_ID('AERO.aeronaves') IS NOT NULL
 BEGIN
-    DROP TABLE AERO.tarjetas_de_credito;
+    DROP TABLE AERO.aeronaves;
 END;
 
-IF OBJECT_ID('AERO.cancelaciones') IS NOT NULL
+IF OBJECT_ID('AERO.tipos_de_servicio') IS NOT NULL
 BEGIN
-    DROP TABLE AERO.cancelaciones;
+    DROP TABLE AERO.tipos_de_servicio;
 END;
 
+IF OBJECT_ID('AERO.fabricantes') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.fabricantes;
+END;
+
+IF OBJECT_ID('AERO.boletos_de_compra') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.boletos_de_compra;
+END;
+
+IF OBJECT_ID('AERO.clientes') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.clientes;
+END;
+
+IF OBJECT_ID('AERO.roles') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.roles;
+END;
 
 -----------------------------------------------------------------------
 -- TABLES
@@ -168,7 +160,7 @@ CREATE TABLE AERO.fabricantes (
     NOMBRE        NVARCHAR(255)    NOT NULL
 )
 
-CREATE TABLE AERO.tipos_de_servicios (
+CREATE TABLE AERO.tipos_de_servicio (
     ID INT   IDENTITY(1,1)    PRIMARY KEY,
     NOMBRE        NVARCHAR(255)    NOT NULL
 )
@@ -459,7 +451,14 @@ IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_AEROXPER_PERXINAC' AND
        CREATE INDEX FKI_AEROXPER_PERXINAC ON AERO.aeronaves_por_periodos (PERIODO_ID);
     END
 
-
+ALTER TABLE AERO.servicios_por_rutas
+ADD CONSTRAINT SERVICIOS_POR_RUTAS_FK01 FOREIGN KEY
+(TIPO_SERVICIO_ID) REFERENCES AERO.tipos_de_servicios (ID)
+ 
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_SERVXRUT_TIPOSERV' AND object_id = OBJECT_ID('AERO.servicios_por_rutas'))
+    BEGIN
+       CREATE INDEX FKI_SERVXRUT_TIPOSERV ON AERO.servicios_por_rutas (TIPO_SERVICIO_ID);
+    END
 
 ALTER TABLE AERO.servicios_por_rutas
 ADD CONSTRAINT SERVICIOS_POR_RUTAS_FK02 FOREIGN KEY
@@ -495,15 +494,6 @@ ADD CONSTRAINT VUELOS_FK02 FOREIGN KEY
 IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_VUEL_RUT' AND object_id = OBJECT_ID('AERO.vuelos'))
     BEGIN
        CREATE INDEX FKI_VUEL_RUT ON AERO.vuelos (RUTA_ID);
-    END
-
-ALTER TABLE AERO.rutas
-ADD CONSTRAINT RUTAS_FK01 FOREIGN KEY
-(TIPO_SERVICIO_ID) REFERENCES AERO.tipos_de_servicio (ID)
-
-IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_RUT_TIPOSERV' AND object_id = OBJECT_ID('AERO.rutas'))
-    BEGIN
-       CREATE INDEX FKI_RUT_TIPOSERV ON AERO.rutas (TIPO_SERVICIO_ID);
     END
 
 ALTER TABLE AERO.rutas
