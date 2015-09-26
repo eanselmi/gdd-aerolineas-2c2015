@@ -22,5 +22,19 @@ namespace AerolineaFrba.Abm_Ciudad
         {
             funcionesComunes.habilitarAnterior();
         }
+
+        private void botonLimpiar_Click(object sender, EventArgs e)
+        {
+            this.textBoxNombre.Clear();
+        }
+
+        private void botonGuardar_Click(object sender, EventArgs e)
+        {
+            String eleccionUsuario = this.textBoxNombre.Text;
+            if (eleccionUsuario != "")
+                //aca deberiamos hacer la funcionalidad del boton de guardar
+                this.textBoxNombre.Clear();//este lo puse para poder poner el else (despues lo sacamos)
+            else MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

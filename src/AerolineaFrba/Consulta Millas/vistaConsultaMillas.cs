@@ -23,5 +23,20 @@ namespace AerolineaFrba.Consulta_Millas
         {
             funcionesComunes.habilitarAnterior();
         }
+
+        //este boton borra el contenido del textbox
+        private void botonLimpiar_Click(object sender, EventArgs e)
+        {
+            this.textBoxDNI.Clear();
+        }
+
+        //este boton le cambia el valor al label con la cantidad de millas del usuario
+        private void botonConsultar_Click(object sender, EventArgs e)
+        {
+            String dni = this.textBoxDNI.Text;
+            if(dni != "")
+                this.labelCantidad.Text = "300";
+            else MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

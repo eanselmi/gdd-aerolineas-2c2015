@@ -22,5 +22,26 @@ namespace AerolineaFrba.Tarjeta
         {
             funcionesComunes.habilitarAnterior();
         }
+
+        //este boton borra el contenido de todos los campos
+        private void botonLimpiar_Click(object sender, EventArgs e)
+        {
+            this.textBoxDni.Clear();
+            this.textBoxCodigo.Clear();
+            this.textBoxNumero.Clear();
+            this.comboBoxTipoTarjeta.SelectedIndex = -1;
+            this.timePickerVencimiento.ResetText();
+        }
+
+        private void botonGuardar_Click(object sender, EventArgs e)
+        {
+            String dni = this.textBoxDni.Text;
+            String codigo = this.textBoxCodigo.Text;
+            String numero = this.textBoxNumero.Text;
+            String func = (String) this.comboBoxTipoTarjeta.SelectedItem;
+            if (dni != "" && codigo != "" && numero != "" && func != null)
+                this.textBoxNumero.Clear();
+            else MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

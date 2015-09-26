@@ -64,6 +64,7 @@
             this.botonConsultar.TabIndex = 2;
             this.botonConsultar.Text = "Consultar";
             this.botonConsultar.UseVisualStyleBackColor = true;
+            this.botonConsultar.Click += new System.EventHandler(this.botonConsultar_Click);
             // 
             // label2
             // 
@@ -107,6 +108,7 @@
             this.botonLimpiar.TabIndex = 6;
             this.botonLimpiar.Text = "Limpiar";
             this.botonLimpiar.UseVisualStyleBackColor = true;
+            this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
             // 
             // vistaConsultaMillas
             // 

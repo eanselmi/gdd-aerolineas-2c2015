@@ -30,10 +30,9 @@
         {
             this.label8 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxDni = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBoxFuncionalidad = new System.Windows.Forms.ComboBox();
+            this.comboBoxTipoTarjeta = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxNumero = new System.Windows.Forms.TextBox();
@@ -47,6 +46,7 @@
             this.botonLimpiar = new System.Windows.Forms.Button();
             this.botonGuardar = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
+            this.textBoxDni = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label8
@@ -71,15 +71,6 @@
             this.label1.TabIndex = 19;
             this.label1.Text = "DNI";
             // 
-            // textBoxDni
-            // 
-            this.textBoxDni.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxDni.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDni.Location = new System.Drawing.Point(76, 32);
-            this.textBoxDni.Name = "textBoxDni";
-            this.textBoxDni.Size = new System.Drawing.Size(261, 26);
-            this.textBoxDni.TabIndex = 18;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -102,19 +93,19 @@
             this.label3.TabIndex = 22;
             this.label3.Text = "Tipo";
             // 
-            // comboBoxFuncionalidad
+            // comboBoxTipoTarjeta
             // 
-            this.comboBoxFuncionalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxFuncionalidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxFuncionalidad.Items.AddRange(new object[] {
+            this.comboBoxTipoTarjeta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTipoTarjeta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxTipoTarjeta.Items.AddRange(new object[] {
             "American Express",
             "Mastercard",
             "Visa",
             "Otros"});
-            this.comboBoxFuncionalidad.Location = new System.Drawing.Point(76, 81);
-            this.comboBoxFuncionalidad.Name = "comboBoxFuncionalidad";
-            this.comboBoxFuncionalidad.Size = new System.Drawing.Size(261, 28);
-            this.comboBoxFuncionalidad.TabIndex = 24;
+            this.comboBoxTipoTarjeta.Location = new System.Drawing.Point(76, 81);
+            this.comboBoxTipoTarjeta.Name = "comboBoxTipoTarjeta";
+            this.comboBoxTipoTarjeta.Size = new System.Drawing.Size(261, 28);
+            this.comboBoxTipoTarjeta.TabIndex = 24;
             // 
             // label4
             // 
@@ -232,6 +223,7 @@
             this.botonLimpiar.TabIndex = 36;
             this.botonLimpiar.Text = "Limpiar";
             this.botonLimpiar.UseVisualStyleBackColor = true;
+            this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
             // 
             // botonGuardar
             // 
@@ -243,6 +235,7 @@
             this.botonGuardar.TabIndex = 35;
             this.botonGuardar.Text = "Guardar";
             this.botonGuardar.UseVisualStyleBackColor = true;
+            this.botonGuardar.Click += new System.EventHandler(this.botonGuardar_Click);
             // 
             // label14
             // 
@@ -254,6 +247,15 @@
             this.label14.Size = new System.Drawing.Size(140, 16);
             this.label14.TabIndex = 34;
             this.label14.Text = "*Campos Obligatorios";
+            // 
+            // textBoxDni
+            // 
+            this.textBoxDni.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxDni.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxDni.Location = new System.Drawing.Point(76, 32);
+            this.textBoxDni.Name = "textBoxDni";
+            this.textBoxDni.Size = new System.Drawing.Size(261, 26);
+            this.textBoxDni.TabIndex = 18;
             // 
             // altaDeTarjeta
             // 
@@ -274,7 +276,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBoxNumero);
-            this.Controls.Add(this.comboBoxFuncionalidad);
+            this.Controls.Add(this.comboBoxTipoTarjeta);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label8);
@@ -292,10 +294,9 @@
 
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxDni;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBoxFuncionalidad;
+        private System.Windows.Forms.ComboBox comboBoxTipoTarjeta;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxNumero;
@@ -309,5 +310,6 @@
         private System.Windows.Forms.Button botonLimpiar;
         private System.Windows.Forms.Button botonGuardar;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBoxDni;
     }
 }

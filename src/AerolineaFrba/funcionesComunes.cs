@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba
 {
+    //creamos una clase con funciones que utilizan las demas para no repetir codigo
     class funcionesComunes
     {
         #region Singletons Ventanas
@@ -16,6 +17,7 @@ namespace AerolineaFrba
         private static List<Form> listaVentanas = new List<Form>();
         private static int pos;
 
+        //lo que hace esta funcion es setear cual es la ventana principal
         public static void ventanaInicial(Form ventanaInicial)
         {
             listaVentanas.Add(ventanaInicial);
@@ -23,6 +25,7 @@ namespace AerolineaFrba
             ventanaInicial.Show();
         }
 
+        //esta funcion abre una ventana nueva seteando la anterior para luego poder volver atras
         public static void deshabilitarVentanaYAbrirNueva(Form ventanaNueva)
         {
             pos = listaVentanas.Count();
@@ -33,6 +36,8 @@ namespace AerolineaFrba
             ventanaNueva.Show();
         }
 
+
+        //esta funcion permite volver a la ventana anterior
         public static void habilitarAnterior()
         {
             pos = listaVentanas.Count();

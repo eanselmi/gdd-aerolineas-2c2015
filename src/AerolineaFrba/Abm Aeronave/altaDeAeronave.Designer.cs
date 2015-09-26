@@ -77,6 +77,7 @@
             this.botonLimpiar.TabIndex = 46;
             this.botonLimpiar.Text = "Limpiar";
             this.botonLimpiar.UseVisualStyleBackColor = true;
+            this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
             // 
             // botonGuardar
             // 
@@ -88,6 +89,7 @@
             this.botonGuardar.TabIndex = 45;
             this.botonGuardar.Text = "Guardar";
             this.botonGuardar.UseVisualStyleBackColor = true;
+            this.botonGuardar.Click += new System.EventHandler(this.botonGuardar_Click);
             // 
             // label14
             // 
@@ -239,6 +241,11 @@
             // 
             this.comboBoxFabricante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFabricante.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxFabricante.Items.AddRange(new object[] {
+            "Airbus",
+            "Bombardier",
+            "Embraer",
+            "Boeing"});
             this.comboBoxFabricante.Location = new System.Drawing.Point(88, 190);
             this.comboBoxFabricante.Name = "comboBoxFabricante";
             this.comboBoxFabricante.Size = new System.Drawing.Size(261, 28);
@@ -248,6 +255,12 @@
             // 
             this.comboBoxServicio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxServicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxServicio.Items.AddRange(new object[] {
+            "Semi-Cama",
+            "Cama",
+            "Premium",
+            "Ejecutivo",
+            "Común"});
             this.comboBoxServicio.Location = new System.Drawing.Point(88, 244);
             this.comboBoxServicio.Name = "comboBoxServicio";
             this.comboBoxServicio.Size = new System.Drawing.Size(261, 28);

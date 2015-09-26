@@ -56,6 +56,7 @@ namespace AerolineaFrba.Ingreso
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Tarjeta.altaDeTarjeta());
                     break;
             }
+            this.comboBoxFuncionalidad.SelectedIndex = -1;
         }
 
       

@@ -36,6 +36,8 @@ namespace AerolineaFrba.Ingreso
           
         }
 
+
+        //este boton borra el contenido de los input
         private void botonLimpiar_Click(object sender, EventArgs e)
         {
             this.textUsuario.Clear();
