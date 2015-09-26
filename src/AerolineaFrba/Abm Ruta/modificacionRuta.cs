@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Canje_Millas
+namespace AerolineaFrba.Abm_Ruta
 {
-    public partial class vistaRealizarCanjeMillas : Form
+    public partial class modificacionRuta : Form
     {
-        public vistaRealizarCanjeMillas()
+        public modificacionRuta()
         {
             InitializeComponent();
         }

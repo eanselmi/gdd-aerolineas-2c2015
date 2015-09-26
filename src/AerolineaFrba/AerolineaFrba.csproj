@@ -53,66 +53,126 @@
     <Compile Include="Abm Aeronave\altaDeAeronave.Designer.cs">
       <DependentUpon>altaDeAeronave.cs</DependentUpon>
     </Compile>
+    <Compile Include="Abm Aeronave\bajaAeronave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\bajaAeronave.Designer.cs">
+      <DependentUpon>bajaAeronave.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Aeronave\modificacionAeronave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Aeronave\modificacionAeronave.Designer.cs">
+      <DependentUpon>modificacionAeronave.cs</DependentUpon>
+    </Compile>
     <Compile Include="Abm Ciudad\altaDeCiudad.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm Ciudad\altaDeCiudad.Designer.cs">
       <DependentUpon>altaDeCiudad.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ruta\Form1.cs">
+    <Compile Include="Abm Ciudad\bajaCiudad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ruta\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Abm Ciudad\bajaCiudad.Designer.cs">
+      <DependentUpon>bajaCiudad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ciudad\modificacionCiudad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ciudad\modificacionCiudad.Designer.cs">
+      <DependentUpon>modificacionCiudad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\altaRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\altaRol.Designer.cs">
+      <DependentUpon>altaRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\bajaRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\bajaRol.Designer.cs">
+      <DependentUpon>bajaRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Rol\modificacionRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Rol\modificacionRol.Designer.cs">
+      <DependentUpon>modificacionRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ruta\altaRuta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\altaRuta.Designer.cs">
+      <DependentUpon>altaRuta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ruta\bajaRuta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\bajaRuta.Designer.cs">
+      <DependentUpon>bajaRuta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Ruta\modificacionRuta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Ruta\modificacionRuta.Designer.cs">
+      <DependentUpon>modificacionRuta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Vuelos\altaVuelo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Vuelos\altaVuelo.Designer.cs">
+      <DependentUpon>altaVuelo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Vuelos\bajaVuelo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Vuelos\bajaVuelo.Designer.cs">
+      <DependentUpon>bajaVuelo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Abm Vuelos\modificacionVuelo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Abm Vuelos\modificacionVuelo.Designer.cs">
+      <DependentUpon>modificacionVuelo.cs</DependentUpon>
     </Compile>
     <Compile Include="Base.cs" />
-    <Compile Include="Canje Millas\vistaCanjesRealizados.cs">
+    <Compile Include="Canje Millas\realizarCanjeMillas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Canje Millas\vistaCanjesRealizados.Designer.cs">
-      <DependentUpon>vistaCanjesRealizados.cs</DependentUpon>
+    <Compile Include="Canje Millas\realizarCanjeMillas.Designer.cs">
+      <DependentUpon>realizarCanjeMillas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Canje Millas\vistaRealizarCanjeMillas.cs">
+    <Compile Include="Compra\bajaEncomienda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Canje Millas\vistaRealizarCanjeMillas.Designer.cs">
-      <DependentUpon>vistaRealizarCanjeMillas.cs</DependentUpon>
+    <Compile Include="Compra\bajaEncomienda.Designer.cs">
+      <DependentUpon>bajaEncomienda.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\vistaCancelarEncomienda.cs">
+    <Compile Include="Compra\comprarPasaje.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra\vistaCancelarEncomienda.Designer.cs">
-      <DependentUpon>vistaCancelarEncomienda.cs</DependentUpon>
+    <Compile Include="Compra\comprarPasaje.Designer.cs">
+      <DependentUpon>comprarPasaje.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\vistaComprarPasajesPropios.cs">
+    <Compile Include="Compra\bajaPasaje.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra\vistaComprarPasajesPropios.Designer.cs">
-      <DependentUpon>vistaComprarPasajesPropios.cs</DependentUpon>
+    <Compile Include="Compra\bajaPasaje.Designer.cs">
+      <DependentUpon>bajaPasaje.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\vistaComprarPasajeTerceros.cs">
+    <Compile Include="Compra\realizarEncomienda.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra\vistaComprarPasajeTerceros.Designer.cs">
-      <DependentUpon>vistaComprarPasajeTerceros.cs</DependentUpon>
+    <Compile Include="Compra\realizarEncomienda.Designer.cs">
+      <DependentUpon>realizarEncomienda.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\vistaDarDeBajaPasajes.cs">
+    <Compile Include="Consulta Millas\consultaMillas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra\vistaDarDeBajaPasajes.Designer.cs">
-      <DependentUpon>vistaDarDeBajaPasajes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Compra\vistaRealizarEncomienda.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Compra\vistaRealizarEncomienda.Designer.cs">
-      <DependentUpon>vistaRealizarEncomienda.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Consulta Millas\vistaConsultaMillas.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Consulta Millas\vistaConsultaMillas.Designer.cs">
-      <DependentUpon>vistaConsultaMillas.cs</DependentUpon>
+    <Compile Include="Consulta Millas\consultaMillas.Designer.cs">
+      <DependentUpon>consultaMillas.cs</DependentUpon>
     </Compile>
     <Compile Include="Devolucion\Form1.cs">
       <SubType>Form</SubType>
@@ -121,12 +181,6 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="funcionesComunes.cs" />
-    <Compile Include="Generacion Viaje\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Generacion Viaje\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Ingreso\Ingreso.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +213,18 @@
     <Compile Include="Registro de Usuario\altaDeCliente.Designer.cs">
       <DependentUpon>altaDeCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="Registro de Usuario\bajaCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro de Usuario\bajaCliente.Designer.cs">
+      <DependentUpon>bajaCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Registro de Usuario\modificacionCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro de Usuario\modificacionCliente.Designer.cs">
+      <DependentUpon>modificacionCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="Registro Llegada Destino\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,14 +238,20 @@
     <Compile Include="Tarjeta\altaDeTarjeta.Designer.cs">
       <DependentUpon>altaDeTarjeta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tarjeta\bajaTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tarjeta\bajaTarjeta.Designer.cs">
+      <DependentUpon>bajaTarjeta.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Abm Aeronave\altaDeAeronave.resx">
       <DependentUpon>altaDeAeronave.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ciudad\altaDeCiudad.resx">
       <DependentUpon>altaDeCiudad.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Consulta Millas\vistaConsultaMillas.resx">
-      <DependentUpon>vistaConsultaMillas.cs</DependentUpon>
+    <EmbeddedResource Include="Consulta Millas\consultaMillas.resx">
+      <DependentUpon>consultaMillas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ingreso\Ingreso.resx">
       <DependentUpon>Ingreso.cs</DependentUpon>
@@ -218,9 +290,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Abm Rol\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

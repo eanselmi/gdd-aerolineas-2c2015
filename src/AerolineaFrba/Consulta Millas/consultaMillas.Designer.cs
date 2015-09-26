@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Consulta_Millas
 {
-    partial class vistaConsultaMillas
+    partial class consultaMillas
     {
         /// <summary>
         /// Required designer variable.

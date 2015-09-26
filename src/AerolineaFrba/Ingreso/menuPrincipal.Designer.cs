@@ -133,8 +133,29 @@
             "Alta de Aeronave",
             "Alta de Ciudad",
             "Alta de Cliente",
+            "Alta de Rol",
+            "Alta de Ruta",
             "Alta de Tarjeta de Crédito",
-            "Consultar Millas"});
+            "Alta de Vuelo",
+            "Baja de Aeronave",
+            "Baja de Ciudad",
+            "Baja de Cliente",
+            "Baja de Rol",
+            "Baja de Ruta",
+            "Baja de Tarjeta de Crédito",
+            "Baja de Vuelo",
+            "Cancelar Encomienda",
+            "Cancelar Pasaje",
+            "Comprar Pasaje",
+            "Consultar Millas",
+            "Modificacion de Aeronave",
+            "Modificacion de Ciudad",
+            "Modificacion de Cliente",
+            "Modificacion de Rol",
+            "Modificacion de Ruta",
+            "Modificacion de Vuelo",
+            "Realizar Canje",
+            "Realizar Encomienda"});
             this.comboBoxFuncionalidad.Location = new System.Drawing.Point(6, 45);
             this.comboBoxFuncionalidad.Name = "comboBoxFuncionalidad";
             this.comboBoxFuncionalidad.Size = new System.Drawing.Size(258, 28);

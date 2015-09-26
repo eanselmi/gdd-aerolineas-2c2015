@@ -11,10 +11,10 @@ using AerolineaFrba;
 
 namespace AerolineaFrba.Consulta_Millas
 {
-    public partial class vistaConsultaMillas : Form
+    public partial class consultaMillas : Form
     {
        
-        public vistaConsultaMillas()
+        public consultaMillas()
         {
             InitializeComponent();
         }

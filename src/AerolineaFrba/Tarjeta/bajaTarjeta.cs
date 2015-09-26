@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Canje_Millas
+namespace AerolineaFrba.Tarjeta
 {
-    public partial class vistaCanjesRealizados : Form
+    public partial class bajaTarjeta : Form
     {
-        public vistaCanjesRealizados()
+        public bajaTarjeta()
         {
             InitializeComponent();
         }

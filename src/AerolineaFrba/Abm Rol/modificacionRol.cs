@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Compra
+namespace AerolineaFrba.Abm_Rol
 {
-    public partial class vistaRealizarEncomienda : Form
+    public partial class modificacionRol : Form
     {
-        public vistaRealizarEncomienda()
+        public modificacionRol()
         {
             InitializeComponent();
         }

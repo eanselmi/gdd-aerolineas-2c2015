@@ -1,6 +1,6 @@
-﻿namespace AerolineaFrba.Compra
+﻿namespace AerolineaFrba.Registro_de_Usuario
 {
-    partial class vistaCancelarEncomienda
+    partial class bajaCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "vistaCancelarEncomienda";
+            this.Text = "bajaCliente";
         }
 
         #endregion

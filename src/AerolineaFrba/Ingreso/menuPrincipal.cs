@@ -41,7 +41,7 @@ namespace AerolineaFrba.Ingreso
             {
 
                 case "Consultar Millas":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Consulta_Millas.vistaConsultaMillas());
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Consulta_Millas.consultaMillas());
                     break;
                 case "Alta de Cliente":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Registro_de_Usuario.altaDeCliente());
@@ -55,10 +55,72 @@ namespace AerolineaFrba.Ingreso
                 case "Alta de Tarjeta de Crédito":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Tarjeta.altaDeTarjeta());
                     break;
+                case "Baja de Aeronave":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Aeronave.bajaAeronave());
+                    break;
+                case "Baja de Ciudad":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ciudad.bajaCiudad());
+                    break;
+                case "Baja de Cliente":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Registro_de_Usuario.bajaCliente());
+                    break;
+                case "Baja de Tarjeta de Crédito":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Tarjeta.bajaTarjeta());
+                    break;
+                case "Modificacion de Aeronave":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Aeronave.modificacionAeronave());
+                    break;
+                case "Modificacion de Ciudad":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ciudad.modificacionCiudad());
+                    break;
+                case "Modificacion de Cliente":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Registro_de_Usuario.modificacionCliente());
+                    break;
+                case "Realizar Canje":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Canje_Millas.realizarCanjeMillas());
+                    break;
+                case "Alta de Rol":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Rol.altaRol());
+                    break;
+                case "Baja de Rol":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Rol.bajaRol());
+                    break;
+                case "Modificacion de Rol":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Rol.modificacionRol());
+                    break;
+                case "Alta de Ruta":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ruta.altaRuta());
+                    break;
+                case "Baja de Ruta":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ruta.bajaRuta());
+                    break;
+                case "Modificacion de Ruta":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ruta.modificacionRuta());
+                    break;
+                case "Realizar Encomienda":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Compra.realizarEncomienda());
+                    break;
+                case "Comprar Pasaje":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Compra.comprarPasaje());
+                    break;
+                case "Cancelar Encomienda":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Compra.bajaEncomienda());
+                    break;
+                case "Cancelar Pasaje":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Compra.bajaPasaje());
+                    break;
+                case "Alta de Vuelo":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Vuelos.altaVuelo());
+                    break;
+                case "Baja de Vuelo":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Vuelos.bajaVuelo());
+                    break;
+                case "Modificacion de Vuelo":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Vuelos.modificacionVuelo());
+                    break;
             }
             this.comboBoxFuncionalidad.SelectedIndex = -1;
         }
 
-      
     }
 }

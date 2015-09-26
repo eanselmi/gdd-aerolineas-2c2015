@@ -1,6 +1,6 @@
-﻿namespace AerolineaFrba.Canje_Millas
+﻿namespace AerolineaFrba.Compra
 {
-    partial class vistaRealizarCanjeMillas
+    partial class bajaEncomienda
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "vistaRealizarCanjeMillas";
+            this.Text = "vistaCancelarEncomienda";
         }
 
         #endregion

@@ -1,6 +1,6 @@
-﻿namespace AerolineaFrba.Canje_Millas
+﻿namespace AerolineaFrba.Abm_Rol
 {
-    partial class vistaCanjesRealizados
+    partial class modificacionRol
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "vistaCanjesRealizados";
+            this.Text = "modificacionRol";
         }
 
         #endregion

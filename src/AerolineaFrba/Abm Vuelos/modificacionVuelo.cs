@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AerolineaFrba.Compra
+namespace AerolineaFrba.Abm_Vuelos
 {
-    public partial class vistaCancelarEncomienda : Form
+    public partial class modificacionVuelo : Form
     {
-        public vistaCancelarEncomienda()
+        public modificacionVuelo()
         {
             InitializeComponent();
         }
