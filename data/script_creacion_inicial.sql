@@ -241,7 +241,7 @@ CREATE TABLE AERO.usuarios (
 CREATE TABLE AERO.productos (
     ID  INT  IDENTITY(1,1)    PRIMARY KEY,
     NOMBRE        NVARCHAR(255)    UNIQUE,
-    MILAS_REQUERIDAS INT  NOT NULL,
+    MILLAS_REQUERIDAS INT  NOT NULL,
     STOCK        INT      NOT NULL    
 )
 
@@ -571,25 +571,31 @@ IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_CANC_BOLCOMP' AND obje
 
 INSERT INTO AERO.funcionalidades VALUES
 ('ABM Rol'),
-('Registro usuario'),
+('ABM Usuario'),
 ('ABM Ciudad'),
 ('ABM Ruta'),
 ('ABM Aeronave'),
-('Generar viaje'),
+('ABM Vuelo'),
 ('Registro Llegada'),
 ('Compra pasaje_encomienda'),
 ('Cancelacion pasaje_encomienda'),
 ('Consulta millas'),
 ('Canje de millas'),
-('Estadisticas')
-
+('Estadisticas');
 
 INSERT INTO AERO.roles (nombre, activo) VALUES
 ('administrador', 1),
-('cliente', 1) 
+('cliente', 1);
 
 INSERT INTO AERO.usuarios  (ROL_ID, USERNAME, PASSWORD, FECHA_CREACION, ULTIMA_MODIFICACION, INTENTOS_LOGIN, ACTIVO) VALUES 
 (1, 'admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', GETDATE(), GETDATE(), 0, 1);
+
+INSERT INTO AERO.productos (NOMBRE, MILLAS_REQUERIDAS, STOCK)
+VALUES ('Valija', 150, 50),
+('Candado', 10, 200),
+('Almohada', 45, 100),
+('Auto', 10000, 15),
+('Calefactor', 500, 150);
 
 -----------------------------------------------------------------------
 -- TRIGGERS
@@ -680,19 +686,47 @@ AS BEGIN
 END
 GO
 
+-----------------------------------------------------------------------
+-- MIGRACION
+
+INSERT INTO AERO.fabricantes (NOMBRE)
+SELECT DISTINCT Aeronave_Fabricante
+FROM gd_esquema.Maestra
+WHERE Aeronave_Fabricante IS NOT NULL
+
+INSERT INTO AERO.tipos_de_servicio (NOMBRE)
+SELECT DISTINCT Tipo_Servicio
+FROM gd_esquema.Maestra
+WHERE Tipo_Servicio IS NOT NULL
+
+INSERT INTO AERO.ciudades (NOMBRE)
+(SELECT DISTINCT Ruta_Ciudad_Origen
+FROM gd_esquema.Maestra
+WHERE Ruta_Ciudad_Origen IS NOT NULL
+UNION
+SELECT DISTINCT Ruta_Ciudad_Destino
+FROM gd_esquema.Maestra
+WHERE Ruta_Ciudad_Destino IS NOT NULL)
+
+INSERT INTO AERO.aeropuertos (CIUDAD_ID, NOMBRE)
+(SELECT ID, NOMBRE
+FROM AERO.ciudades)
+
+-----------------------------------------------------------------------
+-- EJECUCION DE PROCEDURES
 
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Rol';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='Registro usuario';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Usuario';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Ciudad';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Ruta';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Aeronave';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='Generar viaje';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Vuelo';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Registro Llegada';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Compra pasaje_encomienda';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Cancelacion pasaje_encomienda';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Consulta millas';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Canje de millas';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Estadisticas';
---EXEC AERO.addFuncionalidad @rol='cliente', @func ='';
-
-
+EXEC AERO.addFuncionalidad @rol='cliente', @func ='Compra pasaje_encomienda';
+EXEC AERO.addFuncionalidad @rol='cliente', @func ='Consulta millas';
+EXEC AERO.addFuncionalidad @rol='cliente', @func ='Canje de millas';
