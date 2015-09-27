@@ -605,6 +605,30 @@ BEGIN
 END;
 GO
 
+IF OBJECT_ID('AERO.UpdateIntentoFallido') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.UpdateIntentoFallido;
+END;
+GO
+
+IF OBJECT_ID('AERO.UpdateIntentoExitoso') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.UpdateIntentoExitoso;
+END;
+GO
+
+IF OBJECT_ID('AERO.agregarRol') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.agregarRol;
+END;
+GO
+
+IF OBJECT_ID('AERO.agregarCliente') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.agregarCliente;
+END;
+GO
+
 --CREATE
 CREATE PROCEDURE AERO.addFuncionalidad(@rol nvarchar(255), @func nvarchar(255)) AS
 BEGIN
@@ -613,6 +637,49 @@ BEGIN
 		        (SELECT id FROM AERO.funcionalidades WHERE DETALLES = @func))
 END
 GO
+
+CREATE PROCEDURE AERO.UpdateIntentoFallido(@nombre varchar(25))
+AS BEGIN
+  DECLARE @cant_Intentos INT select intentos_login from AERO.usuarios u where u.USERNAME=@nombre;
+  IF( @cant_Intentos = 2)
+	BEGIN
+	  UPDATE AERO.usuarios  SET ACTIVO=0, INTENTOS_LOGIN=0 WHERE USERNAME=@nombre
+	  
+	END
+  ELSE
+	BEGIN
+	  UPDATE AERO.usuarios set INTENTOS_LOGIN=@cant_Intentos+1 WHERE USERNAME=@nombre
+	END
+END
+GO
+
+CREATE PROCEDURE AERO.UpdateIntentoExitoso(@nombre varchar(25))
+AS BEGIN
+	  UPDATE AERO.usuarios  SET INTENTOS_LOGIN=0 WHERE USERNAME=@nombre
+END
+GO
+
+CREATE PROCEDURE AERO.agregarRol(@nombreRol nvarchar(255), @ret int output)
+AS BEGIN
+	INSERT INTO AERO.Roles (NOMBRE,ACTIVO) VALUES (@nombreRol, 1)
+	SET @ret = SCOPE_IDENTITY()
+END
+GO
+
+CREATE PROCEDURE AERO.agregarCliente(@rol_id INT, @nombreCliente nvarchar(255), @apellidoCliente nvarchar(255), 
+	@documentoCliente numeric(18,0), @direccion nvarchar(255), 
+	@telefono numeric(18,0), @mail nvarchar(255), @fechaNac datetime,
+	@ret INT output)
+AS BEGIN
+	INSERT INTO AERO.Clientes (rol_id, nombre, apellido, dni, direccion,telefono,
+	mail,FECHA_NACIMIENTO)  
+	VALUES (@rol_id, @nombreCliente, @apellidoCliente, 
+	@documentoCliente, @direccion, 
+	@telefono, @mail, @fechaNac)
+	SET @ret = SCOPE_IDENTITY()
+END
+GO
+
 
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Rol';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Registro usuario';
@@ -627,3 +694,5 @@ EXEC AERO.addFuncionalidad @rol='administrador', @func ='Consulta millas';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Canje de millas';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Estadisticas';
 --EXEC AERO.addFuncionalidad @rol='cliente', @func ='';
+
+
