@@ -608,9 +608,9 @@ GO
 --CREATE
 CREATE PROCEDURE AERO.addFuncionalidad(@rol nvarchar(255), @func nvarchar(255)) AS
 BEGIN
-	INSERT INTO AERO.funcionalidades_por_rol (rol, funcionalidad)
+	INSERT INTO AERO.funcionalidades_por_rol (ROL_ID, FUNCIONALIDAD_ID)
 		VALUES ((SELECT id FROM AERO.roles WHERE NOMBRE = @rol),
-		        (SELECT id FROM AERO.funcionalidades WHERE DETALLE = @func))
+		        (SELECT id FROM AERO.funcionalidades WHERE DETALLES = @func))
 END
 GO
 
