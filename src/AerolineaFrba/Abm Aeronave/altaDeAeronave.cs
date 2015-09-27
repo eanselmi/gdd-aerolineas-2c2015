@@ -18,7 +18,7 @@ namespace AerolineaFrba.Abm_Aeronave
             InitializeComponent();
         }
 
-        private void botonCancelar_Click(object sender, EventArgs e)
+        private void botonVolver_Click(object sender, EventArgs e)
         {
             funcionesComunes.habilitarAnterior();
         }

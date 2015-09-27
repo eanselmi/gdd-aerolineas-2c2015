@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba;
 
 namespace AerolineaFrba.Abm_Ruta
 {
-    public partial class altaRuta : Form
+    public partial class modificacionDeRuta : Form
     {
-        public altaRuta()
+        public modificacionDeRuta()
         {
             InitializeComponent();
+        }
+
+        private void botonVolver_Click(object sender, EventArgs e)
+        {
+            funcionesComunes.habilitarAnterior();
         }
     }
 }

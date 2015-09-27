@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba;
 
 namespace AerolineaFrba.Abm_Aeronave
 {
-    public partial class modificacionAeronave : Form
+    public partial class modificacionDeAeronave : Form
     {
-        public modificacionAeronave()
+        public modificacionDeAeronave()
         {
             InitializeComponent();
+        }
+
+        private void botonVolver_Click(object sender, EventArgs e)
+        {
+            funcionesComunes.habilitarAnterior();
         }
     }
 }

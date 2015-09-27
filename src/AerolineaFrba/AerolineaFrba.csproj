@@ -53,17 +53,17 @@
     <Compile Include="Abm Aeronave\altaDeAeronave.Designer.cs">
       <DependentUpon>altaDeAeronave.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Aeronave\bajaAeronave.cs">
+    <Compile Include="Abm Aeronave\bajaModificacionDeAeronave.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Aeronave\bajaAeronave.Designer.cs">
-      <DependentUpon>bajaAeronave.cs</DependentUpon>
+    <Compile Include="Abm Aeronave\bajaModificacionDeAeronave.Designer.cs">
+      <DependentUpon>bajaModificacionDeAeronave.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Aeronave\modificacionAeronave.cs">
+    <Compile Include="Abm Aeronave\modificacionDeAeronave.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Aeronave\modificacionAeronave.Designer.cs">
-      <DependentUpon>modificacionAeronave.cs</DependentUpon>
+    <Compile Include="Abm Aeronave\modificacionDeAeronave.Designer.cs">
+      <DependentUpon>modificacionDeAeronave.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Ciudad\altaDeCiudad.cs">
       <SubType>Form</SubType>
@@ -71,17 +71,17 @@
     <Compile Include="Abm Ciudad\altaDeCiudad.Designer.cs">
       <DependentUpon>altaDeCiudad.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ciudad\bajaCiudad.cs">
+    <Compile Include="Abm Ciudad\bajaModificacionDeCiudad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ciudad\bajaCiudad.Designer.cs">
-      <DependentUpon>bajaCiudad.cs</DependentUpon>
+    <Compile Include="Abm Ciudad\bajaModificacionDeCiudad.Designer.cs">
+      <DependentUpon>bajaModificacionDeCiudad.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ciudad\modificacionCiudad.cs">
+    <Compile Include="Abm Ciudad\modificacionDeCiudad.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ciudad\modificacionCiudad.Designer.cs">
-      <DependentUpon>modificacionCiudad.cs</DependentUpon>
+    <Compile Include="Abm Ciudad\modificacionDeCiudad.Designer.cs">
+      <DependentUpon>modificacionDeCiudad.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Rol\altaRol.cs">
       <SubType>Form</SubType>
@@ -101,23 +101,23 @@
     <Compile Include="Abm Rol\modificacionRol.Designer.cs">
       <DependentUpon>modificacionRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ruta\altaRuta.cs">
+    <Compile Include="Abm Ruta\altaDeRuta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ruta\altaRuta.Designer.cs">
-      <DependentUpon>altaRuta.cs</DependentUpon>
+    <Compile Include="Abm Ruta\altaDeRuta.Designer.cs">
+      <DependentUpon>altaDeRuta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ruta\bajaRuta.cs">
+    <Compile Include="Abm Ruta\bajaModificacionDeRuta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ruta\bajaRuta.Designer.cs">
-      <DependentUpon>bajaRuta.cs</DependentUpon>
+    <Compile Include="Abm Ruta\bajaModificacionDeRuta.Designer.cs">
+      <DependentUpon>bajaModificacionDeRuta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ruta\modificacionRuta.cs">
+    <Compile Include="Abm Ruta\modificacionDeRuta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Ruta\modificacionRuta.Designer.cs">
-      <DependentUpon>modificacionRuta.cs</DependentUpon>
+    <Compile Include="Abm Ruta\modificacionDeRuta.Designer.cs">
+      <DependentUpon>modificacionDeRuta.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Vuelos\altaVuelo.cs">
       <SubType>Form</SubType>
@@ -247,8 +247,29 @@
     <EmbeddedResource Include="Abm Aeronave\altaDeAeronave.resx">
       <DependentUpon>altaDeAeronave.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\bajaModificacionDeAeronave.resx">
+      <DependentUpon>bajaModificacionDeAeronave.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Aeronave\modificacionDeAeronave.resx">
+      <DependentUpon>modificacionDeAeronave.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Abm Ciudad\altaDeCiudad.resx">
       <DependentUpon>altaDeCiudad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ciudad\bajaModificacionDeCiudad.resx">
+      <DependentUpon>bajaModificacionDeCiudad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ciudad\modificacionDeCiudad.resx">
+      <DependentUpon>modificacionDeCiudad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\altaDeRuta.resx">
+      <DependentUpon>altaDeRuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\bajaModificacionDeRuta.resx">
+      <DependentUpon>bajaModificacionDeRuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Ruta\modificacionDeRuta.resx">
+      <DependentUpon>modificacionDeRuta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Consulta Millas\consultaMillas.resx">
       <DependentUpon>consultaMillas.cs</DependentUpon>

@@ -56,10 +56,10 @@ namespace AerolineaFrba.Ingreso
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Tarjeta.altaDeTarjeta());
                     break;
                 case "Baja de Aeronave":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Aeronave.bajaAeronave());
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Aeronave.bajaModificacionDeAeronave());
                     break;
                 case "Baja de Ciudad":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ciudad.bajaCiudad());
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ciudad.bajaModificacionDeCiudad());
                     break;
                 case "Baja de Cliente":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Registro_de_Usuario.bajaCliente());
@@ -68,10 +68,10 @@ namespace AerolineaFrba.Ingreso
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Tarjeta.bajaTarjeta());
                     break;
                 case "Modificacion de Aeronave":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Aeronave.modificacionAeronave());
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Aeronave.bajaModificacionDeAeronave());
                     break;
                 case "Modificacion de Ciudad":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ciudad.modificacionCiudad());
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ciudad.bajaModificacionDeCiudad());
                     break;
                 case "Modificacion de Cliente":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Registro_de_Usuario.modificacionCliente());
@@ -89,13 +89,13 @@ namespace AerolineaFrba.Ingreso
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Rol.modificacionRol());
                     break;
                 case "Alta de Ruta":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ruta.altaRuta());
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ruta.altaDeRuta());
                     break;
                 case "Baja de Ruta":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ruta.bajaRuta());
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ruta.bajaModificacionDeRuta());
                     break;
                 case "Modificacion de Ruta":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ruta.modificacionRuta());
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ruta.bajaModificacionDeRuta());
                     break;
                 case "Realizar Encomienda":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Compra.realizarEncomienda());
@@ -121,6 +121,8 @@ namespace AerolineaFrba.Ingreso
             }
             this.comboBoxFuncionalidad.SelectedIndex = -1;
         }
+
+    
 
     }
 }
