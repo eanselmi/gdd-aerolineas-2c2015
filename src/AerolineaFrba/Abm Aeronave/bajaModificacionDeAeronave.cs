@@ -25,7 +25,9 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void botonModificacion_Click(object sender, EventArgs e)
         {
-            funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Aeronave.modificacionDeAeronave());
+            Form modificacionAeronave = new Abm_Aeronave.modificacionDeAeronave();
+            ((TextBox)modificacionAeronave.Controls["textBoxMatricula"]).Text = "Probando";
+            funcionesComunes.deshabilitarVentanaYAbrirNueva(modificacionAeronave);
         }
     }
 }
