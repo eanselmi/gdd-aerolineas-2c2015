@@ -213,7 +213,7 @@ CREATE TABLE AERO.boletos_de_compra (
 CREATE TABLE AERO.roles (
     ID    INT    IDENTITY(1,1)    PRIMARY KEY,
 	NOMBRE 	NVARCHAR(255)		NOT NULL,
-	ACTIVO	INT ,
+	ACTIVO	INT DEFAULT 1,
 	CONSTRAINT roles_CK001 CHECK (ACTIVO IN (0,1))
 )
 
@@ -238,7 +238,6 @@ CREATE TABLE AERO.usuarios (
 	ACTIVO INT,
 	CONSTRAINT usuarios_CK001 CHECK (ACTIVO IN (0,1))
 )
-
 CREATE TABLE AERO.productos (
     ID  INT  IDENTITY(1,1)    PRIMARY KEY,
     NOMBRE        NVARCHAR(255)    UNIQUE,
@@ -568,4 +567,63 @@ IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_CANC_BOLCOMP' AND obje
     END
 
 -----------------------------------------------------------------------
+-- INSERTS
+
+INSERT INTO AERO.funcionalidades VALUES
+('ABM Rol'),
+('Registro usuario'),
+('ABM Ciudad'),
+('ABM Ruta'),
+('ABM Aeronave'),
+('Generar viaje'),
+('Registro Llegada'),
+('Compra pasaje_encomienda'),
+('Cancelacion pasaje_encomienda'),
+('Consulta millas'),
+('Canje de millas'),
+('Estadisticas')
+
+
+INSERT INTO AERO.roles (nombre, activo) VALUES
+('administrador', 1),
+('cliente', 1) 
+
+INSERT INTO AERO.usuarios  (ROL_ID, USERNAME, PASSWORD, FECHA_CREACION, ULTIMA_MODIFICACION, INTENTOS_LOGIN, ACTIVO) VALUES 
+(1, 'admin', 'e6b87050bfcb8143fcb8db0170a4dc9ed00d904ddd3e2a4ad1b1e8dc0fdc9be7', GETDATE(), GETDATE(), 0, 1);
+
+-----------------------------------------------------------------------
 -- TRIGGERS
+
+-----------------------------------------------------------------------
+-- PROCEDURES && FUNCTIONS
+
+--DROP
+
+IF OBJECT_ID('AERO.addFuncionalidad') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.addFuncionalidad;
+END;
+GO
+
+--CREATE
+CREATE PROCEDURE AERO.addFuncionalidad(@rol nvarchar(255), @func nvarchar(255)) AS
+BEGIN
+	INSERT INTO AERO.funcionalidades_por_rol (rol, funcionalidad)
+		VALUES ((SELECT id FROM AERO.roles WHERE NOMBRE = @rol),
+		        (SELECT id FROM AERO.funcionalidades WHERE DETALLE = @func))
+END
+GO
+
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Rol';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Registro usuario';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Ciudad';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Ruta';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Aeronave';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Generar viaje';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Registro Llegada';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Compra pasaje_encomienda';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Cancelacion pasaje_encomienda';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Consulta millas';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Canje de millas';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Estadisticas';
+--EXEC AERO.addFuncionalidad @rol='cliente', @func ='';
