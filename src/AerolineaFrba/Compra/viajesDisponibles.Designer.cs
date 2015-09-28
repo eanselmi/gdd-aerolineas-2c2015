@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.botonBuscar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -287,6 +286,7 @@
             this.botonComprar.TabIndex = 58;
             this.botonComprar.Text = "Comprar";
             this.botonComprar.UseVisualStyleBackColor = true;
+            this.botonComprar.Click += new System.EventHandler(this.botonComprar_Click);
             // 
             // botonLimpiar
             // 
@@ -329,7 +329,6 @@
 
         #endregion
 
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxOrigen;

@@ -22,5 +22,11 @@ namespace AerolineaFrba.Compra
         {
             funcionesComunes.habilitarAnterior();
         }
+
+        private void botonComprar_Click(object sender, EventArgs e)
+        {
+            Form frmCargaDeDatos = new Compra.cargaDeDatos();
+            funcionesComunes.deshabilitarVentanaYAbrirNueva(frmCargaDeDatos);
+        }
     }
 }

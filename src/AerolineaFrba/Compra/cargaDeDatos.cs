@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba;
 
 namespace AerolineaFrba.Compra
 {
@@ -15,6 +16,11 @@ namespace AerolineaFrba.Compra
         public cargaDeDatos()
         {
             InitializeComponent();
+        }
+
+        private void botonVolver_Click(object sender, EventArgs e)
+        {
+            funcionesComunes.habilitarAnterior();
         }
     }
 }

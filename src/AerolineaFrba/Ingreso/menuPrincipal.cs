@@ -97,9 +97,6 @@ namespace AerolineaFrba.Ingreso
                 case "Modificacion de Ruta":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ruta.bajaModificacionDeRuta());
                     break;
-                case "Realizar Encomienda":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Compra.realizarEncomienda());
-                    break;
                 case "Comprar Pasaje/Encomienda":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Compra.viajesDisponibles());
                     break;
