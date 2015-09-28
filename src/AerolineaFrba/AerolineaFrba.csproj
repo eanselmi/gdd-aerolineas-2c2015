@@ -119,23 +119,11 @@
     <Compile Include="Abm Ruta\modificacionDeRuta.Designer.cs">
       <DependentUpon>modificacionDeRuta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Vuelos\altaVuelo.cs">
+    <Compile Include="Abm Vuelos\generarViaje.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Vuelos\altaVuelo.Designer.cs">
-      <DependentUpon>altaVuelo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Vuelos\bajaVuelo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Vuelos\bajaVuelo.Designer.cs">
-      <DependentUpon>bajaVuelo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Vuelos\modificacionVuelo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Vuelos\modificacionVuelo.Designer.cs">
-      <DependentUpon>modificacionVuelo.cs</DependentUpon>
+    <Compile Include="Abm Vuelos\generarViaje.Designer.cs">
+      <DependentUpon>generarViaje.cs</DependentUpon>
     </Compile>
     <Compile Include="Base.cs" />
     <Compile Include="Canje Millas\realizarCanjeMillas.cs">
@@ -270,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ruta\modificacionDeRuta.resx">
       <DependentUpon>modificacionDeRuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Vuelos\generarViaje.resx">
+      <DependentUpon>generarViaje.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Consulta Millas\consultaMillas.resx">
       <DependentUpon>consultaMillas.cs</DependentUpon>

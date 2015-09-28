@@ -109,14 +109,8 @@ namespace AerolineaFrba.Ingreso
                 case "Cancelar Pasaje":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Compra.bajaPasaje());
                     break;
-                case "Alta de Vuelo":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Vuelos.altaVuelo());
-                    break;
-                case "Baja de Vuelo":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Vuelos.bajaVuelo());
-                    break;
-                case "Modificacion de Vuelo":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Vuelos.modificacionVuelo());
+                case "Generar Viaje":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Vuelos.generarViaje());
                     break;
             }
             this.comboBoxFuncionalidad.SelectedIndex = -1;
