@@ -179,7 +179,6 @@ CREATE TABLE AERO.butacas (
 
 CREATE TABLE AERO.pasajes (
     ID    INT    IDENTITY(1,1)    PRIMARY KEY,
-    FECHA_COMPRA    DATETIME        NOT NULL,
     PRECIO        NUMERIC(18,2)		NOT NULL,
     CODIGO        NUMERIC(18,0)    UNIQUE NOT NULL,
     BUTACA_ID        INT            NOT NULL,
