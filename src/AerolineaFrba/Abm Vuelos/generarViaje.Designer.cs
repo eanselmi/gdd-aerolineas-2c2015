@@ -211,50 +211,55 @@
             // textBoxModelo
             // 
             this.textBoxModelo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxModelo.BackColor = System.Drawing.Color.White;
             this.textBoxModelo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxModelo.Location = new System.Drawing.Point(159, 19);
             this.textBoxModelo.Name = "textBoxModelo";
-            this.textBoxModelo.PasswordChar = '*';
+            this.textBoxModelo.ReadOnly = true;
             this.textBoxModelo.Size = new System.Drawing.Size(157, 22);
             this.textBoxModelo.TabIndex = 60;
             // 
             // textBoxFabricante
             // 
             this.textBoxFabricante.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxFabricante.BackColor = System.Drawing.Color.White;
             this.textBoxFabricante.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxFabricante.Location = new System.Drawing.Point(159, 47);
             this.textBoxFabricante.Name = "textBoxFabricante";
-            this.textBoxFabricante.PasswordChar = '*';
+            this.textBoxFabricante.ReadOnly = true;
             this.textBoxFabricante.Size = new System.Drawing.Size(157, 22);
             this.textBoxFabricante.TabIndex = 61;
             // 
             // textBoxAsientos
             // 
             this.textBoxAsientos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxAsientos.BackColor = System.Drawing.Color.White;
             this.textBoxAsientos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxAsientos.Location = new System.Drawing.Point(159, 75);
             this.textBoxAsientos.Name = "textBoxAsientos";
-            this.textBoxAsientos.PasswordChar = '*';
+            this.textBoxAsientos.ReadOnly = true;
             this.textBoxAsientos.Size = new System.Drawing.Size(58, 22);
             this.textBoxAsientos.TabIndex = 62;
             // 
             // textBoxCapacidadCarga
             // 
             this.textBoxCapacidadCarga.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCapacidadCarga.BackColor = System.Drawing.Color.White;
             this.textBoxCapacidadCarga.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxCapacidadCarga.Location = new System.Drawing.Point(159, 105);
             this.textBoxCapacidadCarga.Name = "textBoxCapacidadCarga";
-            this.textBoxCapacidadCarga.PasswordChar = '*';
+            this.textBoxCapacidadCarga.ReadOnly = true;
             this.textBoxCapacidadCarga.Size = new System.Drawing.Size(58, 22);
             this.textBoxCapacidadCarga.TabIndex = 63;
             // 
             // textBoxServicio
             // 
             this.textBoxServicio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxServicio.BackColor = System.Drawing.Color.White;
             this.textBoxServicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxServicio.Location = new System.Drawing.Point(159, 135);
             this.textBoxServicio.Name = "textBoxServicio";
-            this.textBoxServicio.PasswordChar = '*';
+            this.textBoxServicio.ReadOnly = true;
             this.textBoxServicio.Size = new System.Drawing.Size(157, 22);
             this.textBoxServicio.TabIndex = 65;
             // 
@@ -306,10 +311,11 @@
             // textBoxAeropuertoOrigen
             // 
             this.textBoxAeropuertoOrigen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxAeropuertoOrigen.BackColor = System.Drawing.Color.White;
             this.textBoxAeropuertoOrigen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxAeropuertoOrigen.Location = new System.Drawing.Point(141, 19);
             this.textBoxAeropuertoOrigen.Name = "textBoxAeropuertoOrigen";
-            this.textBoxAeropuertoOrigen.PasswordChar = '*';
+            this.textBoxAeropuertoOrigen.ReadOnly = true;
             this.textBoxAeropuertoOrigen.Size = new System.Drawing.Size(157, 22);
             this.textBoxAeropuertoOrigen.TabIndex = 60;
             // 
@@ -348,10 +354,11 @@
             // textBoxCiudadOrigen
             // 
             this.textBoxCiudadOrigen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCiudadOrigen.BackColor = System.Drawing.Color.White;
             this.textBoxCiudadOrigen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxCiudadOrigen.Location = new System.Drawing.Point(141, 51);
             this.textBoxCiudadOrigen.Name = "textBoxCiudadOrigen";
-            this.textBoxCiudadOrigen.PasswordChar = '*';
+            this.textBoxCiudadOrigen.ReadOnly = true;
             this.textBoxCiudadOrigen.Size = new System.Drawing.Size(157, 22);
             this.textBoxCiudadOrigen.TabIndex = 62;
             // 
@@ -369,10 +376,11 @@
             // textBoxAeropuertoDestino
             // 
             this.textBoxAeropuertoDestino.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxAeropuertoDestino.BackColor = System.Drawing.Color.White;
             this.textBoxAeropuertoDestino.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxAeropuertoDestino.Location = new System.Drawing.Point(141, 80);
             this.textBoxAeropuertoDestino.Name = "textBoxAeropuertoDestino";
-            this.textBoxAeropuertoDestino.PasswordChar = '*';
+            this.textBoxAeropuertoDestino.ReadOnly = true;
             this.textBoxAeropuertoDestino.Size = new System.Drawing.Size(157, 22);
             this.textBoxAeropuertoDestino.TabIndex = 64;
             // 
@@ -390,10 +398,11 @@
             // textBoxCiudadDestino
             // 
             this.textBoxCiudadDestino.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCiudadDestino.BackColor = System.Drawing.Color.White;
             this.textBoxCiudadDestino.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxCiudadDestino.Location = new System.Drawing.Point(141, 108);
             this.textBoxCiudadDestino.Name = "textBoxCiudadDestino";
-            this.textBoxCiudadDestino.PasswordChar = '*';
+            this.textBoxCiudadDestino.ReadOnly = true;
             this.textBoxCiudadDestino.Size = new System.Drawing.Size(157, 22);
             this.textBoxCiudadDestino.TabIndex = 66;
             // 

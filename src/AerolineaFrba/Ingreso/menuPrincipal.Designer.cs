@@ -153,7 +153,8 @@
             "Modificacion de Rol",
             "Modificacion de Ruta",
             "Realizar Canje",
-            "Realizar Encomienda"});
+            "Realizar Encomienda",
+            "Registrar Llegadas"});
             this.comboBoxFuncionalidad.Location = new System.Drawing.Point(6, 45);
             this.comboBoxFuncionalidad.Name = "comboBoxFuncionalidad";
             this.comboBoxFuncionalidad.Size = new System.Drawing.Size(258, 28);

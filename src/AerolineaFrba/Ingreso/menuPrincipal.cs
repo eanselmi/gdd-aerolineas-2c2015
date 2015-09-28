@@ -112,6 +112,9 @@ namespace AerolineaFrba.Ingreso
                 case "Generar Viaje":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Vuelos.generarViaje());
                     break;
+                case "Registrar Llegadas":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Registro_Llegada_Destino.registroDeLlegadaADestino());
+                    break;
             }
             this.comboBoxFuncionalidad.SelectedIndex = -1;
         }

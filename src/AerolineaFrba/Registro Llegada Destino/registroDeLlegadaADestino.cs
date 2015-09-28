@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba;
 
 namespace AerolineaFrba.Registro_Llegada_Destino
 {
-    public partial class Form1 : Form
+    public partial class registroDeLlegadaADestino : Form
     {
-        public Form1()
+        public registroDeLlegadaADestino()
         {
             InitializeComponent();
+        }
+
+        private void botonVolver_Click(object sender, EventArgs e)
+        {
+            funcionesComunes.habilitarAnterior();
         }
     }
 }

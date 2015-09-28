@@ -213,11 +213,11 @@
     <Compile Include="Registro de Usuario\modificacionCliente.Designer.cs">
       <DependentUpon>modificacionCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro Llegada Destino\Form1.cs">
+    <Compile Include="Registro Llegada Destino\registroDeLlegadaADestino.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro Llegada Destino\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Registro Llegada Destino\registroDeLlegadaADestino.Designer.cs">
+      <DependentUpon>registroDeLlegadaADestino.cs</DependentUpon>
     </Compile>
     <Compile Include="SqlConnector.cs" />
     <Compile Include="Tarjeta\altaDeTarjeta.cs">
@@ -285,6 +285,9 @@
     </Compile>
     <EmbeddedResource Include="Registro de Usuario\altaDeCliente.resx">
       <DependentUpon>altaDeCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro Llegada Destino\registroDeLlegadaADestino.resx">
+      <DependentUpon>registroDeLlegadaADestino.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tarjeta\altaDeTarjeta.resx">
       <DependentUpon>altaDeTarjeta.cs</DependentUpon>
