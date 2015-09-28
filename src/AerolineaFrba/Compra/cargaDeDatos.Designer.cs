@@ -1,6 +1,6 @@
 ﻿namespace AerolineaFrba.Compra
 {
-    partial class comprarPasaje
+    partial class cargaDeDatos
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "vistaComprarPasajesPropios";
+            this.SuspendLayout();
+            // 
+            // cargaDeDatos
+            // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(779, 482);
+            this.ControlBox = false;
+            this.Name = "cargaDeDatos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "cargaDeDatos";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

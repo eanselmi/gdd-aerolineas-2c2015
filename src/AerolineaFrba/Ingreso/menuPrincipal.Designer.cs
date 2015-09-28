@@ -144,7 +144,7 @@
             "Baja de Tarjeta de Crédito",
             "Cancelar Encomienda",
             "Cancelar Pasaje",
-            "Comprar Pasaje",
+            "Comprar Pasaje/Encomienda",
             "Consultar Millas",
             "Generar Viaje",
             "Modificacion de Aeronave",
@@ -153,7 +153,6 @@
             "Modificacion de Rol",
             "Modificacion de Ruta",
             "Realizar Canje",
-            "Realizar Encomienda",
             "Registrar Llegadas"});
             this.comboBoxFuncionalidad.Location = new System.Drawing.Point(6, 45);
             this.comboBoxFuncionalidad.Name = "comboBoxFuncionalidad";

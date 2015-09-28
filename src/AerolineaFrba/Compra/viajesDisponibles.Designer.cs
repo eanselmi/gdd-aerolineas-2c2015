@@ -1,0 +1,358 @@
+﻿namespace AerolineaFrba.Compra
+{
+    partial class viajesDisponibles
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.botonBuscar = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxDestino = new System.Windows.Forms.TextBox();
+            this.timePickerFecha = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxOrigen = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dataGridViajes = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.numericUpDownEncomiendas = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownPasajes = new System.Windows.Forms.NumericUpDown();
+            this.botonVolver = new System.Windows.Forms.Button();
+            this.botonComprar = new System.Windows.Forms.Button();
+            this.botonLimpiar = new System.Windows.Forms.Button();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViajes)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEncomiendas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPasajes)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.botonBuscar);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.textBoxDestino);
+            this.groupBox1.Controls.Add(this.timePickerFecha);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.textBoxOrigen);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(143, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(494, 165);
+            this.groupBox1.TabIndex = 14;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Viaje";
+            // 
+            // botonBuscar
+            // 
+            this.botonBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.botonBuscar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonBuscar.Location = new System.Drawing.Point(209, 131);
+            this.botonBuscar.Name = "botonBuscar";
+            this.botonBuscar.Size = new System.Drawing.Size(81, 28);
+            this.botonBuscar.TabIndex = 100;
+            this.botonBuscar.Text = "Buscar";
+            this.botonBuscar.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(252, 70);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(118, 20);
+            this.label2.TabIndex = 59;
+            this.label2.Text = "Ciudad Destino";
+            // 
+            // textBoxDestino
+            // 
+            this.textBoxDestino.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxDestino.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxDestino.Location = new System.Drawing.Point(256, 93);
+            this.textBoxDestino.Name = "textBoxDestino";
+            this.textBoxDestino.PasswordChar = '*';
+            this.textBoxDestino.Size = new System.Drawing.Size(226, 26);
+            this.textBoxDestino.TabIndex = 58;
+            // 
+            // timePickerFecha
+            // 
+            this.timePickerFecha.CustomFormat = "dd/MM/yyyy";
+            this.timePickerFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timePickerFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.timePickerFecha.Location = new System.Drawing.Point(150, 41);
+            this.timePickerFecha.Name = "timePickerFecha";
+            this.timePickerFecha.Size = new System.Drawing.Size(217, 26);
+            this.timePickerFecha.TabIndex = 56;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(146, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(54, 20);
+            this.label3.TabIndex = 57;
+            this.label3.Text = "Fecha";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(10, 70);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(110, 20);
+            this.label1.TabIndex = 55;
+            this.label1.Text = "Ciudad Origen";
+            // 
+            // textBoxOrigen
+            // 
+            this.textBoxOrigen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxOrigen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxOrigen.Location = new System.Drawing.Point(14, 93);
+            this.textBoxOrigen.Name = "textBoxOrigen";
+            this.textBoxOrigen.PasswordChar = '*';
+            this.textBoxOrigen.Size = new System.Drawing.Size(226, 26);
+            this.textBoxOrigen.TabIndex = 52;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(36, 197);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(139, 16);
+            this.label5.TabIndex = 56;
+            this.label5.Text = "Viajes Disponibles";
+            // 
+            // dataGridViajes
+            // 
+            this.dataGridViajes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViajes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViajes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.Column6});
+            this.dataGridViajes.Location = new System.Drawing.Point(39, 216);
+            this.dataGridViajes.Name = "dataGridViajes";
+            this.dataGridViajes.RowHeadersVisible = false;
+            this.dataGridViajes.ShowCellToolTips = false;
+            this.dataGridViajes.ShowEditingIcon = false;
+            this.dataGridViajes.Size = new System.Drawing.Size(689, 270);
+            this.dataGridViajes.TabIndex = 55;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Fecha y Hora Salida";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Origen";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Destino";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Butacas Libres";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Kg Disponibles";
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Servicio";
+            this.Column6.Name = "Column6";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.numericUpDownEncomiendas);
+            this.groupBox2.Controls.Add(this.numericUpDownPasajes);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(143, 492);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(494, 105);
+            this.groupBox2.TabIndex = 57;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Compra";
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(309, 31);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(129, 20);
+            this.label6.TabIndex = 57;
+            this.label6.Text = "Kg Encomiendas";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(61, 31);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(133, 20);
+            this.label4.TabIndex = 56;
+            this.label4.Text = "Cantidad Pasajes";
+            // 
+            // numericUpDownEncomiendas
+            // 
+            this.numericUpDownEncomiendas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownEncomiendas.Location = new System.Drawing.Point(313, 54);
+            this.numericUpDownEncomiendas.Name = "numericUpDownEncomiendas";
+            this.numericUpDownEncomiendas.Size = new System.Drawing.Size(125, 26);
+            this.numericUpDownEncomiendas.TabIndex = 1;
+            this.numericUpDownEncomiendas.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // numericUpDownPasajes
+            // 
+            this.numericUpDownPasajes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numericUpDownPasajes.Location = new System.Drawing.Point(65, 54);
+            this.numericUpDownPasajes.Name = "numericUpDownPasajes";
+            this.numericUpDownPasajes.Size = new System.Drawing.Size(121, 26);
+            this.numericUpDownPasajes.TabIndex = 0;
+            this.numericUpDownPasajes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // botonVolver
+            // 
+            this.botonVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonVolver.Location = new System.Drawing.Point(343, 603);
+            this.botonVolver.Name = "botonVolver";
+            this.botonVolver.Size = new System.Drawing.Size(117, 46);
+            this.botonVolver.TabIndex = 59;
+            this.botonVolver.Text = "Volver";
+            this.botonVolver.UseVisualStyleBackColor = true;
+            this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
+            // 
+            // botonComprar
+            // 
+            this.botonComprar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.botonComprar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonComprar.Location = new System.Drawing.Point(220, 603);
+            this.botonComprar.Name = "botonComprar";
+            this.botonComprar.Size = new System.Drawing.Size(117, 46);
+            this.botonComprar.TabIndex = 58;
+            this.botonComprar.Text = "Comprar";
+            this.botonComprar.UseVisualStyleBackColor = true;
+            // 
+            // botonLimpiar
+            // 
+            this.botonLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.botonLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonLimpiar.Location = new System.Drawing.Point(466, 603);
+            this.botonLimpiar.Name = "botonLimpiar";
+            this.botonLimpiar.Size = new System.Drawing.Size(117, 46);
+            this.botonLimpiar.TabIndex = 60;
+            this.botonLimpiar.Text = "Limpiar";
+            this.botonLimpiar.UseVisualStyleBackColor = true;
+            // 
+            // viajesDisponibles
+            // 
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(760, 651);
+            this.ControlBox = false;
+            this.Controls.Add(this.botonLimpiar);
+            this.Controls.Add(this.botonVolver);
+            this.Controls.Add(this.botonComprar);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.dataGridViajes);
+            this.Controls.Add(this.groupBox1);
+            this.Name = "viajesDisponibles";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Comprar Pasajes/Encomiendas";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViajes)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEncomiendas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPasajes)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxOrigen;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxDestino;
+        private System.Windows.Forms.DateTimePicker timePickerFecha;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button botonBuscar;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DataGridView dataGridViajes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.NumericUpDown numericUpDownEncomiendas;
+        private System.Windows.Forms.NumericUpDown numericUpDownPasajes;
+        private System.Windows.Forms.Button botonVolver;
+        private System.Windows.Forms.Button botonComprar;
+        private System.Windows.Forms.Button botonLimpiar;
+    }
+}

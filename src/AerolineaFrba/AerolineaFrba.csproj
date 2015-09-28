@@ -138,23 +138,23 @@
     <Compile Include="Compra\bajaEncomienda.Designer.cs">
       <DependentUpon>bajaEncomienda.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\comprarPasaje.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Compra\comprarPasaje.Designer.cs">
-      <DependentUpon>comprarPasaje.cs</DependentUpon>
-    </Compile>
     <Compile Include="Compra\bajaPasaje.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Compra\bajaPasaje.Designer.cs">
       <DependentUpon>bajaPasaje.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\realizarEncomienda.cs">
+    <Compile Include="Compra\cargaDeDatos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Compra\realizarEncomienda.Designer.cs">
-      <DependentUpon>realizarEncomienda.cs</DependentUpon>
+    <Compile Include="Compra\cargaDeDatos.Designer.cs">
+      <DependentUpon>cargaDeDatos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra\viajesDisponibles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\viajesDisponibles.Designer.cs">
+      <DependentUpon>viajesDisponibles.cs</DependentUpon>
     </Compile>
     <Compile Include="Consulta Millas\consultaMillas.cs">
       <SubType>Form</SubType>
@@ -261,6 +261,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Vuelos\generarViaje.resx">
       <DependentUpon>generarViaje.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\cargaDeDatos.resx">
+      <DependentUpon>cargaDeDatos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\viajesDisponibles.resx">
+      <DependentUpon>viajesDisponibles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Consulta Millas\consultaMillas.resx">
       <DependentUpon>consultaMillas.cs</DependentUpon>
