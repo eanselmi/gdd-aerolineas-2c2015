@@ -51,6 +51,21 @@ namespace AerolineaFrba
             }
         }
 
+        //esta funcion permite volver al menu principal
+        public static void volverAMenuPrincipal()
+        {
+            pos = listaVentanas.Count();
+            ventanaActual = listaVentanas[pos - 1];
+            ventanaActual.Hide();
+            while (pos > 2)
+            {
+                listaVentanas.RemoveAt(pos - 1);
+                pos = pos - 1;
+            }
+            pos = listaVentanas.Count();
+            ventanaActual = listaVentanas[pos - 1];
+            ventanaActual.Show();
+        }
         #endregion
 
        

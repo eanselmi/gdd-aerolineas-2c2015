@@ -100,9 +100,6 @@ namespace AerolineaFrba.Ingreso
                 case "Comprar Pasaje/Encomienda":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Compra.viajesDisponibles());
                     break;
-                case "Cancelar Pasaje":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Compra.bajaPasaje());
-                    break;
                 case "Generar Viaje":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Vuelos.generarViaje());
                     break;

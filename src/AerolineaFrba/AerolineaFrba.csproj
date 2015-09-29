@@ -132,23 +132,23 @@
     <Compile Include="Canje Millas\realizarCanjeMillas.Designer.cs">
       <DependentUpon>realizarCanjeMillas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Compra\bajaEncomienda.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Compra\bajaEncomienda.Designer.cs">
-      <DependentUpon>bajaEncomienda.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Compra\bajaPasaje.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Compra\bajaPasaje.Designer.cs">
-      <DependentUpon>bajaPasaje.cs</DependentUpon>
-    </Compile>
     <Compile Include="Compra\cargaDeDatos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Compra\cargaDeDatos.Designer.cs">
       <DependentUpon>cargaDeDatos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra\procesoCompraExitoso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\procesoCompraExitoso.Designer.cs">
+      <DependentUpon>procesoCompraExitoso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra\registrarPagoTarjeta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\registrarPagoTarjeta.Designer.cs">
+      <DependentUpon>registrarPagoTarjeta.cs</DependentUpon>
     </Compile>
     <Compile Include="Compra\viajesDisponibles.cs">
       <SubType>Form</SubType>
@@ -264,6 +264,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\cargaDeDatos.resx">
       <DependentUpon>cargaDeDatos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\procesoCompraExitoso.resx">
+      <DependentUpon>procesoCompraExitoso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\registrarPagoTarjeta.resx">
+      <DependentUpon>registrarPagoTarjeta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\viajesDisponibles.resx">
       <DependentUpon>viajesDisponibles.cs</DependentUpon>

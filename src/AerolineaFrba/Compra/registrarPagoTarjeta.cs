@@ -11,9 +11,9 @@ using AerolineaFrba;
 
 namespace AerolineaFrba.Compra
 {
-    public partial class cargaDeDatos : Form
+    public partial class registrarPagoTarjeta : Form
     {
-        public cargaDeDatos()
+        public registrarPagoTarjeta()
         {
             InitializeComponent();
         }
@@ -23,12 +23,9 @@ namespace AerolineaFrba.Compra
             funcionesComunes.habilitarAnterior();
         }
 
-        private void botonComprar_Click(object sender, EventArgs e)
+        private void botonConfirmar_Click(object sender, EventArgs e)
         {
-            //Si el rol actual es cliente
-            Form frmPagoTarjeta = new Compra.registrarPagoTarjeta();
-            funcionesComunes.deshabilitarVentanaYAbrirNueva(frmPagoTarjeta);
-
+            funcionesComunes.deshabilitarVentanaYAbrirNueva(new Compra.procesoCompraExitoso());
         }
     }
 }

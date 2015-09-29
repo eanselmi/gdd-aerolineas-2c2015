@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.botonEliminarPasaje = new System.Windows.Forms.Button();
             this.botonLimpiarPas = new System.Windows.Forms.Button();
             this.botonCargarPas = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -62,6 +63,7 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.botonEliminarEnco = new System.Windows.Forms.Button();
             this.botonLimpiarEnco = new System.Windows.Forms.Button();
             this.botonCargarEnco = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -86,15 +88,13 @@
             this.label18 = new System.Windows.Forms.Label();
             this.textBoxDniEnco = new System.Windows.Forms.TextBox();
             this.dataGridEnco = new System.Windows.Forms.DataGridView();
-            this.botonVolver = new System.Windows.Forms.Button();
-            this.botonComprar = new System.Windows.Forms.Button();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.botonEliminarEnco = new System.Windows.Forms.Button();
-            this.botonEliminarPasaje = new System.Windows.Forms.Button();
+            this.botonVolver = new System.Windows.Forms.Button();
+            this.botonComprar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -123,6 +123,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pasajes";
+            // 
+            // botonEliminarPasaje
+            // 
+            this.botonEliminarPasaje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.botonEliminarPasaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonEliminarPasaje.Location = new System.Drawing.Point(645, 20);
+            this.botonEliminarPasaje.Name = "botonEliminarPasaje";
+            this.botonEliminarPasaje.Size = new System.Drawing.Size(79, 42);
+            this.botonEliminarPasaje.TabIndex = 40;
+            this.botonEliminarPasaje.Text = "Eliminar";
+            this.botonEliminarPasaje.UseVisualStyleBackColor = true;
             // 
             // botonLimpiarPas
             // 
@@ -477,6 +488,17 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Encomiendas";
             // 
+            // botonEliminarEnco
+            // 
+            this.botonEliminarEnco.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.botonEliminarEnco.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonEliminarEnco.Location = new System.Drawing.Point(645, 28);
+            this.botonEliminarEnco.Name = "botonEliminarEnco";
+            this.botonEliminarEnco.Size = new System.Drawing.Size(79, 42);
+            this.botonEliminarEnco.TabIndex = 39;
+            this.botonEliminarEnco.Text = "Eliminar";
+            this.botonEliminarEnco.UseVisualStyleBackColor = true;
+            // 
             // botonLimpiarEnco
             // 
             this.botonLimpiarEnco.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -758,29 +780,6 @@
             this.dataGridEnco.Size = new System.Drawing.Size(734, 122);
             this.dataGridEnco.TabIndex = 0;
             // 
-            // botonVolver
-            // 
-            this.botonVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonVolver.Location = new System.Drawing.Point(384, 645);
-            this.botonVolver.Name = "botonVolver";
-            this.botonVolver.Size = new System.Drawing.Size(105, 42);
-            this.botonVolver.TabIndex = 28;
-            this.botonVolver.Text = "Volver";
-            this.botonVolver.UseVisualStyleBackColor = true;
-            this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
-            // 
-            // botonComprar
-            // 
-            this.botonComprar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonComprar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonComprar.Location = new System.Drawing.Point(276, 645);
-            this.botonComprar.Name = "botonComprar";
-            this.botonComprar.Size = new System.Drawing.Size(105, 42);
-            this.botonComprar.TabIndex = 27;
-            this.botonComprar.Text = "Comprar";
-            this.botonComprar.UseVisualStyleBackColor = true;
-            // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "Nombre";
@@ -806,27 +805,29 @@
             this.Column7.HeaderText = "Precio";
             this.Column7.Name = "Column7";
             // 
-            // botonEliminarEnco
+            // botonVolver
             // 
-            this.botonEliminarEnco.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonEliminarEnco.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonEliminarEnco.Location = new System.Drawing.Point(645, 28);
-            this.botonEliminarEnco.Name = "botonEliminarEnco";
-            this.botonEliminarEnco.Size = new System.Drawing.Size(79, 42);
-            this.botonEliminarEnco.TabIndex = 39;
-            this.botonEliminarEnco.Text = "Eliminar";
-            this.botonEliminarEnco.UseVisualStyleBackColor = true;
+            this.botonVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonVolver.Location = new System.Drawing.Point(384, 645);
+            this.botonVolver.Name = "botonVolver";
+            this.botonVolver.Size = new System.Drawing.Size(105, 42);
+            this.botonVolver.TabIndex = 28;
+            this.botonVolver.Text = "Volver";
+            this.botonVolver.UseVisualStyleBackColor = true;
+            this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
             // 
-            // botonEliminarPasaje
+            // botonComprar
             // 
-            this.botonEliminarPasaje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonEliminarPasaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonEliminarPasaje.Location = new System.Drawing.Point(645, 20);
-            this.botonEliminarPasaje.Name = "botonEliminarPasaje";
-            this.botonEliminarPasaje.Size = new System.Drawing.Size(79, 42);
-            this.botonEliminarPasaje.TabIndex = 40;
-            this.botonEliminarPasaje.Text = "Eliminar";
-            this.botonEliminarPasaje.UseVisualStyleBackColor = true;
+            this.botonComprar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.botonComprar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonComprar.Location = new System.Drawing.Point(276, 645);
+            this.botonComprar.Name = "botonComprar";
+            this.botonComprar.Size = new System.Drawing.Size(105, 42);
+            this.botonComprar.TabIndex = 27;
+            this.botonComprar.Text = "Comprar";
+            this.botonComprar.UseVisualStyleBackColor = true;
+            this.botonComprar.Click += new System.EventHandler(this.botonComprar_Click);
             // 
             // cargaDeDatos
             // 

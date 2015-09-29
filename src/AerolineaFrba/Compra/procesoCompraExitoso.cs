@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AerolineaFrba;
 
 namespace AerolineaFrba.Compra
 {
-    public partial class bajaPasaje : Form
+    public partial class procesoCompraExitoso : Form
     {
-        public bajaPasaje()
+        public procesoCompraExitoso()
         {
             InitializeComponent();
+        }
+
+        private void botonAceptar_Click(object sender, EventArgs e)
+        {
+            funcionesComunes.volverAMenuPrincipal();
         }
     }
 }
