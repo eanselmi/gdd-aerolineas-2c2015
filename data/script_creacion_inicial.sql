@@ -233,7 +233,7 @@ CREATE TABLE AERO.usuarios (
     PASSWORD        NVARCHAR(255)		NOT NULL,
 	FECHA_CREACION DATETIME				NOT NULL,
 	ULTIMA_MODIFICACION DATETIME		NOT NULL,
-	INTENTOS_LOGIN INT DEFAULT 0,
+	INTENTOS_LOGIN INT NOT NULL DEFAULT 0,
 	ACTIVO INT,
 	CONSTRAINT usuarios_CK001 CHECK (ACTIVO IN (0,1))
 )
@@ -645,7 +645,8 @@ GO
 
 CREATE PROCEDURE AERO.UpdateIntentoFallido(@nombre varchar(25))
 AS BEGIN
-  DECLARE @cant_Intentos INT select intentos_login from AERO.usuarios u where u.USERNAME=@nombre;
+   DECLARE @cant_Intentos int
+   SELECT @cant_Intentos = intentos_login FROM AERO.usuarios WHERE USERNAME=@nombre
   IF( @cant_Intentos = 2)
 	BEGIN
 	  UPDATE AERO.usuarios  SET ACTIVO=0, INTENTOS_LOGIN=0 WHERE USERNAME=@nombre

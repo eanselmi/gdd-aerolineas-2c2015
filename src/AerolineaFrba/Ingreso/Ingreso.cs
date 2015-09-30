@@ -35,12 +35,19 @@ namespace AerolineaFrba.Ingreso
                 while (dr.Read()){
                     contr = dr.GetString(0);
                 }
+                dr.Close();
                 Base b = new Base();
                 if (contr == b.pasarASha256(this.textPassword.Text)){
-                    //TODO: update intento exitoso procedure
+                    cmd = new SqlCommand("AERO.updateIntentoExitoso", cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@nombre", this.textUsuario.Text));
+                    dr = cmd.ExecuteReader();
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new menuPrincipal());
                 }else{
-                    //TODO: update intento fallido procedure
+                    cmd = new SqlCommand("AERO.updateIntentoFallido", cn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@nombre", this.textUsuario.Text));
+                    dr = cmd.ExecuteReader();
                     MessageBox.Show("Contraseña inválida, tenga en cuenta que son 3 intentos en total");
                 }
             }else{
@@ -48,7 +55,6 @@ namespace AerolineaFrba.Ingreso
             }
             this.textUsuario.Clear();
             this.textPassword.Clear();
-            dr.Close();
         }
 
         private void botonInvitado_Click(object sender, EventArgs e) {
