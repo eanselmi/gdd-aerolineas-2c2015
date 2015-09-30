@@ -87,7 +87,6 @@
             this.textPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textPassword.Location = new System.Drawing.Point(10, 99);
             this.textPassword.Name = "textPassword";
-            this.textPassword.PasswordChar = '*';
             this.textPassword.Size = new System.Drawing.Size(258, 26);
             this.textPassword.TabIndex = 2;
             // 
@@ -219,9 +218,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button botonSalir;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textPassword;
+        public System.Windows.Forms.TextBox textPassword;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textUsuario;
+        public System.Windows.Forms.TextBox textUsuario;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox comboBoxFuncionalidad;
         private System.Windows.Forms.Button botonAceptar;

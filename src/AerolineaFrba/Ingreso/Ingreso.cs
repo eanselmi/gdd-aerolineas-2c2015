@@ -27,17 +27,19 @@ namespace AerolineaFrba.Ingreso
            //Apertura formulario menu para administrador
             SqlConnection cn = new SqlConnection("Data Source=(local)" + "\\" + "SQLSERVER2012;Initial Catalog=GD2C2015;User ID=gd;Password=gd2015;");
             cn.Open();
-            SqlCommand cmd = new SqlCommand("select PASSWORD, ACTIVO, INTENTOS_LOGIN from AERO.usuarios where USERNAME = '" + this.textUsuario.Text + "'", cn);
+            SqlCommand cmd = new SqlCommand("select u.PASSWORD, u.ACTIVO, u.INTENTOS_LOGIN, r.NOMBRE from AERO.usuarios u,AERO.roles r  where u.USERNAME = '" + this.textUsuario.Text + "' AND r.ID = u.ROL_ID", cn );
             SqlDataReader dr;
             dr = cmd.ExecuteReader();
             String contr = "";
             int activo = -1;
             int intentos = -1;
+            String nombreRol = " "; 
             if (dr.HasRows) {
                 while (dr.Read()){
                     contr = dr.GetString(0);
                     activo = (int)dr.GetInt32(1);
                     intentos = (int)dr.GetInt32(2);
+                    nombreRol = dr.GetString(3);
                 }
                 dr.Close();
                 Base b = new Base();
@@ -49,7 +51,10 @@ namespace AerolineaFrba.Ingreso
                         //exitoso = 1 es cuando pasa bien
                         cmd.Parameters.Add(new SqlParameter("@exitoso", 1));
                         dr = cmd.ExecuteReader();
-                        funcionesComunes.deshabilitarVentanaYAbrirNueva(new menuPrincipal());
+                        menuPrincipal menu = new menuPrincipal();
+                        menu.textUsuario.Text = this.textUsuario.Text;
+                        menu.textPassword.Text = nombreRol;
+                        funcionesComunes.deshabilitarVentanaYAbrirNueva(menu);
                     }else{
                         cmd = new SqlCommand("AERO.updateIntento", cn);
                         cmd.CommandType = CommandType.StoredProcedure;
