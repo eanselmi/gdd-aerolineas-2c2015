@@ -27,28 +27,40 @@ namespace AerolineaFrba.Ingreso
            //Apertura formulario menu para administrador
             SqlConnection cn = new SqlConnection("Data Source=(local)" + "\\" + "SQLSERVER2012;Initial Catalog=GD2C2015;User ID=gd;Password=gd2015;");
             cn.Open();
-            SqlCommand cmd = new SqlCommand("select PASSWORD from AERO.usuarios where USERNAME = '" + this.textUsuario.Text + "'",cn);
+            SqlCommand cmd = new SqlCommand("select PASSWORD, ACTIVO, INTENTOS_LOGIN from AERO.usuarios where USERNAME = '" + this.textUsuario.Text + "'", cn);
             SqlDataReader dr;
             dr = cmd.ExecuteReader();
             String contr = "";
+            int activo = -1;
+            int intentos = -1;
             if (dr.HasRows) {
                 while (dr.Read()){
                     contr = dr.GetString(0);
+                    activo = (int)dr.GetInt32(1);
+                    intentos = (int)dr.GetInt32(2);
                 }
                 dr.Close();
                 Base b = new Base();
-                if (contr == b.pasarASha256(this.textPassword.Text)){
-                    cmd = new SqlCommand("AERO.updateIntentoExitoso", cn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@nombre", this.textUsuario.Text));
-                    dr = cmd.ExecuteReader();
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new menuPrincipal());
+                if (activo == 1){
+                    if (contr == b.pasarASha256(this.textPassword.Text)){
+                        cmd = new SqlCommand("AERO.updateIntento", cn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add(new SqlParameter("@nombre", this.textUsuario.Text));
+                        //exitoso = 1 es cuando pasa bien
+                        cmd.Parameters.Add(new SqlParameter("@exitoso", 1));
+                        dr = cmd.ExecuteReader();
+                        funcionesComunes.deshabilitarVentanaYAbrirNueva(new menuPrincipal());
+                    }else{
+                        cmd = new SqlCommand("AERO.updateIntento", cn);
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.Add(new SqlParameter("@nombre", this.textUsuario.Text));
+                        //exitoso != 1 es cuando pasa mal, no deja pasarle 0
+                        cmd.Parameters.Add(new SqlParameter("@exitoso", 2));
+                        dr = cmd.ExecuteReader();
+                        MessageBox.Show("Contraseña inválida, le quedan " + (2-intentos) + " intentos");
+                    }
                 }else{
-                    cmd = new SqlCommand("AERO.updateIntentoFallido", cn);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add(new SqlParameter("@nombre", this.textUsuario.Text));
-                    dr = cmd.ExecuteReader();
-                    MessageBox.Show("Contraseña inválida, tenga en cuenta que son 3 intentos en total");
+                    MessageBox.Show("El usuario ingresado esta inhabilitado, contacte al administrador");
                 }
             }else{
                 MessageBox.Show("Usuario inválido");

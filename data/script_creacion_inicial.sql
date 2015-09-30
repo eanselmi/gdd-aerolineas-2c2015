@@ -610,15 +610,9 @@ BEGIN
 END;
 GO
 
-IF OBJECT_ID('AERO.UpdateIntentoFallido') IS NOT NULL
+IF OBJECT_ID('AERO.UpdateIntento') IS NOT NULL
 BEGIN
-	DROP PROCEDURE AERO.UpdateIntentoFallido;
-END;
-GO
-
-IF OBJECT_ID('AERO.UpdateIntentoExitoso') IS NOT NULL
-BEGIN
-	DROP PROCEDURE AERO.UpdateIntentoExitoso;
+	DROP PROCEDURE AERO.UpdateIntento;
 END;
 GO
 
@@ -643,25 +637,26 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE AERO.UpdateIntentoFallido(@nombre varchar(25))
-AS BEGIN
-   DECLARE @cant_Intentos int
-   SELECT @cant_Intentos = intentos_login FROM AERO.usuarios WHERE USERNAME=@nombre
-  IF( @cant_Intentos = 2)
-	BEGIN
-	  UPDATE AERO.usuarios  SET ACTIVO=0, INTENTOS_LOGIN=0 WHERE USERNAME=@nombre
-	  
-	END
-  ELSE
-	BEGIN
-	  UPDATE AERO.usuarios set INTENTOS_LOGIN=@cant_Intentos+1 WHERE USERNAME=@nombre
-	END
-END
-GO
 
-CREATE PROCEDURE AERO.UpdateIntentoExitoso(@nombre varchar(25))
+CREATE PROCEDURE AERO.UpdateIntento(@nombre varchar(25), @exitoso int)
 AS BEGIN
-	  UPDATE AERO.usuarios  SET INTENTOS_LOGIN=0 WHERE USERNAME=@nombre
+	IF(@exitoso = 1)
+		BEGIN
+			UPDATE AERO.usuarios  SET INTENTOS_LOGIN=0 WHERE USERNAME=@nombre
+		END
+	ELSE
+		BEGIN
+			DECLARE @cant_Intentos int
+			SELECT @cant_Intentos = intentos_login FROM AERO.usuarios WHERE USERNAME=@nombre
+			IF( @cant_Intentos = 2)
+				BEGIN
+					UPDATE AERO.usuarios  SET ACTIVO=0, INTENTOS_LOGIN=0 WHERE USERNAME=@nombre
+				END
+			ELSE
+				BEGIN
+					UPDATE AERO.usuarios set INTENTOS_LOGIN=@cant_Intentos+1 WHERE USERNAME=@nombre
+				END
+		END
 END
 GO
 
