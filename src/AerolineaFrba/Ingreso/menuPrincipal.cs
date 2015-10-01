@@ -114,14 +114,16 @@ namespace AerolineaFrba.Ingreso
         private void menuPrincipal_Load(object sender, EventArgs e)
         {
             //Cuando no este harcodeado la podemos sacar la linea de abajo
-            comboBoxFuncionalidad.Items.Clear();
             this.textRol.Text = funcionesComunes.getRol();
             //Carga las funcionalidades dependiendo del rol en el comboBox
                 DataTable dt = new DataTable();
-                dt = SqlConnector.obtenerTablaSegunConsultaString("select funcionalidades.ID, funcionalidades.DETALLES from aero.roles inner join aero.funcionalidades_por_rol on roles.ID = funcionalidades_por_rol.ROL_ID inner join AERO.funcionalidades on funcionalidades_por_rol.FUNCIONALIDAD_ID = funcionalidades.ID where roles.NOMBRE = '" + funcionesComunes.getRol() + "'");
-                comboBoxFuncionalidad.DataSource = dt;
-                comboBoxFuncionalidad.ValueMember = "ID";
-            comboBoxFuncionalidad.DisplayMember = "DETALLES";  
+               
+                dt = SqlConnector.obtenerTablaSegunConsultaString("select funcionalidades.DETALLES from aero.roles inner join aero.funcionalidades_por_rol on roles.ID = funcionalidades_por_rol.ROL_ID inner join AERO.funcionalidades on funcionalidades_por_rol.FUNCIONALIDAD_ID = funcionalidades.ID where roles.NOMBRE = '" + funcionesComunes.getRol() + "'");
+                foreach (DataRow row in dt.Rows)
+                comboBoxFuncionalidad.Items.Add(row.ItemArray[0].ToString());
+
+            comboBoxFuncionalidad.DisplayMember = "DETALLES";
+            comboBoxFuncionalidad.SelectedIndex = 0;
         }
     }
 }

@@ -103,31 +103,6 @@
             // 
             this.comboBoxFuncionalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFuncionalidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxFuncionalidad.Items.AddRange(new object[] {
-            "Alta de Aeronave",
-            "Alta de Ciudad",
-            "Alta de Cliente",
-            "Alta de Rol",
-            "Alta de Ruta",
-            "Alta de Tarjeta de Crédito",
-            "Baja de Aeronave",
-            "Baja de Ciudad",
-            "Baja de Cliente",
-            "Baja de Rol",
-            "Baja de Ruta",
-            "Baja de Tarjeta de Crédito",
-            "Cancelar Encomienda",
-            "Cancelar Pasaje",
-            "Comprar Pasaje/Encomienda",
-            "Consultar Millas",
-            "Generar Viaje",
-            "Modificacion de Aeronave",
-            "Modificacion de Ciudad",
-            "Modificacion de Cliente",
-            "Modificacion de Rol",
-            "Modificacion de Ruta",
-            "Realizar Canje",
-            "Registrar Llegadas"});
             this.comboBoxFuncionalidad.Location = new System.Drawing.Point(6, 45);
             this.comboBoxFuncionalidad.Name = "comboBoxFuncionalidad";
             this.comboBoxFuncionalidad.Size = new System.Drawing.Size(258, 28);
