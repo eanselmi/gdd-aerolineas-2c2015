@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using AerolineaFrba;
+using System.Data.SqlClient;
 
 namespace AerolineaFrba.Ingreso
 {
@@ -110,7 +111,24 @@ namespace AerolineaFrba.Ingreso
             this.comboBoxFuncionalidad.SelectedIndex = -1;
         }
 
-    
-
+        private void menuPrincipal_Load(object sender, EventArgs e)
+        {
+            //Cuando no este harcodeado la podemos sacar la linea de abajo
+            comboBoxFuncionalidad.Items.Clear();
+            this.textRol.Text = funcionesComunes.getRol();
+            //Carga las funcionalidades dependiendo del rol en el comboBox
+            try {
+                DataTable dt = new DataTable();
+                SqlConnection cn = funcionesComunes.getCn();
+                SqlCommand cmd = new SqlCommand("select funcionalidades.ID, funcionalidades.DETALLES from aero.roles inner join aero.funcionalidades_por_rol on roles.ID = funcionalidades_por_rol.ROL_ID inner join AERO.funcionalidades on funcionalidades_por_rol.FUNCIONALIDAD_ID = funcionalidades.ID where roles.NOMBRE = '" + funcionesComunes.getRol() + "'", cn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                comboBoxFuncionalidad.DataSource = dt;
+                comboBoxFuncionalidad.ValueMember = "ID";
+                comboBoxFuncionalidad.DisplayMember = "DETALLES";
+            }catch (Exception ex){
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

@@ -92,5 +92,20 @@ namespace AerolineaFrba
 
         #endregion
 
+        #region rol
+
+        private static string rol;
+        public static void setRol(String r)
+        {
+            rol = r;
+        }
+        public static String getRol()
+        {
+            return rol;
+        }
+
+        #endregion
+
+
     }
 }

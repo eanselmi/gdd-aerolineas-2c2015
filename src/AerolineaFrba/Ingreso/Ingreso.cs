@@ -52,10 +52,11 @@ namespace AerolineaFrba.Ingreso
                                 //exitoso = 1 es cuando pasa bien
                                 cmd.Parameters.Add(new SqlParameter("@exitoso", 1));
                                 dr = cmd.ExecuteReader();
+                                dr.Close();
                                 menuPrincipal menu = new menuPrincipal();
-                                menu.textUsuario.Text = this.textUsuario.Text;
-                                menu.textPassword.Text = nombreRol;
+                                funcionesComunes.setRol(nombreRol);
                                 funcionesComunes.deshabilitarVentanaYAbrirNueva(menu);
+                               
                             }
                             catch (Exception ex){
                                 MessageBox.Show(ex.Message);
@@ -69,6 +70,7 @@ namespace AerolineaFrba.Ingreso
                                 cmd.Parameters.Add(new SqlParameter("@exitoso", 2));
                                 dr = cmd.ExecuteReader();
                                 MessageBox.Show("Contraseña inválida, le quedan " + (2 - intentos) + " intentos");
+                                dr.Close();
                             }
                             catch (Exception ex) {
                                 MessageBox.Show(ex.Message);
@@ -91,6 +93,7 @@ namespace AerolineaFrba.Ingreso
 
         private void botonInvitado_Click(object sender, EventArgs e) {
             //Apertura formulario menu para invitado
+            funcionesComunes.setRol("cliente");
             funcionesComunes.deshabilitarVentanaYAbrirNueva(new menuPrincipal());
         }
 
@@ -100,5 +103,6 @@ namespace AerolineaFrba.Ingreso
             this.textUsuario.Clear();
             this.textPassword.Clear();
         }
+
     }
 }
