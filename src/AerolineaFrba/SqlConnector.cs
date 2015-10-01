@@ -18,64 +18,61 @@ namespace AerolineaFrba
         /// </summary>
         /// <param name="cn"></param>
         /// <param name="cm"></param>
-        public static void conexionSql(SqlConnection cn,SqlCommand cm)
-        {           
+
+        private static SqlConnection cn;
+        public static bool conectarABaseDeDatos()
+        {
             try
             {
-                /*string sconcompleto = Globals.getConnectionString();
-                cn.ConnectionString = sconcompleto; // esta linea no se si es obligatoria pero por las dudas jaja, haria lo mismo, estableceria la cabecera de conexion                
-                cm.Connection = cn; // establezco que el comando sql que cree antes use la conexion sql que estableci recien
-                cn.Open(); */// aca abro la conexion  
+                cn = new SqlConnection("Data Source=(local)" + "\\" + "SQLSERVER2012;Initial Catalog=GD2C2015;User ID=gd;Password=gd2015;");
+                cn.Open();
+                return true;
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex; // tiro el error para arriba para que lo tome el metodo de acceso
+                MessageBox.Show("No se puede conectar a la base de datos");
+                return false;
             }
+
         }
+
+        public static SqlConnection getCn()
+        {
+            return cn;
+        }
+
         /// <summary>
         /// Realiza una consulta y devuelve un datatable con el resultado del mismo.
         /// </summary>
         /// <param name="procedure">Consulta.</param>
         /// <returns></returns>
-        public static DataTable obtenerTablaSegunScript(string consulta)
+        public static DataTable obtenerTablaSegunConsultaString(string consulta)
         {
-            SqlConnection cn = new SqlConnection();
-            SqlCommand cm = new SqlCommand();
-            SqlDataReader dr;
             DataTable dt = new DataTable();
-            List<string> args = new List<string>();
             try
             {
-                conexionSql(cn, cm);
-                cm.CommandType = CommandType.Text;
-                cm.CommandText = /*"COMPUMUNDO_HIPER_MEGA_RED." +*/ consulta;
-                dr = cm.ExecuteReader();
-                dt.Load(dr);
+                SqlConnection cn = getCn();
+                SqlCommand cmd = new SqlCommand(consulta, cn);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
                 return dt;
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 return null;
             }
-
-            finally
-            {
-                if (cn != null)
-                {
-                    cn.Close();
-                }
-            }
         }
+        /*
         public static void executeDynamicQuery(string consulta)
         {
-            SqlConnection cn = new SqlConnection();
             SqlCommand cm = new SqlCommand();
             SqlDataReader dr;
             List<string> args = new List<string>();
             try
             {
-                conexionSql(cn, cm);
-                cm.CommandText = /*"COMPUMUNDO_HIPER_MEGA_RED." +*/ consulta;
+                SqlConnection cn = getCn();
+                cm.CommandText =consulta;
                 cm.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -89,33 +86,40 @@ namespace AerolineaFrba
                 }
             }
         }
+    */
         /// <summary>
         /// Ejecuta un stored procedure y devuelve un datatable con el resultado del mismo.
         /// </summary>
         /// <param name="procedure">Nombre del stored procedure almacenado en la BDD sin el nombre del esquema delante.</param>
         /// <param name="values">Argumentos que recibe el stored procedure.</param>
         /// <returns></returns>
+      /*
         public static DataTable retrieveDataTable(string procedure, params object[] values)
         {
             List<string> argumentos = _generateArguments(procedure);
             return _retrieveDataTable(procedure, argumentos, values);
         }
-
+        
         /// <summary>
         /// Ejecuta un stored procedure y devuelve un datatable con el resultado del mismo.
         /// </summary>
         /// <param name="procedure">Nombre del stored procedure almacenado en la BDD sin el nombre del esquema delante.</param>
         /// <returns></returns>
+        /// 
+      
         public static DataTable retrieveDataTable(string procedure)
         {
             return _retrieveDataTable(procedure, null, null);
         }
-
+        
+              */
         /// <summary>
         /// Ejecuta un stored procedure.
         /// </summary>
         /// <param name="procedure">Nombre del stored procedure almacenado en la BDD sin el nombre del esquema delante.</param>
         /// <param name="values">Argumentos que recibe el stored procedure.</param>
+        /// 
+        /*
         public static bool executeProcedure(string procedure, params object[] values)
         {
             List<string> argumentos = _generateArguments(procedure);
@@ -130,6 +134,7 @@ namespace AerolineaFrba
         {
             return _executeProcedure(procedure, null, null);
         }
+        */
 
         /// <summary>
         /// Ejecuta una consulta (a partir de un stored procedure) y devuelve si encontró datos o no.
@@ -137,63 +142,62 @@ namespace AerolineaFrba
         /// <param name="procedure">Nombre del stored procedure almacenado en la BDD sin el nombre del esquema delante.</param>
         /// <param name="values">Argumentos que recibe el stored procedure.</param>
         /// <returns> True: la consulta devolvió alguna fila. False: no devolvió filas.</returns>
-        public static bool checkIfExists(string procedure, params object[] values)
+        /*public static bool checkIfExists(string procedure, params object[] values)
         {
             List<string> argumentos = _generateArguments(procedure);
             return _checkIfExists(procedure, argumentos, values);
         }
+        */
         /// <summary>
         /// Ejecuta una consulta (a partir de un stored procedure) y devuelve si encontró datos o no.
         /// </summary>
         /// <param name="procedure">Nombre del stored procedure almacenado en la BDD sin el nombre del esquema delante.</param>
         /// <returns> True: la consulta devolvió alguna fila. False: no devolvió filas.</returns>
+        /// 
+        /*
         public static bool checkIfExists(string procedure)
         {
             return _checkIfExists(procedure, null, null);
         }
+        */
         /// <summary>
         /// Ejecuta un stored procedure que devuelve un valor númerico y retorna dicho valor.
         /// </summary>
         /// <param name="procedure">Nombre del stored procedure almacenado en la BDD sin el nombre del esquema delante.</param>
         /// <param name="values">Argumentos que recibe el stored procedure.</param>
         /// <returns> Valor de retorno del stored procedure.</returns>
+        /// 
+        /*
         public static int executeProcedureWithReturnValue(string procedure, params object[] values)
         {
             List<string> argumentos = _generateArguments(procedure);
             return _executeProcedureWithReturnValue(procedure, argumentos, values);
         }
+        */
 
-        private static bool _executeProcedure(string procedure, List<string> args, params object[] values)
+        public static bool executeProcedure(string procedure, List<string> args, params object[] values)
         {
-            SqlConnection cn = new SqlConnection();
-            SqlCommand cm = new SqlCommand();
-            
-
-            try
+          try
             {
-                conexionSql(cn, cm);
-                cm.CommandType = CommandType.StoredProcedure;
-                cm.CommandText = "COMPUMUNDO_HIPER_MEGA_RED."+procedure;
+                SqlDataReader dr;
+                SqlConnection cn = getCn();
+                SqlCommand cmd = new SqlCommand(procedure, cn);
+                cmd.CommandType = CommandType.StoredProcedure;
                 if (_validateArgumentsAndParameters(args, values))
                 {
-                    _loadSqlCommand(args, values, cm);
+                    _loadSqlCommand(args, values, cmd);
                 }
-                cm.ExecuteNonQuery();
+                dr = cmd.ExecuteReader();
+                dr.Close();
                 return true;
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 return false;
             }
-
-            finally
-            {
-                if (cn != null)
-                {
-                    cn.Close();
-                }
-            }
         }
+        /*
         private static bool _checkIfExists(string procedure, List<string> args, params object[] values)
         {
             SqlConnection cn = new SqlConnection();
@@ -258,6 +262,8 @@ namespace AerolineaFrba
                 }
             }
         }
+
+    
         private static DataTable _retrieveDataTable(string procedure, List<string> args, params object[] values)
         {
             SqlConnection cn = new SqlConnection();
@@ -291,6 +297,7 @@ namespace AerolineaFrba
                 }
             }
         }
+        
         private static List<string> _generateArguments(string procedure)
         {
             SqlConnection cn = new SqlConnection();
@@ -324,6 +331,8 @@ namespace AerolineaFrba
                 }
             }
         }
+    */
+    
         private static bool _validateArgumentsAndParameters(List<string> args, params object[] values)
         {
             if (args != null && values != null)

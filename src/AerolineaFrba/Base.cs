@@ -26,7 +26,7 @@ namespace AerolineaFrba
        }
 
         
-        public string pasarASha256(string input)
+        public static string pasarASha256(string input)
         {
             SHA256CryptoServiceProvider provider = new SHA256CryptoServiceProvider();
             ///transforma a secuencia de bytes,codificacion

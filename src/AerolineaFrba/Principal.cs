@@ -26,7 +26,7 @@ namespace AerolineaFrba
         private void Principal_Load(object sender, EventArgs e)
         {
 
-            if (funcionesComunes.conectarABaseDeDatos()){
+            if (SqlConnector.conectarABaseDeDatos()){
                 funcionesComunes.ventanaInicial(new Ingreso.Ingreso());
             }else{
                 MessageBox.Show("Cierre el programa e intente nuevamente");
