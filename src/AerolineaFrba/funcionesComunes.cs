@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
+using System.Data;
 
 
 namespace AerolineaFrba
@@ -68,6 +70,27 @@ namespace AerolineaFrba
         }
         #endregion
 
-       
+        #region conexion
+
+        private static SqlConnection cn;
+        public static bool conectarABaseDeDatos(){
+            try{
+                cn = new SqlConnection("Data Source=(local)" + "\\" + "SQLSERVER2012;Initial Catalog=GD2C2015;User ID=gd;Password=gd2015;");
+                cn.Open();
+                return true;
+            }catch{
+                MessageBox.Show("No se puede conectar a la base de datos");
+                return false;
+            }
+          
+        }
+
+        public static SqlConnection getCn() {
+            return cn;
+        }
+
+
+        #endregion
+
     }
 }

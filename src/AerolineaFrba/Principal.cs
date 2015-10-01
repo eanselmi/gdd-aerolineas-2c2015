@@ -26,7 +26,12 @@ namespace AerolineaFrba
         private void Principal_Load(object sender, EventArgs e)
         {
 
-            funcionesComunes.ventanaInicial(new Ingreso.Ingreso());
+            if (funcionesComunes.conectarABaseDeDatos()){
+                funcionesComunes.ventanaInicial(new Ingreso.Ingreso());
+            }else{
+                MessageBox.Show("Cierre el programa e intente nuevamente");
+            }
+            
      
         }
     }
