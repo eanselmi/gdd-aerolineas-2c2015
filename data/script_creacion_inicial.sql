@@ -569,18 +569,28 @@ IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_CANC_BOLCOMP' AND obje
 -- INSERTS
 
 INSERT INTO AERO.funcionalidades VALUES
-('ABM Rol'),
-('ABM Usuario'),
-('ABM Ciudad'),
-('ABM Ruta'),
-('ABM Aeronave'),
-('ABM Vuelo'),
-('Registro Llegada'),
-('Compra pasaje_encomienda'),
-('Cancelacion pasaje_encomienda'),
-('Consulta millas'),
-('Canje de millas'),
-('Estadisticas');
+('Consultar Millas'),
+('Alta de Cliente'),
+('Alta de Aeronave'),
+('Alta de Ciudad'),
+('Alta de Tarjeta de Crédito'),
+('Baja de Aeronave'),
+('Baja de Ciudad'),
+('Baja de Cliente'),
+('Baja de Tarjeta de Crédito'),
+('Modificacion de Aeronave'),
+('Modificacion de Ciudad'),
+('Modificacion de Cliente'),
+('Realizar Canje'),
+('Alta de Rol'),
+('Baja de Rol'),
+('Modificacion de Rol'),
+('Alta de Ruta'),
+('Baja de Ruta'),
+('Modificacion de Ruta'),
+('Comprar Pasaje/Encomienda'),
+('Generar Viaje'),
+('Registrar Llegadas');
 
 INSERT INTO AERO.roles (nombre, activo) VALUES
 ('administrador', 1),
@@ -710,18 +720,28 @@ FROM AERO.ciudades)
 -----------------------------------------------------------------------
 -- EJECUCION DE PROCEDURES
 
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Rol';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Usuario';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Ciudad';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Ruta';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Aeronave';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='ABM Vuelo';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='Registro Llegada';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='Compra pasaje_encomienda';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='Cancelacion pasaje_encomienda';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='Consulta millas';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='Canje de millas';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='Estadisticas';
-EXEC AERO.addFuncionalidad @rol='cliente', @func ='Compra pasaje_encomienda';
-EXEC AERO.addFuncionalidad @rol='cliente', @func ='Consulta millas';
-EXEC AERO.addFuncionalidad @rol='cliente', @func ='Canje de millas';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Consultar Millas';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Cliente';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Aeronave';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Ciudad';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Tarjeta de Crédito';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Aeronave';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Ciudad';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Cliente';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Tarjeta de Crédito';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Modificacion de Aeronave';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Modificacion de Ciudad';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Modificacion de Cliente';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Realizar Canje';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Rol';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Rol';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Modificacion de Rol';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Ruta';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Ruta';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Modificacion de Ruta';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Comprar Pasaje/Encomienda';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Generar Viaje';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Registrar Llegadas';
+EXEC AERO.addFuncionalidad @rol='cliente', @func ='Comprar Pasaje/Encomienda';
+EXEC AERO.addFuncionalidad @rol='cliente', @func ='Consultar Millas';
+EXEC AERO.addFuncionalidad @rol='cliente', @func ='Realizar Canje';
