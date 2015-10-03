@@ -156,6 +156,12 @@
     <Compile Include="Compra\viajesDisponibles.Designer.cs">
       <DependentUpon>viajesDisponibles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\VistaFormaDePago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\VistaFormaDePago.Designer.cs">
+      <DependentUpon>VistaFormaDePago.cs</DependentUpon>
+    </Compile>
     <Compile Include="Consulta Millas\consultaMillas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,6 +279,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\viajesDisponibles.resx">
       <DependentUpon>viajesDisponibles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\VistaFormaDePago.resx">
+      <DependentUpon>VistaFormaDePago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Consulta Millas\consultaMillas.resx">
       <DependentUpon>consultaMillas.cs</DependentUpon>

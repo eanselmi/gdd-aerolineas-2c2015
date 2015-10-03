@@ -26,8 +26,16 @@ namespace AerolineaFrba.Compra
         private void botonComprar_Click(object sender, EventArgs e)
         {
             //Si el rol actual es cliente
-            Form frmPagoTarjeta = new Compra.registrarPagoTarjeta();
-            funcionesComunes.deshabilitarVentanaYAbrirNueva(frmPagoTarjeta);
+            if (funcionesComunes.getRol() == "administrador")
+            {
+
+                funcionesComunes.deshabilitarVentanaYAbrirNueva(new Compra.VistaFormaDePago());
+            }
+            else
+            {
+                Form frmPagoTarjeta = new Compra.registrarPagoTarjeta();
+                funcionesComunes.deshabilitarVentanaYAbrirNueva(frmPagoTarjeta);
+            }
 
         }
     }
