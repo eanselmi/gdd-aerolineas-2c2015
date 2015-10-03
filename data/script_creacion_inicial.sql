@@ -191,7 +191,7 @@ CREATE TABLE AERO.clientes (
     ROL_ID        INT            NOT NULL,
     NOMBRE        NVARCHAR(255)    NOT NULL,
     APELLIDO        NVARCHAR(255),
-    DNI            NUMERIC(18,0)    UNIQUE NOT NULL,
+    DNI            NUMERIC(18,0) NOT NULL,
     DIRECCION        NVARCHAR(255),
     TELEFONO        NUMERIC(18,0),
     MAIL            NVARCHAR(255),
@@ -716,6 +716,12 @@ WHERE Ruta_Ciudad_Destino IS NOT NULL)
 INSERT INTO AERO.aeropuertos (CIUDAD_ID, NOMBRE)
 (SELECT ID, NOMBRE
 FROM AERO.ciudades)
+
+INSERT INTO AERO.clientes (DNI, NOMBRE, APELLIDO, FECHA_NACIMIENTO, MAIL, TELEFONO, DIRECCION, ROL_ID)
+select m.Cli_Dni, m.Cli_Nombre, m.Cli_Apellido, m.Cli_Fecha_Nac, m.Cli_Mail, m.Cli_Telefono, m.Cli_Dir, r.ID
+from GD2C2015.gd_esquema.Maestra m, AERO.roles r
+where r.NOMBRE = 'cliente'
+group by m.Cli_Dni, m.Cli_Nombre, m.Cli_Apellido, m.Cli_Fecha_Nac, m.Cli_Mail, m.Cli_Telefono, m.Cli_Dir, r.ID;
 
 -----------------------------------------------------------------------
 -- EJECUCION DE PROCEDURES
