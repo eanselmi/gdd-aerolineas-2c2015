@@ -171,7 +171,7 @@ CREATE TABLE AERO.butacas (
     TIPO            NVARCHAR(255),
     PISO            NUMERIC(18,0),
     AERONAVE_ID    INT            NOT NULL,
-    ESTADO        NVARCHAR(255),
+    ESTADO        NVARCHAR(255) DEFAULT 'LIBRE',
     CONSTRAINT butacas_CK001 CHECK (TIPO IN ('VENTANILLA', 'PASILLO')),
     CONSTRAINT butacas_CK002 CHECK (ESTADO IN ('LIBRE', 'COMPRADO')),
 	CONSTRAINT butacas_CK003 CHECK (PISO IN (1,2))
@@ -800,6 +800,21 @@ select m.Cli_Dni, m.Cli_Nombre, m.Cli_Apellido, m.Cli_Fecha_Nac, AERO.corrigeMai
 from GD2C2015.gd_esquema.Maestra m, AERO.roles r
 where r.NOMBRE = 'cliente'
 group by m.Cli_Dni, m.Cli_Nombre, m.Cli_Apellido, m.Cli_Fecha_Nac, m.Cli_Mail, m.Cli_Telefono, m.Cli_Dir, r.ID;
+
+/*la fecha de creacion es CURRENT TIMESTAMP ya que las fechas de salida de las aeronaves son en 2016*/
+INSERT INTO AERO.aeronaves (MATRICULA, MODELO, KG_DISPONIBLES, FABRICANTE_ID, TIPO_SERVICIO_ID, FECHA_ALTA, CANT_BUTACAS)
+SELECT m.Aeronave_Matricula, m.Aeronave_Modelo, m.Aeronave_KG_Disponibles, f.ID, ts.ID, CURRENT_TIMESTAMP, m.Butaca_Nro
+FROM GD2C2015.gd_esquema.Maestra m, AERO.fabricantes f, AERO.tipos_de_servicio ts
+where f.NOMBRE = m.Aeronave_Fabricante and ts.NOMBRE = m.Tipo_Servicio 
+/*QUERY PARA SABER CUAL ES EL MAYOR NUMERO DE BUTACA DE LAS AERONAVES, POR SI ES QUE SE USA ESE NUMERO PARA LA CANT_BUTACAS*/
+and m.Butaca_Nro = (select max(Butaca_Nro) from [GD2C2015].[gd_esquema].[Maestra] j where m.Aeronave_Matricula = j.Aeronave_Matricula)
+group by m.Aeronave_Matricula, m.Aeronave_Modelo, m.Aeronave_KG_Disponibles, f.ID, ts.ID, m.Butaca_Nro
+
+INSERT INTO AERO.butacas (NUMERO, TIPO, PISO, AERONAVE_ID, ESTADO)
+SELECT M.Butaca_Nro, M.Butaca_Tipo, M.Butaca_Piso, A.ID, 'COMPRADO'
+FROM AERO.aeronaves A, GD2C2015.gd_esquema.Maestra M
+WHERE A.MATRICULA = M.Aeronave_Matricula AND M.Butaca_Nro != 0
+GROUP BY M.Butaca_Nro, M.Butaca_Tipo, M.Butaca_Piso, A.ID
 
 -----------------------------------------------------------------------
 -- EJECUCION DE PROCEDURES
