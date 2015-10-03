@@ -195,7 +195,8 @@ CREATE TABLE AERO.clientes (
     DIRECCION        NVARCHAR(255),
     TELEFONO        NUMERIC(18,0),
     MAIL            NVARCHAR(255),
-    FECHA_NACIMIENTO DATETIME
+    FECHA_NACIMIENTO DATETIME,
+	INVALIDO	INT DEFAULT 0
 )
 
 CREATE TABLE AERO.boletos_de_compra (
@@ -609,6 +610,27 @@ VALUES ('Valija', 150, 50),
 -----------------------------------------------------------------------
 -- TRIGGERS
 
+IF OBJECT_ID('AERO.TR_Clientes_AFTER_INSERT') IS NOT NULL
+BEGIN
+	DROP TRIGGER AERO.TR_Clientes_AFTER_INSERT;
+END;
+GO
+
+CREATE TRIGGER TR_Clientes_AFTER_INSERT ON AERO.clientes
+AFTER INSERT
+AS BEGIN TRANSACTION
+ 
+ /*aca actualizamos todos los clientes con dni repetidos con el bit de invalido 1 ya que no podemos saber
+ con cual quedarnos al no tener la fecha de alta de los clientes*/
+ UPDATE AERO.clientes
+ SET INVALIDO = 1
+ WHERE ID IN (select C.id 
+ from AERO.clientes C, AERO.clientes C2 
+ where C.DNI = C2.Dni and (C.nombre != C2.NOMBRE or C.APELLIDO != C2.APELLIDO));
+
+COMMIT;
+GO
+
 -----------------------------------------------------------------------
 -- PROCEDURES && FUNCTIONS
 
@@ -636,6 +658,10 @@ IF OBJECT_ID('AERO.agregarCliente') IS NOT NULL
 BEGIN
 	DROP PROCEDURE AERO.agregarCliente;
 END;
+GO
+
+IF OBJECT_ID('AERO.corrigeMail') IS NOT NULL
+    DROP FUNCTION AERO.corrigeMail
 GO
 
 --CREATE
@@ -691,6 +717,58 @@ AS BEGIN
 END
 GO
 
+CREATE FUNCTION AERO.corrigeMail (@s NVARCHAR (255)) 
+RETURNS NVARCHAR(255)
+AS
+BEGIN
+   IF @s is null
+      RETURN null
+   
+   DECLARE @s2 NVARCHAR(255)
+   SET @s2 = ''
+   DECLARE @l int
+   SET @l = len(@s)
+   DECLARE @p int
+   SET @p = 1
+   WHILE @p <= @l
+   BEGIN
+      DECLARE @c int;
+      SET @c = ascii(substring(@s, @p, 1))
+      set @c = LOWER(@c)
+      
+      --si es espacio todo a la izquierda se descarta
+      if (@c = 32) set @s2 = '';
+      
+	  if @c = ascii('ä') set @c = ascii('a')
+	  if @c = ascii('ë') set @c = ascii('e')
+	  if @c = ascii('ï') set @c = ascii('i')
+	  if @c = ascii('ö') set @c = ascii('o')
+      if @c = ascii('ü') set @c = ascii('u')
+	  if @c = ascii('á') set @c = ascii('a')
+      if @c = ascii('é') set @c = ascii('e')
+	  if @c = ascii('í') set @c = ascii('i')
+	  if @c = ascii('ó') set @c = ascii('o')
+	  if @c = ascii('ú') set @c = ascii('u')
+	  if @c = ascii('à') set @c = ascii('a')
+      if @c = ascii('è') set @c = ascii('e')
+	  if @c = ascii('ì') set @c = ascii('i')
+	  if @c = ascii('ò') set @c = ascii('o')
+	  if @c = ascii('ù') set @c = ascii('u')
+	  if @c = ascii('ñ') set @c = ascii('n')
+
+      if (@c between 48 and 57 or @c = 64 or @c = 45 or @c = 46 
+      or @c = 95 or @c between 65 and 90 or @c between 97 and 122)
+		
+		SET @s2 = @s2 + char(@c)
+      
+      SET @p = @p + 1
+   END
+   IF len(@s2) = 0
+      return null
+   return @s2
+END
+GO
+
 -----------------------------------------------------------------------
 -- MIGRACION
 
@@ -718,7 +796,7 @@ INSERT INTO AERO.aeropuertos (CIUDAD_ID, NOMBRE)
 FROM AERO.ciudades)
 
 INSERT INTO AERO.clientes (DNI, NOMBRE, APELLIDO, FECHA_NACIMIENTO, MAIL, TELEFONO, DIRECCION, ROL_ID)
-select m.Cli_Dni, m.Cli_Nombre, m.Cli_Apellido, m.Cli_Fecha_Nac, m.Cli_Mail, m.Cli_Telefono, m.Cli_Dir, r.ID
+select m.Cli_Dni, m.Cli_Nombre, m.Cli_Apellido, m.Cli_Fecha_Nac, AERO.corrigeMail(m.Cli_Mail), m.Cli_Telefono, m.Cli_Dir, r.ID
 from GD2C2015.gd_esquema.Maestra m, AERO.roles r
 where r.NOMBRE = 'cliente'
 group by m.Cli_Dni, m.Cli_Nombre, m.Cli_Apellido, m.Cli_Fecha_Nac, m.Cli_Mail, m.Cli_Telefono, m.Cli_Dir, r.ID;
