@@ -138,11 +138,23 @@
     <Compile Include="Compra\cargaDeDatos.Designer.cs">
       <DependentUpon>cargaDeDatos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Compra\formaDePago.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\formaDePago.Designer.cs">
+      <DependentUpon>formaDePago.cs</DependentUpon>
+    </Compile>
     <Compile Include="Compra\procesoCompraExitoso.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Compra\procesoCompraExitoso.Designer.cs">
       <DependentUpon>procesoCompraExitoso.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compra\registrarPagoEfectivo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Compra\registrarPagoEfectivo.Designer.cs">
+      <DependentUpon>registrarPagoEfectivo.cs</DependentUpon>
     </Compile>
     <Compile Include="Compra\registrarPagoTarjeta.cs">
       <SubType>Form</SubType>
@@ -155,12 +167,6 @@
     </Compile>
     <Compile Include="Compra\viajesDisponibles.Designer.cs">
       <DependentUpon>viajesDisponibles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Compra\VistaFormaDePago.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Compra\VistaFormaDePago.Designer.cs">
-      <DependentUpon>VistaFormaDePago.cs</DependentUpon>
     </Compile>
     <Compile Include="Consulta Millas\consultaMillas.cs">
       <SubType>Form</SubType>
@@ -271,17 +277,20 @@
     <EmbeddedResource Include="Compra\cargaDeDatos.resx">
       <DependentUpon>cargaDeDatos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Compra\formaDePago.resx">
+      <DependentUpon>formaDePago.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Compra\procesoCompraExitoso.resx">
       <DependentUpon>procesoCompraExitoso.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Compra\registrarPagoEfectivo.resx">
+      <DependentUpon>registrarPagoEfectivo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\registrarPagoTarjeta.resx">
       <DependentUpon>registrarPagoTarjeta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra\viajesDisponibles.resx">
       <DependentUpon>viajesDisponibles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Compra\VistaFormaDePago.resx">
-      <DependentUpon>VistaFormaDePago.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Consulta Millas\consultaMillas.resx">
       <DependentUpon>consultaMillas.cs</DependentUpon>
