@@ -80,8 +80,9 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         private void consultarClientes()
         {
-            listado = SqlConnector.obtenerTablaSegunConsultaString("select NOMBRE as Nombre, APELLIDO as Apellido, DNI as Dni, DIRECCION as Dirección, TELEFONO as Teléfono, MAIL as Mail, FECHA_NACIMIENTO as 'Fecha de Nacimiento' from AERO.clientes ");
+            listado = SqlConnector.obtenerTablaSegunConsultaString("select ID as Id,NOMBRE as Nombre, APELLIDO as Apellido, DNI as Dni, DIRECCION as Dirección, TELEFONO as Teléfono, MAIL as Mail, FECHA_NACIMIENTO as 'Fecha de Nacimiento' from AERO.clientes ");
             dataGridListadoClientes.DataSource = listado;
+            dataGridListadoClientes.Columns[0].Visible = false;
         }
     }
 }
