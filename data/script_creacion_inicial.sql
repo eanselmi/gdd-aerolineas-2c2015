@@ -63,6 +63,11 @@ BEGIN
     DROP TABLE AERO.tarjetas_de_credito;
 END;
 
+IF OBJECT_ID('AERO.tipos_tarjeta') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.tipos_tarjeta;
+END;
+
 IF OBJECT_ID('AERO.paquetes') IS NOT NULL
 BEGIN
     DROP TABLE AERO.paquetes;
@@ -152,6 +157,7 @@ CREATE TABLE AERO.aeronaves (
     FECHA_ALTA      DATETIME        NOT NULL,
     CANT_BUTACAS    INT            NOT NULL,
     FECHA_BAJA    DATETIME,
+	INVALIDO	INT DEFAULT 0,
     CONSTRAINT aeronaves_CK001 CHECK (BAJA IN ('DEFINITIVA', 'POR_PERIODO'))
 )
 
@@ -284,7 +290,8 @@ CREATE TABLE AERO.rutas (
     PRECIO_BASE_KG     NUMERIC(18,2)  NOT NULL,
     PRECIO_BASE_PASAJE NUMERIC(18,2) NOT NULL,
     ORIGEN_ID        INT            NOT NULL,
-    DESTINO_ID        INT            NOT NULL
+    DESTINO_ID        INT            NOT NULL,
+	INVALIDO		INT DEFAULT 0
 )
 
 CREATE TABLE AERO.encomiendas (
@@ -316,11 +323,18 @@ CREATE TABLE AERO.canjes (
 
 CREATE TABLE AERO.tarjetas_de_credito (
     ID   INT   IDENTITY(1,1)     PRIMARY KEY,
-    TIPO             NVARCHAR(255) NOT NULL,
+    TIPO_TARJETA_ID    INT NOT NULL,
     NUMERO         NUMERIC(18,0)    UNIQUE NOT NULL,
     FECHA_VTO         DATETIME        NOT NULL,
     CLIENTE_ID         INT            NOT NULL
 )
+
+CREATE TABLE AERO.tipos_tarjeta (
+    ID   INT   IDENTITY(1,1)     PRIMARY KEY,
+    NOMBRE    NVARCHAR(255) NOT NULL,
+	CUOTAS INT DEFAULT 0   
+)
+
 
 CREATE TABLE AERO.cancelaciones (
     ID   INT   IDENTITY(1,1)     PRIMARY KEY,
@@ -331,6 +345,16 @@ CREATE TABLE AERO.cancelaciones (
 
 -----------------------------------------------------------------------
 -- FOREIGN KEYS && INDEXES
+
+ALTER TABLE AERO.tarjetas_de_credito
+ADD CONSTRAINT TARJETAS_FK01 FOREIGN KEY
+(TIPO_TARJETA_ID) REFERENCES AERO.tipos_tarjeta (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'TARJ_TIPO_TARJ' AND object_id = OBJECT_ID('AERO.tarjetas_de_credito'))
+    BEGIN
+       CREATE INDEX TARJ_TIPO_TARJ ON AERO.tarjetas_de_credito (TIPO_TARJETA_ID);
+    END
+
 
 ALTER TABLE AERO.aeronaves
 ADD CONSTRAINT AERONAVES_FK01 FOREIGN KEY
@@ -607,12 +631,24 @@ VALUES ('Valija', 150, 50),
 ('Auto', 10000, 15),
 ('Calefactor', 500, 150);
 
+INSERT INTO AERO.tipos_tarjeta (NOMBRE, CUOTAS)
+VALUES ('VISA', 6),
+('MASTERCARD', 12),
+('AMEX', 3),
+('DINERS', 0);
+
 -----------------------------------------------------------------------
 -- TRIGGERS
 
 IF OBJECT_ID('AERO.TR_Clientes_AFTER_INSERT') IS NOT NULL
 BEGIN
 	DROP TRIGGER AERO.TR_Clientes_AFTER_INSERT;
+END;
+GO
+
+IF OBJECT_ID('AERO.TR_Aeronaves_AFTER_INSERT') IS NOT NULL
+BEGIN
+	DROP TRIGGER AERO.TR_Aeronaves_AFTER_INSERT;
 END;
 GO
 
@@ -627,6 +663,20 @@ AS BEGIN TRANSACTION
  WHERE ID IN (select C.id 
  from AERO.clientes C, AERO.clientes C2 
  where C.DNI = C2.Dni and (C.nombre != C2.NOMBRE or C.APELLIDO != C2.APELLIDO));
+
+COMMIT;
+GO
+
+CREATE TRIGGER TR_Aeronaves_AFTER_INSERT ON AERO.aeronaves
+AFTER INSERT
+AS BEGIN TRANSACTION
+ 
+ /*aca actualizamos las aeronaves que tienen igual matrícula, pero diferente o fabricante*/
+ UPDATE AERO.aeronaves
+ SET INVALIDO = 1
+ WHERE ID IN (select A.id 
+ from AERO.aeronaves A, AERO.aeronaves A2 
+ where A.MATRICULA = A2.MATRICULA and (A.FABRICANTE_ID != A2.FABRICANTE_ID or A.MODELO != A2.MODELO));
 
 COMMIT;
 GO
@@ -815,6 +865,12 @@ SELECT M.Butaca_Nro, M.Butaca_Tipo, M.Butaca_Piso, A.ID, 'COMPRADO'
 FROM AERO.aeronaves A, GD2C2015.gd_esquema.Maestra M
 WHERE A.MATRICULA = M.Aeronave_Matricula AND M.Butaca_Nro != 0
 GROUP BY M.Butaca_Nro, M.Butaca_Tipo, M.Butaca_Piso, A.ID
+/* FALTA DEFINIR (SE PREGUNTO EN EL GRUPO DE GOOGLE
+INSERT INTO AERO.rutas (CODIGO, PRECIO_BASE_KG, PRECIO_BASE_PASAJE, ORIGEN_ID, DESTINO_ID)
+SELECT m.Ruta_Codigo, m.Ruta_Precio_BaseKG, m.Ruta_Precio_BasePasaje, origen.ID, destino.ID
+FROM AERO.aeropuertos origen, AERO.aeropuertos destino, GD2C2015.gd_esquema.Maestra m
+WHERE origen.NOMBRE = m.Ruta_Ciudad_Origen AND destino.NOMBRE = m.Ruta_Ciudad_Destino
+GROUP BY m.Ruta_Codigo, m.Ruta_Precio_BaseKG, m.Ruta_Precio_BasePasaje, origen.ID, destino.ID*/
 
 -----------------------------------------------------------------------
 -- EJECUCION DE PROCEDURES
