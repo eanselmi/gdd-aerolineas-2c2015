@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AerolineaFrba.Registro_de_Usuario
 {
-    public partial class modificacionCliente : Form
+    public partial class modificacionDeCliente : Form
     {
-        public modificacionCliente()
+        public modificacionDeCliente()
         {
             InitializeComponent();
         }

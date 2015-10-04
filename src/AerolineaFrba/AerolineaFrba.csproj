@@ -213,17 +213,17 @@
     <Compile Include="Registro de Usuario\altaDeCliente.Designer.cs">
       <DependentUpon>altaDeCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro de Usuario\bajaCliente.cs">
+    <Compile Include="Registro de Usuario\bajaModificacionDeCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro de Usuario\bajaCliente.Designer.cs">
-      <DependentUpon>bajaCliente.cs</DependentUpon>
+    <Compile Include="Registro de Usuario\bajaModificacionDeCliente.Designer.cs">
+      <DependentUpon>bajaModificacionDeCliente.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro de Usuario\modificacionCliente.cs">
+    <Compile Include="Registro de Usuario\modificacionDeCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro de Usuario\modificacionCliente.Designer.cs">
-      <DependentUpon>modificacionCliente.cs</DependentUpon>
+    <Compile Include="Registro de Usuario\modificacionDeCliente.Designer.cs">
+      <DependentUpon>modificacionDeCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Registro Llegada Destino\registroDeLlegadaADestino.cs">
       <SubType>Form</SubType>
@@ -315,6 +315,12 @@
     </Compile>
     <EmbeddedResource Include="Registro de Usuario\altaDeCliente.resx">
       <DependentUpon>altaDeCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro de Usuario\bajaModificacionDeCliente.resx">
+      <DependentUpon>bajaModificacionDeCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Registro de Usuario\modificacionDeCliente.resx">
+      <DependentUpon>modificacionDeCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro Llegada Destino\registroDeLlegadaADestino.resx">
       <DependentUpon>registroDeLlegadaADestino.cs</DependentUpon>
