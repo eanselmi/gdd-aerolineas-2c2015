@@ -186,6 +186,8 @@
             this.textBoxKgDisponibles.Name = "textBoxKgDisponibles";
             this.textBoxKgDisponibles.Size = new System.Drawing.Size(261, 26);
             this.textBoxKgDisponibles.TabIndex = 33;
+            this.textBoxKgDisponibles.Enter += new System.EventHandler(this.textBoxKgDisponibles_Enter);
+            this.textBoxKgDisponibles.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxKgDisponibles_KeyPress);
             // 
             // label3
             // 
@@ -234,6 +236,7 @@
             this.textBoxMatricula.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxMatricula.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxMatricula.Location = new System.Drawing.Point(88, 34);
+            this.textBoxMatricula.MaxLength = 7;
             this.textBoxMatricula.Name = "textBoxMatricula";
             this.textBoxMatricula.Size = new System.Drawing.Size(261, 26);
             this.textBoxMatricula.TabIndex = 27;
@@ -242,11 +245,6 @@
             // 
             this.comboBoxFabricante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxFabricante.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxFabricante.Items.AddRange(new object[] {
-            "Airbus",
-            "Bombardier",
-            "Embraer",
-            "Boeing"});
             this.comboBoxFabricante.Location = new System.Drawing.Point(88, 190);
             this.comboBoxFabricante.Name = "comboBoxFabricante";
             this.comboBoxFabricante.Size = new System.Drawing.Size(261, 28);
@@ -256,12 +254,6 @@
             // 
             this.comboBoxServicio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxServicio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxServicio.Items.AddRange(new object[] {
-            "Semi-Cama",
-            "Cama",
-            "Premium",
-            "Ejecutivo",
-            "Común"});
             this.comboBoxServicio.Location = new System.Drawing.Point(88, 244);
             this.comboBoxServicio.Name = "comboBoxServicio";
             this.comboBoxServicio.Size = new System.Drawing.Size(261, 28);
@@ -297,6 +289,8 @@
             this.textBoxCantButacas.Name = "textBoxCantButacas";
             this.textBoxCantButacas.Size = new System.Drawing.Size(261, 26);
             this.textBoxCantButacas.TabIndex = 51;
+            this.textBoxCantButacas.Enter += new System.EventHandler(this.textBoxCantButacas_Enter);
+            this.textBoxCantButacas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCantButacas_KeyPress);
             // 
             // label7
             // 
@@ -369,7 +363,6 @@
             this.PerformLayout();
 
         }
-
         #endregion
 
         private System.Windows.Forms.Button botonVolver;

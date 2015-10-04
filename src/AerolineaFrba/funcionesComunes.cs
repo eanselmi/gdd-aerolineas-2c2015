@@ -84,6 +84,34 @@ namespace AerolineaFrba
 
         #endregion
 
+        #region llenado
+        public static void llenarCombobox(ComboBox combo, String display, String query)
+        {
+            DataTable dt = new DataTable();
+            dt = SqlConnector.obtenerTablaSegunConsultaString(query);
+            combo.Items.Clear();
+            combo.DataSource = dt;
+            combo.ValueMember = "ID";
+            combo.DisplayMember = display;
+            combo.SelectedIndex = -1;
+        }
 
+        public static void soloNumeros(KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else if (Char.IsControl(e.KeyChar))
+            {
+                e.Handled = false;
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        #endregion
     }
 }
