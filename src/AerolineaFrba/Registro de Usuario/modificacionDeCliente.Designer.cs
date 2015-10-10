@@ -50,8 +50,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxApellido = new System.Windows.Forms.TextBox();
             this.botonVolver = new System.Windows.Forms.Button();
-            this.botonLimpiar = new System.Windows.Forms.Button();
             this.botonModificar = new System.Windows.Forms.Button();
+            this.textBoxId = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label11
@@ -278,34 +278,34 @@
             // 
             this.botonVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonVolver.Location = new System.Drawing.Point(277, 395);
+            this.botonVolver.Location = new System.Drawing.Point(218, 395);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(105, 42);
             this.botonVolver.TabIndex = 54;
             this.botonVolver.Text = "Volver";
             this.botonVolver.UseVisualStyleBackColor = true;
-            // 
-            // botonLimpiar
-            // 
-            this.botonLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonLimpiar.Location = new System.Drawing.Point(169, 395);
-            this.botonLimpiar.Name = "botonLimpiar";
-            this.botonLimpiar.Size = new System.Drawing.Size(105, 42);
-            this.botonLimpiar.TabIndex = 53;
-            this.botonLimpiar.Text = "Limpiar";
-            this.botonLimpiar.UseVisualStyleBackColor = true;
+            this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
             // 
             // botonModificar
             // 
             this.botonModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonModificar.Location = new System.Drawing.Point(61, 395);
+            this.botonModificar.Location = new System.Drawing.Point(107, 395);
             this.botonModificar.Name = "botonModificar";
             this.botonModificar.Size = new System.Drawing.Size(105, 42);
             this.botonModificar.TabIndex = 52;
             this.botonModificar.Text = "Modificar";
             this.botonModificar.UseVisualStyleBackColor = true;
+            // 
+            // textBoxId
+            // 
+            this.textBoxId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxId.Location = new System.Drawing.Point(12, 26);
+            this.textBoxId.Name = "textBoxId";
+            this.textBoxId.Size = new System.Drawing.Size(40, 26);
+            this.textBoxId.TabIndex = 76;
+            this.textBoxId.Visible = false;
             // 
             // modificacionDeCliente
             // 
@@ -313,6 +313,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(442, 441);
             this.ControlBox = false;
+            this.Controls.Add(this.textBoxId);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBoxDNI);
@@ -335,7 +336,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxApellido);
             this.Controls.Add(this.botonVolver);
-            this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.botonModificar);
             this.Name = "modificacionDeCliente";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -349,27 +349,27 @@
 
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBoxDNI;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.DateTimePicker TimePickerNacimiento;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBoxMail;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBoxTelefono;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxDireccion;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxNombre;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxApellido;
         private System.Windows.Forms.Button botonVolver;
-        private System.Windows.Forms.Button botonLimpiar;
         private System.Windows.Forms.Button botonModificar;
+        private System.Windows.Forms.TextBox textBoxId;
+        private System.Windows.Forms.TextBox textBoxDNI;
+        private System.Windows.Forms.DateTimePicker TimePickerNacimiento;
+        private System.Windows.Forms.TextBox textBoxMail;
+        private System.Windows.Forms.TextBox textBoxTelefono;
+        private System.Windows.Forms.TextBox textBoxDireccion;
+        private System.Windows.Forms.TextBox textBoxNombre;
+        public System.Windows.Forms.TextBox textBoxApellido;
     }
 }

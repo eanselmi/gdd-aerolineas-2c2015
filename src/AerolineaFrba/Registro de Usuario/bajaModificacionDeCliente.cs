@@ -30,11 +30,11 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         private void botonBuscar_Click(object sender, EventArgs e)
         {
-            DataTable clientesFiltro = filtrarCliente(textNombre.Text, textApellido.Text, textMail.Text, textDni.Text, textTelefono.Text);
+            DataTable clientesFiltro = filtrarCliente(textNombre.Text, textApellido.Text, textMail.Text, textDni.Text, textTelefono.Text, textDireccion.Text);
             dataGridListadoClientes.DataSource = clientesFiltro;
         }
 
-        private DataTable filtrarCliente(string nombre, string apellido, string mail, string dni, string telefono)
+        private DataTable filtrarCliente(string nombre, string apellido, string mail, string dni, string telefono, string direccion)
         {
             DataTable tablaClientes = listado;
             var final_rol = "";
@@ -45,6 +45,7 @@ namespace AerolineaFrba.Registro_de_Usuario
             if (mail != "") filtrosBusqueda.Add("Mail LIKE '%" + mail + "%'");
             if (dni != "") filtrosBusqueda.Add("Dni = " + dni);
             if (telefono != "") filtrosBusqueda.Add("Teléfono = " + telefono);
+            if (direccion != "") filtrosBusqueda.Add("Dirección LIKE '%" + direccion + "%'");
    
             foreach (var filtro in filtrosBusqueda)
             {
@@ -76,6 +77,7 @@ namespace AerolineaFrba.Registro_de_Usuario
             textMail.Text = "";
             textDni.Text = "";
             textTelefono.Text = "";
+            textDireccion.Text = "";
         }
 
         private void consultarClientes()
@@ -84,5 +86,22 @@ namespace AerolineaFrba.Registro_de_Usuario
             dataGridListadoClientes.DataSource = listado;
             dataGridListadoClientes.Columns[0].Visible = false;
         }
+
+        private void botonModificacion_Click(object sender, EventArgs e)
+        {
+            Form modificarCliente = new Registro_de_Usuario.modificacionDeCliente();
+        
+            ((TextBox)modificarCliente.Controls["textBoxId"]).Text = dataGridListadoClientes.SelectedCells[0].Value.ToString();
+            ((TextBox)modificarCliente.Controls["textBoxNombre"]).Text = dataGridListadoClientes.SelectedCells[1].Value.ToString();
+            ((TextBox)modificarCliente.Controls["textBoxApellido"]).Text = dataGridListadoClientes.SelectedCells[2].Value.ToString();
+            ((TextBox)modificarCliente.Controls["textBoxDni"]).Text = dataGridListadoClientes.SelectedCells[3].Value.ToString();
+            ((TextBox)modificarCliente.Controls["textBoxDireccion"]).Text = dataGridListadoClientes.SelectedCells[4].Value.ToString();
+            ((TextBox)modificarCliente.Controls["textBoxTelefono"]).Text = dataGridListadoClientes.SelectedCells[5].Value.ToString();
+            ((TextBox)modificarCliente.Controls["textBoxMail"]).Text = dataGridListadoClientes.SelectedCells[6].Value.ToString();
+            ((DateTimePicker)modificarCliente.Controls["TimePickerNacimiento"]).Value = Convert.ToDateTime(dataGridListadoClientes.SelectedCells[7].Value.ToString());
+
+            funcionesComunes.deshabilitarVentanaYAbrirNueva(modificarCliente);
+        }
+
     }
 }
