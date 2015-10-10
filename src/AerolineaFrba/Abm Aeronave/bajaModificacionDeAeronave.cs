@@ -33,13 +33,17 @@ namespace AerolineaFrba.Abm_Aeronave
             ((TextBox)modificacionAeronave.Controls["textBoxKgDisponibles"]).Text = dataGridListadoAeronaves.SelectedCells[3].Value.ToString();
             ((ComboBox)modificacionAeronave.Controls["comboBoxFabricante"]).Text = dataGridListadoAeronaves.SelectedCells[4].Value.ToString();
             ((ComboBox)modificacionAeronave.Controls["comboBoxServicio"]).Text = dataGridListadoAeronaves.SelectedCells[5].Value.ToString();
-            ((DateTimePicker)modificacionAeronave.Controls["timePickerAlta"]).Value = Convert.ToDateTime(dataGridListadoAeronaves.SelectedCells[7].Value.ToString());
-            ((TextBox)modificacionAeronave.Controls["textBoxCantButacas"]).Text = dataGridListadoAeronaves.SelectedCells[8].Value.ToString();
+            ((DateTimePicker)modificacionAeronave.Controls["timePickerAlta"]).Value = Convert.ToDateTime(dataGridListadoAeronaves.SelectedCells[6].Value.ToString());
+            ((TextBox)modificacionAeronave.Controls["textBoxCantButacas"]).Text = dataGridListadoAeronaves.SelectedCells[7].Value.ToString();
             funcionesComunes.deshabilitarVentanaYAbrirNueva(modificacionAeronave);
         }
 
         private void bajaModificacionDeAeronave_Load(object sender, EventArgs e)
         {
+            consultarAeronaves();
+        }
+
+        private void consultarAeronaves(){
             listado = SqlConnector.obtenerTablaSegunConsultaString("SELECT a.ID as Id, a.MATRICULA as Matricula, a.MODELO as Modelo, a.KG_DISPONIBLES as 'KG Disponibles', f.NOMBRE as Fabricante, ts.NOMBRE as Servicio, a.FECHA_ALTA as 'Fecha de Alta', a.CANT_BUTACAS as Butacas FROM AERO.aeronaves a, AERO.fabricantes f, AERO.tipos_de_servicio ts WHERE a.FABRICANTE_ID = f.ID AND a.TIPO_SERVICIO_ID = ts.ID AND a.BAJA IS NULL;");
             dataGridListadoAeronaves.DataSource = listado;
             dataGridListadoAeronaves.Columns[0].Visible = false;
@@ -51,6 +55,7 @@ namespace AerolineaFrba.Abm_Aeronave
             textMatricula.Clear();
             textModelo.Clear();
             textTipoServicio.Clear();
+            consultarAeronaves();
         }
 
         private void botonBuscar_Click(object sender, EventArgs e)

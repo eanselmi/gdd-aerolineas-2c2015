@@ -16,6 +16,8 @@ namespace AerolineaFrba.Abm_Aeronave
         public modificacionDeAeronave()
         {
             InitializeComponent();
+            funcionesComunes.llenarCombobox(comboBoxFabricante, "NOMBRE", "select ID, NOMBRE from AERO.fabricantes");
+            funcionesComunes.llenarCombobox(comboBoxServicio, "NOMBRE", "select ID, NOMBRE from AERO.tipos_de_servicio");
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
@@ -23,26 +25,31 @@ namespace AerolineaFrba.Abm_Aeronave
             funcionesComunes.habilitarAnterior();
         }
 
-        private void textBoxMatricula_KeyPress(object sender, KeyPressEventArgs e)
+        private void botonModificar_Click(object sender, EventArgs e)
         {
-            funcionesComunes.soloMail(e);
+            if (this.fechaFinInactividad.Value < this.fechaInicioInactividad.Value){
+                MessageBox.Show("La fecha de fin de la inactividad no puede ser menor que la de inicio");
+            } else {
+                List<string> lista = new List<string>();
+                lista.Add("@id");
+                lista.Add("@fechaInicio");
+                lista.Add("@fechaFin");
+                bool resultado = SqlConnector.executeProcedure("AERO.updateAeronave", lista, Convert.ToDateTime(this.fechaInicioInactividad.Value), Convert.ToDateTime(this.fechaFinInactividad.Value));
+                if (resultado){
+                    MessageBox.Show("La aeronave se actualizo exitosamente");
+                }
+            }
+            limpiar();
         }
 
-        private void textBoxModelo_KeyPress(object sender, KeyPressEventArgs e)
+        private void botonLimpiar_Click(object sender, EventArgs e)
         {
-            funcionesComunes.soloLetrasYNumeros(e);
+            limpiar();
         }
 
-        private void textBoxKgDisponibles_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            funcionesComunes.soloNumeros(e);
+        private void limpiar(){
+            this.fechaFinInactividad.ResetText();
+            this.fechaInicioInactividad.ResetText();
         }
-
-        private void textBoxCantButacas_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            funcionesComunes.soloNumeros(e);
-        }
-
-
     }
 }

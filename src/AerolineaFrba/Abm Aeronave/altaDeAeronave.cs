@@ -28,6 +28,10 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void botonLimpiar_Click(object sender, EventArgs e)
         {
+            limpiar();
+        }
+
+        private void limpiar(){
             this.textBoxCantButacas.Clear();
             this.textBoxKgDisponibles.Clear();
             this.textBoxMatricula.Clear();
@@ -39,8 +43,14 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void botonGuardar_Click(object sender, EventArgs e)
         {
-            String cantButacas = this.textBoxCantButacas.Text;
-            String kg = this.textBoxKgDisponibles.Text;
+            Int32 cantButacas = 0;
+            if(this.textBoxCantButacas.Text != ""){
+                cantButacas = Int32.Parse(this.textBoxCantButacas.Text);
+            }
+            Int32 kg = 0;
+            if(this.textBoxKgDisponibles.Text != ""){
+               kg = Int32.Parse(this.textBoxKgDisponibles.Text);
+            }
             String matricula = this.textBoxMatricula.Text;
             String modelo = this.textBoxModelo.Text;
             Int32 fabricante = 0;
@@ -49,22 +59,29 @@ namespace AerolineaFrba.Abm_Aeronave
                 fabricante = (Int32)comboBoxFabricante.SelectedValue;
             if (comboBoxServicio.SelectedValue != null)
                 servicio = (Int32)this.comboBoxServicio.SelectedValue;
-            if (cantButacas != "" && kg != "" && matricula != "" && modelo != "" && fabricante > 0 && servicio > 0)
-                if(validarCampos(cantButacas, kg, matricula)){
-                     //TODO: insertar en tabla aeronaves
+            if (cantButacas > 0 && kg > 0 && matricula != "" && modelo != "" && fabricante > 0 && servicio > 0)
+                if(validarMatricula(matricula)){
+                    List<string> lista = new List<string>();
+                    lista.Add("@matricula");
+                    lista.Add("@modelo");
+                    lista.Add("@kg_disponibles");
+                    lista.Add("@fabricante");
+                    lista.Add("@tipo_servicio");
+                    lista.Add("@alta");
+                    lista.Add("@cantButacas");
+                    bool resultado = SqlConnector.executeProcedure("AERO.agregarAeronave", lista,matricula,modelo,kg,fabricante, servicio,
+                        Convert.ToDateTime(this.timePickerAlta.Value), cantButacas);
+                    if (resultado){
+                        MessageBox.Show("Se guardo exitosamente");
+                        limpiar();
+                    }
                 }else{
                     MessageBox.Show("Uno o más campos son inválidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             else MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private bool validarCampos(String butacas, String kg, String matricula){
-            if (Int32.Parse(butacas) < 0){
-                return false;
-            }
-            if (Int32.Parse(kg) < 0){
-                return false;
-            }
+        private bool validarMatricula(String matricula){
             DataTable dt = new DataTable();
             dt = SqlConnector.obtenerTablaSegunConsultaString("select MATRICULA from AERO.aeronaves where MATRICULA = UPPER('"+ matricula +"')");
             if (dt.Rows.Count != 0){
