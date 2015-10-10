@@ -34,7 +34,7 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         private void textBoxDireccion_KeyPress(object sender, KeyPressEventArgs e)
         {
-            funcionesComunes.soloLetras(e);
+            funcionesComunes.soloLetrasYNumeros(e);
         }
 
         private void textBoxTelefono_KeyPress(object sender, KeyPressEventArgs e)
@@ -44,12 +44,17 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         private void textBoxMail_KeyPress(object sender, KeyPressEventArgs e)
         {
-            funcionesComunes.soloLetras(e);
+            funcionesComunes.soloMail(e);
         }
 
         private void textBoxDNI_KeyPress(object sender, KeyPressEventArgs e)
         {
             funcionesComunes.soloNumeros(e);
+        }
+
+        private void botonModificar_Click(object sender, EventArgs e)
+        {
+
         }
 
 

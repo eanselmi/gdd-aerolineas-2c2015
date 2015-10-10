@@ -112,6 +112,24 @@ namespace AerolineaFrba
             }
         }
 
+        public static void soloMail(KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Space)
+            {
+                e.Handled = true;
+            }
+        }
+
+        public static void soloLetrasYNumeros(KeyPressEventArgs e)
+        {
+            if (!((char.IsLetter(e.KeyChar)) || (e.KeyChar == (char)Keys.Back) || (e.KeyChar == (char)Keys.Space) || (char.IsDigit(e.KeyChar))))
+            {
+                e.Handled = true;
+            }
+        }
+
+       
+
         #endregion
     }
 }

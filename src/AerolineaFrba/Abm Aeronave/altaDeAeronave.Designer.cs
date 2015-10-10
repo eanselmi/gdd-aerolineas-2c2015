@@ -186,7 +186,6 @@
             this.textBoxKgDisponibles.Name = "textBoxKgDisponibles";
             this.textBoxKgDisponibles.Size = new System.Drawing.Size(261, 26);
             this.textBoxKgDisponibles.TabIndex = 33;
-            this.textBoxKgDisponibles.Enter += new System.EventHandler(this.textBoxKgDisponibles_Enter);
             this.textBoxKgDisponibles.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxKgDisponibles_KeyPress);
             // 
             // label3
@@ -208,6 +207,7 @@
             this.textBoxModelo.Name = "textBoxModelo";
             this.textBoxModelo.Size = new System.Drawing.Size(261, 26);
             this.textBoxModelo.TabIndex = 31;
+            this.textBoxModelo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxModelo_KeyPress);
             // 
             // label2
             // 
@@ -240,6 +240,7 @@
             this.textBoxMatricula.Name = "textBoxMatricula";
             this.textBoxMatricula.Size = new System.Drawing.Size(261, 26);
             this.textBoxMatricula.TabIndex = 27;
+            this.textBoxMatricula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxMatricula_KeyPress);
             // 
             // comboBoxFabricante
             // 
@@ -289,7 +290,6 @@
             this.textBoxCantButacas.Name = "textBoxCantButacas";
             this.textBoxCantButacas.Size = new System.Drawing.Size(261, 26);
             this.textBoxCantButacas.TabIndex = 51;
-            this.textBoxCantButacas.Enter += new System.EventHandler(this.textBoxCantButacas_Enter);
             this.textBoxCantButacas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCantButacas_KeyPress);
             // 
             // label7
