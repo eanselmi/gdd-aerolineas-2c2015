@@ -113,6 +113,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridListadoAeronaves);
             this.Name = "listadoEstadistico";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listados Estadisticos";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridListadoAeronaves)).EndInit();
             this.ResumeLayout(false);
