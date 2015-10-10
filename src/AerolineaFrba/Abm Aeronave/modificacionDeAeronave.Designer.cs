@@ -37,7 +37,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxFabricante = new System.Windows.Forms.ComboBox();
             this.botonVolver = new System.Windows.Forms.Button();
-            this.botonLimpiar = new System.Windows.Forms.Button();
             this.botonModificar = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -108,6 +107,7 @@
             this.textBoxCantButacas.Name = "textBoxCantButacas";
             this.textBoxCantButacas.Size = new System.Drawing.Size(261, 26);
             this.textBoxCantButacas.TabIndex = 76;
+            this.textBoxCantButacas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCantButacas_KeyPress);
             // 
             // comboBoxServicio
             // 
@@ -142,7 +142,7 @@
             // 
             this.botonVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonVolver.Location = new System.Drawing.Point(169, 431);
+            this.botonVolver.Location = new System.Drawing.Point(206, 433);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(105, 42);
             this.botonVolver.TabIndex = 72;
@@ -150,23 +150,11 @@
             this.botonVolver.UseVisualStyleBackColor = true;
             this.botonVolver.Click += new System.EventHandler(this.botonVolver_Click);
             // 
-            // botonLimpiar
-            // 
-            this.botonLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonLimpiar.Location = new System.Drawing.Point(280, 431);
-            this.botonLimpiar.Name = "botonLimpiar";
-            this.botonLimpiar.Size = new System.Drawing.Size(105, 42);
-            this.botonLimpiar.TabIndex = 71;
-            this.botonLimpiar.Text = "Limpiar";
-            this.botonLimpiar.UseVisualStyleBackColor = true;
-            this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
-            // 
             // botonModificar
             // 
             this.botonModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonModificar.Location = new System.Drawing.Point(58, 431);
+            this.botonModificar.Location = new System.Drawing.Point(95, 433);
             this.botonModificar.Name = "botonModificar";
             this.botonModificar.Size = new System.Drawing.Size(105, 42);
             this.botonModificar.TabIndex = 70;
@@ -268,6 +256,7 @@
             this.textBoxKgDisponibles.Name = "textBoxKgDisponibles";
             this.textBoxKgDisponibles.Size = new System.Drawing.Size(261, 26);
             this.textBoxKgDisponibles.TabIndex = 61;
+            this.textBoxKgDisponibles.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxKgDisponibles_KeyPress);
             // 
             // label3
             // 
@@ -288,6 +277,7 @@
             this.textBoxModelo.Name = "textBoxModelo";
             this.textBoxModelo.Size = new System.Drawing.Size(261, 26);
             this.textBoxModelo.TabIndex = 59;
+            this.textBoxModelo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxModelo_KeyPress);
             // 
             // label2
             // 
@@ -319,6 +309,7 @@
             this.textBoxMatricula.Name = "textBoxMatricula";
             this.textBoxMatricula.Size = new System.Drawing.Size(261, 26);
             this.textBoxMatricula.TabIndex = 56;
+            this.textBoxMatricula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxMatricula_KeyPress);
             // 
             // textBoxId
             // 
@@ -344,7 +335,6 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboBoxFabricante);
             this.Controls.Add(this.botonVolver);
-            this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.botonModificar);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
@@ -379,7 +369,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBoxFabricante;
         private System.Windows.Forms.Button botonVolver;
-        private System.Windows.Forms.Button botonLimpiar;
         private System.Windows.Forms.Button botonModificar;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;

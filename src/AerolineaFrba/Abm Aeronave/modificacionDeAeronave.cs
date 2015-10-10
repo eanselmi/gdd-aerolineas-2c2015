@@ -23,9 +23,26 @@ namespace AerolineaFrba.Abm_Aeronave
             funcionesComunes.habilitarAnterior();
         }
 
-        private void botonLimpiar_Click(object sender, EventArgs e)
+        private void textBoxMatricula_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            funcionesComunes.soloMail(e);
         }
+
+        private void textBoxModelo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funcionesComunes.soloLetrasYNumeros(e);
+        }
+
+        private void textBoxKgDisponibles_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funcionesComunes.soloNumeros(e);
+        }
+
+        private void textBoxCantButacas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funcionesComunes.soloNumeros(e);
+        }
+
+
     }
 }

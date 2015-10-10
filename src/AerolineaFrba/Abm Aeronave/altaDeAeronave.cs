@@ -83,14 +83,14 @@ namespace AerolineaFrba.Abm_Aeronave
             funcionesComunes.soloNumeros(e);
         }
 
-        private void textBoxCantButacas_Enter(object sender, EventArgs e)
+        private void textBoxMatricula_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Clipboard.Clear();
+            funcionesComunes.soloMail(e);
         }
 
-        private void textBoxKgDisponibles_Enter(object sender, EventArgs e)
+        private void textBoxModelo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Clipboard.Clear();
+            funcionesComunes.soloLetrasYNumeros(e);
         }
     }
 }
