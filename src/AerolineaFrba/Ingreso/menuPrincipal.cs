@@ -107,6 +107,9 @@ namespace AerolineaFrba.Ingreso
                 case "Registrar Llegadas":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Registro_Llegada_Destino.registroDeLlegadaADestino());
                     break;
+                case "Consultar Listado":
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Listado_Estadistico.listadoEstadistico());
+                    break;
             }
             this.comboBoxFuncionalidad.SelectedIndex = -1;
         }
