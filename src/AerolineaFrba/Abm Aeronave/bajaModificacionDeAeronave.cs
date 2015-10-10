@@ -92,7 +92,13 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void botonBaja_Click(object sender, EventArgs e)
         {
-            //TODO: dar de baja aeronave
+            List<string> lista = new List<string>();
+            lista.Add("@id");       
+            bool resultado = SqlConnector.executeProcedure("AERO.bajaAeronave", lista, dataGridListadoAeronaves.SelectedCells[0].Value.ToString());
+            if (resultado)
+            {
+                MessageBox.Show("La aeronave se dio de baja exitosamente");
+            }
         }
     }
 }

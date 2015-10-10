@@ -152,7 +152,6 @@ CREATE TABLE AERO.aeronaves (
     FECHA_ALTA      DATETIME        NOT NULL,
     CANT_BUTACAS    INT            NOT NULL,
     FECHA_BAJA    DATETIME,
-	INVALIDO	INT DEFAULT 0,
     CONSTRAINT aeronaves_CK001 CHECK (BAJA IN ('DEFINITIVA', 'POR_PERIODO'))
 )
 
@@ -196,8 +195,7 @@ CREATE TABLE AERO.clientes (
     DIRECCION        NVARCHAR(255),
     TELEFONO        NUMERIC(18,0),
     MAIL            NVARCHAR(255),
-    FECHA_NACIMIENTO DATETIME,
-	INVALIDO	INT DEFAULT 0
+    FECHA_NACIMIENTO DATETIME
 )
 
 CREATE TABLE AERO.boletos_de_compra (
@@ -280,7 +278,7 @@ CREATE TABLE AERO.rutas (
     PRECIO_BASE_PASAJE NUMERIC(18,2) NOT NULL,
     ORIGEN_ID        INT            NOT NULL,
     DESTINO_ID        INT            NOT NULL,
-	TIPO_SERVICIO	NVARCHAR(255)	NOT NULL
+	TIPO_SERVICIO_ID	INT	NOT NULL
 )
 
 CREATE TABLE AERO.encomiendas (
@@ -561,6 +559,15 @@ IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_CANC_BOLCOMP' AND obje
        CREATE INDEX FKI_CANC_BOLCOMP ON AERO.cancelaciones (BOLETO_COMPRA_ID);
     END
 
+ALTER TABLE AERO.rutas
+ADD CONSTRAINT rutas_FK01 FOREIGN KEY
+(TIPO_SERVICIO_ID) REFERENCES AERO.tipos_de_servicio (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_rutas_tipo_servicio' AND object_id = OBJECT_ID('AERO.rutas'))
+    BEGIN
+       CREATE INDEX FKI_rutas_tipo_servicio ON AERO.rutas (TIPO_SERVICIO_ID);
+    END
+
 -----------------------------------------------------------------------
 -- INSERTS
 
@@ -611,46 +618,6 @@ VALUES ('VISA', 6),
 -----------------------------------------------------------------------
 -- TRIGGERS
 
-IF OBJECT_ID('AERO.TR_Clientes_AFTER_INSERT') IS NOT NULL
-BEGIN
-	DROP TRIGGER AERO.TR_Clientes_AFTER_INSERT;
-END;
-GO
-
-IF OBJECT_ID('AERO.TR_Aeronaves_AFTER_INSERT') IS NOT NULL
-BEGIN
-	DROP TRIGGER AERO.TR_Aeronaves_AFTER_INSERT;
-END;
-GO
-
-CREATE TRIGGER TR_Clientes_AFTER_INSERT ON AERO.clientes
-AFTER INSERT
-AS BEGIN TRANSACTION
- 
- /*aca actualizamos todos los clientes con dni repetidos con el bit de invalido 1 ya que no podemos saber
- con cual quedarnos al no tener la fecha de alta de los clientes*/
- UPDATE AERO.clientes
- SET INVALIDO = 1
- WHERE ID IN (select C.id 
- from AERO.clientes C, AERO.clientes C2 
- where C.DNI = C2.Dni and (C.nombre != C2.NOMBRE or C.APELLIDO != C2.APELLIDO));
-
-COMMIT;
-GO
-
-CREATE TRIGGER TR_Aeronaves_AFTER_INSERT ON AERO.aeronaves
-AFTER INSERT
-AS BEGIN TRANSACTION
- 
- /*aca actualizamos las aeronaves que tienen igual matrícula, pero diferente o fabricante*/
- UPDATE AERO.aeronaves
- SET INVALIDO = 1
- WHERE ID IN (select A.id 
- from AERO.aeronaves A, AERO.aeronaves A2 
- where A.MATRICULA = A2.MATRICULA and (A.FABRICANTE_ID != A2.FABRICANTE_ID or A.MODELO != A2.MODELO));
-
-COMMIT;
-GO
 
 -----------------------------------------------------------------------
 -- PROCEDURES && FUNCTIONS
@@ -687,8 +654,20 @@ BEGIN
 END;
 GO
 
+IF OBJECT_ID('AERO.updateAeronave') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.updateAeronave;
+END;
+GO
+
 IF OBJECT_ID('AERO.corrigeMail') IS NOT NULL
     DROP FUNCTION AERO.corrigeMail
+GO
+
+IF OBJECT_ID('AERO.bajaAeronave') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.bajaAeronave;
+END;
 GO
 
 --CREATE
@@ -751,6 +730,29 @@ AS BEGIN
 	VALUES (@matricula, @modelo, @kg_disponibles, @fabricante, @tipo_servicio, @alta, @cantButacas)
 END
 GO
+
+CREATE PROCEDURE AERO.updateAeronave(@id  INT, @fechaInicio DATETIME, @fechaFin DATETIME)
+AS BEGIN
+DECLARE @IDPERIODO INT
+SELECT @IDPERIODO= ID FROM AERO.periodos_de_inactividad WHERE DESDE=@fechaInicio AND HASTA=@fechaFin
+	IF(@IDPERIODO IS NULL)
+		BEGIN
+			INSERT INTO AERO.periodos_de_inactividad VALUES(@fechaInicio,@fechaFin) 
+			SET @IDPERIODO=SCOPE_IDENTITY()
+		END
+INSERT INTO  AERO.aeronaves_por_periodos VALUES(@ID,@IDPERIODO)
+UPDATE AERO.aeronaves SET BAJA='POR_PERIODO' WHERE ID=@id; 
+END
+GO
+
+CREATE PROCEDURE AERO.bajaAeronave(@id  INT)
+AS BEGIN
+UPDATE AERO.aeronaves SET BAJA='DEFINITIVA',
+FECHA_BAJA= CURRENT_TIMESTAMP
+WHERE ID=@id;
+END
+GO
+
 
 CREATE FUNCTION AERO.corrigeMail (@s NVARCHAR (255)) 
 RETURNS NVARCHAR(255)
