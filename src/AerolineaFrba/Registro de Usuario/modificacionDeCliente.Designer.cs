@@ -85,6 +85,7 @@
             this.textBoxDNI.Name = "textBoxDNI";
             this.textBoxDNI.Size = new System.Drawing.Size(261, 26);
             this.textBoxDNI.TabIndex = 73;
+            this.textBoxDNI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxDNI_KeyPress);
             // 
             // label14
             // 
@@ -192,6 +193,7 @@
             this.textBoxMail.Name = "textBoxMail";
             this.textBoxMail.Size = new System.Drawing.Size(261, 26);
             this.textBoxMail.TabIndex = 63;
+            this.textBoxMail.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxMail_KeyPress);
             // 
             // label5
             // 
@@ -213,6 +215,7 @@
             this.textBoxTelefono.Name = "textBoxTelefono";
             this.textBoxTelefono.Size = new System.Drawing.Size(261, 26);
             this.textBoxTelefono.TabIndex = 61;
+            this.textBoxTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTelefono_KeyPress);
             // 
             // label3
             // 
@@ -233,6 +236,7 @@
             this.textBoxDireccion.Name = "textBoxDireccion";
             this.textBoxDireccion.Size = new System.Drawing.Size(261, 26);
             this.textBoxDireccion.TabIndex = 59;
+            this.textBoxDireccion.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxDireccion_KeyPress);
             // 
             // label2
             // 
@@ -253,6 +257,7 @@
             this.textBoxNombre.Name = "textBoxNombre";
             this.textBoxNombre.Size = new System.Drawing.Size(261, 26);
             this.textBoxNombre.TabIndex = 57;
+            this.textBoxNombre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNombre_KeyPress);
             // 
             // label1
             // 
@@ -273,6 +278,7 @@
             this.textBoxApellido.Name = "textBoxApellido";
             this.textBoxApellido.Size = new System.Drawing.Size(261, 26);
             this.textBoxApellido.TabIndex = 55;
+            this.textBoxApellido.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxApellido_KeyPress);
             // 
             // botonVolver
             // 
