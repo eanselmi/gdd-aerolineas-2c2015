@@ -73,11 +73,6 @@ BEGIN
     DROP TABLE AERO.paquetes;
 END;
 
-IF OBJECT_ID('AERO.servicios_por_rutas') IS NOT NULL
-BEGIN
-    DROP TABLE AERO.servicios_por_rutas;
-END;
-
 IF OBJECT_ID('AERO.encomiendas') IS NOT NULL
 BEGIN
     DROP TABLE AERO.encomiendas;
@@ -263,12 +258,6 @@ CREATE TABLE AERO.aeronaves_por_periodos (
     PRIMARY KEY(AERONAVE_ID,PERIODO_ID)
 )
 
-CREATE TABLE AERO.servicios_por_rutas (
-	TIPO_SERVICIO_ID   INT  ,
-    RUTA_ID   INT,
-    PRIMARY KEY(TIPO_SERVICIO_ID, RUTA_ID)
-)
-
 CREATE TABLE AERO.aeropuertos (
     ID  INT    IDENTITY(1,1)    PRIMARY KEY,
     NOMBRE        NVARCHAR(255)     NOT NULL,
@@ -286,12 +275,12 @@ CREATE TABLE AERO.vuelos (
 
 CREATE TABLE AERO.rutas (
     ID     INT     IDENTITY(1,1)     PRIMARY KEY,
-    CODIGO         NUMERIC(18,0)    UNIQUE NOT NULL,
+    CODIGO         NUMERIC(18,0)    NOT NULL,
     PRECIO_BASE_KG     NUMERIC(18,2)  NOT NULL,
     PRECIO_BASE_PASAJE NUMERIC(18,2) NOT NULL,
     ORIGEN_ID        INT            NOT NULL,
     DESTINO_ID        INT            NOT NULL,
-	INVALIDO		INT DEFAULT 0
+	TIPO_SERVICIO	NVARCHAR(255)	NOT NULL
 )
 
 CREATE TABLE AERO.encomiendas (
@@ -471,24 +460,6 @@ ADD CONSTRAINT AERONAVES_POR_PERIODOS_FK02 FOREIGN KEY
 IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_AEROXPER_PERXINAC' AND object_id = OBJECT_ID('AERO.aeronaves_por_periodos'))
     BEGIN
        CREATE INDEX FKI_AEROXPER_PERXINAC ON AERO.aeronaves_por_periodos (PERIODO_ID);
-    END
-
-ALTER TABLE AERO.servicios_por_rutas
-ADD CONSTRAINT SERVICIOS_POR_RUTAS_FK01 FOREIGN KEY
-(TIPO_SERVICIO_ID) REFERENCES AERO.tipos_de_servicio (ID)
- 
-IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_SERVXRUT_TIPOSERV' AND object_id = OBJECT_ID('AERO.servicios_por_rutas'))
-    BEGIN
-       CREATE INDEX FKI_SERVXRUT_TIPOSERV ON AERO.servicios_por_rutas (TIPO_SERVICIO_ID);
-    END
-
-ALTER TABLE AERO.servicios_por_rutas
-ADD CONSTRAINT SERVICIOS_POR_RUTAS_FK02 FOREIGN KEY
-(RUTA_ID) REFERENCES AERO.rutas (ID)
-
-IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_SERVXRUT_RUT' AND object_id = OBJECT_ID('AERO.servicios_por_rutas'))
-    BEGIN
-       CREATE INDEX FKI_SERVXRUT_RUT ON AERO.servicios_por_rutas (RUTA_ID);
     END
 
 ALTER TABLE AERO.aeropuertos
@@ -710,6 +681,12 @@ BEGIN
 END;
 GO
 
+IF OBJECT_ID('AERO.agregarAeronave') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.agregarAeronave;
+END;
+GO
+
 IF OBJECT_ID('AERO.corrigeMail') IS NOT NULL
     DROP FUNCTION AERO.corrigeMail
 GO
@@ -764,6 +741,14 @@ AS BEGIN
 	@documentoCliente, @direccion, 
 	@telefono, @mail, @fechaNac)
 	SET @ret = SCOPE_IDENTITY()
+END
+GO
+
+CREATE PROCEDURE AERO.agregarAeronave(@matricula nvarchar(255), @modelo nvarchar(255), @kg_disponibles numeric(18,0), 
+@fabricante nvarchar(255), @tipo_servicio nvarchar(255), @alta datetime, @cantButacas int)
+AS BEGIN
+	INSERT INTO AERO.aeronaves(MATRICULA, MODELO, KG_DISPONIBLES, FABRICANTE_ID, TIPO_SERVICIO_ID, FECHA_ALTA, CANT_BUTACAS)
+	VALUES (@matricula, @modelo, @kg_disponibles, @fabricante, @tipo_servicio, @alta, @cantButacas)
 END
 GO
 
