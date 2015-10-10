@@ -34,7 +34,7 @@ namespace AerolineaFrba.Abm_Aeronave
                 lista.Add("@id");
                 lista.Add("@fechaInicio");
                 lista.Add("@fechaFin");
-                bool resultado = SqlConnector.executeProcedure("AERO.updateAeronave", lista,this.textBoxId.Text ,Convert.ToDateTime(this.fechaInicioInactividad.Value), Convert.ToDateTime(this.fechaFinInactividad.Value));
+                bool resultado = SqlConnector.executeProcedure("AERO.updateAeronave", lista, this.textBoxId.Text, Convert.ToDateTime(this.fechaInicioInactividad.Value), Convert.ToDateTime(this.fechaFinInactividad.Value));
                 if (resultado){
                     MessageBox.Show("La aeronave se actualizo exitosamente");
                 }

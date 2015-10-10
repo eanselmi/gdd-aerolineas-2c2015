@@ -43,7 +43,6 @@
             this.textMatricula = new System.Windows.Forms.TextBox();
             this.lblApellido = new System.Windows.Forms.Label();
             this.dataGridListadoAeronaves = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridListadoAeronaves)).BeginInit();
             this.SuspendLayout();
@@ -215,20 +214,12 @@
             this.dataGridListadoAeronaves.Size = new System.Drawing.Size(762, 257);
             this.dataGridListadoAeronaves.TabIndex = 26;
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 27;
-            // 
             // bajaModificacionDeAeronave
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(787, 483);
             this.ControlBox = false;
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dataGridListadoAeronaves);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.botonLimpiar);
@@ -264,6 +255,5 @@
         private System.Windows.Forms.TextBox textMatricula;
         private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.DataGridView dataGridListadoAeronaves;
-        private System.Windows.Forms.TextBox textBox1;
     }
 }
