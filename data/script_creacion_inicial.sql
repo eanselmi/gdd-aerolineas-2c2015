@@ -889,3 +889,33 @@ EXEC AERO.addFuncionalidad @rol='administrador', @func ='Consultar Listado';
 EXEC AERO.addFuncionalidad @rol='cliente', @func ='Comprar Pasaje/Encomienda';
 EXEC AERO.addFuncionalidad @rol='cliente', @func ='Consultar Millas';
 EXEC AERO.addFuncionalidad @rol='cliente', @func ='Realizar Canje';
+
+
+-----------------------------------------------------------------------
+-- CONSULTA DE LISTADOS
+/*
+set de datos para prueba
+insert into AERO.rutas (CODIGO,PRECIO_BASE_KG,PRECIO_BASE_PASAJE,ORIGEN_ID,DESTINO_ID,TIPO_SERVICIO_ID) values(123,12,234,1,2,1)
+insert into AERO.vuelos (FECHA_LLEGADA,FECHA_LLEGADA_ESTIMADA,FECHA_SALIDA,AERONAVE_ID,RUTA_ID) 
+values(CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,19,2) 
+insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22)
+insert into AERO.pasajes values(100,1,37,1,1)
+
+select *  from  AERO.aeropuertos
+select *  from  AERO.tipos_de_servicio
+select * from AERO.rutas
+select * from AERO.butacas
+select * from AERO.clientes
+select * from AERO.boletos_de_compra
+
+--TOP 5 de los destino con mas pasajes comprados
+select top 5 a.NOMBRE as destino, count(p.ID) as cantidadPasajes  
+from AERO.aeropuertos a 
+join AERO.rutas r on  a.ID=r.DESTINO_ID
+join AERO.vuelos v on r.ID=v.RUTA_ID
+join AERO.aeronaves naves on v.AERONAVE_ID= naves.ID
+join AERO. butacas b on naves.ID=b.AERONAVE_ID
+join AERO.pasajes p on b.ID=p.BUTACA_ID 
+group by a.nombre
+order by 2
+*/
