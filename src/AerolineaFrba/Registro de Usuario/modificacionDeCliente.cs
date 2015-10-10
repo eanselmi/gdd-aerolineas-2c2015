@@ -16,5 +16,12 @@ namespace AerolineaFrba.Registro_de_Usuario
         {
             InitializeComponent();
         }
+
+        private void botonVolver_Click(object sender, EventArgs e)
+        {
+            funcionesComunes.habilitarAnterior();
+        }
+
+
     }
 }
