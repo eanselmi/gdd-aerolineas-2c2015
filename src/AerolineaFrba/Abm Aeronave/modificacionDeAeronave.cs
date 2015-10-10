@@ -22,5 +22,10 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             funcionesComunes.habilitarAnterior();
         }
+
+        private void botonLimpiar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
