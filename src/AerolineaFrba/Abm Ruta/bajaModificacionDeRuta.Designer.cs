@@ -59,6 +59,7 @@
             this.dataGridListadoRutas.Location = new System.Drawing.Point(45, 111);
             this.dataGridListadoRutas.Name = "dataGridListadoRutas";
             this.dataGridListadoRutas.RowHeadersVisible = false;
+            this.dataGridListadoRutas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridListadoRutas.Size = new System.Drawing.Size(622, 297);
             this.dataGridListadoRutas.TabIndex = 16;
             // 

@@ -16,11 +16,39 @@ namespace AerolineaFrba.Abm_Ruta
         public modificacionDeRuta()
         {
             InitializeComponent();
+            funcionesComunes.llenarCombobox(this.comboBoxServicios, "NOMBRE", "select ID, NOMBRE from AERO.tipos_de_servicio");
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
         {
             funcionesComunes.habilitarAnterior();
+        }
+
+        private void botonLimpiar_Click(object sender, EventArgs e)
+        {
+            limpiar();
+        }
+
+        private void limpiar()
+        {
+            this.textBoxPrecioKg.Clear();
+            this.textBoxPrecioPasaje.Clear();
+        }
+
+        private void validacion(object sender, KeyPressEventArgs e)
+        {
+            if (this.textBoxPrecioKg.Text.Contains('.'))
+                funcionesComunes.soloNumeros(e);
+            else
+                funcionesComunes.soloPrecio(e);
+        }
+
+        private void validacionPasaje(object sender, KeyPressEventArgs e)
+        {
+            if (this.textBoxPrecioPasaje.Text.Contains('.'))
+                funcionesComunes.soloNumeros(e);
+            else
+                funcionesComunes.soloPrecio(e);
         }
     }
 }
