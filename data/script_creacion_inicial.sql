@@ -853,13 +853,30 @@ SELECT M.Butaca_Nro, M.Butaca_Tipo, M.Butaca_Piso, A.ID, 'COMPRADO'
 FROM AERO.aeronaves A, GD2C2015.gd_esquema.Maestra M
 WHERE A.MATRICULA = M.Aeronave_Matricula AND M.Butaca_Nro != 0
 GROUP BY M.Butaca_Nro, M.Butaca_Tipo, M.Butaca_Piso, A.ID
-/* FALTA DEFINIR (SE PREGUNTO EN EL GRUPO DE GOOGLE
-INSERT INTO AERO.rutas (CODIGO, PRECIO_BASE_KG, PRECIO_BASE_PASAJE, ORIGEN_ID, DESTINO_ID)
-SELECT m.Ruta_Codigo, m.Ruta_Precio_BaseKG, m.Ruta_Precio_BasePasaje, origen.ID, destino.ID
-FROM AERO.aeropuertos origen, AERO.aeropuertos destino, GD2C2015.gd_esquema.Maestra m
-WHERE origen.NOMBRE = m.Ruta_Ciudad_Origen AND destino.NOMBRE = m.Ruta_Ciudad_Destino
-GROUP BY m.Ruta_Codigo, m.Ruta_Precio_BaseKG, m.Ruta_Precio_BasePasaje, origen.ID, destino.ID*/
 
+/*Creo tabla temporal para las rutas, con esa tabla despues es mas facil unificar las filas que pertenezcan a la MISMA ruta (todo igual
+excepto que en una fila el kg base esta en 0 y en la otra el pasaje base esta en 0) porque en vez de recorrer 400000 filas recorre
+solamente 136, por lo que nos deja un total de 68 rutas diferentes (si tienen el mismo codigo de ruta pero distinto origen o destino o 
+tipo de servicio son distintas rutas)*/
+SELECT DISTINCT [Ruta_Codigo]
+      ,[Ruta_Precio_BaseKG]
+      ,[Ruta_Precio_BasePasaje]
+      ,[Ruta_Ciudad_Origen]
+      ,[Ruta_Ciudad_Destino]
+      ,[Tipo_Servicio]
+INTO #rutas_temporales
+FROM [GD2C2015].[gd_esquema].[Maestra]
+
+INSERT INTO AERO.rutas (CODIGO, PRECIO_BASE_KG, PRECIO_BASE_PASAJE, ORIGEN_ID, DESTINO_ID, TIPO_SERVICIO_ID)
+SELECT r.Ruta_Codigo, r.Ruta_Precio_BaseKG, r2.Ruta_Precio_BasePasaje, o.ID, d.ID, ts.ID
+FROM #rutas_temporales r, #rutas_temporales r2, AERO.aeropuertos o, AERO.aeropuertos d, AERO.tipos_de_servicio ts
+WHERE d.NOMBRE = r.Ruta_Ciudad_Destino AND o.NOMBRE = r.Ruta_Ciudad_Origen AND ts.NOMBRE = r.Tipo_Servicio
+AND r.Ruta_Precio_BasePasaje = 0 AND r2.Ruta_Precio_BaseKG = 0 AND r.Ruta_Codigo = r2.Ruta_Codigo
+AND r.Ruta_Ciudad_Destino = r2.Ruta_Ciudad_Destino AND r.Ruta_Ciudad_Origen = r2.Ruta_Ciudad_Origen
+AND r.Tipo_Servicio = r2.Tipo_Servicio
+
+/*elimino la tabla temporal*/
+DROP TABLE #rutas_temporales
 -----------------------------------------------------------------------
 -- EJECUCION DE PROCEDURES
 
@@ -895,7 +912,6 @@ EXEC AERO.addFuncionalidad @rol='cliente', @func ='Realizar Canje';
 -- CONSULTA DE LISTADOS
 
 --set de datos para prueba
-insert into AERO.rutas (CODIGO,PRECIO_BASE_KG,PRECIO_BASE_PASAJE,ORIGEN_ID,DESTINO_ID,TIPO_SERVICIO_ID) values(123,12,234,1,2,1)
 insert into AERO.vuelos (FECHA_LLEGADA,FECHA_LLEGADA_ESTIMADA,FECHA_SALIDA,AERONAVE_ID,RUTA_ID) 
 values(CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,19,1) 
 insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22)
