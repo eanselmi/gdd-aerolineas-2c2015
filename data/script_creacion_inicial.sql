@@ -901,58 +901,62 @@ values(CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,19,1)
 insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22)
 insert into AERO.pasajes values(100,1,37,1,1)
 
-select *  from  AERO.aeropuertos
-select *  from  AERO.tipos_de_servicio
+/* YA PASADOS A LA APP
+
+select * from AERO.aeropuertos
+select * from AERO.tipos_de_servicio
 select * from AERO.rutas
 select * from AERO.butacas
 select * from AERO.clientes
 select * from AERO.boletos_de_compra
 
 --TOP 5 de los destino con mas pasajes comprados
-select top 5 a.NOMBRE as destino, count(p.ID) as cantidadPasajes  
+select top 5 a.NOMBRE as Destino, count(p.ID) as 'Cantidad de Pasajes' 
 from AERO.aeropuertos a 
-join AERO.rutas r on  a.ID=r.DESTINO_ID
-join AERO.vuelos v on r.ID=v.RUTA_ID
-join AERO.aeronaves naves on v.AERONAVE_ID= naves.ID
-join AERO. butacas b on naves.ID=b.AERONAVE_ID
+join AERO.rutas r on a.ID=r.DESTINO_ID 
+join AERO.vuelos v on r.ID=v.RUTA_ID 
+join AERO.aeronaves naves on v.AERONAVE_ID= naves.ID 
+join AERO. butacas b on naves.ID=b.AERONAVE_ID 
 join AERO.pasajes p on b.ID=p.BUTACA_ID 
-group by a.nombre
+group by a.nombre 
 order by 2 desc
 
 --TOP 5 de los destino con aeronaves mas vacias
---esta hecho con ESTADO <> 'LIBRE'para q muestre datos, desp se cambia a = ..
-select a.NOMBRE as destino, naves.ID, count(b.ID) as Vacios
-from AERO.aeronaves naves join AERO.butacas b on naves.ID= b.Aeronave_id
-join AERO.vuelos v on naves.ID=v.AERONAVE_ID
-join AERO.rutas r on v.RUTA_ID=r.ID
-join AERO.aeropuertos a on r.DESTINO_ID=a.ID
-where b.ESTADO <> 'LIBRE'
-group by a.NOMBRE, naves.ID
+select a.NOMBRE as Destino, naves.ID as 'ID de Aeronave', count(b.ID) as 'Butacas Vacias' 
+from AERO.aeronaves naves 
+join AERO.butacas b on naves.ID = b.Aeronave_id 
+join AERO.vuelos v on naves.ID=v.AERONAVE_ID 
+join AERO.rutas r on v.RUTA_ID=r.ID 
+join AERO.aeropuertos a on r.DESTINO_ID=a.ID 
+where b.ESTADO = 'LIBRE' 
+group by a.NOMBRE, naves.ID 
 order by 3 desc
 
 /* este insert esta aca para probar que no se cuentan las millas de ALIHUEN (22) porque el boleto de compra esta cancelado
 insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(1, CURRENT_TIMESTAMP, 'porque me pinto!')*/
 
 --TOP de los clientes con mas puntos acumulados a la fecha
-select c.nombre, sum(bc.millas) as MillasSumadas
-from AERO.clientes c join AERO.pasajes p on c.ID=p.CLIENTE_ID
-join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID
-where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones)
-group by c.nombre
+select c.nombre as 'Nombre Cliente', sum(bc.millas) as 'Cantidad de Millas' 
+from AERO.clientes c 
+join AERO.pasajes p on c.ID=p.CLIENTE_ID 
+join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID 
+where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones) 
+group by c.nombre 
 order by 2 desc
 
 /*cancelo el boleto de compra para probar que funciona la query*/
 insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(1, CURRENT_TIMESTAMP, 'porque me pinto!')
 
 --TOP 5 de los destino con pasajes cancelados
-select top 5 a.NOMBRE as destino, count(c.ID) as cantidadCancelaciones
+select top 5 a.NOMBRE as Destino, count(c.ID) as 'Cantidad de Cancelaciones' 
 from AERO.aeropuertos a 
-join AERO.rutas r on  a.ID=r.DESTINO_ID
-join AERO.vuelos v on r.ID=v.RUTA_ID
-join AERO.aeronaves naves on v.AERONAVE_ID= naves.ID
-join AERO. butacas b on naves.ID=b.AERONAVE_ID
+join AERO.rutas r on a.ID=r.DESTINO_ID 
+join AERO.vuelos v on r.ID=v.RUTA_ID 
+join AERO.aeronaves naves on v.AERONAVE_ID= naves.ID 
+join AERO. butacas b on naves.ID=b.AERONAVE_ID 
 join AERO.pasajes p on b.ID=p.BUTACA_ID 
-join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID
+join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID 
 join AERO.cancelaciones c on bc.ID=c.BOLETO_COMPRA_ID 
-group by a.nombre
+group by a.nombre 
 order by 2 desc
+*/

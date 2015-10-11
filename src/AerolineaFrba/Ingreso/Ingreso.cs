@@ -30,7 +30,9 @@ namespace AerolineaFrba.Ingreso
                 int activo = -1;
                 int intentos = -1;
                 String nombreRol = " ";
-                DataTable usuario = SqlConnector.obtenerTablaSegunConsultaString("select u.PASSWORD, u.ACTIVO, u.INTENTOS_LOGIN, r.NOMBRE from AERO.usuarios u,AERO.roles r  where u.USERNAME = '" + this.textUsuario.Text + "' AND r.ID = u.ROL_ID");
+                DataTable usuario = SqlConnector.obtenerTablaSegunConsultaString(@"select u.PASSWORD, u.ACTIVO, 
+                    u.INTENTOS_LOGIN, r.NOMBRE from AERO.usuarios u,AERO.roles r  where 
+                    u.USERNAME = '" + this.textUsuario.Text + "' AND r.ID = u.ROL_ID");
                
                 if (usuario.Rows.Count > 0) {
                         contr = (String)usuario.Rows[0].ItemArray[0];
@@ -80,6 +82,5 @@ namespace AerolineaFrba.Ingreso
             this.textUsuario.Clear();
             this.textPassword.Clear();
         }
-
     }
 }

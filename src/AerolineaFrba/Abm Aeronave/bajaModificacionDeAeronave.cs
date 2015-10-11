@@ -44,7 +44,11 @@ namespace AerolineaFrba.Abm_Aeronave
         }
 
         private void consultarAeronaves(){
-            listado = SqlConnector.obtenerTablaSegunConsultaString("SELECT a.ID as Id, a.MATRICULA as Matricula, a.MODELO as Modelo, a.KG_DISPONIBLES as 'KG Disponibles', f.NOMBRE as Fabricante, ts.NOMBRE as Servicio, a.FECHA_ALTA as 'Fecha de Alta', a.CANT_BUTACAS as Butacas FROM AERO.aeronaves a, AERO.fabricantes f, AERO.tipos_de_servicio ts WHERE a.FABRICANTE_ID = f.ID AND a.TIPO_SERVICIO_ID = ts.ID AND a.BAJA IS NULL;");
+            listado = SqlConnector.obtenerTablaSegunConsultaString(@"SELECT a.ID as Id, a.MATRICULA as Matricula, 
+                a.MODELO as Modelo, a.KG_DISPONIBLES as 'KG Disponibles', f.NOMBRE as Fabricante, ts.NOMBRE as 
+                Servicio, a.FECHA_ALTA as 'Fecha de Alta', a.CANT_BUTACAS as Butacas FROM AERO.aeronaves a, 
+                AERO.fabricantes f, AERO.tipos_de_servicio ts WHERE a.FABRICANTE_ID = f.ID AND 
+                a.TIPO_SERVICIO_ID = ts.ID AND a.BAJA IS NULL;");
             dataGridListadoAeronaves.DataSource = listado;
             dataGridListadoAeronaves.Columns[0].Visible = false;
         }

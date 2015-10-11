@@ -28,34 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridListadoAeronaves = new System.Windows.Forms.DataGridView();
+            this.dataGridListadoEstadistico = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxListados = new System.Windows.Forms.ComboBox();
             this.botonVolver = new System.Windows.Forms.Button();
             this.botonConsultar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridListadoAeronaves)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridListadoEstadistico)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridListadoAeronaves
+            // dataGridListadoEstadistico
             // 
-            this.dataGridListadoAeronaves.AllowUserToAddRows = false;
-            this.dataGridListadoAeronaves.AllowUserToDeleteRows = false;
-            this.dataGridListadoAeronaves.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridListadoAeronaves.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridListadoAeronaves.Location = new System.Drawing.Point(70, 84);
-            this.dataGridListadoAeronaves.MultiSelect = false;
-            this.dataGridListadoAeronaves.Name = "dataGridListadoAeronaves";
-            this.dataGridListadoAeronaves.ReadOnly = true;
-            this.dataGridListadoAeronaves.RowHeadersVisible = false;
-            this.dataGridListadoAeronaves.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridListadoAeronaves.Size = new System.Drawing.Size(596, 229);
-            this.dataGridListadoAeronaves.TabIndex = 27;
+            this.dataGridListadoEstadistico.AllowUserToAddRows = false;
+            this.dataGridListadoEstadistico.AllowUserToDeleteRows = false;
+            this.dataGridListadoEstadistico.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridListadoEstadistico.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridListadoEstadistico.Location = new System.Drawing.Point(106, 84);
+            this.dataGridListadoEstadistico.MultiSelect = false;
+            this.dataGridListadoEstadistico.Name = "dataGridListadoEstadistico";
+            this.dataGridListadoEstadistico.ReadOnly = true;
+            this.dataGridListadoEstadistico.RowHeadersVisible = false;
+            this.dataGridListadoEstadistico.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridListadoEstadistico.Size = new System.Drawing.Size(560, 174);
+            this.dataGridListadoEstadistico.TabIndex = 27;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label1.Location = new System.Drawing.Point(102, 36);
+            this.label1.Location = new System.Drawing.Point(102, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 20);
             this.label1.TabIndex = 28;
@@ -81,7 +81,7 @@
             // 
             this.botonVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonVolver.Location = new System.Drawing.Point(168, 332);
+            this.botonVolver.Location = new System.Drawing.Point(188, 268);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(105, 42);
             this.botonVolver.TabIndex = 48;
@@ -93,7 +93,7 @@
             // 
             this.botonConsultar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonConsultar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonConsultar.Location = new System.Drawing.Point(413, 332);
+            this.botonConsultar.Location = new System.Drawing.Point(433, 268);
             this.botonConsultar.Name = "botonConsultar";
             this.botonConsultar.Size = new System.Drawing.Size(105, 42);
             this.botonConsultar.TabIndex = 49;
@@ -105,17 +105,17 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(726, 395);
+            this.ClientSize = new System.Drawing.Size(726, 325);
             this.ControlBox = false;
             this.Controls.Add(this.botonConsultar);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.comboBoxListados);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridListadoAeronaves);
+            this.Controls.Add(this.dataGridListadoEstadistico);
             this.Name = "listadoEstadistico";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listados Estadisticos";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridListadoAeronaves)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridListadoEstadistico)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,7 +123,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridListadoAeronaves;
+        private System.Windows.Forms.DataGridView dataGridListadoEstadistico;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxListados;
         private System.Windows.Forms.Button botonVolver;

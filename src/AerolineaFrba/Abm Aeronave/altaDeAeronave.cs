@@ -83,7 +83,8 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private bool validarMatricula(String matricula){
             DataTable dt = new DataTable();
-            dt = SqlConnector.obtenerTablaSegunConsultaString("select MATRICULA from AERO.aeronaves where MATRICULA = UPPER('"+ matricula +"')");
+            dt = SqlConnector.obtenerTablaSegunConsultaString(@"select MATRICULA from AERO.aeronaves where 
+                MATRICULA = UPPER('"+ matricula +"')");
             if (dt.Rows.Count != 0){
                 return false;
             }
