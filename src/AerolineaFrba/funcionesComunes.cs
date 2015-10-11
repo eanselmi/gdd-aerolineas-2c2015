@@ -112,6 +112,14 @@ namespace AerolineaFrba
             }
         }
 
+        public static void precioONumeros(TextBox textbox, KeyPressEventArgs e)
+        {
+            if (textbox.Text.Contains('.'))
+                funcionesComunes.soloNumeros(e);
+            else
+                funcionesComunes.soloPrecio(e);
+        }
+
         public static void soloLetras(KeyPressEventArgs e)
         {
             if (!((char.IsLetter(e.KeyChar)) || (e.KeyChar == (char)Keys.Back) || (e.KeyChar == (char)Keys.Space)))

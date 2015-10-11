@@ -41,9 +41,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.comboBoxOrigen = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBoxServiciosRuta = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.botonQuitar = new System.Windows.Forms.Button();
             this.comboBoxServicios = new System.Windows.Forms.ComboBox();
             this.botonVolver = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
@@ -53,7 +50,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxCodigo = new System.Windows.Forms.TextBox();
-            this.botonAgregar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label13
@@ -193,37 +189,6 @@
             this.label4.TabIndex = 86;
             this.label4.Text = "Origen";
             // 
-            // comboBoxServiciosRuta
-            // 
-            this.comboBoxServiciosRuta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxServiciosRuta.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxServiciosRuta.Location = new System.Drawing.Point(304, 121);
-            this.comboBoxServiciosRuta.Name = "comboBoxServiciosRuta";
-            this.comboBoxServiciosRuta.Size = new System.Drawing.Size(204, 28);
-            this.comboBoxServiciosRuta.TabIndex = 85;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(300, 98);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(149, 20);
-            this.label3.TabIndex = 84;
-            this.label3.Text = "Servicios de la Ruta";
-            // 
-            // botonQuitar
-            // 
-            this.botonQuitar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonQuitar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonQuitar.Location = new System.Drawing.Point(225, 121);
-            this.botonQuitar.Name = "botonQuitar";
-            this.botonQuitar.Size = new System.Drawing.Size(34, 28);
-            this.botonQuitar.TabIndex = 83;
-            this.botonQuitar.Text = "<";
-            this.botonQuitar.UseVisualStyleBackColor = true;
-            // 
             // comboBoxServicios
             // 
             this.comboBoxServicios.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -232,7 +197,7 @@
             "Ejecutivo",
             "Primera Clase",
             "Turista"});
-            this.comboBoxServicios.Location = new System.Drawing.Point(15, 121);
+            this.comboBoxServicios.Location = new System.Drawing.Point(15, 132);
             this.comboBoxServicios.Name = "comboBoxServicios";
             this.comboBoxServicios.Size = new System.Drawing.Size(204, 28);
             this.comboBoxServicios.TabIndex = 82;
@@ -271,6 +236,7 @@
             this.botonGuardar.TabIndex = 79;
             this.botonGuardar.Text = "Guardar";
             this.botonGuardar.UseVisualStyleBackColor = true;
+            this.botonGuardar.Click += new System.EventHandler(this.botonGuardar_Click);
             // 
             // label14
             // 
@@ -288,7 +254,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Red;
-            this.label8.Location = new System.Drawing.Point(512, 121);
+            this.label8.Location = new System.Drawing.Point(225, 132);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(15, 20);
             this.label8.TabIndex = 77;
@@ -299,7 +265,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(11, 98);
+            this.label2.Location = new System.Drawing.Point(11, 109);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(136, 20);
             this.label2.TabIndex = 76;
@@ -326,24 +292,12 @@
             this.textBoxCodigo.TabIndex = 74;
             this.textBoxCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros);
             // 
-            // botonAgregar
-            // 
-            this.botonAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonAgregar.Location = new System.Drawing.Point(264, 121);
-            this.botonAgregar.Name = "botonAgregar";
-            this.botonAgregar.Size = new System.Drawing.Size(34, 28);
-            this.botonAgregar.TabIndex = 99;
-            this.botonAgregar.Text = ">";
-            this.botonAgregar.UseVisualStyleBackColor = true;
-            // 
             // altaDeRuta
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(538, 354);
             this.ControlBox = false;
-            this.Controls.Add(this.botonAgregar);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -357,9 +311,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBoxOrigen);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBoxServiciosRuta);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.botonQuitar);
             this.Controls.Add(this.comboBoxServicios);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.botonLimpiar);
@@ -392,9 +343,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBoxOrigen;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBoxServiciosRuta;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button botonQuitar;
         private System.Windows.Forms.ComboBox comboBoxServicios;
         private System.Windows.Forms.Button botonVolver;
         private System.Windows.Forms.Button botonLimpiar;
@@ -404,7 +352,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxCodigo;
-        private System.Windows.Forms.Button botonAgregar;
 
     }
 }

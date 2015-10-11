@@ -37,18 +37,12 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void validacion(object sender, KeyPressEventArgs e)
         {
-            if (this.textBoxPrecioKg.Text.Contains('.'))
-                funcionesComunes.soloNumeros(e);
-            else
-                funcionesComunes.soloPrecio(e);
+            funcionesComunes.precioONumeros(this.textBoxPrecioKg, e);
         }
 
         private void validacionPasaje(object sender, KeyPressEventArgs e)
         {
-            if (this.textBoxPrecioPasaje.Text.Contains('.'))
-                funcionesComunes.soloNumeros(e);
-            else
-                funcionesComunes.soloPrecio(e);
+            funcionesComunes.precioONumeros(this.textBoxPrecioPasaje, e);
         }
     }
 }

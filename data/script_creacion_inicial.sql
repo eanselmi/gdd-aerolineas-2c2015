@@ -754,6 +754,13 @@ WHERE ID=@id;
 END
 GO
 
+CREATE PROCEDURE AERO.agregarRuta(@codigo int, @precioKg numeric(18,2), @precioPasaje numeric(18,2), @origen int, @destino int, 
+	@servicio int)
+AS BEGIN
+	INSERT INTO AERO.rutas(CODIGO, PRECIO_BASE_KG, PRECIO_BASE_PASAJE, ORIGEN_ID, DESTINO_ID, TIPO_SERVICIO_ID)
+	VALUES (@codigo, @precioKg, @precioPasaje, @origen, @destino, @servicio)
+END
+GO
 
 CREATE FUNCTION AERO.corrigeMail (@s NVARCHAR (255)) 
 RETURNS NVARCHAR(255)
