@@ -893,11 +893,11 @@ EXEC AERO.addFuncionalidad @rol='cliente', @func ='Realizar Canje';
 
 -----------------------------------------------------------------------
 -- CONSULTA DE LISTADOS
-/*
+
 --set de datos para prueba
 insert into AERO.rutas (CODIGO,PRECIO_BASE_KG,PRECIO_BASE_PASAJE,ORIGEN_ID,DESTINO_ID,TIPO_SERVICIO_ID) values(123,12,234,1,2,1)
 insert into AERO.vuelos (FECHA_LLEGADA,FECHA_LLEGADA_ESTIMADA,FECHA_SALIDA,AERONAVE_ID,RUTA_ID) 
-values(CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,19,2) 
+values(CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,19,1) 
 insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22)
 insert into AERO.pasajes values(100,1,37,1,1)
 
@@ -930,12 +930,19 @@ where b.ESTADO <> 'LIBRE'
 group by a.NOMBRE, naves.ID
 order by 3 desc
 
+/* este insert esta aca para probar que no se cuentan las millas de ALIHUEN (22) porque el boleto de compra esta cancelado
+insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(1, CURRENT_TIMESTAMP, 'porque me pinto!')*/
+
 --TOP de los clientes con mas puntos acumulados a la fecha
 select c.nombre, sum(bc.millas) as MillasSumadas
 from AERO.clientes c join AERO.pasajes p on c.ID=p.CLIENTE_ID
 join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID
+where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones)
 group by c.nombre
 order by 2 desc
+
+/*cancelo el boleto de compra para probar que funciona la query*/
+insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(1, CURRENT_TIMESTAMP, 'porque me pinto!')
 
 --TOP 5 de los destino con pasajes cancelados
 select top 5 a.NOMBRE as destino, count(c.ID) as cantidadCancelaciones
@@ -949,4 +956,3 @@ join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID
 join AERO.cancelaciones c on bc.ID=c.BOLETO_COMPRA_ID 
 group by a.nombre
 order by 2 desc
-*/
