@@ -15,6 +15,10 @@ namespace AerolineaFrba.Listado_Estadistico
         public listadoEstadistico()
         {
             InitializeComponent();
+            pickerAño.Format = DateTimePickerFormat.Custom;
+            pickerAño.CustomFormat = "yyyy";
+            pickerAño.ShowUpDown = true;
+            comboBoxSemestre.SelectedIndex = 0;
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
@@ -25,6 +29,20 @@ namespace AerolineaFrba.Listado_Estadistico
         private void botonConsultar_Click(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
+            Int32 mesInicio;
+            Int32 mesFin;
+            if (comboBoxSemestre.SelectedIndex == 0){
+                mesInicio = 1;
+                mesFin = 6;
+            }else{
+                mesInicio = 7;
+                mesFin = 12;
+            }
+            //Creo las fechas de inicio y fin dependiendo del año y el semestre elegido
+            DateTime fechaInicio = new DateTime(Int32.Parse(pickerAño.Text), mesInicio, 1);
+            DateTime fechaFin = new DateTime(Int32.Parse(pickerAño.Text), mesFin, 1);
+            MessageBox.Show("Fecha Inicio: " + fechaInicio + " Fecha Fin: " + fechaFin);
+            //TODO: tenemos que agarrar las fechas de inicio y fin del semestre para hacer las queries
             switch ((String)this.comboBoxListados.SelectedItem)
             {
                 case "Top 5 Destinos con más pasajes comprados":
