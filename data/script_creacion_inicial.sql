@@ -858,12 +858,7 @@ GROUP BY M.Butaca_Nro, M.Butaca_Tipo, M.Butaca_Piso, A.ID
 excepto que en una fila el kg base esta en 0 y en la otra el pasaje base esta en 0) porque en vez de recorrer 400000 filas recorre
 solamente 136, por lo que nos deja un total de 68 rutas diferentes (si tienen el mismo codigo de ruta pero distinto origen o destino o 
 tipo de servicio son distintas rutas)*/
-SELECT DISTINCT [Ruta_Codigo]
-      ,[Ruta_Precio_BaseKG]
-      ,[Ruta_Precio_BasePasaje]
-      ,[Ruta_Ciudad_Origen]
-      ,[Ruta_Ciudad_Destino]
-      ,[Tipo_Servicio]
+SELECT DISTINCT [Ruta_Codigo], [Ruta_Precio_BaseKG], [Ruta_Precio_BasePasaje], [Ruta_Ciudad_Origen], [Ruta_Ciudad_Destino], [Tipo_Servicio]
 INTO #rutas_temporales
 FROM [GD2C2015].[gd_esquema].[Maestra]
 
@@ -877,6 +872,13 @@ AND r.Tipo_Servicio = r2.Tipo_Servicio
 
 /*elimino la tabla temporal*/
 DROP TABLE #rutas_temporales
+
+INSERT INTO AERO.vuelos (FECHA_SALIDA, FECHA_LLEGADA_ESTIMADA, FECHA_LLEGADA, AERONAVE_ID, RUTA_ID)
+SELECT m.[FechaSalida], m.[Fecha_LLegada_Estimada], m.[FechaLLegada], a.ID, r.ID
+FROM [GD2C2015].[gd_esquema].[Maestra] m, AERO.aeronaves a, AERO.rutas r, AERO.aeropuertos p1, AERO.aeropuertos p2
+WHERE m.[Ruta_Codigo] = r.CODIGO AND m.[Ruta_Ciudad_Origen] = p1.NOMBRE AND p1.ID = r.ORIGEN_ID AND m.[Ruta_Ciudad_Destino] = p2.NOMBRE 
+AND p2.ID = r.DESTINO_ID AND a.MATRICULA = m.[Aeronave_Matricula]
+GROUP BY m.[FechaSalida], m.[Fecha_LLegada_Estimada], m.[FechaLLegada], a.ID, r.ID
 -----------------------------------------------------------------------
 -- EJECUCION DE PROCEDURES
 
@@ -912,12 +914,10 @@ EXEC AERO.addFuncionalidad @rol='cliente', @func ='Realizar Canje';
 -- CONSULTA DE LISTADOS
 
 --set de datos para prueba
-insert into AERO.vuelos (FECHA_LLEGADA,FECHA_LLEGADA_ESTIMADA,FECHA_SALIDA,AERONAVE_ID,RUTA_ID) 
-values(CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,19,1) 
 insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22)
 insert into AERO.pasajes values(100,1,37,1,1)
 
-/* YA PASADOS A LA APP
+/*YA PASADOS A LA APP
 
 select * from AERO.aeropuertos
 select * from AERO.tipos_de_servicio
@@ -961,11 +961,13 @@ group by c.nombre
 order by 2 desc
 
 /*cancelo el boleto de compra para probar que funciona la query*/
-insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(1, CURRENT_TIMESTAMP, 'porque me pinto!')
+insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(1, CURRENT_TIMESTAMP, 'porque me pinto!');
 
---TOP 5 de los destino con pasajes cancelados
+--TOP 5 de los destinos con más pasajes cancelados
+/* NO ESTA FUNCIONANDO!
+
 select top 5 a.NOMBRE as Destino, count(c.ID) as 'Cantidad de Cancelaciones' 
-from AERO.aeropuertos a 
+from AERO.aeropuertos a
 join AERO.rutas r on a.ID=r.DESTINO_ID 
 join AERO.vuelos v on r.ID=v.RUTA_ID 
 join AERO.aeronaves naves on v.AERONAVE_ID= naves.ID 
@@ -975,4 +977,21 @@ join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID
 join AERO.cancelaciones c on bc.ID=c.BOLETO_COMPRA_ID 
 group by a.nombre 
 order by 2 desc
+
+select top 5 a.MATRICULA as AERONAVE, count(a.ID) as 'cancelaciones por aeronave' from AERO.cancelaciones c
+join AERO.boletos_de_compra bc on c.BOLETO_COMPRA_ID = bc.ID
+join AERO.pasajes p on p.BOLETO_COMPRA_ID = bc.ID
+join AERO.butacas b on p.BUTACA_ID = b.ID
+join AERO.aeronaves a on b.AERONAVE_ID = a.ID
+GROUP BY a.MATRICULA
+order by 2 desc
+
+select top 5 a.NOMBRE as Destino, count(v.ID) as 'vuelos por destino' 
+from AERO.aeropuertos a
+join AERO.rutas r on a.ID=r.DESTINO_ID 
+join AERO.vuelos v on r.ID=v.RUTA_ID 
+join AERO.aeronaves naves on v.AERONAVE_ID= naves.ID 
+GROUP BY a.NOMBRE
+order by 2 desc
+*/
 */
