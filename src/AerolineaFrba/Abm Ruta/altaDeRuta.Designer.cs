@@ -130,6 +130,7 @@
             this.textBoxPrecioPasaje.Name = "textBoxPrecioPasaje";
             this.textBoxPrecioPasaje.Size = new System.Drawing.Size(143, 26);
             this.textBoxPrecioPasaje.TabIndex = 92;
+            this.textBoxPrecioPasaje.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.validacionPasaje);
             // 
             // label6
             // 
@@ -150,6 +151,7 @@
             this.textBoxPrecioKg.Name = "textBoxPrecioKg";
             this.textBoxPrecioKg.Size = new System.Drawing.Size(143, 26);
             this.textBoxPrecioKg.TabIndex = 90;
+            this.textBoxPrecioKg.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.validacion);
             // 
             // comboBoxDestino
             // 
@@ -257,6 +259,7 @@
             this.botonLimpiar.TabIndex = 80;
             this.botonLimpiar.Text = "Limpiar";
             this.botonLimpiar.UseVisualStyleBackColor = true;
+            this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
             // 
             // botonGuardar
             // 
@@ -321,6 +324,7 @@
             this.textBoxCodigo.Name = "textBoxCodigo";
             this.textBoxCodigo.Size = new System.Drawing.Size(146, 26);
             this.textBoxCodigo.TabIndex = 74;
+            this.textBoxCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.soloNumeros);
             // 
             // botonAgregar
             // 

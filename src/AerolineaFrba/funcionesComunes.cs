@@ -104,6 +104,14 @@ namespace AerolineaFrba
             }
         }
 
+        public static void soloPrecio(KeyPressEventArgs e)
+        {   
+            if (!((char.IsDigit(e.KeyChar)) || (e.KeyChar == '.') || (e.KeyChar == (char)Keys.Back)))
+            {
+                e.Handled = true;
+            }
+        }
+
         public static void soloLetras(KeyPressEventArgs e)
         {
             if (!((char.IsLetter(e.KeyChar)) || (e.KeyChar == (char)Keys.Back) || (e.KeyChar == (char)Keys.Space)))
