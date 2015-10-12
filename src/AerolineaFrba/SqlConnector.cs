@@ -63,6 +63,34 @@ namespace AerolineaFrba
                 return null;
             }
         }
+
+        /// <summary>
+        /// Ejecuta un stored procedure que devuelve un datatable con el resultado del mismo.
+        /// </summary>
+        /// <param name="procedure">Consulta.</param>
+        /// <returns></returns>
+        public static DataTable obtenerTablaSegunProcedure(string procedure, List<string> args, params object[] values)
+        {
+            DataTable dt = new DataTable();
+            try
+            {
+                SqlConnection cn = getCn();
+                SqlCommand cmd = new SqlCommand(procedure, cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                if (_validateArgumentsAndParameters(args, values))
+                {
+                    _loadSqlCommand(args, values, cmd);
+                }
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+        }
         /*
         public static void executeDynamicQuery(string consulta)
         {
