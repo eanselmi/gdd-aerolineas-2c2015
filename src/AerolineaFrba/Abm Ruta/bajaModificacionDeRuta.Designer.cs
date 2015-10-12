@@ -61,6 +61,9 @@
             // 
             // dataGridListadoRutas
             // 
+            this.dataGridListadoRutas.AllowUserToAddRows = false;
+            this.dataGridListadoRutas.AllowUserToDeleteRows = false;
+            this.dataGridListadoRutas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridListadoRutas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridListadoRutas.Location = new System.Drawing.Point(45, 136);
             this.dataGridListadoRutas.MultiSelect = false;

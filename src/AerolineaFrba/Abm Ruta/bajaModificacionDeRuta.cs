@@ -39,7 +39,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void bajaModificacionDeRuta_Load(object sender, EventArgs e)
         {
-            consultarRutas();
+            this.botonLimpiar.PerformClick();
         }
 
         private void consultarRutas()
@@ -106,7 +106,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void bajaModificacionDeRuta_Enter(object sender, EventArgs e)
         {
-            this.consultarRutas();
+            this.botonLimpiar.PerformClick();
         }
     }
 }
