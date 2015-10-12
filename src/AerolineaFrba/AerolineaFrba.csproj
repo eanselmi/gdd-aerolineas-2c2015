@@ -207,23 +207,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registro de Usuario\altaDeCliente.cs">
+    <Compile Include="Registro de Usuario\altaModificacionDeCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro de Usuario\altaDeCliente.Designer.cs">
-      <DependentUpon>altaDeCliente.cs</DependentUpon>
+    <Compile Include="Registro de Usuario\altaModificacionDeCliente.Designer.cs">
+      <DependentUpon>altaModificacionDeCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Registro de Usuario\bajaModificacionDeCliente.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Registro de Usuario\bajaModificacionDeCliente.Designer.cs">
       <DependentUpon>bajaModificacionDeCliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Registro de Usuario\modificacionDeCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Registro de Usuario\modificacionDeCliente.Designer.cs">
-      <DependentUpon>modificacionDeCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="Registro Llegada Destino\registroDeLlegadaADestino.cs">
       <SubType>Form</SubType>
@@ -316,14 +310,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Registro de Usuario\altaDeCliente.resx">
-      <DependentUpon>altaDeCliente.cs</DependentUpon>
+    <EmbeddedResource Include="Registro de Usuario\altaModificacionDeCliente.resx">
+      <DependentUpon>altaModificacionDeCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro de Usuario\bajaModificacionDeCliente.resx">
       <DependentUpon>bajaModificacionDeCliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Registro de Usuario\modificacionDeCliente.resx">
-      <DependentUpon>modificacionDeCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Registro Llegada Destino\registroDeLlegadaADestino.resx">
       <DependentUpon>registroDeLlegadaADestino.cs</DependentUpon>

@@ -17,7 +17,8 @@ namespace AerolineaFrba.Ingreso
      
         public Ingreso()
         {
-            InitializeComponent();   
+            InitializeComponent();
+            setearIdRolCliente();
         }
 
         private void botonIngresar_Click(object sender, EventArgs e)
@@ -30,8 +31,9 @@ namespace AerolineaFrba.Ingreso
                 int activo = -1;
                 int intentos = -1;
                 String nombreRol = " ";
+                Int32 idRol;
                 DataTable usuario = SqlConnector.obtenerTablaSegunConsultaString(@"select u.PASSWORD, u.ACTIVO, 
-                    u.INTENTOS_LOGIN, r.NOMBRE from AERO.usuarios u,AERO.roles r  where 
+                    u.INTENTOS_LOGIN, r.NOMBRE, r.ID from AERO.usuarios u,AERO.roles r  where 
                     u.USERNAME = '" + this.textUsuario.Text + "' AND r.ID = u.ROL_ID");
                
                 if (usuario.Rows.Count > 0) {
@@ -39,6 +41,7 @@ namespace AerolineaFrba.Ingreso
                         activo = (int)usuario.Rows[0].ItemArray[1];
                         intentos = (int)usuario.Rows[0].ItemArray[2];
                         nombreRol = (String)usuario.Rows[0].ItemArray[3];
+                        idRol = (Int32)usuario.Rows[0].ItemArray[4];
                     if (activo == 1) {
                         if (contr == Base.pasarASha256(this.textPassword.Text)) {
                           
@@ -70,17 +73,34 @@ namespace AerolineaFrba.Ingreso
 
         }
 
-        private void botonInvitado_Click(object sender, EventArgs e) {
+        private void botonInvitado_Click(object sender, EventArgs e)
+        {
             //Apertura formulario menu para invitado
+
+
             funcionesComunes.setRol("cliente");
             funcionesComunes.deshabilitarVentanaYAbrirNueva(new menuPrincipal());
-        }
+        } 
 
         //este boton borra el contenido de los input
         private void botonLimpiar_Click(object sender, EventArgs e)
         {
             this.textUsuario.Clear();
             this.textPassword.Clear();
+        }
+
+        private void setearIdRolCliente()
+        {
+            DataTable cliente = SqlConnector.obtenerTablaSegunConsultaString("select ID from AERO.roles where NOMBRE = 'cliente'");
+            if (cliente.Rows.Count > 0)
+            {
+
+                funcionesComunes.setIdRolCliente((Int32)cliente.Rows[0].ItemArray[0]);
+            }
+            else
+            {
+                MessageBox.Show("El rol de cliente no puede ser seteado");
+            }
         }
     }
 }

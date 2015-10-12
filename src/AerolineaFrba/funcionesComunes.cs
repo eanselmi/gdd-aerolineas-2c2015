@@ -73,6 +73,7 @@ namespace AerolineaFrba
         #region rol
 
         private static string rol;
+        private static Int32 idRol;
         public static void setRol(String r)
         {
             rol = r;
@@ -81,6 +82,17 @@ namespace AerolineaFrba
         {
             return rol;
         }
+
+        public static Int32 getIdRolCliente()
+        {
+            return idRol;
+        }
+
+        public static void setIdRolCliente(Int32 id)
+        {
+            idRol = id;
+        }
+
 
         #endregion
 
