@@ -103,7 +103,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void textBoxMatricula_KeyPress(object sender, KeyPressEventArgs e)
         {
-            funcionesComunes.soloMail(e);
+            funcionesComunes.martricula(this.textBoxMatricula,e);
         }
 
         private void textBoxModelo_KeyPress(object sender, KeyPressEventArgs e)

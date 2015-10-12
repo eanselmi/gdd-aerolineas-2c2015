@@ -188,6 +188,7 @@
             this.textMatricula.Name = "textMatricula";
             this.textMatricula.Size = new System.Drawing.Size(148, 26);
             this.textMatricula.TabIndex = 9;
+            this.textMatricula.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.matricula);
             // 
             // lblApellido
             // 
