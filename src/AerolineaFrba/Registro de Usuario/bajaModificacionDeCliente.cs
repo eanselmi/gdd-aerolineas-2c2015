@@ -82,15 +82,20 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         private void consultarClientes()
         {
-            listado = SqlConnector.obtenerTablaSegunConsultaString("select ID as Id,NOMBRE as Nombre, APELLIDO as Apellido, DNI as Dni, DIRECCION as Dirección, TELEFONO as Teléfono, MAIL as Mail, FECHA_NACIMIENTO as 'Fecha de Nacimiento' from AERO.clientes ");
+            listado = SqlConnector.obtenerTablaSegunConsultaString("select ID as Id,NOMBRE as Nombre, APELLIDO as Apellido, DNI as Dni, DIRECCION as Dirección, TELEFONO as Teléfono, MAIL as Mail, FECHA_NACIMIENTO as 'Fecha de Nacimiento' from AERO.clientes where BAJA = 0");
             dataGridListadoClientes.DataSource = listado;
             dataGridListadoClientes.Columns[0].Visible = false;
         }
 
         private void botonModificacion_Click(object sender, EventArgs e)
         {
-            Form modificarCliente = new Registro_de_Usuario.modificacionDeCliente();
-        
+            Form modificarCliente = new Registro_de_Usuario.altaModificacionDeCliente();
+            int valor = 1;
+            ((Label)modificarCliente.Controls["campoRequeridoApellido"]).Visible= false;
+            ((Label)modificarCliente.Controls["campoRequeridoNombre"]).Visible = false;
+            ((Label)modificarCliente.Controls["campoRequeridoDNI"]).Visible = false;
+            ((Label)modificarCliente.Controls["campoRequeridoNacimiento"]).Visible = false;
+            ((TextBox)modificarCliente.Controls["textBoxTipoForm"]).Text = valor.ToString();
             ((TextBox)modificarCliente.Controls["textBoxId"]).Text = dataGridListadoClientes.SelectedCells[0].Value.ToString();
             ((TextBox)modificarCliente.Controls["textBoxNombre"]).Text = dataGridListadoClientes.SelectedCells[1].Value.ToString();
             ((TextBox)modificarCliente.Controls["textBoxApellido"]).Text = dataGridListadoClientes.SelectedCells[2].Value.ToString();
@@ -99,7 +104,7 @@ namespace AerolineaFrba.Registro_de_Usuario
             ((TextBox)modificarCliente.Controls["textBoxTelefono"]).Text = dataGridListadoClientes.SelectedCells[5].Value.ToString();
             ((TextBox)modificarCliente.Controls["textBoxMail"]).Text = dataGridListadoClientes.SelectedCells[6].Value.ToString();
             ((DateTimePicker)modificarCliente.Controls["TimePickerNacimiento"]).Value = Convert.ToDateTime(dataGridListadoClientes.SelectedCells[7].Value.ToString());
-
+            modificarCliente.Text = "Modificación de Cliente";
             funcionesComunes.deshabilitarVentanaYAbrirNueva(modificarCliente);
         }
 
@@ -112,6 +117,12 @@ namespace AerolineaFrba.Registro_de_Usuario
             {
                 MessageBox.Show("El cliente se dio de baja exitosamente");
             }
+            consultarClientes();
+        }
+
+
+        private void bajaModificacionDeCliente_Enter(object sender, EventArgs e)
+        {
             consultarClientes();
         }
 

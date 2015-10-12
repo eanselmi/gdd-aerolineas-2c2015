@@ -273,6 +273,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado de Clientes";
             this.Load += new System.EventHandler(this.bajaModificacionDeCliente_Load);
+            this.Enter += new System.EventHandler(this.bajaModificacionDeCliente_Enter);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridListadoClientes)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

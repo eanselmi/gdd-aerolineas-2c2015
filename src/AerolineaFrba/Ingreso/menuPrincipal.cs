@@ -45,7 +45,11 @@ namespace AerolineaFrba.Ingreso
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Consulta_Millas.consultaMillas());
                     break;
                 case "Alta de Cliente":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Registro_de_Usuario.altaDeCliente());
+                    Form altaDeCliente = new Registro_de_Usuario.altaModificacionDeCliente();
+                    int valor = 0;
+                    ((TextBox)altaDeCliente.Controls["textBoxTipoForm"]).Text = valor.ToString() ;
+                    altaDeCliente.Text = "Alta de Cliente";
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(altaDeCliente);
                     break;
                 case "Alta de Aeronave":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Aeronave.altaDeAeronave());
