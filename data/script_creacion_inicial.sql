@@ -195,7 +195,8 @@ CREATE TABLE AERO.clientes (
     DIRECCION        NVARCHAR(255),
     TELEFONO        NUMERIC(18,0),
     MAIL            NVARCHAR(255),
-    FECHA_NACIMIENTO DATETIME
+    FECHA_NACIMIENTO DATETIME,
+	BAJA			INT DEFAULT 0
 )
 
 CREATE TABLE AERO.boletos_de_compra (
@@ -278,7 +279,8 @@ CREATE TABLE AERO.rutas (
     PRECIO_BASE_PASAJE NUMERIC(18,2) NOT NULL,
     ORIGEN_ID        INT            NOT NULL,
     DESTINO_ID        INT            NOT NULL,
-	TIPO_SERVICIO_ID	INT	NOT NULL
+	TIPO_SERVICIO_ID	INT	NOT NULL,
+	BAJA			INT DEFAULT 0
 )
 
 CREATE TABLE AERO.encomiendas (
@@ -649,6 +651,18 @@ BEGIN
 END;
 GO
 
+IF OBJECT_ID('AERO.updateCliente') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.updateCliente;
+END;
+GO
+
+IF OBJECT_ID('AERO.bajaCliente') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.bajaCliente;
+END;
+GO
+
 IF OBJECT_ID('AERO.agregarAeronave') IS NOT NULL
 BEGIN
 	DROP PROCEDURE AERO.agregarAeronave;
@@ -661,19 +675,9 @@ BEGIN
 END;
 GO
 
-IF OBJECT_ID('AERO.corrigeMail') IS NOT NULL
-    DROP FUNCTION AERO.corrigeMail
-GO
-
 IF OBJECT_ID('AERO.bajaAeronave') IS NOT NULL
 BEGIN
 	DROP PROCEDURE AERO.bajaAeronave;
-END;
-GO
-
-IF OBJECT_ID('AERO.bajaCliente') IS NOT NULL
-BEGIN
-	DROP PROCEDURE AERO.bajaCliente;
 END;
 GO
 
@@ -683,104 +687,23 @@ BEGIN
 END;
 GO
 
---CREATE
-CREATE PROCEDURE AERO.addFuncionalidad(@rol nvarchar(255), @func nvarchar(255)) AS
+IF OBJECT_ID('AERO.updateRuta') IS NOT NULL
 BEGIN
-	INSERT INTO AERO.funcionalidades_por_rol (ROL_ID, FUNCIONALIDAD_ID)
-		VALUES ((SELECT id FROM AERO.roles WHERE NOMBRE = @rol),
-		        (SELECT id FROM AERO.funcionalidades WHERE DETALLES = @func))
-END
+	DROP PROCEDURE AERO.updateRuta;
+END;
 GO
 
-
-CREATE PROCEDURE AERO.UpdateIntento(@nombre varchar(25), @exitoso int)
-AS BEGIN
-	IF(@exitoso = 1)
-		BEGIN
-			UPDATE AERO.usuarios  SET INTENTOS_LOGIN=0 WHERE USERNAME=@nombre
-		END
-	ELSE
-		BEGIN
-			DECLARE @cant_Intentos int
-			SELECT @cant_Intentos = intentos_login FROM AERO.usuarios WHERE USERNAME=@nombre
-			IF( @cant_Intentos = 2)
-				BEGIN
-					UPDATE AERO.usuarios  SET ACTIVO=0, INTENTOS_LOGIN=0 WHERE USERNAME=@nombre
-				END
-			ELSE
-				BEGIN
-					UPDATE AERO.usuarios set INTENTOS_LOGIN=@cant_Intentos+1 WHERE USERNAME=@nombre
-				END
-		END
-END
+IF OBJECT_ID('AERO.bajaRuta') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.bajaRuta;
+END;
 GO
 
-CREATE PROCEDURE AERO.agregarRol(@nombreRol nvarchar(255), @ret int output)
-AS BEGIN
-	INSERT INTO AERO.Roles (NOMBRE,ACTIVO) VALUES (@nombreRol, 1)
-	SET @ret = SCOPE_IDENTITY()
-END
+IF OBJECT_ID('AERO.corrigeMail') IS NOT NULL
+    DROP FUNCTION AERO.corrigeMail
 GO
 
-CREATE PROCEDURE AERO.agregarCliente(@rol_id INT, @nombreCliente nvarchar(255), @apellidoCliente nvarchar(255), 
-	@documentoCliente numeric(18,0), @direccion nvarchar(255), 
-	@telefono numeric(18,0), @mail nvarchar(255), @fechaNac datetime)
-
-AS BEGIN
-	INSERT INTO AERO.Clientes (rol_id, nombre, apellido, dni, direccion,telefono,
-	mail,FECHA_NACIMIENTO)  
-	VALUES (@rol_id, @nombreCliente, @apellidoCliente, 
-	@documentoCliente, @direccion, 
-	@telefono, @mail, @fechaNac)
-END
-GO
-
-CREATE PROCEDURE AERO.agregarAeronave(@matricula nvarchar(255), @modelo nvarchar(255), @kg_disponibles numeric(18,0), 
-@fabricante nvarchar(255), @tipo_servicio nvarchar(255), @alta datetime, @cantButacas int)
-AS BEGIN
-	INSERT INTO AERO.aeronaves(MATRICULA, MODELO, KG_DISPONIBLES, FABRICANTE_ID, TIPO_SERVICIO_ID, FECHA_ALTA, CANT_BUTACAS)
-	VALUES (@matricula, @modelo, @kg_disponibles, @fabricante, @tipo_servicio, @alta, @cantButacas)
-END
-GO
-
-CREATE PROCEDURE AERO.updateAeronave(@id  INT, @fechaInicio DATETIME, @fechaFin DATETIME)
-AS BEGIN
-DECLARE @IDPERIODO INT
-SELECT @IDPERIODO= ID FROM AERO.periodos_de_inactividad WHERE DESDE=@fechaInicio AND HASTA=@fechaFin
-	IF(@IDPERIODO IS NULL)
-		BEGIN
-			INSERT INTO AERO.periodos_de_inactividad VALUES(@fechaInicio,@fechaFin) 
-			SET @IDPERIODO=SCOPE_IDENTITY()
-		END
-INSERT INTO  AERO.aeronaves_por_periodos VALUES(@ID,@IDPERIODO)
-UPDATE AERO.aeronaves SET BAJA='POR_PERIODO' WHERE ID=@id; 
-END
-GO
-
-CREATE PROCEDURE AERO.bajaAeronave(@id  INT)
-AS BEGIN
-UPDATE AERO.aeronaves SET BAJA='DEFINITIVA',
-FECHA_BAJA= CURRENT_TIMESTAMP
-WHERE ID=@id;
-END
-GO
-
-CREATE PROCEDURE AERO.bajaCliente(@id  INT)
-AS BEGIN
-DELETE AERO.clientes
-FROM AERO.clientes
-WHERE ID=@id;
-END
-GO
-
-CREATE PROCEDURE AERO.agregarRuta(@codigo int, @precioKg numeric(18,2), @precioPasaje numeric(18,2), @origen int, @destino int, 
-	@servicio int)
-AS BEGIN
-	INSERT INTO AERO.rutas(CODIGO, PRECIO_BASE_KG, PRECIO_BASE_PASAJE, ORIGEN_ID, DESTINO_ID, TIPO_SERVICIO_ID)
-	VALUES (@codigo, @precioKg, @precioPasaje, @origen, @destino, @servicio)
-END
-GO
-
+--CREATE
 CREATE FUNCTION AERO.corrigeMail (@s NVARCHAR (255)) 
 RETURNS NVARCHAR(255)
 AS
@@ -830,6 +753,127 @@ BEGIN
    IF len(@s2) = 0
       return null
    return @s2
+END
+GO
+
+CREATE PROCEDURE AERO.addFuncionalidad(@rol nvarchar(255), @func nvarchar(255)) AS
+BEGIN
+	INSERT INTO AERO.funcionalidades_por_rol (ROL_ID, FUNCIONALIDAD_ID)
+		VALUES ((SELECT id FROM AERO.roles WHERE NOMBRE = @rol),
+		        (SELECT id FROM AERO.funcionalidades WHERE DETALLES = @func))
+END
+GO
+
+
+CREATE PROCEDURE AERO.UpdateIntento(@nombre varchar(25), @exitoso int)
+AS BEGIN
+	IF(@exitoso = 1)
+		BEGIN
+			UPDATE AERO.usuarios  SET INTENTOS_LOGIN=0 WHERE USERNAME=@nombre
+		END
+	ELSE
+		BEGIN
+			DECLARE @cant_Intentos int
+			SELECT @cant_Intentos = intentos_login FROM AERO.usuarios WHERE USERNAME=@nombre
+			IF( @cant_Intentos = 2)
+				BEGIN
+					UPDATE AERO.usuarios  SET ACTIVO=0, INTENTOS_LOGIN=0 WHERE USERNAME=@nombre
+				END
+			ELSE
+				BEGIN
+					UPDATE AERO.usuarios set INTENTOS_LOGIN=@cant_Intentos+1 WHERE USERNAME=@nombre
+				END
+		END
+END
+GO
+
+CREATE PROCEDURE AERO.agregarRol(@nombreRol nvarchar(255), @ret int output)
+AS BEGIN
+	INSERT INTO AERO.Roles (NOMBRE,ACTIVO) VALUES (@nombreRol, 1)
+	SET @ret = SCOPE_IDENTITY()
+END
+GO
+
+CREATE PROCEDURE AERO.agregarCliente(@rol_id INT, @nombreCliente nvarchar(255), @apellidoCliente nvarchar(255), 
+	@documentoCliente numeric(18,0), @direccion nvarchar(255), 
+	@telefono numeric(18,0), @mail nvarchar(255), @fechaNac datetime)
+
+AS BEGIN
+	INSERT INTO AERO.Clientes (rol_id, nombre, apellido, dni, direccion,telefono,
+	mail,FECHA_NACIMIENTO)  
+	VALUES (@rol_id, @nombreCliente, @apellidoCliente, 
+	@documentoCliente, @direccion, 
+	@telefono, AERO.corrigeMail(@mail), @fechaNac)
+END
+GO
+
+CREATE PROCEDURE AERO.agregarAeronave(@matricula nvarchar(255), @modelo nvarchar(255), @kg_disponibles numeric(18,0), 
+@fabricante nvarchar(255), @tipo_servicio nvarchar(255), @alta datetime, @cantButacas int)
+AS BEGIN
+	INSERT INTO AERO.aeronaves(MATRICULA, MODELO, KG_DISPONIBLES, FABRICANTE_ID, TIPO_SERVICIO_ID, FECHA_ALTA, CANT_BUTACAS)
+	VALUES (@matricula, @modelo, @kg_disponibles, @fabricante, @tipo_servicio, @alta, @cantButacas)
+END
+GO
+
+CREATE PROCEDURE AERO.updateAeronave(@id  INT, @fechaInicio DATETIME, @fechaFin DATETIME)
+AS BEGIN
+DECLARE @IDPERIODO INT
+SELECT @IDPERIODO= ID FROM AERO.periodos_de_inactividad WHERE DESDE=@fechaInicio AND HASTA=@fechaFin
+	IF(@IDPERIODO IS NULL)
+		BEGIN
+			INSERT INTO AERO.periodos_de_inactividad VALUES(@fechaInicio,@fechaFin) 
+			SET @IDPERIODO=SCOPE_IDENTITY()
+		END
+INSERT INTO  AERO.aeronaves_por_periodos VALUES(@ID,@IDPERIODO)
+UPDATE AERO.aeronaves SET BAJA='POR_PERIODO' WHERE ID=@id; 
+END
+GO
+
+CREATE PROCEDURE AERO.bajaAeronave(@id  INT)
+AS BEGIN
+UPDATE AERO.aeronaves SET BAJA='DEFINITIVA',
+FECHA_BAJA= CURRENT_TIMESTAMP
+WHERE ID=@id;
+END
+GO
+
+CREATE PROCEDURE AERO.bajaCliente(@id  INT)
+AS BEGIN
+UPDATE AERO.clientes
+SET BAJA = 1
+WHERE ID=@id;
+END
+GO
+
+CREATE PROCEDURE AERO.agregarRuta(@codigo int, @precioKg numeric(18,2), @precioPasaje numeric(18,2), @origen int, @destino int, 
+	@servicio int)
+AS BEGIN
+	INSERT INTO AERO.rutas(CODIGO, PRECIO_BASE_KG, PRECIO_BASE_PASAJE, ORIGEN_ID, DESTINO_ID, TIPO_SERVICIO_ID)
+	VALUES (@codigo, @precioKg, @precioPasaje, @origen, @destino, @servicio)
+END
+GO
+
+CREATE PROCEDURE AERO.bajaRuta(@id INT)
+AS BEGIN
+UPDATE AERO.rutas
+SET BAJA = 1
+WHERE ID=@id;
+END
+GO
+
+CREATE PROCEDURE AERO.updateRuta(@id INT, @precioKg numeric(18,2), @precioPasaje numeric(18,2), @servicio INT)
+AS BEGIN
+UPDATE AERO.rutas
+SET PRECIO_BASE_KG = @precioKg, PRECIO_BASE_PASAJE = @precioPasaje, TIPO_SERVICIO_ID = @servicio
+WHERE ID = @id
+END
+GO
+
+CREATE PROCEDURE AERO.updateCliente(@id INT, @direccion nvarchar(255), @telefono numeric(18,0), @mail nvarchar(255))
+AS BEGIN
+UPDATE AERO.clientes
+SET DIRECCION = @direccion, TELEFONO = @telefono, MAIL =  AERO.corrigeMail(@mail)
+WHERE ID = @id
 END
 GO
 
