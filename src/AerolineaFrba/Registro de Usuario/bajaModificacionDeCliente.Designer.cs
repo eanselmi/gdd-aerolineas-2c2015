@@ -112,6 +112,7 @@
             this.botonBaja.TabIndex = 18;
             this.botonBaja.Text = "Baja";
             this.botonBaja.UseVisualStyleBackColor = true;
+            this.botonBaja.Click += new System.EventHandler(this.botonBaja_Click);
             // 
             // groupBox1
             // 

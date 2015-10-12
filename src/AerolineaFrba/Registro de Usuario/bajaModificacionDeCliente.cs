@@ -103,5 +103,17 @@ namespace AerolineaFrba.Registro_de_Usuario
             funcionesComunes.deshabilitarVentanaYAbrirNueva(modificarCliente);
         }
 
+        private void botonBaja_Click(object sender, EventArgs e)
+        {
+            List<string> lista = new List<string>();
+            lista.Add("@id");
+            bool resultado = SqlConnector.executeProcedure("AERO.bajaCliente", lista, dataGridListadoClientes.SelectedCells[0].Value.ToString());
+            if (resultado)
+            {
+                MessageBox.Show("El cliente se dio de baja exitosamente");
+            }
+            consultarClientes();
+        }
+
     }
 }

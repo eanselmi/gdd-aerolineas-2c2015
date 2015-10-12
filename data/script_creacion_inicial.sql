@@ -671,6 +671,18 @@ BEGIN
 END;
 GO
 
+IF OBJECT_ID('AERO.bajaCliente') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.bajaCliente;
+END;
+GO
+
+IF OBJECT_ID('AERO.agregarRuta') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.agregarRuta;
+END;
+GO
+
 --CREATE
 CREATE PROCEDURE AERO.addFuncionalidad(@rol nvarchar(255), @func nvarchar(255)) AS
 BEGIN
@@ -712,15 +724,14 @@ GO
 
 CREATE PROCEDURE AERO.agregarCliente(@rol_id INT, @nombreCliente nvarchar(255), @apellidoCliente nvarchar(255), 
 	@documentoCliente numeric(18,0), @direccion nvarchar(255), 
-	@telefono numeric(18,0), @mail nvarchar(255), @fechaNac datetime,
-	@ret INT output)
+	@telefono numeric(18,0), @mail nvarchar(255), @fechaNac datetime)
+
 AS BEGIN
 	INSERT INTO AERO.Clientes (rol_id, nombre, apellido, dni, direccion,telefono,
 	mail,FECHA_NACIMIENTO)  
 	VALUES (@rol_id, @nombreCliente, @apellidoCliente, 
 	@documentoCliente, @direccion, 
 	@telefono, @mail, @fechaNac)
-	SET @ret = SCOPE_IDENTITY()
 END
 GO
 
@@ -750,6 +761,14 @@ CREATE PROCEDURE AERO.bajaAeronave(@id  INT)
 AS BEGIN
 UPDATE AERO.aeronaves SET BAJA='DEFINITIVA',
 FECHA_BAJA= CURRENT_TIMESTAMP
+WHERE ID=@id;
+END
+GO
+
+CREATE PROCEDURE AERO.bajaCliente(@id  INT)
+AS BEGIN
+DELETE AERO.clientes
+FROM AERO.clientes
 WHERE ID=@id;
 END
 GO
