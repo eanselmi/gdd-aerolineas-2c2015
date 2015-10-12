@@ -104,7 +104,7 @@ namespace AerolineaFrba.Abm_Vuelos
 
         private void textBoxMatricula_KeyPress(object sender, KeyPressEventArgs e)
         {
-            funcionesComunes.soloMail(e);
+            funcionesComunes.martricula(this.textBoxMatricula,e);
         }
         private void soloNumeros(object sender, KeyPressEventArgs e)
         {

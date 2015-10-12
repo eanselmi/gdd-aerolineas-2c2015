@@ -109,5 +109,10 @@ namespace AerolineaFrba.Abm_Aeronave
         {
             this.consultarAeronaves();
         }
+
+        private void matricula(object sender, KeyPressEventArgs e)
+        {
+            funcionesComunes.martricula(this.textMatricula, e);
+        }
     }
 }

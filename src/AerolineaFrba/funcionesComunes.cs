@@ -132,6 +132,14 @@ namespace AerolineaFrba
                 funcionesComunes.soloPrecio(e);
         }
 
+        public static void martricula(TextBox textbox, KeyPressEventArgs e)
+        {
+            if (textbox.Text.Contains('-'))
+                funcionesComunes.soloNumeros(e);
+            else
+                funcionesComunes.soloMail(e);
+        }
+
         public static void soloLetras(KeyPressEventArgs e)
         {
             if (!((char.IsLetter(e.KeyChar)) || (e.KeyChar == (char)Keys.Back) || (e.KeyChar == (char)Keys.Space)))
