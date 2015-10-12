@@ -1063,10 +1063,10 @@ insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) valu
 insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(3, CURRENT_TIMESTAMP, 'porque me pinto!');
 
 --set de datos para prueba
-insert into AERO.pasajes values(100,1,37,1,1)
-insert into AERO.pasajes values(100,2,37,1,2)
-insert into AERO.pasajes values(100,3,37,1,4)
-insert into AERO.pasajes values(100,4,37,1,5)
+insert into AERO.pasajes values(100,1,37,1,1,0)
+insert into AERO.pasajes values(100,2,37,1,2,0)
+insert into AERO.pasajes values(100,3,37,1,4,0)
+insert into AERO.pasajes values(100,4,37,1,5,0)
 /*
 select * from AERO.aeropuertos
 select * from AERO.tipos_de_servicio
