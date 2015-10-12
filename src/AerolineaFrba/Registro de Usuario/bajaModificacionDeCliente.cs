@@ -123,7 +123,7 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         private void bajaModificacionDeCliente_Enter(object sender, EventArgs e)
         {
-            consultarClientes();
+            limpiar();
         }
 
     }
