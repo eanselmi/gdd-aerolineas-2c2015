@@ -7,5 +7,4 @@
 * Adriano Alianiello
 * Juan Manuel Manrique
 
-## DER
-![alt tag] (https://raw.githubusercontent.com/adrianescat/gdd-aerolineas-2c2015/master/der.png)
+[Der] (https://drive.google.com/file/d/0B-vdLKw6jcX7bnJUX09lSEZZaGM/view?usp=sharing)
