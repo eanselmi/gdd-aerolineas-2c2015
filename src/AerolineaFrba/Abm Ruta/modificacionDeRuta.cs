@@ -44,5 +44,48 @@ namespace AerolineaFrba.Abm_Ruta
         {
             funcionesComunes.precioONumeros(this.textBoxPrecioPasaje, e);
         }
+
+        private void botonModificar_Click(object sender, EventArgs e)
+        {
+            Double precioKg = Math.Round(Double.Parse(textBoxPrecioKg.Text), 2);
+            Double precioPasaje = Math.Round(Double.Parse(textBoxPrecioPasaje.Text), 2);
+            Int32 servicio = (Int32)comboBoxServicios.SelectedValue;
+            if (this.validarPrecios(precioKg,precioPasaje)) {
+                List<string> lista = new List<string>();
+                lista.Add("@id");
+                lista.Add("@precioKg");
+                lista.Add("@precioPasaje");
+                lista.Add("@servicio");
+                bool resultado=SqlConnector.executeProcedure("AERO.updateRuta",lista,this.textBoxId.Text,precioKg,precioPasaje,servicio);
+                if (resultado)
+                {
+                    MessageBox.Show("La ruta se actualizo exitosamente");
+                    funcionesComunes.habilitarAnterior();
+
+                }
+            }
+        }
+
+        private bool validarPrecios(double precioKg, double precioPasaje)
+        {
+            if ((precioKg == 0) || (precioPasaje == 0))
+            {
+                MessageBox.Show("El valor de los precios no puede ser 0");
+                if ((precioKg == 0) && (precioPasaje == 0))
+                {
+                    this.textBoxPrecioKg.Clear();
+                    this.textBoxPrecioPasaje.Clear();
+                    return false;
+                }
+                else {
+                    if (precioKg == 0)
+                        this.textBoxPrecioKg.Clear();
+                    else
+                        this.textBoxPrecioPasaje.Clear();
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

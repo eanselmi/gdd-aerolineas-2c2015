@@ -24,8 +24,8 @@ namespace AerolineaFrba.Abm_Ruta
             Form modificacionRuta = new Abm_Ruta.modificacionDeRuta();
             ((TextBox)modificacionRuta.Controls["textBoxId"]).Text = dataGridListadoRutas.SelectedCells[0].Value.ToString();
             ((TextBox)modificacionRuta.Controls["textBoxCodigo"]).Text = dataGridListadoRutas.SelectedCells[1].Value.ToString();
-            ((TextBox)modificacionRuta.Controls["textBoxPrecioKg"]).Text = dataGridListadoRutas.SelectedCells[2].Value.ToString().Replace(',','.');
-            ((TextBox)modificacionRuta.Controls["textBoxPrecioPasaje"]).Text = dataGridListadoRutas.SelectedCells[3].Value.ToString().Replace(',', '.');
+            ((TextBox)modificacionRuta.Controls["textBoxPrecioKg"]).Text = dataGridListadoRutas.SelectedCells[2].Value.ToString();
+            ((TextBox)modificacionRuta.Controls["textBoxPrecioPasaje"]).Text = dataGridListadoRutas.SelectedCells[3].Value.ToString();
             ((TextBox)modificacionRuta.Controls["textBoxOrigen"]).Text = dataGridListadoRutas.SelectedCells[4].Value.ToString();
             ((TextBox)modificacionRuta.Controls["textBoxDestino"]).Text = dataGridListadoRutas.SelectedCells[5].Value.ToString();
             ((ComboBox)modificacionRuta.Controls["comboBoxServicios"]).Text = dataGridListadoRutas.SelectedCells[6].Value.ToString();
@@ -48,7 +48,7 @@ namespace AerolineaFrba.Abm_Ruta
                 r.PRECIO_BASE_KG as 'Precio Base Kg', r.PRECIO_BASE_PASAJE as 'Precio Base Pasaje', 
                 c1.NOMBRE as Origen, c2.NOMBRE as Destino, t.NOMBRE as Servicio from AERO.rutas r, 
                 AERO.aeropuertos c1, AERO.aeropuertos c2, AERO.tipos_de_servicio t WHERE r.ORIGEN_ID = c1.ID AND 
-                r.DESTINO_ID=c2.ID AND r.TIPO_SERVICIO_ID = t.ID ");
+                r.DESTINO_ID=c2.ID AND r.TIPO_SERVICIO_ID = t.ID AND r.BAJA = 0 ");
             dataGridListadoRutas.DataSource = listado;
             dataGridListadoRutas.Columns[0].Visible = false;
         }
@@ -95,7 +95,18 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void botonBaja_Click(object sender, EventArgs e)
         {
+            List<string> lista = new List<string>();
+            lista.Add("@id");
+            bool resultado = SqlConnector.executeProcedure("AERO.bajaRuta",lista,dataGridListadoRutas.SelectedCells[0].Value.ToString());
+            if(resultado){
+                MessageBox.Show("La ruta se dio de baja exitosamente");
+            }
+            this.consultarRutas();
+        }
 
+        private void bajaModificacionDeRuta_Enter(object sender, EventArgs e)
+        {
+            this.consultarRutas();
         }
     }
 }

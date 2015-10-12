@@ -29,6 +29,9 @@ namespace AerolineaFrba.Abm_Ruta
         private void botonLimpiar_Click(object sender, EventArgs e)
         {
             limpiar();
+            this.comboBoxDestino.SelectedIndex = -1;
+            this.comboBoxOrigen.SelectedIndex = -1;
+            this.comboBoxServicios.SelectedIndex = -1;
         }
 
         private void limpiar()
@@ -58,29 +61,58 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void botonGuardar_Click(object sender, EventArgs e)
         {
-            //TODO: validaciones de campos requeridos y que el destino no sea el mismo que el origen
             Int32 codigo = Int32.Parse(textBoxCodigo.Text);
-            //TODO: hay que ver como convertir a numeric(18,2) y como redondear a 2 decimales
             Double precioKg = Math.Round(Double.Parse(textBoxPrecioKg.Text), 2);
             Double precioPasaje = Math.Round(Double.Parse(textBoxPrecioPasaje.Text), 2);
-            MessageBox.Show("precio base kg: " + precioKg + " precio base pasaje: " + precioPasaje);
             Int32 origen = (Int32)comboBoxOrigen.SelectedValue;
             Int32 destino = (Int32)comboBoxDestino.SelectedValue;
             Int32 servicio = (Int32)comboBoxServicios.SelectedValue;
-            List<string> lista = new List<string>();
-            lista.Add("@codigo");
-            lista.Add("@precioKg");
-            lista.Add("@precioPasaje");
-            lista.Add("@origen");
-            lista.Add("@destino");
-            lista.Add("@servicio");
-            bool resultado = SqlConnector.executeProcedure("AERO.agregarRuta", lista, codigo, precioKg, precioPasaje, 
-                origen, destino, servicio);
-            if (resultado)
+            if(this.validarCampos(origen,destino,precioKg,precioPasaje,codigo))
             {
-                MessageBox.Show("Se guardo exitosamente");
-                limpiar();
+                List<string> lista = new List<string>();
+                lista.Add("@codigo");
+                lista.Add("@precioKg");
+                lista.Add("@precioPasaje");
+                lista.Add("@origen");
+                lista.Add("@destino");
+                lista.Add("@servicio");
+                bool resultado = SqlConnector.executeProcedure("AERO.agregarRuta", lista, codigo, precioKg, precioPasaje, 
+                    origen, destino, servicio);
+                if (resultado)
+                {
+                    MessageBox.Show("Se guardo exitosamente");
+                    limpiar();
+                    this.comboBoxDestino.SelectedIndex = -1;
+                    this.comboBoxOrigen.SelectedIndex = -1;
+                    this.comboBoxServicios.SelectedIndex = -1;
+                }
             }
         }
+
+        private bool validarCampos(int origen, int destino, double precioKg, double precioPasaje,int codigo)
+        {
+            if (origen == destino) {
+                MessageBox.Show("No se puede tener como destino el mismo lugar de origen");
+                this.comboBoxDestino.SelectedIndex = -1;
+                return false;
+            }
+            if ((precioKg == 0) || (precioPasaje == 0)) {
+                MessageBox.Show("El valor de los precios no puede ser 0");
+                if (precioKg == 0)
+                    this.textBoxPrecioKg.Clear();
+                else
+                    this.textBoxPrecioPasaje.Clear();
+                return false;
+            }
+            if (codigo == 0) {
+                MessageBox.Show("El codigo de ruta no puede ser 0");
+                this.textBoxCodigo.Clear();
+                return false;
+            }
+
+            return true;
+        }
+
+       
     }
 }

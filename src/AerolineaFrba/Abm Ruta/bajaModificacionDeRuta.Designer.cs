@@ -234,6 +234,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado de Rutas";
             this.Load += new System.EventHandler(this.bajaModificacionDeRuta_Load);
+            this.Enter += new System.EventHandler(this.bajaModificacionDeRuta_Enter);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridListadoRutas)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

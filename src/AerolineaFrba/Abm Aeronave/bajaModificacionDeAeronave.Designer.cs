@@ -230,6 +230,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Listado de Aeronaves";
             this.Load += new System.EventHandler(this.bajaModificacionDeAeronave_Load);
+            this.Enter += new System.EventHandler(this.bajaModificacionDeAeronave_Enter);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridListadoAeronaves)).EndInit();

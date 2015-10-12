@@ -104,5 +104,10 @@ namespace AerolineaFrba.Abm_Aeronave
             }
             consultarAeronaves();
         }
+
+        private void bajaModificacionDeAeronave_Enter(object sender, EventArgs e)
+        {
+            this.consultarAeronaves();
+        }
     }
 }
