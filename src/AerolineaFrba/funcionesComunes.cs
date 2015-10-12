@@ -118,7 +118,7 @@ namespace AerolineaFrba
 
         public static void soloPrecio(KeyPressEventArgs e)
         {   
-            if (!((char.IsDigit(e.KeyChar)) || (e.KeyChar == '.') || (e.KeyChar == (char)Keys.Back)))
+            if (!((char.IsDigit(e.KeyChar)) || (e.KeyChar == ',') || (e.KeyChar == (char)Keys.Back)))
             {
                 e.Handled = true;
             }
