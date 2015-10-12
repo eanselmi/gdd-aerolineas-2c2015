@@ -73,9 +73,14 @@ BEGIN
     DROP TABLE AERO.paquetes;
 END;
 
-IF OBJECT_ID('AERO.encomiendas') IS NOT NULL
+IF OBJECT_ID('AERO.pasajes') IS NOT NULL
 BEGIN
-    DROP TABLE AERO.encomiendas;
+    DROP TABLE AERO.pasajes;
+END;
+
+IF OBJECT_ID('AERO.boletos_de_compra') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.boletos_de_compra;
 END;
 
 IF OBJECT_ID('AERO.vuelos') IS NOT NULL
@@ -98,11 +103,6 @@ BEGIN
     DROP TABLE AERO.ciudades;
 END;
 
-IF OBJECT_ID('AERO.pasajes') IS NOT NULL
-BEGIN
-    DROP TABLE AERO.pasajes;
-END;
-
 IF OBJECT_ID('AERO.butacas') IS NOT NULL
 BEGIN
     DROP TABLE AERO.butacas;
@@ -121,11 +121,6 @@ END;
 IF OBJECT_ID('AERO.fabricantes') IS NOT NULL
 BEGIN
     DROP TABLE AERO.fabricantes;
-END;
-
-IF OBJECT_ID('AERO.boletos_de_compra') IS NOT NULL
-BEGIN
-    DROP TABLE AERO.boletos_de_compra;
 END;
 
 IF OBJECT_ID('AERO.clientes') IS NOT NULL
@@ -207,6 +202,7 @@ CREATE TABLE AERO.boletos_de_compra (
     TIPO_COMPRA    NVARCHAR(255),
     CLIENTE_ID        INT            NOT NULL,
 	MILLAS 			  INT,
+	VUELO_ID         INT		NOT NULL,
     CONSTRAINT boletos_de_compra_CK001 CHECK (TIPO_COMPRA IN ('EFECTIVO', 'TARJETA'))
 )
 
@@ -283,12 +279,6 @@ CREATE TABLE AERO.rutas (
 	BAJA			INT DEFAULT 0
 )
 
-CREATE TABLE AERO.encomiendas (
-    ID  INT    IDENTITY(1,1)    PRIMARY KEY,
-    BOLETO_COMPRA_ID INT		NOT NULL,
-    VUELO_ID         INT		NOT NULL
-)
-
 CREATE TABLE AERO.ciudades (
     ID     INT     IDENTITY(1,1)     PRIMARY KEY,
     NOMBRE         NVARCHAR(255)    NOT NULL
@@ -299,7 +289,7 @@ CREATE TABLE AERO.paquetes(
     CODIGO         NUMERIC(18,0)    UNIQUE NOT NULL,
     PRECIO         NUMERIC(18,2)	NOT NULL,
     KG             NUMERIC(18,0)	NOT NULL,
-    ENCOMIENDA_ID     INT		NOT NULL
+    BOLETO_COMPRA_ID     INT		NOT NULL
 )
 
 CREATE TABLE AERO.canjes (
@@ -498,31 +488,22 @@ IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_RUT_AERO' AND object_i
        CREATE INDEX FKI_RUT_AERO ON AERO.rutas (ORIGEN_ID);
     END
 
-ALTER TABLE AERO.encomiendas
-ADD CONSTRAINT ENCOMIENDAS_FK01 FOREIGN KEY
+ALTER TABLE AERO.paquetes
+ADD CONSTRAINT paquetes_FK01 FOREIGN KEY
 (BOLETO_COMPRA_ID) REFERENCES AERO.boletos_de_compra (ID)
 
-IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_ENCO_BOLDECOMP' AND object_id = OBJECT_ID('AERO.encomiendas'))
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_PAQ_BOLDECOMP' AND object_id = OBJECT_ID('AERO.paquetes'))
     BEGIN
-       CREATE INDEX FKI_ENCO_BOLDECOMP ON AERO.encomiendas (BOLETO_COMPRA_ID);
+       CREATE INDEX FKI_PAQ_BOLDECOMP ON AERO.paquetes (BOLETO_COMPRA_ID);
     END
 
-ALTER TABLE AERO.encomiendas
-ADD CONSTRAINT ENCOMIENDAS_FK02 FOREIGN KEY
+ALTER TABLE AERO.boletos_de_compra
+ADD CONSTRAINT boletos_FK02 FOREIGN KEY
 (VUELO_ID) REFERENCES AERO.vuelos (ID)
 
-IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_ENCO_VUEL' AND object_id = OBJECT_ID('AERO.encomiendas'))
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_BOLETO_VUEL' AND object_id = OBJECT_ID('AERO.boletos_de_compra'))
     BEGIN
-       CREATE INDEX FKI_ENCO_VUEL ON AERO.encomiendas (VUELO_ID);
-    END
-
-ALTER TABLE AERO.paquetes
-ADD CONSTRAINT PAQUETES_FK01 FOREIGN KEY
-(ENCOMIENDA_ID) REFERENCES AERO.encomiendas (ID)
-
-IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_PAQ_ENCO' AND object_id = OBJECT_ID('AERO.paquetes'))
-    BEGIN
-       CREATE INDEX FKI_PAQ_ENCO ON AERO.paquetes (ENCOMIENDA_ID);
+       CREATE INDEX FKI_BOLETO_VUEL ON AERO.boletos_de_compra (VUELO_ID);
     END
 
 ALTER TABLE AERO.canjes
@@ -703,6 +684,30 @@ IF OBJECT_ID('AERO.corrigeMail') IS NOT NULL
     DROP FUNCTION AERO.corrigeMail
 GO
 
+IF OBJECT_ID('AERO.top5DestinosConPasajes') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.top5DestinosConPasajes;
+END;
+GO
+
+IF OBJECT_ID('AERO.top5DestinosCancelados') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.top5DestinosCancelados;
+END;
+GO
+
+IF OBJECT_ID('AERO.top5DestinosAeronavesVacias') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.top5DestinosAeronavesVacias;
+END;
+GO
+
+IF OBJECT_ID('AERO.top5ClientesMillas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.top5ClientesMillas;
+END;
+GO
+
 --CREATE
 CREATE FUNCTION AERO.corrigeMail (@s NVARCHAR (255)) 
 RETURNS NVARCHAR(255)
@@ -876,6 +881,68 @@ WHERE ID = @id
 END
 GO
 
+--TOP 5 de los destino con mas pasajes comprados
+CREATE PROCEDURE AERO.top5DestinosConPasajes(@fechaFrom DATETIME, @fechaTo DATETIME)
+AS BEGIN
+select top 5 a.NOMBRE as Destino, count(p.ID) as 'Cantidad de Pasajes' 
+from AERO.pasajes p 
+join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID
+join AERO.vuelos v on bc.VUELO_ID=v.ID 
+join AERO.rutas r on v.RUTA_ID=r.ID
+join AERO.aeropuertos a on r.DESTINO_ID=a.ID
+where bc.id not in (select BOLETO_COMPRA_ID from AERO.cancelaciones)
+and  bc.FECHA_COMPRA between @fechaFrom and @fechaTo 
+group by a.nombre 
+order by 2 desc
+END
+GO
+
+--ESTAMOS CONTANDO BOLETO DE COMPRA CANCELADO Y NO PASAJES!!!
+--TOP 5 de los destinos con más pasajes cancelados
+CREATE PROCEDURE AERO.top5DestinosCancelados(@fechaFrom DATETIME, @fechaTo DATETIME)
+AS BEGIN
+select top 5 a.NOMBRE as AERONAVE, count(c.ID) as 'cancelaciones por aeronave' from AERO.cancelaciones c
+join AERO.boletos_de_compra bc on c.BOLETO_COMPRA_ID = bc.ID
+join AERO.vuelos v on bc.VUELO_ID = v.ID
+join AERO.rutas r on v.RUTA_ID=r.ID
+join AERO.aeropuertos a on r.DESTINO_ID=a.ID
+where bc.FECHA_COMPRA between @fechaFrom and @fechaTo 
+group by a.NOMBRE 
+order by 2 desc
+END
+GO
+
+--TOP 5 de los destino con aeronaves mas vacias
+CREATE PROCEDURE AERO.top5DestinosAeronavesVacias(@fechaFrom DATETIME, @fechaTo DATETIME)
+AS BEGIN
+select a.NOMBRE as Destino, count(b.ID) as 'Butacas Vacias' 
+from AERO.aeronaves naves 
+join AERO.butacas b on naves.ID = b.Aeronave_id 
+join AERO.vuelos v on naves.ID=v.AERONAVE_ID 
+join AERO.rutas r on v.RUTA_ID=r.ID 
+join AERO.aeropuertos a on r.DESTINO_ID=a.ID 
+where b.ESTADO = 'LIBRE' and
+v.FECHA_SALIDA between @fechaFrom and @fechaTo and
+v.FECHA_LLEGADA between @fechaFrom and @fechaTo 
+group by a.NOMBRE
+order by 2 desc
+END
+GO
+
+--TOP de los clientes con mas puntos acumulados a la fecha (la fecha es hasta el dia de hoy)
+CREATE PROCEDURE AERO.top5ClientesMillas(@fechaFrom DATETIME, @fechaTo DATETIME)
+AS BEGIN
+select c.nombre as 'Nombre Cliente', sum(bc.millas) as 'Cantidad de Millas' 
+from AERO.clientes c 
+join AERO.pasajes p on c.ID=p.CLIENTE_ID 
+join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID 
+where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones) and
+bc.FECHA_COMPRA between DATEADD(YYYY, -1, CURRENT_TIMESTAMP) and CURRENT_TIMESTAMP 
+group by c.nombre 
+order by 2 desc
+END
+GO
+
 -----------------------------------------------------------------------
 -- MIGRACION
 
@@ -980,89 +1047,43 @@ EXEC AERO.addFuncionalidad @rol='cliente', @func ='Comprar Pasaje/Encomienda';
 EXEC AERO.addFuncionalidad @rol='cliente', @func ='Consultar Millas';
 EXEC AERO.addFuncionalidad @rol='cliente', @func ='Realizar Canje';
 
-
 -----------------------------------------------------------------------
 -- CONSULTA DE LISTADOS
 
+--set de datos para prueba 4
+insert into AERO.boletos_de_compra values(ABS(CHECKSUM(NewId())) % 7,CURRENT_TIMESTAMP,1,'efectivo',1,22,1)
+insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22,1)
+insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22,2)
+insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22,2)
+insert into AERO.boletos_de_compra values(1,DATEADD(YYYY,-4,CURRENT_TIMESTAMP),1,'efectivo',1,22,2)
+insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(1, CURRENT_TIMESTAMP, 'porque me pinto!');
+insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(1, CURRENT_TIMESTAMP, 'porque me pinto!');
+insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(3, CURRENT_TIMESTAMP, 'porque me pinto!');
+
 --set de datos para prueba
-insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22)
 insert into AERO.pasajes values(100,1,37,1,1)
-
-/*YA PASADOS A LA APP
-
+insert into AERO.pasajes values(100,2,37,1,2)
+insert into AERO.pasajes values(100,3,37,1,4)
+insert into AERO.pasajes values(100,4,37,1,5)
+/*
 select * from AERO.aeropuertos
 select * from AERO.tipos_de_servicio
 select * from AERO.rutas
 select * from AERO.butacas
 select * from AERO.clientes
 select * from AERO.boletos_de_compra
-
---TOP 5 de los destino con mas pasajes comprados
-select top 5 a.NOMBRE as Destino, count(p.ID) as 'Cantidad de Pasajes' 
-from AERO.aeropuertos a 
-join AERO.rutas r on a.ID=r.DESTINO_ID 
-join AERO.vuelos v on r.ID=v.RUTA_ID 
-join AERO.aeronaves naves on v.AERONAVE_ID= naves.ID 
-join AERO. butacas b on naves.ID=b.AERONAVE_ID 
-join AERO.pasajes p on b.ID=p.BUTACA_ID 
-group by a.nombre 
-order by 2 desc
-
---TOP 5 de los destino con aeronaves mas vacias
-select a.NOMBRE as Destino, naves.ID as 'ID de Aeronave', count(b.ID) as 'Butacas Vacias' 
-from AERO.aeronaves naves 
-join AERO.butacas b on naves.ID = b.Aeronave_id 
-join AERO.vuelos v on naves.ID=v.AERONAVE_ID 
-join AERO.rutas r on v.RUTA_ID=r.ID 
-join AERO.aeropuertos a on r.DESTINO_ID=a.ID 
-where b.ESTADO = 'LIBRE' 
-group by a.NOMBRE, naves.ID 
-order by 3 desc
-
-/* este insert esta aca para probar que no se cuentan las millas de ALIHUEN (22) porque el boleto de compra esta cancelado
-insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(1, CURRENT_TIMESTAMP, 'porque me pinto!')*/
-
---TOP de los clientes con mas puntos acumulados a la fecha
-select c.nombre as 'Nombre Cliente', sum(bc.millas) as 'Cantidad de Millas' 
-from AERO.clientes c 
-join AERO.pasajes p on c.ID=p.CLIENTE_ID 
-join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID 
-where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones) 
-group by c.nombre 
-order by 2 desc
-
-/*cancelo el boleto de compra para probar que funciona la query*/
-insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(1, CURRENT_TIMESTAMP, 'porque me pinto!');
-
---TOP 5 de los destinos con más pasajes cancelados
-/* NO ESTA FUNCIONANDO!
-
-select top 5 a.NOMBRE as Destino, count(c.ID) as 'Cantidad de Cancelaciones' 
-from AERO.aeropuertos a
-join AERO.rutas r on a.ID=r.DESTINO_ID 
-join AERO.vuelos v on r.ID=v.RUTA_ID 
-join AERO.aeronaves naves on v.AERONAVE_ID= naves.ID 
-join AERO. butacas b on naves.ID=b.AERONAVE_ID 
-join AERO.pasajes p on b.ID=p.BUTACA_ID 
-join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID 
-join AERO.cancelaciones c on bc.ID=c.BOLETO_COMPRA_ID 
-group by a.nombre 
-order by 2 desc
-
-select top 5 a.MATRICULA as AERONAVE, count(a.ID) as 'cancelaciones por aeronave' from AERO.cancelaciones c
-join AERO.boletos_de_compra bc on c.BOLETO_COMPRA_ID = bc.ID
-join AERO.pasajes p on p.BOLETO_COMPRA_ID = bc.ID
-join AERO.butacas b on p.BUTACA_ID = b.ID
-join AERO.aeronaves a on b.AERONAVE_ID = a.ID
-GROUP BY a.MATRICULA
-order by 2 desc
-
-select top 5 a.NOMBRE as Destino, count(v.ID) as 'vuelos por destino' 
-from AERO.aeropuertos a
-join AERO.rutas r on a.ID=r.DESTINO_ID 
-join AERO.vuelos v on r.ID=v.RUTA_ID 
-join AERO.aeronaves naves on v.AERONAVE_ID= naves.ID 
-GROUP BY a.NOMBRE
-order by 2 desc
+select * from AERO.pasajes
+select * from AERO.cancelaciones
 */
-*/
+EXEC AERO.top5DestinosCancelados @fechaFrom='01/01/2000', @fechaTo ='01/01/2999';
+
+
+
+
+
+
+
+
+
+
+
