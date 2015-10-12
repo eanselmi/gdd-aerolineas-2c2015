@@ -85,13 +85,17 @@ namespace AerolineaFrba.Ingreso
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Canje_Millas.realizarCanjeMillas());
                     break;
                 case "Alta de Rol":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Rol.altaRol());
+                    Form altaDeRol = new Abm_Rol.altaModificacionDeRol();
+                    int val = 0;
+                    ((TextBox)altaDeRol.Controls["textTipoForm"]).Text = val.ToString() ;
+                    altaDeRol.Text = "Alta de Rol";
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(altaDeRol);
                     break;
                 case "Baja de Rol":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Rol.bajaRol());
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Rol.bajaModificacionDeRol());
                     break;
                 case "Modificacion de Rol":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Rol.modificacionRol());
+                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Rol.bajaModificacionDeRol());
                     break;
                 case "Alta de Ruta":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ruta.altaDeRuta());
@@ -130,7 +134,7 @@ namespace AerolineaFrba.Ingreso
                 funcionalidades_por_rol.FUNCIONALIDAD_ID = funcionalidades.ID where 
                 roles.NOMBRE = '" + funcionesComunes.getRol() + "'");
             foreach (DataRow row in dt.Rows)
-                comboBoxFuncionalidad.Items.Add(row.ItemArray[0].ToString());
+            comboBoxFuncionalidad.Items.Add(row.ItemArray[0].ToString());
             comboBoxFuncionalidad.DisplayMember = "DETALLES";
             comboBoxFuncionalidad.SelectedIndex = 0;
         }

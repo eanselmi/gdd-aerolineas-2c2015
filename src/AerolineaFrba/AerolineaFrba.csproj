@@ -83,23 +83,17 @@
     <Compile Include="Abm Ciudad\modificacionDeCiudad.Designer.cs">
       <DependentUpon>modificacionDeCiudad.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Rol\altaRol.cs">
+    <Compile Include="Abm Rol\altaModificacionDeRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\altaRol.Designer.cs">
-      <DependentUpon>altaRol.cs</DependentUpon>
+    <Compile Include="Abm Rol\altaModificacionDeRol.Designer.cs">
+      <DependentUpon>altaModificacionDeRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Rol\bajaRol.cs">
+    <Compile Include="Abm Rol\bajaModificacionDeRol.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Abm Rol\bajaRol.Designer.cs">
-      <DependentUpon>bajaRol.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Rol\modificacionRol.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Rol\modificacionRol.Designer.cs">
-      <DependentUpon>modificacionRol.cs</DependentUpon>
+    <Compile Include="Abm Rol\bajaModificacionDeRol.Designer.cs">
+      <DependentUpon>bajaModificacionDeRol.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Ruta\altaDeRuta.cs">
       <SubType>Form</SubType>
@@ -255,6 +249,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ciudad\modificacionDeCiudad.resx">
       <DependentUpon>modificacionDeCiudad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\altaModificacionDeRol.resx">
+      <DependentUpon>altaModificacionDeRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Abm Rol\bajaModificacionDeRol.resx">
+      <DependentUpon>bajaModificacionDeRol.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Ruta\altaDeRuta.resx">
       <DependentUpon>altaDeRuta.cs</DependentUpon>
