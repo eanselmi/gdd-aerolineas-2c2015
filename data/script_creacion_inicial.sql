@@ -722,10 +722,8 @@ BEGIN
       DECLARE @c int;
       SET @c = ascii(substring(@s, @p, 1))
       set @c = LOWER(@c)
-      
-      --si es espacio todo a la izquierda se descarta
-      if (@c = 32) set @s2 = '';
-      
+
+      if (@c = 32) set @c = ascii('_')      
 	  if @c = ascii('ä') set @c = ascii('a')
 	  if @c = ascii('ë') set @c = ascii('e')
 	  if @c = ascii('ï') set @c = ascii('i')
@@ -801,7 +799,8 @@ CREATE PROCEDURE AERO.agregarCliente(@rol_id INT, @nombreCliente nvarchar(255), 
 AS BEGIN
 	INSERT INTO AERO.Clientes (rol_id, nombre, apellido, dni, direccion,telefono,
 	mail,FECHA_NACIMIENTO)  
-	VALUES (@rol_id, @nombreCliente, @apellidoCliente, 
+	VALUES (@rol_id, SUBSTRING(UPPER (@nombreCliente), 1, 1) + SUBSTRING (LOWER (@nombreCliente), 2,LEN(@nombreCliente)), 
+	SUBSTRING(UPPER (@apellidoCliente), 1, 1) + SUBSTRING (LOWER (@apellidoCliente), 2,LEN(@apellidoCliente)), 
 	@documentoCliente, @direccion, 
 	@telefono, AERO.corrigeMail(@mail), @fechaNac)
 END
@@ -904,7 +903,9 @@ INSERT INTO AERO.aeropuertos (CIUDAD_ID, NOMBRE)
 FROM AERO.ciudades)
 
 INSERT INTO AERO.clientes (DNI, NOMBRE, APELLIDO, FECHA_NACIMIENTO, MAIL, TELEFONO, DIRECCION, ROL_ID)
-select m.Cli_Dni, m.Cli_Nombre, m.Cli_Apellido, m.Cli_Fecha_Nac, AERO.corrigeMail(m.Cli_Mail), m.Cli_Telefono, m.Cli_Dir, r.ID
+select m.Cli_Dni, SUBSTRING(UPPER (m.Cli_Nombre), 1, 1) + SUBSTRING (LOWER (m.Cli_Nombre), 2,LEN(m.Cli_Nombre)), 
+SUBSTRING(UPPER (m.Cli_Apellido), 1, 1) + SUBSTRING (LOWER (m.Cli_Apellido), 2,LEN(m.Cli_Apellido)), m.Cli_Fecha_Nac, 
+AERO.corrigeMail(m.Cli_Mail), m.Cli_Telefono, m.Cli_Dir, r.ID
 from GD2C2015.gd_esquema.Maestra m, AERO.roles r
 where r.NOMBRE = 'cliente'
 group by m.Cli_Dni, m.Cli_Nombre, m.Cli_Apellido, m.Cli_Fecha_Nac, m.Cli_Mail, m.Cli_Telefono, m.Cli_Dir, r.ID;
