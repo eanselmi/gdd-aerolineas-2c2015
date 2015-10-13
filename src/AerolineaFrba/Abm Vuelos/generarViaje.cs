@@ -154,7 +154,7 @@ namespace AerolineaFrba.Abm_Vuelos
                     dataGridListadoAeronaves.SelectedCells[0].Value, 
                     Convert.ToDateTime(this.timePickerSalida.Value), 
                     Convert.ToDateTime(this.timePickerLlegadaEstimada.Value));
-                if (resultado.Rows.Count > 0){
+                if (Int32.Parse(resultado.Rows[0].ItemArray[0].ToString()) != 0){
                     MessageBox.Show("La aeronave ya tiene un vuelo programado para esas fechas, no se puede generar el vuelo");
                     return false;
                 }
