@@ -125,8 +125,21 @@ namespace AerolineaFrba.Abm_Vuelos
         {
             if (this.validar())
             {   
-                //TODO:Hacer el insert
-                MessageBox.Show("Se genero el viaje exitosamente");
+                List<string> lista = new List<string>();
+                lista.Add("@fechaSalida");
+                lista.Add("@fechaLlegadaEstimada");
+                lista.Add("@idAeronave");
+                lista.Add("@idRuta");
+                bool resultado = SqlConnector.executeProcedure("AERO.generarViaje", lista, 
+                    Convert.ToDateTime(this.timePickerSalida.Value),
+                    Convert.ToDateTime(this.timePickerLlegadaEstimada.Value),
+                    dataGridListadoAeronaves.SelectedCells[0].Value,
+                    dataGridListadoRutas.SelectedCells[0].Value);
+                if (resultado == true){
+                    MessageBox.Show("Se genero el viaje exitosamente");
+                }else{
+                    MessageBox.Show("Ocurrió un error generando el viaje");
+                }
             }
             
         }
@@ -145,19 +158,18 @@ namespace AerolineaFrba.Abm_Vuelos
                 MessageBox.Show("La aeronave y la ruta elegida deben tener el mismo tipo de servicio");
                 return false;
             }
-            //TODO: faltaria ver que la aeronave no tenga otro vuelo en ese intervalo de tiempo
             List<string> lista = new List<string>();
-                lista.Add("@id");
-                lista.Add("@fechaSalida");
-                lista.Add("@fechaLlegadaEstimada");
-                DataTable resultado = SqlConnector.obtenerTablaSegunProcedure("AERO.validarVuelo", lista, 
-                    dataGridListadoAeronaves.SelectedCells[0].Value, 
-                    Convert.ToDateTime(this.timePickerSalida.Value), 
-                    Convert.ToDateTime(this.timePickerLlegadaEstimada.Value));
-                if (Int32.Parse(resultado.Rows[0].ItemArray[0].ToString()) != 0){
-                    MessageBox.Show("La aeronave ya tiene un vuelo programado para esas fechas, no se puede generar el vuelo");
-                    return false;
-                }
+            lista.Add("@id");
+            lista.Add("@fechaSalida");
+            lista.Add("@fechaLlegadaEstimada");
+            DataTable resultado = SqlConnector.obtenerTablaSegunProcedure("AERO.validarVuelo", lista, 
+                dataGridListadoAeronaves.SelectedCells[0].Value, 
+                Convert.ToDateTime(this.timePickerSalida.Value), 
+                Convert.ToDateTime(this.timePickerLlegadaEstimada.Value));
+            if (Int32.Parse(resultado.Rows[0].ItemArray[0].ToString()) != 0){
+                MessageBox.Show("La aeronave ya tiene un vuelo programado para esas fechas, no se puede generar el vuelo");
+                return false;
+            }
             return true;
         }
         

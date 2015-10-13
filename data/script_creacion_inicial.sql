@@ -1013,14 +1013,11 @@ VALUES (@fechaSalida, @fechaLlegadaEstimada, @idAeronave, @idRuta)
 END
 GO
 
--- LO QUE ESTA COMENTADO SERIA EN EL CASO QUE MANDEMOS EL ID DEL VUELO EN VEZ DE TODO LO DEMAS
-CREATE PROCEDURE AERO.registrarLlegada(/*@idVuelo int*/@fechaSalida datetime, @fechaLlegadaEstimada datetime, @idAeronave int, @idRuta int, 
-@fechaLlegada datetime)
+CREATE PROCEDURE AERO.registrarLlegada(@idVuelo int, @fechaLlegada datetime)
 AS BEGIN
 UPDATE AERO.vuelos
 SET FECHA_LLEGADA = @fechaLlegada
--- WHERE ID = @idVuelo
-WHERE FECHA_SALIDA = @fechaSalida AND FECHA_LLEGADA_ESTIMADA = @fechaLlegadaEstimada AND AERONAVE_ID = @idAeronave AND RUTA_ID = @idRuta
+WHERE ID = @idVuelo
 END
 GO
 
