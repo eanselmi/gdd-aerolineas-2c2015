@@ -146,7 +146,7 @@ namespace AerolineaFrba.Abm_Vuelos
                 return false;
             }
             //TODO: faltaria ver que la aeronave no tenga otro vuelo en ese intervalo de tiempo
-            /*List<string> lista = new List<string>();
+            List<string> lista = new List<string>();
                 lista.Add("@id");
                 lista.Add("@fechaSalida");
                 lista.Add("@fechaLlegadaEstimada");
@@ -158,7 +158,6 @@ namespace AerolineaFrba.Abm_Vuelos
                     MessageBox.Show("La aeronave ya tiene un vuelo programado para esas fechas, no se puede generar el vuelo");
                     return false;
                 }
-             */
             return true;
         }
         

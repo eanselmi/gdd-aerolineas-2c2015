@@ -953,8 +953,7 @@ GO
 
 CREATE PROCEDURE AERO.validarVuelo (@id int, @fechaSalida datetime, @fechaLlegadaEstimada datetime)
 AS BEGIN
-DECLARE @vuelos int
-select @vuelos = COUNT(v.ID) from AERO.vuelos v
+select COUNT(v.ID) from AERO.vuelos v
 where v.AERONAVE_ID = @id and v.FECHA_SALIDA between @fechaSalida and @fechaLlegadaEstimada
 END
 GO

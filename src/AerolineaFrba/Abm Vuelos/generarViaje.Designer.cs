@@ -69,7 +69,7 @@
             // 
             // timePickerLlegadaEstimada
             // 
-            this.timePickerLlegadaEstimada.CustomFormat = "dd/MM/yyyy - HH:mm:ss";
+            this.timePickerLlegadaEstimada.CustomFormat = "dd/MM/yyyy HH:mm:ss";
             this.timePickerLlegadaEstimada.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timePickerLlegadaEstimada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.timePickerLlegadaEstimada.Location = new System.Drawing.Point(258, 43);
@@ -79,7 +79,7 @@
             // 
             // timePickerSalida
             // 
-            this.timePickerSalida.CustomFormat = "dd/MM/yyyy - HH:mm:ss";
+            this.timePickerSalida.CustomFormat = "dd/MM/yyyy HH:mm:ss";
             this.timePickerSalida.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.timePickerSalida.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.timePickerSalida.Location = new System.Drawing.Point(13, 43);
