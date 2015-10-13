@@ -710,6 +710,12 @@ BEGIN
 END;
 GO
 
+IF OBJECT_ID('AERO.validarVuelo') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.validarVuelo;
+END;
+GO
+
 --CREATE
 CREATE FUNCTION AERO.corrigeMail (@s NVARCHAR (255)) 
 RETURNS NVARCHAR(255)
@@ -945,6 +951,13 @@ order by 2 desc
 END
 GO
 
+CREATE PROCEDURE AERO.validarVuelo (@id int, @fechaSalida datetime, @fechaLlegadaEstimada datetime)
+AS BEGIN
+DECLARE @vuelos int
+select @vuelos = COUNT(v.ID) from AERO.vuelos v
+where v.AERONAVE_ID = @id and v.FECHA_SALIDA between @fechaSalida and @fechaLlegadaEstimada
+END
+GO
 -----------------------------------------------------------------------
 -- MIGRACION
 

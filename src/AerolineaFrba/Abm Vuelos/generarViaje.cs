@@ -18,6 +18,7 @@ namespace AerolineaFrba.Abm_Vuelos
         {
             InitializeComponent();
             this.consultarAeronaves();
+            this.consultarRutas();
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
@@ -75,7 +76,6 @@ namespace AerolineaFrba.Abm_Vuelos
 
         private void botonBuscarRuta_Click(object sender, EventArgs e)
         {
-            this.consultarRutas();
             DataTable rutasFiltrado = filtrarRutas(textBoxCodigo.Text);
             this.dataGridListadoRutas.DataSource = rutasFiltrado;
         }
@@ -133,13 +133,11 @@ namespace AerolineaFrba.Abm_Vuelos
 
         private bool validar() 
         {
-            if (this.timePickerSalida.Value > this.timePickerLlegadaEstimada.Value)
-            {   //TODO:Esto seria como una primera validacion, faltaria ver lo de las 24hs y que la aeronave no tenga otro vuelo en ese intervalo de tiempo
+            if (this.timePickerSalida.Value > this.timePickerLlegadaEstimada.Value){
                 MessageBox.Show("No puede haber una fecha de salida despues de la estima");
                 return false;
             }
-            if (timePickerSalida.Value.AddDays((double)1) < timePickerLlegadaEstimada.Value)
-            {
+            if (timePickerSalida.Value.AddDays((double)1) < timePickerLlegadaEstimada.Value){
                 MessageBox.Show("La fecha estimada de llegada no puede ser mayor a 24hs de la de salida");
                 return false;
             }
@@ -147,6 +145,20 @@ namespace AerolineaFrba.Abm_Vuelos
                 MessageBox.Show("La aeronave y la ruta elegida deben tener el mismo tipo de servicio");
                 return false;
             }
+            //TODO: faltaria ver que la aeronave no tenga otro vuelo en ese intervalo de tiempo
+            /*List<string> lista = new List<string>();
+                lista.Add("@id");
+                lista.Add("@fechaSalida");
+                lista.Add("@fechaLlegadaEstimada");
+                DataTable resultado = SqlConnector.obtenerTablaSegunProcedure("AERO.validarVuelo", lista, 
+                    dataGridListadoAeronaves.SelectedCells[0].Value, 
+                    Convert.ToDateTime(this.timePickerSalida.Value), 
+                    Convert.ToDateTime(this.timePickerLlegadaEstimada.Value));
+                if (resultado.Rows.Count > 0){
+                    MessageBox.Show("La aeronave ya tiene un vuelo programado para esas fechas, no se puede generar el vuelo");
+                    return false;
+                }
+             */
             return true;
         }
         
