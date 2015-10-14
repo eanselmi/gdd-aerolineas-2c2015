@@ -33,6 +33,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             DataTable filtradoVuelos = filtradoDeVuelos(this.textBoxMatricula.Text);
             dataGridListadoVuelos.DataSource = filtradoVuelos;
             dataGridListadoVuelos.Columns[0].Visible = false;
+            
         }
 
         private DataTable filtradoDeVuelos(string matricula)
@@ -62,14 +63,52 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
         private DataTable consultarVuelos()
         {
-            DataTable listado = SqlConnector.obtenerTablaSegunConsultaString(@"select v.ID as ID,a.MATRICULA as Matricula,r.CODIGO as 'Codigo Ruta'
-                                                ,o.NOMBRE as Origen,d.NOMBRE as Destino,v.FECHA_SALIDA as 'Fecha De Salida' 
-                                                from AERO.vuelos v join Aero.aeronaves a on v.AERONAVE_ID = a.ID
-                                                                   join AERO.rutas r on v.RUTA_ID = r.ID
-                                                                   join AERO.aeropuertos o on r.ORIGEN_ID = o.ID
-                                                                   join AERO.aeropuertos d on r.DESTINO_ID = d.ID
-                                                where v.FECHA_LLEGADA IS NULL");
+            DataTable listado = SqlConnector.obtenerTablaSegunConsultaString(@"select v.ID as ID,a.MATRICULA as Matricula,
+                                                    o.NOMBRE as Origen,d.NOMBRE as Destino,v.FECHA_SALIDA as 'Fecha De Salida',
+                                                    v.FECHA_LLEGADA_ESTIMADA as 'Fecha Llegada Estimada' 
+                                                    from AERO.vuelos v join Aero.aeronaves a on v.AERONAVE_ID = a.ID
+                                                    join AERO.rutas r on v.RUTA_ID = r.ID
+                                                    join AERO.aeropuertos o on r.ORIGEN_ID = o.ID
+                                                    join AERO.aeropuertos d on r.DESTINO_ID = d.ID
+                                                    where v.FECHA_LLEGADA IS NULL");
             return listado;
+        }
+
+        private void botonLimpiar_Click(object sender, EventArgs e)
+        {
+            limpiar();
+        }
+
+        private void limpiar()
+        {
+            this.textBoxMatricula.Clear();
+            this.timePickerLlegada.ResetText();
+            this.dataGridListadoVuelos.DataSource = null;
+        }
+
+        private void botonRegistrar_Click(object sender, EventArgs e)
+        {
+            if (validarRegistro()) {
+                List<string> lista = new List<string>();
+                lista.Add("@idVuelo");
+                lista.Add("@fechaLlegada");
+                bool resultado = SqlConnector.executeProcedure("AERO.registrarLlegada", lista, dataGridListadoVuelos.SelectedCells[0].Value.ToString(), Convert.ToDateTime(this.timePickerLlegada.Value));
+                if (resultado)
+                {
+                    MessageBox.Show("Se registro exitosamente la fecha de llegada");
+                    limpiar();
+                    this.botonBuscar.PerformClick();
+                }
+            }
+        }
+
+        private bool validarRegistro()
+        {        DateTime fechaSalida=Convert.ToDateTime (dataGridListadoVuelos.SelectedCells[4].Value.ToString());
+                DateTime fechaEstima = Convert.ToDateTime (dataGridListadoVuelos.SelectedCells[5].Value.ToString());
+            if ((timePickerLlegada.Value > fechaSalida) && ( timePickerLlegada.Value <= fechaEstima) )
+                    return true;
+            MessageBox.Show("Fecha De Llegada invalida");
+            return false;
         }
     }
 }
