@@ -561,11 +561,11 @@ INSERT INTO AERO.funcionalidades VALUES
 ('Alta de Cliente'),
 ('Alta de Aeronave'),
 ('Alta de Ciudad'),
-('Alta de Tarjeta de Crédito'),
+('Alta de Tarjeta de CrÃ©dito'),
 ('Baja de Aeronave'),
 ('Baja de Ciudad'),
 ('Baja de Cliente'),
-('Baja de Tarjeta de Crédito'),
+('Baja de Tarjeta de CrÃ©dito'),
 ('Modificacion de Aeronave'),
 ('Modificacion de Ciudad'),
 ('Modificacion de Cliente'),
@@ -778,22 +778,22 @@ BEGIN
       set @c = LOWER(@c)
 
       if (@c = 32) set @c = ascii('_')      
-	  if @c = ascii('ä') set @c = ascii('a')
-	  if @c = ascii('ë') set @c = ascii('e')
-	  if @c = ascii('ï') set @c = ascii('i')
-	  if @c = ascii('ö') set @c = ascii('o')
-      if @c = ascii('ü') set @c = ascii('u')
-	  if @c = ascii('á') set @c = ascii('a')
-      if @c = ascii('é') set @c = ascii('e')
-	  if @c = ascii('í') set @c = ascii('i')
-	  if @c = ascii('ó') set @c = ascii('o')
-	  if @c = ascii('ú') set @c = ascii('u')
-	  if @c = ascii('à') set @c = ascii('a')
-      if @c = ascii('è') set @c = ascii('e')
-	  if @c = ascii('ì') set @c = ascii('i')
-	  if @c = ascii('ò') set @c = ascii('o')
-	  if @c = ascii('ù') set @c = ascii('u')
-	  if @c = ascii('ñ') set @c = ascii('n')
+	  if @c = ascii('Ã¤') set @c = ascii('a')
+	  if @c = ascii('Ã«') set @c = ascii('e')
+	  if @c = ascii('Ã¯') set @c = ascii('i')
+	  if @c = ascii('Ã¶') set @c = ascii('o')
+      if @c = ascii('Ã¼') set @c = ascii('u')
+	  if @c = ascii('Ã¡') set @c = ascii('a')
+      if @c = ascii('Ã©') set @c = ascii('e')
+	  if @c = ascii('Ã­') set @c = ascii('i')
+	  if @c = ascii('Ã³') set @c = ascii('o')
+	  if @c = ascii('Ãº') set @c = ascii('u')
+	  if @c = ascii('Ã ') set @c = ascii('a')
+      if @c = ascii('Ã¨') set @c = ascii('e')
+	  if @c = ascii('Ã¬') set @c = ascii('i')
+	  if @c = ascii('Ã²') set @c = ascii('o')
+	  if @c = ascii('Ã¹') set @c = ascii('u')
+	  if @c = ascii('Ã±') set @c = ascii('n')
 
       if (@c between 48 and 57 or @c = 64 or @c = 45 or @c = 46 
       or @c = 95 or @c between 65 and 90 or @c between 97 and 122)
@@ -824,7 +824,7 @@ WHERE ID = @idRol
 END
 GO
 
-CREATE PROCEDURE AERO.habilitarrRol(@idRol int)
+CREATE PROCEDURE AERO.habilitarRol(@idRol int)
 AS BEGIN
 UPDATE AERO.roles
 SET ACTIVO = 1
@@ -980,7 +980,7 @@ order by 2 desc
 END
 GO
 
---TOP 5 de los destinos con más pasajes cancelados (ESTAMOS CONTANDO BOLETO DE COMPRA CANCELADO Y NO PASAJES!!!)
+--TOP 5 de los destinos con mÃ¡s pasajes cancelados (ESTAMOS CONTANDO BOLETO DE COMPRA CANCELADO Y NO PASAJES!!!)
 CREATE PROCEDURE AERO.top5DestinosCancelados(@fechaFrom DATETIME, @fechaTo DATETIME)
 AS BEGIN
 select top 5 a.NOMBRE as AERONAVE, count(c.ID) as 'cancelaciones por aeronave' from AERO.cancelaciones c
@@ -1169,11 +1169,11 @@ EXEC AERO.addFuncionalidad @rol='administrador', @func ='Consultar Millas';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Cliente';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Aeronave';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Ciudad';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Tarjeta de Crédito';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Tarjeta de CrÃ©dito';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Aeronave';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Ciudad';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Cliente';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Tarjeta de Crédito';
+EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Tarjeta de CrÃ©dito';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Modificacion de Aeronave';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Modificacion de Ciudad';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Modificacion de Cliente';
