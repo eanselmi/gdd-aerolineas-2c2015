@@ -39,6 +39,7 @@
             this.botonModificacion = new System.Windows.Forms.Button();
             this.botonVolver = new System.Windows.Forms.Button();
             this.botonBaja = new System.Windows.Forms.Button();
+            this.botonAlta = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridListadoRoles)).BeginInit();
             this.SuspendLayout();
@@ -77,6 +78,7 @@
             this.textEstado.Name = "textEstado";
             this.textEstado.Size = new System.Drawing.Size(148, 26);
             this.textEstado.TabIndex = 13;
+            this.textEstado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textEstado_KeyPress);
             // 
             // label2
             // 
@@ -95,6 +97,7 @@
             this.textRol.Name = "textRol";
             this.textRol.Size = new System.Drawing.Size(148, 26);
             this.textRol.TabIndex = 9;
+            this.textRol.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textRol_KeyPress);
             // 
             // lblApellido
             // 
@@ -125,7 +128,7 @@
             // 
             this.botonLimpiar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonLimpiar.Location = new System.Drawing.Point(471, 401);
+            this.botonLimpiar.Location = new System.Drawing.Point(538, 401);
             this.botonLimpiar.Name = "botonLimpiar";
             this.botonLimpiar.Size = new System.Drawing.Size(117, 46);
             this.botonLimpiar.TabIndex = 34;
@@ -137,7 +140,7 @@
             // 
             this.botonModificacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonModificacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonModificacion.Location = new System.Drawing.Point(349, 401);
+            this.botonModificacion.Location = new System.Drawing.Point(416, 401);
             this.botonModificacion.Name = "botonModificacion";
             this.botonModificacion.Size = new System.Drawing.Size(117, 46);
             this.botonModificacion.TabIndex = 33;
@@ -149,7 +152,7 @@
             // 
             this.botonVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonVolver.Location = new System.Drawing.Point(226, 401);
+            this.botonVolver.Location = new System.Drawing.Point(293, 401);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(117, 46);
             this.botonVolver.TabIndex = 32;
@@ -161,7 +164,7 @@
             // 
             this.botonBaja.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonBaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonBaja.Location = new System.Drawing.Point(103, 401);
+            this.botonBaja.Location = new System.Drawing.Point(170, 401);
             this.botonBaja.Name = "botonBaja";
             this.botonBaja.Size = new System.Drawing.Size(117, 46);
             this.botonBaja.TabIndex = 31;
@@ -169,12 +172,25 @@
             this.botonBaja.UseVisualStyleBackColor = true;
             this.botonBaja.Click += new System.EventHandler(this.botonBaja_Click);
             // 
+            // botonAlta
+            // 
+            this.botonAlta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.botonAlta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonAlta.Location = new System.Drawing.Point(47, 401);
+            this.botonAlta.Name = "botonAlta";
+            this.botonAlta.Size = new System.Drawing.Size(117, 46);
+            this.botonAlta.TabIndex = 35;
+            this.botonAlta.Text = "Alta";
+            this.botonAlta.UseVisualStyleBackColor = true;
+            this.botonAlta.Click += new System.EventHandler(this.botonAlta_Click);
+            // 
             // bajaModificacionDeRol
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(690, 459);
             this.ControlBox = false;
+            this.Controls.Add(this.botonAlta);
             this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.botonModificacion);
             this.Controls.Add(this.botonVolver);
@@ -205,5 +221,6 @@
         private System.Windows.Forms.Button botonModificacion;
         private System.Windows.Forms.Button botonVolver;
         private System.Windows.Forms.Button botonBaja;
+        private System.Windows.Forms.Button botonAlta;
     }
 }

@@ -62,14 +62,35 @@ namespace AerolineaFrba.Abm_Rol
 
         private void botonBaja_Click(object sender, EventArgs e)
         {
-            List<string> lista = new List<string>();
-            lista.Add("@id");
-            bool resultado = SqlConnector.executeProcedure("AERO.bajaRol", lista, dataGridListadoRoles.SelectedCells[0].Value.ToString());
-            if (resultado)
+            if (rolActivo())
             {
-                MessageBox.Show("El rol se dio de baja exitosamente");
+                List<string> lista = new List<string>();
+                lista.Add("@idRol");
+                bool resultado = SqlConnector.executeProcedure("AERO.inhabilitarRol", lista, Convert.ToInt32(dataGridListadoRoles.SelectedCells[0].Value));
+                if (resultado)
+                {
+                    MessageBox.Show("El rol fue inhabilitado exitosamente");
+                    consultarRoles();
+                }
+               
             }
-            consultarRoles();
+            else
+            {
+                MessageBox.Show("El rol no se encuentra activo");
+            }
+        }
+
+        private bool rolActivo()
+        {
+                if (dataGridListadoRoles.SelectedCells[3].Value.ToString() == "Activo")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+     
         }
 
         private void botonModificacion_Click(object sender, EventArgs e)
@@ -118,6 +139,36 @@ namespace AerolineaFrba.Abm_Rol
             if (tablaRoles != null)
                 tablaRoles.DefaultView.RowFilter = final_rol;
             return tablaRoles;
+        }
+
+        private void textRol_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funcionesComunes.soloLetras(e);
+        }
+
+        private void textEstado_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funcionesComunes.soloLetras(e);
+        }
+
+        private void botonAlta_Click(object sender, EventArgs e)
+        {
+            if (!rolActivo())
+            {
+                List<string> lista = new List<string>();
+                lista.Add("@idRol");
+                bool resultado = SqlConnector.executeProcedure("AERO.habilitarRol", lista, Convert.ToInt32(dataGridListadoRoles.SelectedCells[0].Value));
+                if (resultado)
+                {
+                    MessageBox.Show("El rol fue habilitado exitosamente");
+                    consultarRoles();
+                }
+                
+            }
+            else
+            {
+                MessageBox.Show("El rol no se encuentra inactivo");
+            }
         }
     }
 }

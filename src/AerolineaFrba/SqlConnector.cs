@@ -258,40 +258,33 @@ namespace AerolineaFrba
                 }
             }
         }
-        private static int _executeProcedureWithReturnValue(string procedure, List<string> args, params object[] values)
+         */
+        public static int executeProcedureWithReturnValue(string procedure, List<string> args, params object[] values)
         {
-            SqlConnection cn = new SqlConnection();
-            SqlCommand cm = new SqlCommand();
-            
-
+    
+ 
             try
             {
-                conexionSql(cn, cm);
-                cm.CommandType = CommandType.StoredProcedure;
-                cm.CommandText = "COMPUMUNDO_HIPER_MEGA_RED." + procedure;
+                SqlConnection cn = getCn();
+                SqlCommand cmd = new SqlCommand(procedure, cn);
+                cmd.CommandType = CommandType.StoredProcedure;
                 if (_validateArgumentsAndParameters(args, values))
                 {
-                    _loadSqlCommand(args, values, cm);
+                    _loadSqlCommand(args, values, cmd);
                 }
-                cm.Parameters.Add("@RETURN_VALUE", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
-                cm.ExecuteNonQuery();
-                return (int)cm.Parameters["@RETURN_VALUE"].Value;
+                cmd.Parameters.Add("@retorno", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.ExecuteNonQuery();
+                return (int)cmd.Parameters["@retorno"].Value;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 return -1;
-            }
-
-            finally
-            {
-                if (cn != null)
-                {
-                    cn.Close();
-                }
+             
             }
         }
 
-    
+    /*
         private static DataTable _retrieveDataTable(string procedure, List<string> args, params object[] values)
         {
             SqlConnection cn = new SqlConnection();

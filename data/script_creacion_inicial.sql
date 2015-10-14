@@ -643,6 +643,12 @@ BEGIN
 END;
 GO
 
+IF OBJECT_ID('AERO.habilitarRol') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.habilitarRol;
+END;
+GO
+
 IF OBJECT_ID('AERO.UpdateIntento') IS NOT NULL
 BEGIN
 	DROP PROCEDURE AERO.UpdateIntento;
@@ -803,10 +809,10 @@ END
 GO
 
 -- ROLES Y FUNCIONALIDADES
-CREATE PROCEDURE AERO.agregarRol(@nombreRol nvarchar(255), @ret int output)
+CREATE PROCEDURE AERO.agregarRol(@nombreRol nvarchar(255),@retorno int output)
 AS BEGIN
 	INSERT INTO AERO.Roles (NOMBRE,ACTIVO) VALUES (@nombreRol, 1)
-	SET @ret = SCOPE_IDENTITY()
+	SET @retorno = SCOPE_IDENTITY()
 END
 GO
 
@@ -814,6 +820,14 @@ CREATE PROCEDURE AERO.inhabilitarRol(@idRol int)
 AS BEGIN
 UPDATE AERO.roles
 SET ACTIVO = 0
+WHERE ID = @idRol
+END
+GO
+
+CREATE PROCEDURE AERO.habilitarrRol(@idRol int)
+AS BEGIN
+UPDATE AERO.roles
+SET ACTIVO = 1
 WHERE ID = @idRol
 END
 GO
