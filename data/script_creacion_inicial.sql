@@ -745,6 +745,12 @@ BEGIN
 END;
 GO
 
+IF OBJECT_ID('AERO.consultarMillas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.consultarMillas;
+END;
+GO
+
 --CREATE
 CREATE FUNCTION AERO.corrigeMail (@s NVARCHAR (255)) 
 RETURNS NVARCHAR(255)
@@ -1027,6 +1033,45 @@ select COUNT(v.ID) from AERO.vuelos v
 where v.AERONAVE_ID = @id and (v.FECHA_SALIDA between @fechaSalida and @fechaLlegadaEstimada
 or v.FECHA_LLEGADA between @fechaSalida and @fechaLlegadaEstimada 
 or v.FECHA_LLEGADA_ESTIMADA between @fechaSalida and @fechaLlegadaEstimada)
+END
+GO
+
+-- MILLAS
+CREATE PROCEDURE AERO.consultarMillas (@dni numeric(18,0))
+AS BEGIN
+
+/*creo tabla temporal, para poder insertar de ambas queries*/
+create table #tablaMillas(
+FECHA_COMPRA datetime,
+Motivo varchar(255),
+Millas int
+)
+
+/*inserto en la tabla temporal los pasajes*/
+insert into #tablaMillas 
+select bc.FECHA_COMPRA as Fecha, 'Pasaje' as Motivo, bc.millas as Millas
+from AERO.clientes c
+join AERO.pasajes p on c.ID=p.CLIENTE_ID 
+join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID 
+where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones) and
+bc.FECHA_COMPRA between DATEADD(YYYY, -1, CURRENT_TIMESTAMP) and CURRENT_TIMESTAMP
+and c.DNI = @dni
+
+/*inserto en la tabla temporal los paquetes*/
+insert into #tablaMillas 
+select bc.FECHA_COMPRA as Fecha, 'Paquete' as Motivo, bc.millas as Millas
+from AERO.clientes c  
+join AERO.boletos_de_compra bc on bc.CLIENTE_ID=c.ID
+join AERO.paquetes p on bc.ID = p.BOLETO_COMPRA_ID
+where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones) and
+bc.FECHA_COMPRA between DATEADD(YYYY, -1, CURRENT_TIMESTAMP) and CURRENT_TIMESTAMP
+and c.DNI = @dni
+
+/*hago el select que me va a devolver toda la tabla para el dataGridView*/
+select * from #tablaMillas
+
+/*hago drop de la tabla temporal*/
+drop table #tablaMillas
 END
 GO
 -----------------------------------------------------------------------

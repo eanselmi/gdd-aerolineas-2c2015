@@ -137,6 +137,7 @@ namespace AerolineaFrba.Abm_Vuelos
                     dataGridListadoRutas.SelectedCells[0].Value);
                 if (resultado == true){
                     MessageBox.Show("Se genero el viaje exitosamente");
+                    funcionesComunes.habilitarAnterior();
                 }else{
                     MessageBox.Show("Ocurrió un error generando el viaje");
                 }

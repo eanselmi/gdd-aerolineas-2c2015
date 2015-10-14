@@ -34,9 +34,6 @@
             this.botonVolver = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
             this.dataGridConsultaMillas = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBoxTotal = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConsultaMillas)).BeginInit();
@@ -99,30 +96,13 @@
             // 
             this.dataGridConsultaMillas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridConsultaMillas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridConsultaMillas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
-            this.Column2,
-            this.Column3});
             this.dataGridConsultaMillas.Location = new System.Drawing.Point(52, 144);
+            this.dataGridConsultaMillas.MultiSelect = false;
             this.dataGridConsultaMillas.Name = "dataGridConsultaMillas";
+            this.dataGridConsultaMillas.ReadOnly = true;
             this.dataGridConsultaMillas.RowHeadersVisible = false;
             this.dataGridConsultaMillas.Size = new System.Drawing.Size(464, 202);
             this.dataGridConsultaMillas.TabIndex = 7;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Fecha";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Motivo";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Millas";
-            this.Column3.Name = "Column3";
             // 
             // textBoxTotal
             // 
@@ -148,7 +128,7 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Total";
             // 
-            // vistaConsultaMillas
+            // consultaMillas
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
@@ -162,7 +142,7 @@
             this.Controls.Add(this.botonConsultar);
             this.Controls.Add(this.textBoxDNI);
             this.Controls.Add(this.label1);
-            this.Name = "vistaConsultaMillas";
+            this.Name = "consultaMillas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta de Millas";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConsultaMillas)).EndInit();
@@ -179,9 +159,6 @@
         private System.Windows.Forms.Button botonVolver;
         private System.Windows.Forms.Button botonLimpiar;
         private System.Windows.Forms.DataGridView dataGridConsultaMillas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.TextBox textBoxTotal;
         private System.Windows.Forms.Label label2;
     }
