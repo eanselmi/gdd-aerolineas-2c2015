@@ -336,6 +336,14 @@ IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'TARJ_TIPO_TARJ' AND object
        CREATE INDEX TARJ_TIPO_TARJ ON AERO.tarjetas_de_credito (TIPO_TARJETA_ID);
     END
 
+ALTER TABLE AERO.tarjetas_de_credito
+ADD CONSTRAINT TARJETAS_FK02 FOREIGN KEY
+(CLIENTE_ID) REFERENCES AERO.clientes (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_TARJ_CLIE' AND object_id = OBJECT_ID('AERO.tarjetas_de_credito'))
+    BEGIN
+       CREATE INDEX FKI_TARJ_CLIE ON AERO.tarjetas_de_credito (CLIENTE_ID);
+    END
 
 ALTER TABLE AERO.aeronaves
 ADD CONSTRAINT AERONAVES_FK01 FOREIGN KEY
@@ -407,6 +415,15 @@ ADD CONSTRAINT BOLETOS_DE_COMPRA_FK01 FOREIGN KEY
 IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_BOL_COMP_CLIENT' AND object_id = OBJECT_ID('AERO.boletos_de_compra'))
     BEGIN
        CREATE INDEX FKI_BOL_COMP_CLIENT ON AERO.boletos_de_compra (CLIENTE_ID);
+    END
+
+ALTER TABLE AERO.boletos_de_compra
+ADD CONSTRAINT boletos_FK02 FOREIGN KEY
+(VUELO_ID) REFERENCES AERO.vuelos (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_BOLETO_VUEL' AND object_id = OBJECT_ID('AERO.boletos_de_compra'))
+    BEGIN
+       CREATE INDEX FKI_BOLETO_VUEL ON AERO.boletos_de_compra (VUELO_ID);
     END
 
 ALTER TABLE AERO.funcionalidades_por_rol
@@ -482,6 +499,15 @@ IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_VUEL_RUT' AND object_i
     END
 
 ALTER TABLE AERO.rutas
+ADD CONSTRAINT rutas_FK01 FOREIGN KEY
+(TIPO_SERVICIO_ID) REFERENCES AERO.tipos_de_servicio (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_rutas_tipo_servicio' AND object_id = OBJECT_ID('AERO.rutas'))
+    BEGIN
+       CREATE INDEX FKI_rutas_tipo_servicio ON AERO.rutas (TIPO_SERVICIO_ID);
+    END
+
+ALTER TABLE AERO.rutas
 ADD CONSTRAINT RUTAS_FK02 FOREIGN KEY
 (ORIGEN_ID) REFERENCES AERO.aeropuertos (ID)
 
@@ -508,15 +534,6 @@ IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_PAQ_BOLDECOMP' AND obj
        CREATE INDEX FKI_PAQ_BOLDECOMP ON AERO.paquetes (BOLETO_COMPRA_ID);
     END
 
-ALTER TABLE AERO.boletos_de_compra
-ADD CONSTRAINT boletos_FK02 FOREIGN KEY
-(VUELO_ID) REFERENCES AERO.vuelos (ID)
-
-IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_BOLETO_VUEL' AND object_id = OBJECT_ID('AERO.boletos_de_compra'))
-    BEGIN
-       CREATE INDEX FKI_BOLETO_VUEL ON AERO.boletos_de_compra (VUELO_ID);
-    END
-
 ALTER TABLE AERO.canjes
 ADD CONSTRAINT CANJES_FK01 FOREIGN KEY
 (PRODUCTO_ID) REFERENCES AERO.productos (ID)
@@ -535,15 +552,6 @@ IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_CANJ_CLIE' AND object_
        CREATE INDEX FKI_CANJ_CLIE ON AERO.canjes (CLIENTE_ID);
     END
 
-ALTER TABLE AERO.tarjetas_de_credito
-ADD CONSTRAINT TARJETAS_DE_CREDITO_FK01 FOREIGN KEY
-(CLIENTE_ID) REFERENCES AERO.clientes (ID)
-
-IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_TARJCRED_CLIE' AND object_id = OBJECT_ID('AERO.tarjetas_de_credito'))
-    BEGIN
-       CREATE INDEX FKI_TARJCRED_CLIE ON AERO.tarjetas_de_credito (CLIENTE_ID);
-    END
-
 ALTER TABLE AERO.cancelaciones
 ADD CONSTRAINT CANCELACIONES_FK01 FOREIGN KEY
 (BOLETO_COMPRA_ID) REFERENCES AERO.boletos_de_compra (ID)
@@ -552,16 +560,6 @@ IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_CANC_BOLCOMP' AND obje
     BEGIN
        CREATE INDEX FKI_CANC_BOLCOMP ON AERO.cancelaciones (BOLETO_COMPRA_ID);
     END
-
-ALTER TABLE AERO.rutas
-ADD CONSTRAINT rutas_FK01 FOREIGN KEY
-(TIPO_SERVICIO_ID) REFERENCES AERO.tipos_de_servicio (ID)
-
-IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_rutas_tipo_servicio' AND object_id = OBJECT_ID('AERO.rutas'))
-    BEGIN
-       CREATE INDEX FKI_rutas_tipo_servicio ON AERO.rutas (TIPO_SERVICIO_ID);
-    END
-
 -----------------------------------------------------------------------
 -- INSERTS
 
@@ -1035,14 +1033,36 @@ GO
 --TOP de los clientes con mas puntos acumulados a la fecha (la fecha es hasta el dia de hoy)
 CREATE PROCEDURE AERO.top5ClientesMillas(@fechaFrom DATETIME, @fechaTo DATETIME)
 AS BEGIN
-select c.nombre as 'Nombre Cliente', sum(bc.millas) as 'Cantidad de Millas' 
-from AERO.clientes c 
+/*creo tabla temporal, para poder insertar de ambas queries*/
+create table #tablaMillas(
+Cliente varchar(255),
+Millas int
+)
+
+/*inserto en la tabla temporal los pasajes*/
+insert into #tablaMillas 
+select c.NOMBRE+' '+c.APELLIDO, sum(bc.millas)
+from AERO.clientes c
 join AERO.pasajes p on c.ID=p.CLIENTE_ID 
 join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID 
 where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones) and
-bc.FECHA_COMPRA between DATEADD(YYYY, -1, CURRENT_TIMESTAMP) and CURRENT_TIMESTAMP 
-group by c.nombre 
+bc.FECHA_COMPRA between DATEADD(YYYY, -1, CURRENT_TIMESTAMP) and CURRENT_TIMESTAMP
+group by c.nombre, c.APELLIDO
+
+/*inserto en la tabla temporal los paquetes*/
+insert into #tablaMillas 
+select c.NOMBRE+' '+c.APELLIDO, sum(bc.millas)
+from AERO.clientes c  
+join AERO.boletos_de_compra bc on bc.CLIENTE_ID=c.ID
+join AERO.paquetes p on bc.ID = p.BOLETO_COMPRA_ID
+where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones) and
+bc.FECHA_COMPRA between DATEADD(YYYY, -1, CURRENT_TIMESTAMP) and CURRENT_TIMESTAMP
+group by c.nombre, c.APELLIDO
+
+select * from #tablaMillas
 order by 2 desc
+
+drop table #tablaMillas
 END
 GO
 
@@ -1102,6 +1122,16 @@ where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones) and
 bc.FECHA_COMPRA between DATEADD(YYYY, -1, CURRENT_TIMESTAMP) and CURRENT_TIMESTAMP
 and c.DNI = @dni
 
+/*inserto en la tabla temporal los canjes*/
+insert into #tablaMillas 
+select cj.FECHA_CANJE as Fecha, 'Canje por '+CONVERT(varchar(10), cj.CANTIDAD)+' unidades de '+p.NOMBRE as Motivo, 
+-p.MILLAS_REQUERIDAS*cj.CANTIDAD as Millas
+from AERO.clientes c
+join AERO.canjes cj on cj.CLIENTE_ID=c.ID
+join AERO.productos p on p.ID = cj.PRODUCTO_ID
+where cj.FECHA_CANJE between DATEADD(YYYY, -1, CURRENT_TIMESTAMP) and CURRENT_TIMESTAMP
+and c.DNI = @dni
+
 /*hago el select que me va a devolver toda la tabla para el dataGridView*/
 select * from #tablaMillas
 
@@ -1135,8 +1165,6 @@ VALUES (@idCliente, @idProducto, @cantidad, CURRENT_TIMESTAMP)
 UPDATE AERO.productos
 SET STOCK = STOCK - @cantidad
 where ID = @idProducto
-/*restar las millas al cliente, no tengo idea como lo hariamos... a menos que cuando consultemos las millas disponibles
-le restemos el valor de los canjes...*/
 END
 GO
 -----------------------------------------------------------------------
