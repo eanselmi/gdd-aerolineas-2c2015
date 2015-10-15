@@ -63,9 +63,8 @@ namespace AerolineaFrba.Registro_Llegada_Destino
 
         private DataTable consultarVuelos()
         {
-            DataTable listado = SqlConnector.obtenerTablaSegunConsultaString(@"select v.ID as ID,a.MATRICULA as Matricula,
-                                                    o.NOMBRE as Origen,d.NOMBRE as Destino,v.FECHA_SALIDA as 'Fecha De Salida',
-                                                    v.FECHA_LLEGADA_ESTIMADA as 'Fecha Llegada Estimada' 
+            DataTable listado = SqlConnector.obtenerTablaSegunConsultaString(@"select v.ID as ID,a.MATRICULA as Matricula,r.CODIGO as 'Codigo de Ruta',
+                                                    o.NOMBRE as Origen,d.NOMBRE as Destino,v.FECHA_SALIDA as 'Fecha De Salida' 
                                                     from AERO.vuelos v join Aero.aeronaves a on v.AERONAVE_ID = a.ID
                                                     join AERO.rutas r on v.RUTA_ID = r.ID
                                                     join AERO.aeropuertos o on r.ORIGEN_ID = o.ID
@@ -103,12 +102,18 @@ namespace AerolineaFrba.Registro_Llegada_Destino
         }
 
         private bool validarRegistro()
-        {        DateTime fechaSalida=Convert.ToDateTime (dataGridListadoVuelos.SelectedCells[4].Value.ToString());
-                DateTime fechaEstima = Convert.ToDateTime (dataGridListadoVuelos.SelectedCells[5].Value.ToString());
-            if ((timePickerLlegada.Value > fechaSalida) && ( timePickerLlegada.Value <= fechaEstima) )
-                    return true;
-            MessageBox.Show("Fecha De Llegada invalida");
-            return false;
+        {        DateTime fechaSalida=Convert.ToDateTime (dataGridListadoVuelos.SelectedCells[5].Value.ToString());
+             if (this.timePickerLlegada.Value < fechaSalida)
+                 {
+                    MessageBox.Show("No puede haber una fecha de llega antes de la de salida");
+                    return false;
+                 }
+            if (fechaSalida.AddDays((double)1) < timePickerLlegada.Value)
+                {
+                     MessageBox.Show("La fecha de llegada no puede ser mayor a 24hs de la de salida");
+                     return false;
+                }
+            return true;
         }
     }
 }

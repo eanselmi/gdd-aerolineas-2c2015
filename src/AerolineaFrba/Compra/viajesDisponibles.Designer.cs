@@ -31,19 +31,11 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.botonBuscar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxDestino = new System.Windows.Forms.TextBox();
             this.timePickerFecha = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxOrigen = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridViajes = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,6 +44,14 @@
             this.botonVolver = new System.Windows.Forms.Button();
             this.botonComprar = new System.Windows.Forms.Button();
             this.botonLimpiar = new System.Windows.Forms.Button();
+            this.comboBoxDestino = new System.Windows.Forms.ComboBox();
+            this.comboBoxOrigen = new System.Windows.Forms.ComboBox();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViajes)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -61,13 +61,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBoxOrigen);
+            this.groupBox1.Controls.Add(this.comboBoxDestino);
             this.groupBox1.Controls.Add(this.botonBuscar);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBoxDestino);
             this.groupBox1.Controls.Add(this.timePickerFecha);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBoxOrigen);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(143, 12);
             this.groupBox1.Name = "groupBox1";
@@ -86,6 +86,7 @@
             this.botonBuscar.TabIndex = 100;
             this.botonBuscar.Text = "Buscar";
             this.botonBuscar.UseVisualStyleBackColor = true;
+            this.botonBuscar.Click += new System.EventHandler(this.botonBuscar_Click);
             // 
             // label2
             // 
@@ -97,16 +98,6 @@
             this.label2.Size = new System.Drawing.Size(118, 20);
             this.label2.TabIndex = 59;
             this.label2.Text = "Ciudad Destino";
-            // 
-            // textBoxDestino
-            // 
-            this.textBoxDestino.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxDestino.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDestino.Location = new System.Drawing.Point(256, 93);
-            this.textBoxDestino.Name = "textBoxDestino";
-            this.textBoxDestino.PasswordChar = '*';
-            this.textBoxDestino.Size = new System.Drawing.Size(226, 26);
-            this.textBoxDestino.TabIndex = 58;
             // 
             // timePickerFecha
             // 
@@ -140,16 +131,6 @@
             this.label1.TabIndex = 55;
             this.label1.Text = "Ciudad Origen";
             // 
-            // textBoxOrigen
-            // 
-            this.textBoxOrigen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxOrigen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxOrigen.Location = new System.Drawing.Point(14, 93);
-            this.textBoxOrigen.Name = "textBoxOrigen";
-            this.textBoxOrigen.PasswordChar = '*';
-            this.textBoxOrigen.Size = new System.Drawing.Size(226, 26);
-            this.textBoxOrigen.TabIndex = 52;
-            // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -179,36 +160,6 @@
             this.dataGridViajes.ShowEditingIcon = false;
             this.dataGridViajes.Size = new System.Drawing.Size(689, 270);
             this.dataGridViajes.TabIndex = 55;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Fecha y Hora Salida";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Origen";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Destino";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Butacas Libres";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Kg Disponibles";
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Servicio";
-            this.Column6.Name = "Column6";
             // 
             // groupBox2
             // 
@@ -298,6 +249,55 @@
             this.botonLimpiar.TabIndex = 60;
             this.botonLimpiar.Text = "Limpiar";
             this.botonLimpiar.UseVisualStyleBackColor = true;
+            this.botonLimpiar.Click += new System.EventHandler(this.botonLimpiar_Click);
+            // 
+            // comboBoxDestino
+            // 
+            this.comboBoxDestino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDestino.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxDestino.Location = new System.Drawing.Point(256, 97);
+            this.comboBoxDestino.Name = "comboBoxDestino";
+            this.comboBoxDestino.Size = new System.Drawing.Size(226, 28);
+            this.comboBoxDestino.TabIndex = 101;
+            // 
+            // comboBoxOrigen
+            // 
+            this.comboBoxOrigen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxOrigen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxOrigen.Location = new System.Drawing.Point(6, 97);
+            this.comboBoxOrigen.Name = "comboBoxOrigen";
+            this.comboBoxOrigen.Size = new System.Drawing.Size(226, 28);
+            this.comboBoxOrigen.TabIndex = 102;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Servicio";
+            this.Column6.Name = "Column6";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Kg Disponibles";
+            this.Column5.Name = "Column5";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Butacas Libres";
+            this.Column4.Name = "Column4";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Destino";
+            this.Column3.Name = "Column3";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Origen";
+            this.Column2.Name = "Column2";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Fecha y Hora Salida";
+            this.Column1.Name = "Column1";
             // 
             // viajesDisponibles
             // 
@@ -331,20 +331,12 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxOrigen;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBoxDestino;
         private System.Windows.Forms.DateTimePicker timePickerFecha;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button botonBuscar;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DataGridView dataGridViajes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
@@ -353,5 +345,13 @@
         private System.Windows.Forms.Button botonVolver;
         private System.Windows.Forms.Button botonComprar;
         private System.Windows.Forms.Button botonLimpiar;
+        private System.Windows.Forms.ComboBox comboBoxOrigen;
+        private System.Windows.Forms.ComboBox comboBoxDestino;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
     }
 }
