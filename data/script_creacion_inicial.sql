@@ -757,6 +757,18 @@ BEGIN
 END;
 GO
 
+IF OBJECT_ID('AERO.obtenerClienteConMillas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.obtenerClienteConMillas;
+END;
+GO
+
+IF OBJECT_ID('AERO.altaCanje') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.altaCanje;
+END;
+GO
+
 --CREATE
 CREATE FUNCTION AERO.corrigeMail (@s NVARCHAR (255)) 
 RETURNS NVARCHAR(255)
@@ -1086,6 +1098,36 @@ select * from #tablaMillas
 
 /*hago drop de la tabla temporal*/
 drop table #tablaMillas
+END
+GO
+
+CREATE PROCEDURE AERO.obtenerClienteConMillas (@dni numeric(18,0))
+AS BEGIN
+CREATE TABLE #Result (
+  FECHA_COMPRA datetime,
+  Motivo varchar(255),
+  Millas int
+)
+INSERT INTO #Result EXEC AERO.consultarMillas @dni
+
+SELECT c.ID, c.NOMBRE, c.APELLIDO, c.DNI, c.FECHA_NACIMIENTO, SUM(r.Millas) as Millas
+FROM #Result r
+join AERO.clientes c on c.DNI = @dni
+group by c.ID, c.NOMBRE, c.APELLIDO, c.DNI, c.FECHA_NACIMIENTO
+DROP TABLE #Result
+END
+GO
+
+-- CANJES
+CREATE PROCEDURE AERO.altaCanje (@idCliente int, @idProducto int, @cantidad int)
+AS BEGIN
+INSERT INTO AERO.canjes (CLIENTE_ID, PRODUCTO_ID, CANTIDAD, FECHA_CANJE)
+VALUES (@idCliente, @idProducto, @cantidad, CURRENT_TIMESTAMP)
+UPDATE AERO.productos
+SET STOCK = STOCK - @cantidad
+where ID = @idProducto
+/*restar las millas al cliente, no tengo idea como lo hariamos... a menos que cuando consultemos las millas disponibles
+le restemos el valor de los canjes...*/
 END
 GO
 -----------------------------------------------------------------------

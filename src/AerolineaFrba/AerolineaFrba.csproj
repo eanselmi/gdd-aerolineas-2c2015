@@ -268,6 +268,9 @@
     <EmbeddedResource Include="Abm Vuelos\generarViaje.resx">
       <DependentUpon>generarViaje.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Canje Millas\realizarCanjeMillas.resx">
+      <DependentUpon>realizarCanjeMillas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Compra\cargaDeDatos.resx">
       <DependentUpon>cargaDeDatos.cs</DependentUpon>
     </EmbeddedResource>
