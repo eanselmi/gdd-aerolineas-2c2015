@@ -16,9 +16,6 @@ namespace AerolineaFrba.Compra
         public viajesDisponibles()
         {
             InitializeComponent();
-            funcionesComunes.llenarCombobox(this.comboBoxOrigen, "NOMBRE", "select ID,NOMBRE from AERO.aeropuertos");
-            funcionesComunes.llenarCombobox(this.comboBoxDestino, "NOMBRE", "select ID,NOMBRE from AERO.aeropuertos");
-            consultarViajes();
         }
 
         private void consultarViajes()
@@ -40,13 +37,25 @@ namespace AerolineaFrba.Compra
 
         private void botonBuscar_Click(object sender, EventArgs e)
         {
-            dataGridViajes.DataSource = filtrarViajes();
-            dataGridViajes.Columns[0].Visible = false;
+            if (comboBoxOrigen.SelectedIndex != comboBoxDestino.SelectedIndex){
+
+                   if (timePickerFecha.Value >= DateTime.Today)
+                      {
+                      //dataGridViajes.DataSource = filtrarViajes();
+                      //dataGridViajes.Columns[0].Visible = false;
+                      }
+                   else
+                      {
+                          MessageBox.Show("La fecha seleccionada debe ser el dia actual o posterior al dia actual");
+                      }
+            }else{
+                MessageBox.Show("La ciudad de origen no puede ser la misma que la de destino");
+            }
         }
 
-        private object filtrarViajes()
+        private void filtrarViajes()
         {   //TODO: Hacer filtrado
-            throw new NotImplementedException();
+           
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)
@@ -63,6 +72,25 @@ namespace AerolineaFrba.Compra
             this.numericUpDownPasajes.ResetText();
             this.comboBoxOrigen.SelectedIndex = -1;
             this.comboBoxDestino.SelectedIndex = -1;
+        }
+
+        private void viajesDisponibles_Load(object sender, EventArgs e)
+        {
+            llenarComboBoxs();
+        }
+
+        private void llenarComboBoxs()
+        {
+            DataTable dt1 = new DataTable();
+            DataTable dt2 = new DataTable();
+            dt1 = SqlConnector.obtenerTablaSegunConsultaString("select c.ID, c.NOMBRE from aero.ciudades c order by c.NOMBRE");
+            comboBoxOrigen.DataSource = dt1;
+            comboBoxOrigen.DisplayMember = "NOMBRE";
+            comboBoxOrigen.ValueMember = "ID";
+            dt2 = SqlConnector.obtenerTablaSegunConsultaString("select c.ID, c.NOMBRE from aero.ciudades c order by c.NOMBRE");
+            comboBoxDestino.DataSource = dt2;
+            comboBoxDestino.DisplayMember = "NOMBRE";
+            comboBoxDestino.ValueMember = "ID";
         }
     }
 }
