@@ -266,7 +266,8 @@ CREATE TABLE AERO.vuelos (
     FECHA_LLEGADA     DATETIME,
     FECHA_LLEGADA_ESTIMADA DATETIME NOT NULL,
     AERONAVE_ID     INT            NOT NULL,
-    RUTA_ID         INT            NOT NULL
+    RUTA_ID         INT            NOT NULL,
+	INVALIDO		INT			DEFAULT 0
 )
 
 CREATE TABLE AERO.rutas (
@@ -607,10 +608,6 @@ VALUES ('VISA', 6),
 ('MASTERCARD', 12),
 ('AMEX', 3),
 ('DINERS', 0);
-
------------------------------------------------------------------------
--- TRIGGERS
-
 
 -----------------------------------------------------------------------
 -- PROCEDURES && FUNCTIONS
@@ -1085,10 +1082,10 @@ END
 GO
 
 -- VUELOS
-CREATE PROCEDURE AERO.generarViaje(@fechaSalida datetime, @fechaLlegadaEstimada datetime, @idAeronave int, @idRuta int)
+CREATE PROCEDURE AERO.generarViaje(@fechaSalida varchar(255), @fechaLlegadaEstimada varchar(255), @idAeronave int, @idRuta int)
 AS BEGIN
 INSERT INTO AERO.vuelos (FECHA_SALIDA, FECHA_LLEGADA_ESTIMADA, AERONAVE_ID, RUTA_ID)
-VALUES (@fechaSalida, @fechaLlegadaEstimada, @idAeronave, @idRuta)
+VALUES (convert(datetime, @fechaSalida,109), convert(datetime, @fechaLlegadaEstimada, 109), @idAeronave, @idRuta)
 END
 GO
 
@@ -1185,6 +1182,28 @@ SET STOCK = STOCK - @cantidad
 where ID = @idProducto
 END
 GO
+
+-----------------------------------------------------------------------
+-- TRIGGERS
+
+IF OBJECT_ID('AERO.insertVuelos') IS NOT NULL
+BEGIN
+   DROP TRIGGER AERO.insertVuelos;
+END;
+GO    
+
+CREATE TRIGGER AERO.insertVuelos on AERO.vuelos
+AFTER INSERT
+as begin transaction
+update AERO.vuelos
+set INVALIDO= 1
+where ID in (select i.ID from AERO.vuelos v, inserted i
+where v.id != i.id and v.AERONAVE_ID = i.AERONAVE_ID and (i.FECHA_SALIDA between v.FECHA_SALIDA and v.FECHA_LLEGADA_ESTIMADA
+or i.FECHA_LLEGADA between v.FECHA_SALIDA and v.FECHA_LLEGADA_ESTIMADA 
+or i.FECHA_LLEGADA_ESTIMADA between v.FECHA_SALIDA and v.FECHA_LLEGADA_ESTIMADA))
+commit
+GO
+
 -----------------------------------------------------------------------
 -- MIGRACION
 
@@ -1292,7 +1311,7 @@ EXEC AERO.addFuncionalidad @rol='cliente', @func ='Realizar Canje';
 -----------------------------------------------------------------------
 -- CONSULTA DE LISTADOS
 
---set de datos para prueba 4
+/*--set de datos para prueba 4
 insert into AERO.boletos_de_compra values(ABS(CHECKSUM(NewId())) % 7,CURRENT_TIMESTAMP,1,'efectivo',1,22,1)
 insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22,1)
 insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22,2)
@@ -1334,8 +1353,7 @@ select * from AERO.aeronaves_por_periodos
 select * from AERO.periodos_de_inactividad
 */
 EXEC AERO.top5AeronavesFueraDeServicio @fechaFrom='01/01/2015', @fechaTo ='01/06/2015';
-
-
+*/
 
 
 

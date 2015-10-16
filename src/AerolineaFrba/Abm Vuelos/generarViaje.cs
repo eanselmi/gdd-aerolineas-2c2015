@@ -124,15 +124,15 @@ namespace AerolineaFrba.Abm_Vuelos
         private void botonGuardar_Click(object sender, EventArgs e)
         {
             if (this.validar())
-            {   
+            {
                 List<string> lista = new List<string>();
                 lista.Add("@fechaSalida");
                 lista.Add("@fechaLlegadaEstimada");
                 lista.Add("@idAeronave");
                 lista.Add("@idRuta");
                 bool resultado = SqlConnector.executeProcedure("AERO.generarViaje", lista, 
-                    Convert.ToDateTime(this.timePickerSalida.Value),
-                    Convert.ToDateTime(this.timePickerLlegadaEstimada.Value),
+                    String.Format("{0:yyyyMMdd HH:mm:ss}",this.timePickerSalida.Value),
+                    String.Format("{0:yyyyMMdd HH:mm:ss}", this.timePickerLlegadaEstimada.Value),
                     dataGridListadoAeronaves.SelectedCells[0].Value,
                     dataGridListadoRutas.SelectedCells[0].Value);
                 if (resultado == true){
