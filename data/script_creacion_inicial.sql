@@ -776,6 +776,12 @@ BEGIN
 END;
 GO
 
+IF OBJECT_ID('AERO.top5AeronavesFueraDeServicio') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.top5AeronavesFueraDeServicio;
+END;
+GO
+
 --CREATE
 CREATE FUNCTION AERO.corrigeMail (@s NVARCHAR (255)) 
 RETURNS NVARCHAR(255)
@@ -1030,7 +1036,7 @@ order by 2 desc
 END
 GO
 
---TOP de los clientes con mas puntos acumulados a la fecha (la fecha es hasta el dia de hoy)
+--TOP5 de los clientes con mas puntos acumulados a la fecha (la fecha es hasta el dia de hoy)
 CREATE PROCEDURE AERO.top5ClientesMillas(@fechaFrom DATETIME, @fechaTo DATETIME)
 AS BEGIN
 /*creo tabla temporal, para poder insertar de ambas queries*/
@@ -1038,6 +1044,19 @@ create table #tablaMillas(
 Cliente varchar(255),
 Millas int
 )
+
+--TOP5 de las aeronaves con mas dias inactivas
+CREATE PROCEDURE AERO.top5AeronavesFueraDeServicio(@fechaFrom DATETIME, @fechaTo DATETIME)
+AS BEGIN
+select top 5 a.matricula as 'Nombre Aeronave', sum(DATEDIFF(day,pi.desde,pi.hasta)) as 'Cantidad de días fuera de servicio'  from AERO.aeronaves_por_periodos ap
+join Aero.periodos_de_inactividad pi on ap.periodo_id=pi.id
+join AERO.aeronaves a on ap.aeronave_id= a.id
+where pi.desde between @fechaFrom and @fechaTo AND
+pi.hasta between @fechaFrom and @fechaTo 
+group by a.matricula
+order by 2 desc 
+END
+GO
 
 /*inserto en la tabla temporal los pasajes*/
 insert into #tablaMillas 
@@ -1301,6 +1320,21 @@ select * from AERO.cancelaciones
 */
 EXEC AERO.top5DestinosCancelados @fechaFrom='01/01/2000', @fechaTo ='01/01/2999';
 
+/*
+--set de datos para prueba5
+insert into AERO.periodos_de_inactividad values('01/01/2015','30/05/2015')
+insert into AERO.periodos_de_inactividad values('20/01/2015','30/12/2015')
+insert into AERO.periodos_de_inactividad values('01/01/2015','10/01/2015')
+insert into AERO.periodos_de_inactividad values('01/02/2015','10/02/2015')
+insert into AERO.aeronaves_por_periodos values(1,1)
+insert into AERO.aeronaves_por_periodos values(1,2)
+insert into AERO.aeronaves_por_periodos values(2,3)
+insert into AERO.aeronaves_por_periodos values(2,4)
+select * from AERO.aeronaves
+select * from AERO.aeronaves_por_periodos
+select * from AERO.periodos_de_inactividad
+*/
+EXEC AERO.top5AeronavesFueraDeServicio @fechaFrom='01/01/2015', @fechaTo ='01/06/2015';
 
 
 
