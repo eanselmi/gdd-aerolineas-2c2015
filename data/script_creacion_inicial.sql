@@ -740,6 +740,12 @@ BEGIN
 END;
 GO
 
+IF OBJECT_ID('AERO.top5AeronavesFueraDeServicio') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.top5AeronavesFueraDeServicio;
+END;
+GO
+
 IF OBJECT_ID('AERO.generarViaje') IS NOT NULL
 BEGIN
 	DROP PROCEDURE AERO.generarViaje;
@@ -773,12 +779,6 @@ GO
 IF OBJECT_ID('AERO.altaCanje') IS NOT NULL
 BEGIN
 	DROP PROCEDURE AERO.altaCanje;
-END;
-GO
-
-IF OBJECT_ID('AERO.top5AeronavesFueraDeServicio') IS NOT NULL
-BEGIN
-	DROP PROCEDURE AERO.top5AeronavesFueraDeServicio;
 END;
 GO
 
@@ -1036,7 +1036,7 @@ order by 2 desc
 END
 GO
 
---TOP5 de los clientes con mas puntos acumulados a la fecha (la fecha es hasta el dia de hoy)
+--TOP de los clientes con mas puntos acumulados a la fecha (la fecha es hasta el dia de hoy)
 CREATE PROCEDURE AERO.top5ClientesMillas(@fechaFrom DATETIME, @fechaTo DATETIME)
 AS BEGIN
 /*creo tabla temporal, para poder insertar de ambas queries*/
@@ -1044,19 +1044,6 @@ create table #tablaMillas(
 Cliente varchar(255),
 Millas int
 )
-
---TOP5 de las aeronaves con mas dias inactivas
-CREATE PROCEDURE AERO.top5AeronavesFueraDeServicio(@fechaFrom DATETIME, @fechaTo DATETIME)
-AS BEGIN
-select top 5 a.matricula as 'Nombre Aeronave', sum(DATEDIFF(day,pi.desde,pi.hasta)) as 'Cantidad de días fuera de servicio'  from AERO.aeronaves_por_periodos ap
-join Aero.periodos_de_inactividad pi on ap.periodo_id=pi.id
-join AERO.aeronaves a on ap.aeronave_id= a.id
-where pi.desde between @fechaFrom and @fechaTo AND
-pi.hasta between @fechaFrom and @fechaTo 
-group by a.matricula
-order by 2 desc 
-END
-GO
 
 /*inserto en la tabla temporal los pasajes*/
 insert into #tablaMillas 
@@ -1082,6 +1069,18 @@ select * from #tablaMillas
 order by 2 desc
 
 drop table #tablaMillas
+END
+GO
+
+CREATE PROCEDURE AERO.top5AeronavesFueraDeServicio(@fechaFrom DATETIME, @fechaTo DATETIME)
+AS BEGIN
+select top 5 a.matricula as 'Nombre Aeronave', sum(DATEDIFF(day,pi.desde,pi.hasta)) as 'Cantidad de días fuera de servicio'  from AERO.aeronaves_por_periodos ap
+join Aero.periodos_de_inactividad pi on ap.periodo_id=pi.id
+join AERO.aeronaves a on ap.aeronave_id= a.id
+where pi.desde between @fechaFrom and @fechaTo AND
+pi.hasta between @fechaFrom and @fechaTo 
+group by a.matricula
+order by 2 desc 
 END
 GO
 
@@ -1335,7 +1334,6 @@ select * from AERO.aeronaves_por_periodos
 select * from AERO.periodos_de_inactividad
 */
 EXEC AERO.top5AeronavesFueraDeServicio @fechaFrom='01/01/2015', @fechaTo ='01/06/2015';
-
 
 
 
