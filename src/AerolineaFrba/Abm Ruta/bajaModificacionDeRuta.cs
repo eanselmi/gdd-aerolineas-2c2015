@@ -79,7 +79,7 @@ namespace AerolineaFrba.Abm_Ruta
             textBoxDestino.Clear();
             textBoxOrigen.Clear();
             textBoxServicio.Clear();
-            funcionesComunes.consultarRutas(dataGridListadoRutas);
+            listado = funcionesComunes.consultarRutas(dataGridListadoRutas);
         }
 
         private void botonBaja_Click(object sender, EventArgs e)
@@ -91,7 +91,7 @@ namespace AerolineaFrba.Abm_Ruta
             if(resultado){
                 MessageBox.Show("La ruta se dio de baja exitosamente");
             }
-            funcionesComunes.consultarRutas(dataGridListadoRutas);
+            this.botonLimpiar.PerformClick();
         }
 
         private void bajaModificacionDeRuta_Enter(object sender, EventArgs e)
