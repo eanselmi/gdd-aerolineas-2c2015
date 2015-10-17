@@ -52,9 +52,6 @@ namespace AerolineaFrba.Ingreso
                 case "Alta de Aeronave":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Aeronave.altaDeAeronave());
                     break;
-                case "Alta de Ciudad":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ciudad.altaDeCiudad());
-                    break;
                 case "Alta de Tarjeta de Crédito":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Tarjeta.altaDeTarjeta());
                     break;
@@ -72,9 +69,6 @@ namespace AerolineaFrba.Ingreso
                     break;
                 case "Modificacion de Aeronave":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Aeronave.bajaModificacionDeAeronave());
-                    break;
-                case "Modificacion de Ciudad":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ciudad.bajaModificacionDeCiudad());
                     break;
                 case "Modificacion de Cliente":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Registro_de_Usuario.bajaModificacionDeCliente());
