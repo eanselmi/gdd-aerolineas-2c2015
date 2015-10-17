@@ -40,17 +40,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void bajaModificacionDeAeronave_Load(object sender, EventArgs e)
         {
-            consultarAeronaves();
-        }
-
-        private void consultarAeronaves(){
-            listado = SqlConnector.obtenerTablaSegunConsultaString(@"SELECT a.ID as Id, a.MATRICULA as Matricula, 
-                a.MODELO as Modelo, a.KG_DISPONIBLES as 'KG Disponibles', f.NOMBRE as Fabricante, ts.NOMBRE as 
-                Servicio, a.FECHA_ALTA as 'Fecha de Alta', a.CANT_BUTACAS as Butacas FROM AERO.aeronaves a, 
-                AERO.fabricantes f, AERO.tipos_de_servicio ts WHERE a.FABRICANTE_ID = f.ID AND 
-                a.TIPO_SERVICIO_ID = ts.ID AND a.BAJA IS NULL;");
-            dataGridListadoAeronaves.DataSource = listado;
-            dataGridListadoAeronaves.Columns[0].Visible = false;
+            funcionesComunes.consultarAeronaves(dataGridListadoAeronaves);
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)
@@ -59,7 +49,7 @@ namespace AerolineaFrba.Abm_Aeronave
             textMatricula.Clear();
             textModelo.Clear();
             textTipoServicio.Clear();
-            consultarAeronaves();
+            funcionesComunes.consultarAeronaves(dataGridListadoAeronaves);
         }
 
         private void botonBuscar_Click(object sender, EventArgs e)
@@ -102,12 +92,12 @@ namespace AerolineaFrba.Abm_Aeronave
             if (resultado){
                 MessageBox.Show("La aeronave se dio de baja exitosamente");
             }
-            consultarAeronaves();
+            funcionesComunes.consultarAeronaves(dataGridListadoAeronaves);
         }
 
         private void bajaModificacionDeAeronave_Enter(object sender, EventArgs e)
         {
-            this.consultarAeronaves();
+            funcionesComunes.consultarAeronaves(dataGridListadoAeronaves);
         }
 
         private void matricula(object sender, KeyPressEventArgs e)

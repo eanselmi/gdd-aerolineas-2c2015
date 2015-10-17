@@ -33,12 +33,11 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             DataTable filtradoVuelos = filtradoDeVuelos(this.textBoxMatricula.Text);
             dataGridListadoVuelos.DataSource = filtradoVuelos;
             dataGridListadoVuelos.Columns[0].Visible = false;
-            
         }
 
         private DataTable filtradoDeVuelos(string matricula)
         {
-            DataTable tablaVuelos = consultarVuelos();
+            DataTable tablaVuelos = funcionesComunes.consultarVuelos();
             var final_rol = "";
             var posFiltro = true;
             var filtrosBusqueda = new List<string>();
@@ -57,20 +56,7 @@ namespace AerolineaFrba.Registro_Llegada_Destino
             }
             if (tablaVuelos != null)
                 tablaVuelos.DefaultView.RowFilter = final_rol;
-
             return tablaVuelos;
-        }
-
-        private DataTable consultarVuelos()
-        {
-            DataTable listado = SqlConnector.obtenerTablaSegunConsultaString(@"select v.ID as ID,a.MATRICULA as Matricula,r.CODIGO as 'Codigo de Ruta',
-                                                    o.NOMBRE as Origen,d.NOMBRE as Destino,v.FECHA_SALIDA as 'Fecha De Salida' 
-                                                    from AERO.vuelos v join Aero.aeronaves a on v.AERONAVE_ID = a.ID
-                                                    join AERO.rutas r on v.RUTA_ID = r.ID
-                                                    join AERO.aeropuertos o on r.ORIGEN_ID = o.ID
-                                                    join AERO.aeropuertos d on r.DESTINO_ID = d.ID
-                                                    where v.FECHA_LLEGADA IS NULL");
-            return listado;
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)

@@ -32,7 +32,6 @@ namespace AerolineaFrba.Ingreso
             if (eleccionUsuario != null)
                 abrirFormulario(eleccionUsuario);
             else MessageBox.Show("Seleccione funcionalidad", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
         }
 
         //Abre formulario segun funcionalidad elegida en combobox
@@ -40,7 +39,6 @@ namespace AerolineaFrba.Ingreso
         {
             switch (eleccionUsuario)
             {
-
                 case "Consultar Millas":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Consulta_Millas.consultaMillas());
                     break;

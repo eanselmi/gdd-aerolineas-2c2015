@@ -20,27 +20,7 @@ namespace AerolineaFrba.Abm_Rol
 
         private void bajaModificacionDeRol_Load(object sender, EventArgs e)
         {
-            consultarRoles();
-        }
-
-        private void consultarRoles()
-        {
-            listado = SqlConnector.obtenerTablaSegunConsultaString("select r.ID as IdRol, r.NOMBRE as Rol, r.ACTIVO as Activo from AERO.roles r");
-            listado.Columns.Add("Estado", typeof(String));
-            foreach (DataRow row in listado.Rows)
-            {
-                if (Convert.ToInt32(row[2]) == 0)
-                {
-                    row[3] = "Inactivo";
-                }
-                else
-                {
-                    row[3] = "Activo";
-                }
-            }
-            dataGridListadoRoles.DataSource = listado;
-            dataGridListadoRoles.Columns[0].Visible = false;
-            dataGridListadoRoles.Columns[2].Visible = false;
+            funcionesComunes.consultarRoles(dataGridListadoRoles);
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
@@ -57,7 +37,7 @@ namespace AerolineaFrba.Abm_Rol
         {
             textRol.Clear();
             textEstado.Clear();
-            consultarRoles();
+            funcionesComunes.consultarRoles(dataGridListadoRoles);
         }
 
         private void botonBaja_Click(object sender, EventArgs e)
@@ -70,27 +50,20 @@ namespace AerolineaFrba.Abm_Rol
                 if (resultado)
                 {
                     MessageBox.Show("El rol fue inhabilitado exitosamente");
-                    consultarRoles();
+                    funcionesComunes.consultarRoles(dataGridListadoRoles);
                 }
-               
-            }
-            else
-            {
+            }else{
                 MessageBox.Show("El rol no se encuentra activo");
             }
         }
 
         private bool rolActivo()
         {
-                if (dataGridListadoRoles.SelectedCells[3].Value.ToString() == "Activo")
-                {
+                if (dataGridListadoRoles.SelectedCells[3].Value.ToString() == "Activo"){
                     return true;
-                }
-                else
-                {
+                }else{
                     return false;
                 }
-     
         }
 
         private void botonModificacion_Click(object sender, EventArgs e)
@@ -161,7 +134,7 @@ namespace AerolineaFrba.Abm_Rol
                 if (resultado)
                 {
                     MessageBox.Show("El rol fue habilitado exitosamente");
-                    consultarRoles();
+                    funcionesComunes.consultarRoles(dataGridListadoRoles);
                 }
                 
             }

@@ -167,5 +167,88 @@ namespace AerolineaFrba
        
 
         #endregion
+
+        #region consultas
+        
+        public static void consultarRutas(DataGridView datagridview)
+        {
+            DataTable listadoRutas = SqlConnector.obtenerTablaSegunConsultaString(@"SELECT r.ID as ID, r.CODIGO as Codigo, 
+                r.PRECIO_BASE_KG as 'Precio Base Kg', r.PRECIO_BASE_PASAJE as 'Precio Base Pasaje', 
+                c1.NOMBRE as Origen, c2.NOMBRE as Destino, t.NOMBRE as Servicio from AERO.rutas r, 
+                AERO.aeropuertos c1, AERO.aeropuertos c2, AERO.tipos_de_servicio t WHERE r.ORIGEN_ID = c1.ID AND 
+                r.DESTINO_ID=c2.ID AND r.TIPO_SERVICIO_ID = t.ID AND r.BAJA = 0 ");
+            datagridview.DataSource = listadoRutas;
+            datagridview.Columns[0].Visible = false;
+        }
+
+        public static void consultarAeronaves(DataGridView datagridview)
+        {
+            DataTable listadoAeronaves = SqlConnector.obtenerTablaSegunConsultaString(@"SELECT a.ID as Id, a.MATRICULA as Matricula, 
+                a.MODELO as Modelo, a.KG_DISPONIBLES as 'KG Disponibles', f.NOMBRE as Fabricante, ts.NOMBRE as 
+                Servicio, a.FECHA_ALTA as 'Fecha de Alta', a.CANT_BUTACAS as Butacas FROM AERO.aeronaves a, 
+                AERO.fabricantes f, AERO.tipos_de_servicio ts WHERE a.FABRICANTE_ID = f.ID AND 
+                a.TIPO_SERVICIO_ID = ts.ID AND a.BAJA IS NULL;");
+            datagridview.DataSource = listadoAeronaves;
+            datagridview.Columns[0].Visible = false;
+        }
+
+        public static DataTable consultarVuelos()
+        {
+            DataTable listado = SqlConnector.obtenerTablaSegunConsultaString(@"select v.ID as ID,
+                a.MATRICULA as Matricula,r.CODIGO as 'Codigo de Ruta', o.NOMBRE as Origen, d.NOMBRE 
+                as Destino,v.FECHA_SALIDA as 'Fecha De Salida' from AERO.vuelos v join 
+                AERO.aeronaves a on v.AERONAVE_ID = a.ID join AERO.rutas r on v.RUTA_ID = r.ID join 
+                AERO.aeropuertos o on r.ORIGEN_ID = o.ID join AERO.aeropuertos d on 
+                r.DESTINO_ID = d.ID where v.FECHA_LLEGADA IS NULL");
+            return listado;
+        }
+
+        public static void consultarMillas(Int32 valor, DataGridView datagridview)
+        {
+            DataTable productos = SqlConnector.obtenerTablaSegunConsultaString(@"select p.ID as 
+                    ID, p.NOMBRE as Producto, p.MILLAS_REQUERIDAS as Millas, p.STOCK as Stock from 
+                    AERO.productos p where p.MILLAS_REQUERIDAS <= '" +
+                    valor + "'");
+            datagridview.DataSource = productos;
+            datagridview.Columns[0].Visible = false;
+        }
+
+        public static void consultarFuncionalidadesDelRol(Int32 valor, DataGridView datagridview)
+        {
+            DataTable listado = SqlConnector.obtenerTablaSegunConsultaString(@"select f.ID as Id, 
+                f.DETALLES as Funcionalidad from AERO.funcionalidades_por_rol fr inner 
+                join AERO.funcionalidades f on fr.FUNCIONALIDAD_ID = f.ID where fr.ROL_ID = '" + 
+                valor + "'");
+            datagridview.DataSource = listado;
+            datagridview.Columns[0].Visible = false;
+        }
+
+        public static void consultarRoles(DataGridView datagridview){
+            DataTable listado = SqlConnector.obtenerTablaSegunConsultaString(@"select r.ID as IdRol, 
+                r.NOMBRE as Rol, r.ACTIVO as Activo from AERO.roles r");
+            listado.Columns.Add("Estado", typeof(String));
+            foreach (DataRow row in listado.Rows){
+                if (Convert.ToInt32(row[2]) == 0){
+                    row[3] = "Inactivo";
+                }else{
+                    row[3] = "Activo";
+                }
+            }
+            datagridview.DataSource = listado;
+            datagridview.Columns[0].Visible = false;
+            datagridview.Columns[2].Visible = false;
+        }
+
+        public static void consultarClientes(DataGridView datagridview)
+        {
+            DataTable listado = SqlConnector.obtenerTablaSegunConsultaString(@"select ID as Id,
+                NOMBRE as Nombre, APELLIDO as Apellido, DNI as Dni, DIRECCION as Dirección, 
+                TELEFONO as Teléfono, MAIL as Mail, FECHA_NACIMIENTO as 'Fecha de Nacimiento' 
+                from AERO.clientes where BAJA = 0");
+            datagridview.DataSource = listado;
+            datagridview.Columns[0].Visible = false;
+        }
+
+        #endregion
     }
 }

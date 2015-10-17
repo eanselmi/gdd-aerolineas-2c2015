@@ -67,7 +67,7 @@ namespace AerolineaFrba.Registro_de_Usuario
         private void botonGuardar_Click(object sender, EventArgs e)
         {
             this.setearCamposIngresados();
-            //Acordarse de validar que la fecha sea anteior a hoy y que la edad sea > 18
+            //TODO: Acordarse de validar que la fecha sea anteior a hoy y que la edad sea > 18
             if (apellido != "" && nombre != "" && direccion != "" && dni > 0 && telefono > 0)
             {
                 if (TimePickerNacimiento.Value < DateTime.Today)
@@ -81,7 +81,8 @@ namespace AerolineaFrba.Registro_de_Usuario
                     lista.Add("@telefono");
                     lista.Add("@mail");
                     lista.Add("@fechaNac");
-                    bool resultado = SqlConnector.executeProcedure("AERO.agregarCliente", lista, funcionesComunes.getIdRolCliente(), nombre, apellido, dni, direccion,
+                    bool resultado = SqlConnector.executeProcedure("AERO.agregarCliente", lista, 
+                        funcionesComunes.getIdRolCliente(), nombre, apellido, dni, direccion,
                         telefono, mail, Convert.ToDateTime(this.TimePickerNacimiento.Value));
                     if (resultado)
                     {
@@ -91,12 +92,14 @@ namespace AerolineaFrba.Registro_de_Usuario
                 }
                 else
                 {
-                    MessageBox.Show("La fecha de nacimiento debe ser anterior a la fecha actual", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("La fecha de nacimiento debe ser anterior a la fecha actual", 
+                        "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -110,7 +113,8 @@ namespace AerolineaFrba.Registro_de_Usuario
                 lista.Add("@direccion");
                 lista.Add("@telefono");
                 lista.Add("@mail");
-                bool resultado = SqlConnector.executeProcedure("AERO.updateCliente", lista, id ,direccion, telefono, mail);
+                bool resultado = SqlConnector.executeProcedure("AERO.updateCliente", lista, id,
+                    direccion, telefono, mail);
                 if (resultado)
                 {
                     MessageBox.Show("Se modificó exitosamente");
@@ -119,7 +123,8 @@ namespace AerolineaFrba.Registro_de_Usuario
             }
             else
             {
-                MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, 
+                    MessageBoxIcon.Error);
             }
         }
 
@@ -173,8 +178,5 @@ namespace AerolineaFrba.Registro_de_Usuario
         {
             funcionesComunes.soloNumeros(e);
         }
-
-        
-
     }
 }

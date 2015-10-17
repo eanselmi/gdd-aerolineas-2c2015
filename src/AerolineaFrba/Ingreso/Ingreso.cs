@@ -52,32 +52,26 @@ namespace AerolineaFrba.Ingreso
                             menuPrincipal menu = new menuPrincipal();
                             funcionesComunes.setRol(nombreRol);
                             funcionesComunes.deshabilitarVentanaYAbrirNueva(menu);
-                       
-                        } else {
-                      
+                        }else{
                             List<string> lista = new List<string>();
                             lista.Add("@nombre");
                             lista.Add("@exitoso");
                             SqlConnector.executeProcedure("AERO.updateIntento", lista, this.textUsuario.Text,2);
                             MessageBox.Show("Contraseña inválida, le quedan " + (2 - intentos) + " intentos"); 
-
                         }
-                    } else {
+                    }else{
                         MessageBox.Show("El usuario ingresado esta inhabilitado, contacte al administrador");
                     }
-                } else {
+                }else{
                     MessageBox.Show("Usuario inválido");
                 }
                 this.textUsuario.Clear();
                 this.textPassword.Clear();
-
         }
 
         private void botonInvitado_Click(object sender, EventArgs e)
         {
             //Apertura formulario menu para invitado
-
-
             funcionesComunes.setRol("cliente");
             funcionesComunes.deshabilitarVentanaYAbrirNueva(new menuPrincipal());
         } 
@@ -91,14 +85,11 @@ namespace AerolineaFrba.Ingreso
 
         private void setearIdRolCliente()
         {
-            DataTable cliente = SqlConnector.obtenerTablaSegunConsultaString("select ID from AERO.roles where NOMBRE = 'cliente'");
-            if (cliente.Rows.Count > 0)
-            {
-
+            DataTable cliente = SqlConnector.obtenerTablaSegunConsultaString(@"select ID from 
+                AERO.roles where NOMBRE = 'cliente'");
+            if (cliente.Rows.Count > 0){
                 funcionesComunes.setIdRolCliente((Int32)cliente.Rows[0].ItemArray[0]);
-            }
-            else
-            {
+            }else{
                 MessageBox.Show("El rol de cliente no puede ser seteado");
             }
         }

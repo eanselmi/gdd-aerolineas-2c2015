@@ -16,7 +16,8 @@ namespace AerolineaFrba.Abm_Ruta
         public modificacionDeRuta()
         {
             InitializeComponent();
-            funcionesComunes.llenarCombobox(this.comboBoxServicios, "NOMBRE", "select ID, NOMBRE from AERO.tipos_de_servicio");
+            funcionesComunes.llenarCombobox(this.comboBoxServicios, "NOMBRE", @"select ID, NOMBRE 
+                from AERO.tipos_de_servicio");
         }
 
         private void botonVolver_Click(object sender, EventArgs e)

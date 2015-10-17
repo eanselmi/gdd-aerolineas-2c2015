@@ -88,18 +88,9 @@ namespace AerolineaFrba.Canje_Millas
             if (dataGridCliente.DataSource == null){
                 MessageBox.Show("Debe seleccionar un cliente primero");
             }else{
-                consultarMillas();
+                funcionesComunes.consultarMillas(Int32.Parse(dataGridCliente.SelectedCells[5].Value.ToString()), 
+                    dataGridProductos);
             }
-        }
-
-        private void consultarMillas()
-        {
-            DataTable productos = SqlConnector.obtenerTablaSegunConsultaString(@"select p.ID as 
-                    ID, p.NOMBRE as Producto, p.MILLAS_REQUERIDAS as Millas, p.STOCK as Stock from 
-                    AERO.productos p where p.MILLAS_REQUERIDAS <= '" +
-                    dataGridCliente.SelectedCells[5].Value + "'");
-            dataGridProductos.DataSource = productos;
-            dataGridProductos.Columns[0].Visible = false;
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)

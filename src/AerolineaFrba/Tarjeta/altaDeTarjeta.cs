@@ -39,7 +39,8 @@ namespace AerolineaFrba.Tarjeta
             String func = (String) this.comboBoxTipoTarjeta.SelectedItem;
             if (dni != "" && numero != "" && func != null)
                 this.textBoxNumero.Clear();
-            else MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, 
+                MessageBoxIcon.Error);
         }
     }
 }

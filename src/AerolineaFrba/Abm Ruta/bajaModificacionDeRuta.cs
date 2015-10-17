@@ -42,17 +42,6 @@ namespace AerolineaFrba.Abm_Ruta
             this.botonLimpiar.PerformClick();
         }
 
-        private void consultarRutas()
-        {
-            listado = SqlConnector.obtenerTablaSegunConsultaString(@"SELECT r.ID as ID, r.CODIGO as Codigo, 
-                r.PRECIO_BASE_KG as 'Precio Base Kg', r.PRECIO_BASE_PASAJE as 'Precio Base Pasaje', 
-                c1.NOMBRE as Origen, c2.NOMBRE as Destino, t.NOMBRE as Servicio from AERO.rutas r, 
-                AERO.aeropuertos c1, AERO.aeropuertos c2, AERO.tipos_de_servicio t WHERE r.ORIGEN_ID = c1.ID AND 
-                r.DESTINO_ID=c2.ID AND r.TIPO_SERVICIO_ID = t.ID AND r.BAJA = 0 ");
-            dataGridListadoRutas.DataSource = listado;
-            dataGridListadoRutas.Columns[0].Visible = false;
-        }
-
         private void botonBuscar_Click(object sender, EventArgs e)
         {
             filtrarRutas(textBoxCodigo.Text, textBoxOrigen.Text, textBoxDestino.Text, textBoxServicio.Text);
@@ -90,18 +79,19 @@ namespace AerolineaFrba.Abm_Ruta
             textBoxDestino.Clear();
             textBoxOrigen.Clear();
             textBoxServicio.Clear();
-            consultarRutas();
+            funcionesComunes.consultarRutas(dataGridListadoRutas);
         }
 
         private void botonBaja_Click(object sender, EventArgs e)
         {
             List<string> lista = new List<string>();
             lista.Add("@id");
-            bool resultado = SqlConnector.executeProcedure("AERO.bajaRuta",lista,dataGridListadoRutas.SelectedCells[0].Value.ToString());
+            bool resultado = SqlConnector.executeProcedure("AERO.bajaRuta",lista,
+                dataGridListadoRutas.SelectedCells[0].Value.ToString());
             if(resultado){
                 MessageBox.Show("La ruta se dio de baja exitosamente");
             }
-            this.consultarRutas();
+            funcionesComunes.consultarRutas(dataGridListadoRutas);
         }
 
         private void bajaModificacionDeRuta_Enter(object sender, EventArgs e)

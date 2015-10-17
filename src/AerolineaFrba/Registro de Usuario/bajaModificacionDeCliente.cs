@@ -25,7 +25,7 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         private void bajaModificacionDeCliente_Load(object sender, EventArgs e)
         {
-            consultarClientes();
+            funcionesComunes.consultarClientes(dataGridListadoClientes);
         }
 
         private void botonBuscar_Click(object sender, EventArgs e)
@@ -65,26 +65,18 @@ namespace AerolineaFrba.Registro_de_Usuario
         private void botonLimpiar_Click(object sender, EventArgs e)
         {
             limpiar();
-
         }
 
         private void limpiar()
         {
             dataGridListadoClientes.DataSource = null;
-            consultarClientes();
+            funcionesComunes.consultarClientes(dataGridListadoClientes);
             textNombre.Text = "";
             textApellido.Text = "";
             textMail.Text = "";
             textDni.Text = "";
             textTelefono.Text = "";
             textDireccion.Text = "";
-        }
-
-        private void consultarClientes()
-        {
-            listado = SqlConnector.obtenerTablaSegunConsultaString("select ID as Id,NOMBRE as Nombre, APELLIDO as Apellido, DNI as Dni, DIRECCION as Dirección, TELEFONO as Teléfono, MAIL as Mail, FECHA_NACIMIENTO as 'Fecha de Nacimiento' from AERO.clientes where BAJA = 0");
-            dataGridListadoClientes.DataSource = listado;
-            dataGridListadoClientes.Columns[0].Visible = false;
         }
 
         private void botonModificacion_Click(object sender, EventArgs e)
@@ -117,14 +109,12 @@ namespace AerolineaFrba.Registro_de_Usuario
             {
                 MessageBox.Show("El cliente se dio de baja exitosamente");
             }
-            consultarClientes();
+            funcionesComunes.consultarClientes(dataGridListadoClientes);
         }
-
 
         private void bajaModificacionDeCliente_Enter(object sender, EventArgs e)
         {
             limpiar();
         }
-
     }
 }

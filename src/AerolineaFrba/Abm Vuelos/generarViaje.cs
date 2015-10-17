@@ -17,33 +17,13 @@ namespace AerolineaFrba.Abm_Vuelos
         public generarViaje()
         {
             InitializeComponent();
-            this.consultarAeronaves();
-            this.consultarRutas();
+            funcionesComunes.consultarAeronaves(dataGridListadoAeronaves);
+            funcionesComunes.consultarRutas(dataGridListadoRutas);
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
         {
             funcionesComunes.habilitarAnterior();
-        }
-        private void consultarRutas()
-        {
-            listadoRutas = SqlConnector.obtenerTablaSegunConsultaString(@"SELECT r.ID as ID, r.CODIGO as Codigo, 
-                r.PRECIO_BASE_KG as 'Precio Base Kg', r.PRECIO_BASE_PASAJE as 'Precio Base Pasaje', 
-                c1.NOMBRE as Origen, c2.NOMBRE as Destino, t.NOMBRE as Servicio from AERO.rutas r, 
-                AERO.aeropuertos c1, AERO.aeropuertos c2, AERO.tipos_de_servicio t WHERE r.ORIGEN_ID = c1.ID AND 
-                r.DESTINO_ID=c2.ID AND r.TIPO_SERVICIO_ID = t.ID AND r.BAJA = 0 ");
-            dataGridListadoRutas.DataSource = listadoRutas;
-            dataGridListadoRutas.Columns[0].Visible = false;
-        }
-        private void consultarAeronaves()
-        {
-            listadoAeronaves = SqlConnector.obtenerTablaSegunConsultaString(@"SELECT a.ID as Id, a.MATRICULA as Matricula, 
-                a.MODELO as Modelo, a.KG_DISPONIBLES as 'KG Disponibles', f.NOMBRE as Fabricante, ts.NOMBRE as 
-                Servicio, a.FECHA_ALTA as 'Fecha de Alta', a.CANT_BUTACAS as Butacas FROM AERO.aeronaves a, 
-                AERO.fabricantes f, AERO.tipos_de_servicio ts WHERE a.FABRICANTE_ID = f.ID AND 
-                a.TIPO_SERVICIO_ID = ts.ID AND a.BAJA IS NULL;");
-            dataGridListadoAeronaves.DataSource = listadoAeronaves;
-            dataGridListadoAeronaves.Columns[0].Visible = false;
         }
 
         private void buttonBuscarMatricula_Click(object sender, EventArgs e)
@@ -114,7 +94,7 @@ namespace AerolineaFrba.Abm_Vuelos
         private void botonLimpiar_Click(object sender, EventArgs e)
         {
             this.dataGridListadoRutas.DataSource = null;
-            this.consultarAeronaves();
+            funcionesComunes.consultarAeronaves(dataGridListadoAeronaves);
             this.textBoxCodigo.Clear();
             this.textBoxMatricula.Clear();
             this.timePickerLlegadaEstimada.ResetText();
