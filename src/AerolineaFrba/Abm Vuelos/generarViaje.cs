@@ -17,8 +17,8 @@ namespace AerolineaFrba.Abm_Vuelos
         public generarViaje()
         {
             InitializeComponent();
-            funcionesComunes.consultarAeronaves(dataGridListadoAeronaves);
-            funcionesComunes.consultarRutas(dataGridListadoRutas);
+            listadoAeronaves = funcionesComunes.consultarAeronaves(dataGridListadoAeronaves);
+            listadoRutas = funcionesComunes.consultarRutas(dataGridListadoRutas);
         }
 
         private void botonVolver_Click(object sender, EventArgs e)

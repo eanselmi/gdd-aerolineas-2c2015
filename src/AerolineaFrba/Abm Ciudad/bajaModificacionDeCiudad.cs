@@ -23,9 +23,70 @@ namespace AerolineaFrba.Abm_Ciudad
             funcionesComunes.habilitarAnterior();
         }
 
-        private void botonModificacion_Click(object sender, EventArgs e)
+        private void bajaModificacionDeCiudad_Load(object sender, EventArgs e)
         {
-            funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Ciudad.modificacionDeCiudad());
+            mostrarListadoCiudades();
+        }
+
+        private void mostrarListadoCiudades()
+        {
+            DataTable listado;
+            listado = SqlConnector.obtenerTablaSegunConsultaString("select ID as Id, NOMBRE as Ciudad from AERO.CIUDADES");
+            dataGridListadoCiudades.DataSource = listado;
+            dataGridListadoCiudades.Columns[0].Visible = false;
+
+        }
+
+        private void botonLimpiar_Click(object sender, EventArgs e)
+        {
+            textBoxBusqueda.Clear();
+            mostrarListadoCiudades();
+
+        }
+
+        private void botonBaja_Click(object sender, EventArgs e)
+        {
+            if (dataGridListadoCiudades.SelectedRows.Count > 0)
+            {
+                List<string> lista = new List<string>();
+                lista.Add("@id");
+                bool resultado = SqlConnector.executeProcedure("AERO.bajaCiudad", lista, dataGridListadoCiudades.SelectedCells[0].Value.ToString());
+                if (resultado)
+                {
+                    MessageBox.Show("La ciudad se dio de baja exitosamente");
+                }
+
+                mostrarListadoCiudades();
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una ciudad para ser eliminada");
+            }
+        }
+
+        private void botonBuscar_Click(object sender, EventArgs e)
+        {
+            if (textBoxBusqueda.Text != "")
+            {
+                DataTable tablaAeronaves = (DataTable)dataGridListadoCiudades.DataSource;
+                tablaAeronaves.DefaultView.RowFilter = "Ciudad LIKE '%" + textBoxBusqueda.Text + "%'";
+                dataGridListadoCiudades.DataSource = tablaAeronaves;
+            }
+            else
+            {
+                mostrarListadoCiudades();
+                MessageBox.Show("Ingrese una ciudad para buscar");
+            }
+        }
+
+        private void textBoxBusqueda_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funcionesComunes.soloLetras(e);
+        }
+
+        private void botonVolver_Click_1(object sender, EventArgs e)
+        {
+            funcionesComunes.habilitarAnterior();
         }
 
  

@@ -17,7 +17,7 @@ namespace AerolineaFrba.Compra
         public viajesDisponibles()
         {
             InitializeComponent();
-            this.consultarViajes();
+            listado = funcionesComunes.consultarViajesDisponibles(this.dataGridViajes);
         }
 
         private void consultarViajes()

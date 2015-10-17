@@ -20,7 +20,7 @@ namespace AerolineaFrba.Abm_Rol
 
         private void bajaModificacionDeRol_Load(object sender, EventArgs e)
         {
-            funcionesComunes.consultarRoles(dataGridListadoRoles);
+            listado = funcionesComunes.consultarRoles(dataGridListadoRoles);
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
@@ -37,7 +37,7 @@ namespace AerolineaFrba.Abm_Rol
         {
             textRol.Clear();
             textEstado.Clear();
-            funcionesComunes.consultarRoles(dataGridListadoRoles);
+          listado =  funcionesComunes.consultarRoles(dataGridListadoRoles);
         }
 
         private void botonBaja_Click(object sender, EventArgs e)
@@ -50,7 +50,7 @@ namespace AerolineaFrba.Abm_Rol
                 if (resultado)
                 {
                     MessageBox.Show("El rol fue inhabilitado exitosamente");
-                    funcionesComunes.consultarRoles(dataGridListadoRoles);
+                   listado = funcionesComunes.consultarRoles(dataGridListadoRoles);
                 }
             }else{
                 MessageBox.Show("El rol no se encuentra activo");
@@ -134,7 +134,7 @@ namespace AerolineaFrba.Abm_Rol
                 if (resultado)
                 {
                     MessageBox.Show("El rol fue habilitado exitosamente");
-                    funcionesComunes.consultarRoles(dataGridListadoRoles);
+                    listado = funcionesComunes.consultarRoles(dataGridListadoRoles);
                 }
                 
             }
