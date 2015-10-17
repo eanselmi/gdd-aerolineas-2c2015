@@ -1049,7 +1049,7 @@ AS BEGIN
 	join AERO.aeropuertos d on r.DESTINO_ID = d.ID
 	join AERO.aeronaves a on v.AERONAVE_ID = a.ID
 	where (v.INVALIDO = 0) AND (v.FECHA_SALIDA > @fecha) 
-	AND( (AERO.cantButacasLibres(v.ID)  >= a.CANT_BUTACAS ) OR (AERO.kgLibres(v.ID) >= a.KG_DISPONIBLES ))
+	AND( (AERO.cantButacasLibres(v.ID)  != 0 ) OR (AERO.kgLibres(v.ID) !=0 ))
 END
 GO
 
