@@ -17,10 +17,9 @@ END
 
 -----------------------------------------------------------------------
 -- DROP TABLES
-
-IF OBJECT_ID('AERO.cancelaciones') IS NOT NULL
+IF OBJECT_ID('AERO.butacas_por_vuelo') IS NOT NULL
 BEGIN
-    DROP TABLE AERO.cancelaciones;
+    DROP TABLE AERO.butacas_por_vuelo;
 END;
 
 IF OBJECT_ID('AERO.canjes') IS NOT NULL
@@ -76,6 +75,11 @@ END;
 IF OBJECT_ID('AERO.pasajes') IS NOT NULL
 BEGIN
     DROP TABLE AERO.pasajes;
+END;
+
+IF OBJECT_ID('AERO.cancelaciones') IS NOT NULL
+BEGIN
+    DROP TABLE AERO.cancelaciones;
 END;
 
 IF OBJECT_ID('AERO.boletos_de_compra') IS NOT NULL
@@ -166,20 +170,26 @@ CREATE TABLE AERO.butacas (
     TIPO            NVARCHAR(255),
     PISO            NUMERIC(18,0),
     AERONAVE_ID    INT            NOT NULL,
-    ESTADO        NVARCHAR(255) DEFAULT 'LIBRE',
     CONSTRAINT butacas_CK001 CHECK (TIPO IN ('VENTANILLA', 'PASILLO')),
-    CONSTRAINT butacas_CK002 CHECK (ESTADO IN ('LIBRE', 'COMPRADO')),
-	CONSTRAINT butacas_CK003 CHECK (PISO IN (1,2))
+	CONSTRAINT butacas_CK002 CHECK (PISO IN (1,2))
+)
+
+CREATE TABLE AERO.butacas_por_vuelo (
+VUELO_ID INT NOT NULL,
+BUTACA_ID INT NOT NULL,
+ESTADO        NVARCHAR(255) DEFAULT 'LIBRE',
+CONSTRAINT butacas_por_vuelo_CK001 CHECK (ESTADO IN ('LIBRE', 'COMPRADO')),
+PRIMARY KEY(VUELO_ID,BUTACA_ID)
 )
 
 CREATE TABLE AERO.pasajes (
     ID    INT    IDENTITY(1,1)    PRIMARY KEY,
     PRECIO        NUMERIC(18,2)		NOT NULL,
-    CODIGO        NUMERIC(18,0)    UNIQUE NOT NULL,
+    CODIGO        NUMERIC(18,0)     NOT NULL,
     BUTACA_ID        INT            NOT NULL,
     CLIENTE_ID        INT            NOT NULL,
     BOLETO_COMPRA_ID INT             NOT NULL,
-    CANCELADO INT NOT NULL DEFAULT 0
+    CANCELACION_ID INT DEFAULT NULL
 )
 
 CREATE TABLE AERO.clientes (
@@ -292,7 +302,7 @@ CREATE TABLE AERO.paquetes(
     PRECIO         NUMERIC(18,2)	NOT NULL,
     KG             NUMERIC(18,0)	NOT NULL,
     BOLETO_COMPRA_ID     INT		NOT NULL,
-    CANCELADO INT NOT NULL DEFAULT 0
+    CANCELACION_ID INT DEFAULT NULL
 )
 
 CREATE TABLE AERO.canjes (
@@ -373,6 +383,24 @@ IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'BUTAC_AERO' AND object_id 
        CREATE INDEX BUTAC_AERO ON AERO.butacas (AERONAVE_ID);
     END
 
+ALTER TABLE AERO.butacas_por_vuelo
+ADD CONSTRAINT butacas_por_vu_FK01 FOREIGN KEY
+(VUELO_ID) REFERENCES AERO.vuelos (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'BUTAC_VUELO_VUELO' AND object_id = OBJECT_ID('AERO.butacas_por_vuelo'))
+    BEGIN
+       CREATE INDEX BUTAC_VUELO_VUELO ON AERO.butacas_por_vuelo (VUELO_ID);
+    END
+
+ALTER TABLE AERO.butacas_por_vuelo
+ADD CONSTRAINT butacas_por_aeronave_FK02 FOREIGN KEY
+(BUTACA_ID) REFERENCES AERO.butacas (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'BUTAC_VUELO_BUTACA' AND object_id = OBJECT_ID('AERO.butacas_por_vuelo'))
+    BEGIN
+       CREATE INDEX BUTAC_VUELO_BUTACA ON AERO.butacas_por_vuelo (BUTACA_ID);
+    END
+
 ALTER TABLE AERO.pasajes
 ADD CONSTRAINT PASAJES_FK01 FOREIGN KEY
 (BUTACA_ID) REFERENCES AERO.butacas (ID)
@@ -398,6 +426,15 @@ ADD CONSTRAINT PASAJES_FK03 FOREIGN KEY
 IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'PASAJ_BOL_COMP' AND object_id = OBJECT_ID('AERO.pasajes'))
     BEGIN
        CREATE INDEX PASAJ_BOL_COMP ON AERO.pasajes (BOLETO_COMPRA_ID);
+    END
+
+ALTER TABLE AERO.pasajes
+ADD CONSTRAINT PASAJES_FK04 FOREIGN KEY
+(CANCELACION_ID) REFERENCES AERO.cancelaciones (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'PASAJ_CANC' AND object_id = OBJECT_ID('AERO.pasajes'))
+    BEGIN
+       CREATE INDEX PASAJ_CANC ON AERO.pasajes (CANCELACION_ID);
     END
 
 ALTER TABLE AERO.clientes
@@ -535,6 +572,15 @@ IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_PAQ_BOLDECOMP' AND obj
        CREATE INDEX FKI_PAQ_BOLDECOMP ON AERO.paquetes (BOLETO_COMPRA_ID);
     END
 
+ALTER TABLE AERO.paquetes
+ADD CONSTRAINT paquetes_FK02 FOREIGN KEY
+(CANCELACION_ID) REFERENCES AERO.cancelaciones (ID)
+
+IF NOT EXISTS(SELECT * FROM sys.indexes WHERE name = 'FKI_PAQ_CANC' AND object_id = OBJECT_ID('AERO.paquetes'))
+    BEGIN
+       CREATE INDEX FKI_PAQ_CANC ON AERO.paquetes (CANCELACION_ID);
+    END
+
 ALTER TABLE AERO.canjes
 ADD CONSTRAINT CANJES_FK01 FOREIGN KEY
 (PRODUCTO_ID) REFERENCES AERO.productos (ID)
@@ -568,14 +614,12 @@ INSERT INTO AERO.funcionalidades VALUES
 ('Consultar Millas'),
 ('Alta de Cliente'),
 ('Alta de Aeronave'),
-('Alta de Ciudad'),
 ('Alta de Tarjeta de Crédito'),
 ('Baja de Aeronave'),
 ('Baja de Ciudad'),
 ('Baja de Cliente'),
 ('Baja de Tarjeta de Crédito'),
 ('Modificacion de Aeronave'),
-('Modificacion de Ciudad'),
 ('Modificacion de Cliente'),
 ('Realizar Canje'),
 ('Alta de Rol'),
@@ -874,7 +918,8 @@ AS BEGIN
 	 JOIN [GD2C2015].[AERO].[pasajes] p on b.ID = p.BOLETO_COMPRA_ID 
 	 join AERO.butacas bu on p.BUTACA_ID = bu.ID
 	 join AERO.aeronaves a on a.ID = bu.AERONAVE_ID
-	 where  b.VUELO_ID =@vuelo AND bu.ESTADO ='COMPRADO')
+	 join AERO.butacas_por_vuelo buV on bu.ID=buV.BUTACA_ID and buV.VUELO_ID=@vuelo
+	 where  b.VUELO_ID =@vuelo AND buV.ESTADO ='COMPRADO')
 	 SET @butacasTot=(SELECT a.CANT_BUTACAS from AERO.vuelos v join
 	AERO.aeronaves a on a.ID = v.AERONAVE_ID
 	where v.ID = @vuelo )
@@ -1094,7 +1139,8 @@ join AERO.butacas b on naves.ID = b.Aeronave_id
 join AERO.vuelos v on naves.ID=v.AERONAVE_ID 
 join AERO.rutas r on v.RUTA_ID=r.ID 
 join AERO.aeropuertos a on r.DESTINO_ID=a.ID 
-where b.ESTADO = 'LIBRE' and
+join AERO.butacas_por_vuelo buV on v.ID=buV.VUELO_ID
+where buV.ESTADO = 'LIBRE' and
 v.FECHA_SALIDA between @fechaFrom and @fechaTo and
 v.FECHA_LLEGADA between @fechaFrom and @fechaTo 
 group by a.NOMBRE
@@ -1316,8 +1362,8 @@ where f.NOMBRE = m.Aeronave_Fabricante and ts.NOMBRE = m.Tipo_Servicio
 and m.Butaca_Nro = (select max(Butaca_Nro) from [GD2C2015].[gd_esquema].[Maestra] j where m.Aeronave_Matricula = j.Aeronave_Matricula)
 group by m.Aeronave_Matricula, m.Aeronave_Modelo, m.Aeronave_KG_Disponibles, f.ID, ts.ID, m.Butaca_Nro
 
-INSERT INTO AERO.butacas (NUMERO, TIPO, PISO, AERONAVE_ID, ESTADO)
-SELECT M.Butaca_Nro, M.Butaca_Tipo, M.Butaca_Piso, A.ID, 'COMPRADO'
+INSERT INTO AERO.butacas (NUMERO, TIPO, PISO, AERONAVE_ID)
+SELECT M.Butaca_Nro, M.Butaca_Tipo, M.Butaca_Piso, A.ID
 FROM AERO.aeronaves A, GD2C2015.gd_esquema.Maestra M
 WHERE A.MATRICULA = M.Aeronave_Matricula AND M.Butaca_Nro != 0
 GROUP BY M.Butaca_Nro, M.Butaca_Tipo, M.Butaca_Piso, A.ID
@@ -1347,20 +1393,21 @@ FROM [GD2C2015].[gd_esquema].[Maestra] m, AERO.aeronaves a, AERO.rutas r, AERO.a
 WHERE m.[Ruta_Codigo] = r.CODIGO AND m.[Ruta_Ciudad_Origen] = p1.NOMBRE AND p1.ID = r.ORIGEN_ID AND m.[Ruta_Ciudad_Destino] = p2.NOMBRE 
 AND p2.ID = r.DESTINO_ID AND a.MATRICULA = m.[Aeronave_Matricula]
 GROUP BY m.[FechaSalida], m.[Fecha_LLegada_Estimada], m.[FechaLLegada], a.ID, r.ID
+
+--TODO: INSERTAR EN TABLA ASOCIATIVA BUTACA POR VUELO
+
 -----------------------------------------------------------------------
 -- EJECUCION DE PROCEDURES
 
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Consultar Millas';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Cliente';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Aeronave';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Ciudad';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Tarjeta de Crédito';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Aeronave';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Ciudad';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Cliente';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Tarjeta de Crédito';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Modificacion de Aeronave';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='Modificacion de Ciudad';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Modificacion de Cliente';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Realizar Canje';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Rol';
@@ -1380,6 +1427,12 @@ EXEC AERO.addFuncionalidad @rol='cliente', @func ='Realizar Canje';
 -----------------------------------------------------------------------
 -- CONSULTA DE LISTADOS
 
+--set de datos para prueba 3
+insert into AERO.butacas_por_vuelo values(1,37,'COMPRADO')
+
+select * from AERO.butacas_por_vuelo
+--select * from AERO.pasajes
+
 --set de datos para prueba 4
 insert into AERO.boletos_de_compra values(ABS(CHECKSUM(NewId())) % 7,CURRENT_TIMESTAMP,1,'efectivo',1,22,1)
 insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22,1)
@@ -1391,10 +1444,10 @@ insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) valu
 insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(3, CURRENT_TIMESTAMP, 'porque me pinto!');
 
 --set de datos para prueba
-insert into AERO.pasajes values(100,1,37,1,1,0)
-insert into AERO.pasajes values(100,2,37,1,2,0)
-insert into AERO.pasajes values(100,3,37,1,4,0)
-insert into AERO.pasajes values(100,4,37,1,5,0)
+insert into AERO.pasajes values(100,1,37,1,1,NULL)
+insert into AERO.pasajes values(100,2,37,1,2,NULL)
+insert into AERO.pasajes values(100,3,37,1,4,NULL)
+insert into AERO.pasajes values(100,4,37,1,5,NULL)
 /*
 select * from AERO.aeropuertos
 select * from AERO.tipos_de_servicio
