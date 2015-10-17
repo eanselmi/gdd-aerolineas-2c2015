@@ -44,7 +44,7 @@ namespace AerolineaFrba.Abm_Ruta
 
         private void botonBuscar_Click(object sender, EventArgs e)
         {
-            filtrarRutas(textBoxCodigo.Text, textBoxOrigen.Text, textBoxDestino.Text, textBoxServicio.Text);
+          this.dataGridListadoRutas.DataSource =  filtrarRutas(textBoxCodigo.Text, textBoxOrigen.Text, textBoxDestino.Text, textBoxServicio.Text);
         }
 
         private DataTable filtrarRutas(string codigo, string origen, string destino, string tipoServicio)

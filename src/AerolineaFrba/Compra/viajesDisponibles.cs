@@ -13,15 +13,22 @@ namespace AerolineaFrba.Compra
 {
     public partial class viajesDisponibles : Form
     {
+        DataTable listado;
         public viajesDisponibles()
         {
             InitializeComponent();
+            this.consultarViajes();
         }
 
         private void consultarViajes()
-        {   
-            //TODO:Hacer o un procedure o funcion para sacar la cantidad de butacas y kg libres
-            //DataTable listado = SqlConnector
+        {
+            List<string> lista = new List<string>();
+            lista.Add("@fecha");
+
+            listado = SqlConnector.obtenerTablaSegunProcedure("AERO.vuelosDisponibles", lista,
+             Convert.ToDateTime(timePickerFecha.Value));
+            dataGridViajes.DataSource = listado;
+            dataGridViajes.Columns[0].Visible = false;
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
@@ -41,8 +48,7 @@ namespace AerolineaFrba.Compra
 
                    if (timePickerFecha.Value >= DateTime.Today)
                       {
-                      //dataGridViajes.DataSource = filtrarViajes();
-                      //dataGridViajes.Columns[0].Visible = false;
+                          filtrarViajes();
                       }
                    else
                       {
@@ -54,7 +60,7 @@ namespace AerolineaFrba.Compra
         }
 
         private void filtrarViajes()
-        {   //TODO: Hacer filtrado
+        {   
            
         }
 
@@ -91,6 +97,7 @@ namespace AerolineaFrba.Compra
             comboBoxDestino.DataSource = dt2;
             comboBoxDestino.DisplayMember = "NOMBRE";
             comboBoxDestino.ValueMember = "ID";
+            Limpiar();
         }
     }
 }
