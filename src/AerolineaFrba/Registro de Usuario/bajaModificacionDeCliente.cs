@@ -25,7 +25,7 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         private void bajaModificacionDeCliente_Load(object sender, EventArgs e)
         {
-            funcionesComunes.consultarClientes(dataGridListadoClientes);
+            listado =funcionesComunes.consultarClientes(dataGridListadoClientes);
         }
 
         private void botonBuscar_Click(object sender, EventArgs e)
@@ -70,7 +70,7 @@ namespace AerolineaFrba.Registro_de_Usuario
         private void limpiar()
         {
             dataGridListadoClientes.DataSource = null;
-            funcionesComunes.consultarClientes(dataGridListadoClientes);
+            listado =  funcionesComunes.consultarClientes(dataGridListadoClientes);
             textNombre.Text = "";
             textApellido.Text = "";
             textMail.Text = "";
@@ -109,7 +109,7 @@ namespace AerolineaFrba.Registro_de_Usuario
             {
                 MessageBox.Show("El cliente se dio de baja exitosamente");
             }
-            funcionesComunes.consultarClientes(dataGridListadoClientes);
+               listado = funcionesComunes.consultarClientes(dataGridListadoClientes);
         }
 
         private void bajaModificacionDeCliente_Enter(object sender, EventArgs e)

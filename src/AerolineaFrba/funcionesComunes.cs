@@ -169,8 +169,8 @@ namespace AerolineaFrba
         #endregion
 
         #region consultas
-        
-        public static void consultarRutas(DataGridView datagridview)
+
+        public static DataTable consultarRutas(DataGridView datagridview)
         {
             DataTable listadoRutas = SqlConnector.obtenerTablaSegunConsultaString(@"SELECT r.ID as ID, r.CODIGO as Codigo, 
                 r.PRECIO_BASE_KG as 'Precio Base Kg', r.PRECIO_BASE_PASAJE as 'Precio Base Pasaje', 
@@ -179,9 +179,10 @@ namespace AerolineaFrba
                 r.DESTINO_ID=c2.ID AND r.TIPO_SERVICIO_ID = t.ID AND r.BAJA = 0 ");
             datagridview.DataSource = listadoRutas;
             datagridview.Columns[0].Visible = false;
+            return listadoRutas;
         }
 
-        public static void consultarAeronaves(DataGridView datagridview)
+        public static DataTable consultarAeronaves(DataGridView datagridview)
         {
             DataTable listadoAeronaves = SqlConnector.obtenerTablaSegunConsultaString(@"SELECT a.ID as Id, a.MATRICULA as Matricula, 
                 a.MODELO as Modelo, a.KG_DISPONIBLES as 'KG Disponibles', f.NOMBRE as Fabricante, ts.NOMBRE as 
@@ -190,6 +191,7 @@ namespace AerolineaFrba
                 a.TIPO_SERVICIO_ID = ts.ID AND a.BAJA IS NULL;");
             datagridview.DataSource = listadoAeronaves;
             datagridview.Columns[0].Visible = false;
+            return listadoAeronaves;
         }
 
         public static DataTable consultarVuelos()
@@ -223,7 +225,7 @@ namespace AerolineaFrba
             datagridview.Columns[0].Visible = false;
         }
 
-        public static void consultarRoles(DataGridView datagridview){
+        public static DataTable consultarRoles(DataGridView datagridview){
             DataTable listado = SqlConnector.obtenerTablaSegunConsultaString(@"select r.ID as IdRol, 
                 r.NOMBRE as Rol, r.ACTIVO as Activo from AERO.roles r");
             listado.Columns.Add("Estado", typeof(String));
@@ -237,9 +239,10 @@ namespace AerolineaFrba
             datagridview.DataSource = listado;
             datagridview.Columns[0].Visible = false;
             datagridview.Columns[2].Visible = false;
+            return listado;
         }
 
-        public static void consultarClientes(DataGridView datagridview)
+        public static DataTable consultarClientes(DataGridView datagridview)
         {
             DataTable listado = SqlConnector.obtenerTablaSegunConsultaString(@"select ID as Id,
                 NOMBRE as Nombre, APELLIDO as Apellido, DNI as Dni, DIRECCION as Dirección, 
@@ -247,6 +250,18 @@ namespace AerolineaFrba
                 from AERO.clientes where BAJA = 0");
             datagridview.DataSource = listado;
             datagridview.Columns[0].Visible = false;
+            return listado;
+        }
+
+       public static DataTable consultarViajesDisponibles(DataGridView datagridview)
+        {
+            List<string> lista = new List<string>();
+            lista.Add("@fecha");
+            DataTable listado;
+            listado = SqlConnector.obtenerTablaSegunProcedure("AERO.vuelosDisponibles", lista,DateTime.Today);
+            datagridview.DataSource = listado;
+            datagridview.Columns[0].Visible = false;
+            return listado;
         }
 
         #endregion

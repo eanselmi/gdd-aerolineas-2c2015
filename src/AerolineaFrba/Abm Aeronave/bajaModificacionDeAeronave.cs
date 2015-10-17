@@ -40,7 +40,7 @@ namespace AerolineaFrba.Abm_Aeronave
 
         private void bajaModificacionDeAeronave_Load(object sender, EventArgs e)
         {
-            funcionesComunes.consultarAeronaves(dataGridListadoAeronaves);
+           listado = funcionesComunes.consultarAeronaves(dataGridListadoAeronaves);
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)
