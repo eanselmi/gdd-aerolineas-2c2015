@@ -859,7 +859,7 @@ AS BEGIN
 	AERO.aeronaves a on a.ID = v.AERONAVE_ID
 	where v.ID = @vuelo )
 	IF(@kgOcupados IS NULL)
-		SET @kgOcupados=0;
+		RETURN @kgTot;
 	RETURN @KgTot - @kgOcupados
 END
 GO
@@ -868,17 +868,17 @@ CREATE FUNCTION AERO.cantButacasLibres(@vuelo int)
 RETURNS INT
 AS BEGIN
 	DECLARE @butacasOcupadas INT;
-	DECLARE @butcasTot INT;
+	DECLARE @butacasTot INT;
 	SET @butacasOcupadas = (SELECT COUNT(bu.ID)
      FROM  [GD2C2015].[AERO].[boletos_de_compra] b 
 	 JOIN [GD2C2015].[AERO].[pasajes] p on b.ID = p.BOLETO_COMPRA_ID 
 	 join AERO.butacas bu on p.BUTACA_ID = bu.ID
 	 join AERO.aeronaves a on a.ID = bu.AERONAVE_ID
-	 where bu.ESTADO ='COMPRADO' AND b.VUELO_ID =@vuelo)
-	 SET @butcasTot=(SELECT a.CANT_BUTACAS from AERO.vuelos v join
+	 where  b.VUELO_ID =@vuelo AND bu.ESTADO ='COMPRADO')
+	 SET @butacasTot=(SELECT a.CANT_BUTACAS from AERO.vuelos v join
 	AERO.aeronaves a on a.ID = v.AERONAVE_ID
 	where v.ID = @vuelo )
-	 RETURN @butcasTot - @butacasOcupadas
+	RETURN  @butacasTot - @butacasOcupadas
 END
 GO
 
@@ -1041,7 +1041,7 @@ GO
 CREATE PROCEDURE AERO.vuelosDisponibles(@fecha DATETIME)
 AS BEGIN
 	Select v.ID as ID,a.MATRICULA as matricula,AERO.cantButacasLibres(v.ID) as 'Butacas Libres',
-	v.FECHA_SALIDA as 'Fecha Salida',AERO.kgLibres(v.ID) as 'kg Disponibles', 
+	v.FECHA_SALIDA as 'Fecha Salida',AERO.kgLibres(v.ID) as 'kg Disponibles', a.CANT_BUTACAS as 'total butacas',
 	o.NOMBRE as Origen,d.NOMBRE as Destino
 	from AERO.vuelos v
 	join AERO.rutas r on r.ID = v.RUTA_ID
@@ -1380,7 +1380,7 @@ EXEC AERO.addFuncionalidad @rol='cliente', @func ='Realizar Canje';
 -----------------------------------------------------------------------
 -- CONSULTA DE LISTADOS
 
-/*--set de datos para prueba 4
+--set de datos para prueba 4
 insert into AERO.boletos_de_compra values(ABS(CHECKSUM(NewId())) % 7,CURRENT_TIMESTAMP,1,'efectivo',1,22,1)
 insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22,1)
 insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22,2)
@@ -1421,6 +1421,7 @@ select * from AERO.aeronaves
 select * from AERO.aeronaves_por_periodos
 select * from AERO.periodos_de_inactividad
 */
+/*
 EXEC AERO.top5AeronavesFueraDeServicio @fechaFrom='01/01/2015', @fechaTo ='01/06/2015';
 */
 
