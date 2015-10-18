@@ -1085,9 +1085,8 @@ GO
 --Vuelos
 CREATE PROCEDURE AERO.vuelosDisponibles(@fecha DATETIME)
 AS BEGIN
-	Select v.ID as ID,a.MATRICULA as matricula,AERO.cantButacasLibres(v.ID) as 'Butacas Libres',
-	v.FECHA_SALIDA as 'Fecha Salida',AERO.kgLibres(v.ID) as 'kg Disponibles', a.CANT_BUTACAS as 'total butacas',
-	o.NOMBRE as Origen,d.NOMBRE as Destino
+	Select v.ID as ID ,v.FECHA_SALIDA as 'Salida', v.FECHA_LLEGADA_ESTIMADA as 'Llegada Estimada', o.NOMBRE as Origen, d.NOMBRE as Destino,
+	 AERO.cantButacasLibres(v.ID) as 'Butacas Libres', AERO.kgLibres(v.ID) as 'Kg Disponibles'
 	from AERO.vuelos v
 	join AERO.rutas r on r.ID = v.RUTA_ID
 	join AERO.aeropuertos o on r.ORIGEN_ID = o.ID
