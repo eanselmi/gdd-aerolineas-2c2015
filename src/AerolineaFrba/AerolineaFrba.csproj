@@ -214,12 +214,6 @@
     <Compile Include="Tarjeta\altaDeTarjeta.Designer.cs">
       <DependentUpon>altaDeTarjeta.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tarjeta\bajaTarjeta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Tarjeta\bajaTarjeta.Designer.cs">
-      <DependentUpon>bajaTarjeta.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Abm Aeronave\altaDeAeronave.resx">
       <DependentUpon>altaDeAeronave.cs</DependentUpon>
     </EmbeddedResource>

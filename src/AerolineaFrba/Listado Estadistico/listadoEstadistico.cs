@@ -47,23 +47,23 @@ namespace AerolineaFrba.Listado_Estadistico
             switch ((String)this.comboBoxListados.SelectedItem){
                 case "Top 5 Destinos con más pasajes comprados":
                     dt = SqlConnector.obtenerTablaSegunProcedure("AERO.top5DestinosConPasajes", 
-                        lista, fechaInicio, fechaFin);
+                        lista, String.Format("{0:yyyyMMdd HH:mm:ss}",fechaInicio), String.Format("{0:yyyyMMdd HH:mm:ss}",fechaFin));
                     break;
                 case "Top 5 Destinos con aeronaves más vacias":
                     dt = SqlConnector.obtenerTablaSegunProcedure("AERO.top5DestinosAeronavesVacias", 
-                        lista, fechaInicio, fechaFin);
+                        lista, String.Format("{0:yyyyMMdd HH:mm:ss}",fechaInicio),String.Format("{0:yyyyMMdd HH:mm:ss}",fechaFin));
                     break;
                 case "Top 5 Clientes con más puntos acumulados a la fecha":
                     dt = SqlConnector.obtenerTablaSegunProcedure("AERO.top5ClientesMillas", lista, 
-                        fechaInicio, fechaFin);
+                        String.Format("{0:yyyyMMdd HH:mm:ss}",fechaInicio), String.Format("{0:yyyyMMdd HH:mm:ss}",fechaFin));
                     break;
                 case "Top 5 Destinos con más pasajes cancelados":
                     dt = SqlConnector.obtenerTablaSegunProcedure("AERO.top5DestinosCancelados", 
-                        lista, fechaInicio, fechaFin);
+                        lista, String.Format("{0:yyyyMMdd HH:mm:ss}",fechaInicio), String.Format("{0:yyyyMMdd HH:mm:ss}",fechaFin));
                     break;
                 case "Top 5 Aeronaves con mayor cantidad de dias fuera de servicio":
                     dt = SqlConnector.obtenerTablaSegunProcedure("AERO.top5AeronavesFueraDeServicio",
-                        lista, fechaInicio, fechaFin);
+                        lista, String.Format("{0:yyyyMMdd HH:mm:ss}",fechaInicio), String.Format("{0:yyyyMMdd HH:mm:ss}",fechaFin));
                     break;
             }
             this.dataGridListadoEstadistico.DataSource = dt;

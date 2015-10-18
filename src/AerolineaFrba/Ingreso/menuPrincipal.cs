@@ -64,9 +64,6 @@ namespace AerolineaFrba.Ingreso
                 case "Baja de Cliente":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Registro_de_Usuario.bajaModificacionDeCliente());
                     break;
-                case "Baja de Tarjeta de Crédito":
-                    funcionesComunes.deshabilitarVentanaYAbrirNueva(new Tarjeta.bajaTarjeta());
-                    break;
                 case "Modificacion de Aeronave":
                     funcionesComunes.deshabilitarVentanaYAbrirNueva(new Abm_Aeronave.bajaModificacionDeAeronave());
                     break;

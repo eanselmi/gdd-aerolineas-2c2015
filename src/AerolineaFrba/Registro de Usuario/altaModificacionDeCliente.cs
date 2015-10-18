@@ -83,7 +83,7 @@ namespace AerolineaFrba.Registro_de_Usuario
                     lista.Add("@fechaNac");
                     bool resultado = SqlConnector.executeProcedure("AERO.agregarCliente", lista, 
                         funcionesComunes.getIdRolCliente(), nombre, apellido, dni, direccion,
-                        telefono, mail, Convert.ToDateTime(this.TimePickerNacimiento.Value));
+                        telefono, mail, String.Format("{0:yyyyMMdd HH:mm:ss}", this.TimePickerNacimiento.Value));
                     if (resultado)
                     {
                         MessageBox.Show("Se guardo exitosamente");

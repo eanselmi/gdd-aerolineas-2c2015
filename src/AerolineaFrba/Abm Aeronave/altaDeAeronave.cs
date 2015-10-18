@@ -70,7 +70,7 @@ namespace AerolineaFrba.Abm_Aeronave
                     lista.Add("@alta");
                     lista.Add("@cantButacas");
                     bool resultado = SqlConnector.executeProcedure("AERO.agregarAeronave", lista,matricula,modelo,kg,fabricante, servicio,
-                        Convert.ToDateTime(this.timePickerAlta.Value), cantButacas);
+                        String.Format("{0:yyyyMMdd HH:mm:ss}",this.timePickerAlta.Value), cantButacas);
                     if (resultado){
                         MessageBox.Show("Se guardo exitosamente");
                         limpiar();

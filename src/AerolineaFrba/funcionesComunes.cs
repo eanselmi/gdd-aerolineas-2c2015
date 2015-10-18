@@ -258,7 +258,7 @@ namespace AerolineaFrba
             List<string> lista = new List<string>();
             lista.Add("@fecha");
             DataTable listado;
-            listado = SqlConnector.obtenerTablaSegunProcedure("AERO.vuelosDisponibles", lista,DateTime.Today);
+            listado = SqlConnector.obtenerTablaSegunProcedure("AERO.vuelosDisponibles", lista,String.Format("{0:yyyyMMdd HH:mm:ss}",DateTime.Today));
             datagridview.DataSource = listado;
             datagridview.Columns[0].Visible = false;
             return listado;

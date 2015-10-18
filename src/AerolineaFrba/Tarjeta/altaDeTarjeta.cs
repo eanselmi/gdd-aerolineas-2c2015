@@ -13,6 +13,7 @@ namespace AerolineaFrba.Tarjeta
 {
     public partial class altaDeTarjeta : Form
     {
+        DataTable listado;
         public altaDeTarjeta()
         {
             InitializeComponent();
@@ -37,7 +38,18 @@ namespace AerolineaFrba.Tarjeta
         private void botonGuardar_Click(object sender, EventArgs e)
         {
             if (validarDatos()) {
-                
+                List<string> lista = new List<string>();
+                lista.Add("@idCliente");
+                lista.Add("@nroTarjeta");
+                lista.Add("@idTipo");
+                lista.Add("@fechaVto");
+                bool resultado = SqlConnector.executeProcedure("AERO.altaTarjeta", lista, Int32.Parse(dataGridCliente.SelectedCells[0].Value.ToString()), Int32.Parse(this.textBoxNumero.Text),
+                                              this.comboBoxTipoTarjeta.SelectedValue, String.Format("{0:yyyyMMdd HH:mm:ss}", this.fechavencimiento.Value));
+                if(resultado){
+                    MessageBox.Show("Se dio de alta la tarjeta exitosamente");
+                    funcionesComunes.habilitarAnterior();
+                }
+                 
                 
             }
         }
@@ -47,16 +59,39 @@ namespace AerolineaFrba.Tarjeta
             String dni = this.textBoxDni.Text;
             if (dni != "")
             {
-                List<string> lista = new List<string>();
-                lista.Add("@dni");
-                DataTable resultado = SqlConnector.obtenerTablaSegunProcedure("AERO.obtenerClienteConMillas", lista, dni);
-                dataGridCliente.DataSource = resultado;
-                dataGridCliente.Columns[0].Visible = false;
+                listado = funcionesComunes.consultarClientes(this.dataGridCliente);
+                this.dataGridCliente.DataSource = this.filtrarCliente();
+
             }
             else
             {
                 MessageBox.Show("Ingrese un numero de documento", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private DataTable filtrarCliente()
+        {
+            DataTable tablaClientes = listado;
+            var final_rol = "";
+            var posFiltro = true;
+            var filtrosBusqueda = new List<string>();
+
+            if (this.textBoxDni.Text != "") filtrosBusqueda.Add("Dni = " + this.textBoxDni.Text);
+          
+
+            foreach (var filtro in filtrosBusqueda)
+            {
+                if (!posFiltro)
+                    final_rol += " AND " + filtro;
+                else
+                {
+                    final_rol += filtro;
+                    posFiltro = false;
+                }
+            }
+            if (tablaClientes != null)
+                tablaClientes.DefaultView.RowFilter = final_rol;
+            return tablaClientes;
         }
 
         
@@ -68,16 +103,22 @@ namespace AerolineaFrba.Tarjeta
                 numero = 0;
             else
                 numero = Int32.Parse(this.textBoxNumero.Text);
-            if (this.dataGridCliente.DataSource != null && numero > 0 && this.comboBoxTipoTarjeta.SelectedValue != null)
-                return true;
-            else MessageBox.Show("Complete los campos requeridos correctamente", "Error", MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
-            if (this.fechavencimiento.Value > DateTime.Today)
-                return true;
+            if (this.dataGridCliente.DataSource != null && numero > 0 && this.comboBoxTipoTarjeta.SelectedValue != null) {
+                if (this.fechavencimiento.Value <= DateTime.Today.AddDays(1))
+                {
+                    MessageBox.Show("La fecha de vencimiento debe ser superior a la de hoy", "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                    return false;
+                }
+                else
+                    return true;
+            }
             else
-                MessageBox.Show("La fecha de vencimiento debe ser superior a la de hoy", "Error", MessageBoxButtons.OK,
+            {
+                MessageBox.Show("Complete los campos requeridos correctamente", "Error", MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
-            return false;
+                return false;
+            }
    
         }
 
