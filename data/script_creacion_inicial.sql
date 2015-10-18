@@ -618,7 +618,6 @@ INSERT INTO AERO.funcionalidades VALUES
 ('Baja de Aeronave'),
 ('Baja de Ciudad'),
 ('Baja de Cliente'),
-('Baja de Tarjeta de Crédito'),
 ('Modificacion de Aeronave'),
 ('Modificacion de Cliente'),
 ('Realizar Canje'),
@@ -1017,14 +1016,14 @@ GO
 -- CLIENTES
 CREATE PROCEDURE AERO.agregarCliente(@rol_id INT, @nombreCliente nvarchar(255), @apellidoCliente nvarchar(255), 
 	@documentoCliente numeric(18,0), @direccion nvarchar(255), 
-	@telefono numeric(18,0), @mail nvarchar(255), @fechaNac datetime)
+	@telefono numeric(18,0), @mail nvarchar(255), @fechaNac varchar(50))
 AS BEGIN
 	INSERT INTO AERO.Clientes (rol_id, nombre, apellido, dni, direccion,telefono,
 	mail,FECHA_NACIMIENTO)  
 	VALUES (@rol_id, SUBSTRING(UPPER (@nombreCliente), 1, 1) + SUBSTRING (LOWER (@nombreCliente), 2,LEN(@nombreCliente)), 
 	SUBSTRING(UPPER (@apellidoCliente), 1, 1) + SUBSTRING (LOWER (@apellidoCliente), 2,LEN(@apellidoCliente)), 
 	@documentoCliente, @direccion, 
-	@telefono, AERO.corrigeMail(@mail), @fechaNac)
+	@telefono, AERO.corrigeMail(@mail), convert(datetime, @fechaNac,109))
 END
 GO
 
@@ -1046,20 +1045,21 @@ GO
 
 -- AERONAVES
 CREATE PROCEDURE AERO.agregarAeronave(@matricula nvarchar(255), @modelo nvarchar(255), @kg_disponibles numeric(18,0), 
-@fabricante nvarchar(255), @tipo_servicio nvarchar(255), @alta datetime, @cantButacas int)
+@fabricante nvarchar(255), @tipo_servicio nvarchar(255), @alta varchar(50), @cantButacas int)
 AS BEGIN
 	INSERT INTO AERO.aeronaves(MATRICULA, MODELO, KG_DISPONIBLES, FABRICANTE_ID, TIPO_SERVICIO_ID, FECHA_ALTA, CANT_BUTACAS)
-	VALUES (@matricula, @modelo, @kg_disponibles, @fabricante, @tipo_servicio, @alta, @cantButacas)
+	VALUES (@matricula, @modelo, @kg_disponibles, @fabricante, @tipo_servicio, convert(datetime, @alta,109), @cantButacas)
 END
 GO
 
-CREATE PROCEDURE AERO.updateAeronave(@id  INT, @fechaInicio DATETIME, @fechaFin DATETIME)
+CREATE PROCEDURE AERO.updateAeronave(@id  INT, @fechaInicio varchar(50), @fechaFin varchar(50))
 AS BEGIN
 DECLARE @IDPERIODO INT
-SELECT @IDPERIODO= ID FROM AERO.periodos_de_inactividad WHERE DESDE=@fechaInicio AND HASTA=@fechaFin
+SELECT @IDPERIODO= ID FROM AERO.periodos_de_inactividad WHERE DESDE=convert(datetime, @fechaInicio,109) AND 
+HASTA=convert(datetime, @fechaFin,109)
 	IF(@IDPERIODO IS NULL)
 		BEGIN
-			INSERT INTO AERO.periodos_de_inactividad VALUES(@fechaInicio,@fechaFin) 
+			INSERT INTO AERO.periodos_de_inactividad VALUES(convert(datetime, @fechaInicio,109),convert(datetime, @fechaFin,109)) 
 			SET @IDPERIODO=SCOPE_IDENTITY()
 		END
 INSERT INTO  AERO.aeronaves_por_periodos VALUES(@ID,@IDPERIODO)
@@ -1101,7 +1101,7 @@ END
 GO
 
 --Vuelos
-CREATE PROCEDURE AERO.vuelosDisponibles(@fecha DATETIME)
+CREATE PROCEDURE AERO.vuelosDisponibles(@fecha varchar(50))
 AS BEGIN
 	Select v.ID as ID ,v.FECHA_SALIDA as 'Salida', v.FECHA_LLEGADA_ESTIMADA as 'Llegada Estimada', o.NOMBRE as Origen, d.NOMBRE as Destino,
 	 AERO.cantButacasLibres(v.ID) as 'Butacas Libres', AERO.kgLibres(v.ID) as 'Kg Disponibles'
@@ -1110,7 +1110,7 @@ AS BEGIN
 	join AERO.aeropuertos o on r.ORIGEN_ID = o.ID
 	join AERO.aeropuertos d on r.DESTINO_ID = d.ID
 	join AERO.aeronaves a on v.AERONAVE_ID = a.ID
-	where (v.INVALIDO = 0) AND (v.FECHA_SALIDA > @fecha) 
+	where (v.INVALIDO = 0) AND (v.FECHA_SALIDA > convert(datetime, @fecha,109)) 
 	AND( (AERO.cantButacasLibres(v.ID)  != 0 ) OR (AERO.kgLibres(v.ID) !=0 ))
 END
 GO
@@ -1118,7 +1118,7 @@ GO
 
 --LISTADOS ESTADISTICOS
 --TOP 5 de los destino con mas pasajes comprados
-CREATE PROCEDURE AERO.top5DestinosConPasajes(@fechaFrom DATETIME, @fechaTo DATETIME)
+CREATE PROCEDURE AERO.top5DestinosConPasajes(@fechaFrom varchar(50), @fechaTo varchar(50))
 AS BEGIN
 select top 5 a.NOMBRE as Destino, count(p.ID) as 'Cantidad de Pasajes' 
 from AERO.pasajes p 
@@ -1127,28 +1127,28 @@ join AERO.vuelos v on bc.VUELO_ID=v.ID
 join AERO.rutas r on v.RUTA_ID=r.ID
 join AERO.aeropuertos a on r.DESTINO_ID=a.ID
 where bc.id not in (select BOLETO_COMPRA_ID from AERO.cancelaciones)
-and  bc.FECHA_COMPRA between @fechaFrom and @fechaTo 
+and  bc.FECHA_COMPRA between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109)
 group by a.nombre 
 order by 2 desc
 END
 GO
 
 --TOP 5 de los destinos con más pasajes cancelados (ESTAMOS CONTANDO BOLETO DE COMPRA CANCELADO Y NO PASAJES!!!)
-CREATE PROCEDURE AERO.top5DestinosCancelados(@fechaFrom DATETIME, @fechaTo DATETIME)
+CREATE PROCEDURE AERO.top5DestinosCancelados(@fechaFrom varchar(50), @fechaTo varchar(50))
 AS BEGIN
 select top 5 a.NOMBRE as AERONAVE, count(c.ID) as 'cancelaciones por aeronave' from AERO.cancelaciones c
 join AERO.boletos_de_compra bc on c.BOLETO_COMPRA_ID = bc.ID
 join AERO.vuelos v on bc.VUELO_ID = v.ID
 join AERO.rutas r on v.RUTA_ID=r.ID
 join AERO.aeropuertos a on r.DESTINO_ID=a.ID
-where bc.FECHA_COMPRA between @fechaFrom and @fechaTo 
+where bc.FECHA_COMPRA between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109)
 group by a.NOMBRE 
 order by 2 desc
 END
 GO
 
 --TOP 5 de los destino con aeronaves mas vacias
-CREATE PROCEDURE AERO.top5DestinosAeronavesVacias(@fechaFrom DATETIME, @fechaTo DATETIME)
+CREATE PROCEDURE AERO.top5DestinosAeronavesVacias(@fechaFrom varchar(50), @fechaTo varchar(50))
 AS BEGIN
 select a.NOMBRE as Destino, count(b.ID) as 'Butacas Vacias' 
 from AERO.aeronaves naves 
@@ -1158,15 +1158,15 @@ join AERO.rutas r on v.RUTA_ID=r.ID
 join AERO.aeropuertos a on r.DESTINO_ID=a.ID 
 join AERO.butacas_por_vuelo buV on v.ID=buV.VUELO_ID
 where buV.ESTADO = 'LIBRE' and
-v.FECHA_SALIDA between @fechaFrom and @fechaTo and
-v.FECHA_LLEGADA between @fechaFrom and @fechaTo 
+v.FECHA_SALIDA between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109) and
+v.FECHA_LLEGADA between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109)
 group by a.NOMBRE
 order by 2 desc
 END
 GO
 
 --TOP de los clientes con mas puntos acumulados a la fecha (la fecha es hasta el dia de hoy)
-CREATE PROCEDURE AERO.top5ClientesMillas(@fechaFrom DATETIME, @fechaTo DATETIME)
+CREATE PROCEDURE AERO.top5ClientesMillas(@fechaFrom varchar(50), @fechaTo varchar(50))
 AS BEGIN
 /*creo tabla temporal, para poder insertar de ambas queries*/
 create table #tablaMillas(
@@ -1201,13 +1201,13 @@ drop table #tablaMillas
 END
 GO
 
-CREATE PROCEDURE AERO.top5AeronavesFueraDeServicio(@fechaFrom DATETIME, @fechaTo DATETIME)
+CREATE PROCEDURE AERO.top5AeronavesFueraDeServicio(@fechaFrom varchar(50), @fechaTo varchar(50))
 AS BEGIN
 select top 5 a.matricula as 'Nombre Aeronave', sum(DATEDIFF(day,pi.desde,pi.hasta)) as 'Cantidad de días fuera de servicio'  from AERO.aeronaves_por_periodos ap
 join Aero.periodos_de_inactividad pi on ap.periodo_id=pi.id
 join AERO.aeronaves a on ap.aeronave_id= a.id
-where pi.desde between @fechaFrom and @fechaTo AND
-pi.hasta between @fechaFrom and @fechaTo 
+where pi.desde between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109) AND
+pi.hasta between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109) 
 group by a.matricula
 order by 2 desc 
 END
@@ -1221,20 +1221,20 @@ VALUES (convert(datetime, @fechaSalida,109), convert(datetime, @fechaLlegadaEsti
 END
 GO
 
-CREATE PROCEDURE AERO.registrarLlegada(@idVuelo int, @fechaLlegada datetime)
+CREATE PROCEDURE AERO.registrarLlegada(@idVuelo int, @fechaLlegada varchar(50))
 AS BEGIN
 UPDATE AERO.vuelos
-SET FECHA_LLEGADA = @fechaLlegada
+SET FECHA_LLEGADA = convert(datetime, @fechaLlegada,109)
 WHERE ID = @idVuelo
 END
 GO
 
-CREATE PROCEDURE AERO.validarVuelo (@id int, @fechaSalida datetime, @fechaLlegadaEstimada datetime)
+CREATE PROCEDURE AERO.validarVuelo (@id int, @fechaSalida varchar(50), @fechaLlegadaEstimada varchar(50))
 AS BEGIN
 select COUNT(v.ID) from AERO.vuelos v
-where v.AERONAVE_ID = @id and (v.FECHA_SALIDA between @fechaSalida and @fechaLlegadaEstimada
-or v.FECHA_LLEGADA between @fechaSalida and @fechaLlegadaEstimada 
-or v.FECHA_LLEGADA_ESTIMADA between @fechaSalida and @fechaLlegadaEstimada)
+where v.AERONAVE_ID = @id and (v.FECHA_SALIDA between convert(datetime, @fechaSalida,109) and convert(datetime, @fechaLlegadaEstimada,109)
+or v.FECHA_LLEGADA between convert(datetime, @fechaSalida,109) and convert(datetime, @fechaLlegadaEstimada,109)
+or v.FECHA_LLEGADA_ESTIMADA between convert(datetime, @fechaSalida,109) and convert(datetime, @fechaLlegadaEstimada,109))
 END
 GO
 
@@ -1486,7 +1486,6 @@ EXEC AERO.addFuncionalidad @rol='administrador', @func ='Alta de Tarjeta de Cré
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Aeronave';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Ciudad';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Cliente';
-EXEC AERO.addFuncionalidad @rol='administrador', @func ='Baja de Tarjeta de Crédito';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Modificacion de Aeronave';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Modificacion de Cliente';
 EXEC AERO.addFuncionalidad @rol='administrador', @func ='Realizar Canje';
@@ -1503,6 +1502,7 @@ EXEC AERO.addFuncionalidad @rol='administrador', @func ='Consultar Listado';
 EXEC AERO.addFuncionalidad @rol='cliente', @func ='Comprar Pasaje/Encomienda';
 EXEC AERO.addFuncionalidad @rol='cliente', @func ='Consultar Millas';
 EXEC AERO.addFuncionalidad @rol='cliente', @func ='Realizar Canje';
+EXEC AERO.addFuncionalidad @rol='cliente', @func ='Alta de Tarjeta de Crédito';
 
 -----------------------------------------------------------------------
 -- CONSULTA DE LISTADOS
