@@ -841,6 +841,24 @@ BEGIN
 END;
 GO
 
+IF OBJECT_ID('AERO.migracionButacasPorVuelo') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.migracionButacasPorVuelo;
+END;
+GO
+
+IF OBJECT_ID('AERO.altaTarjeta') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.altaTarjeta;
+END;
+GO
+
+IF OBJECT_ID('AERO.bajaCiudad') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.bajaCiudad;
+END;
+GO
+
 --CREATE
 CREATE FUNCTION AERO.corrigeMail (@s NVARCHAR (255)) 
 RETURNS NVARCHAR(255)
@@ -1085,9 +1103,8 @@ GO
 --Vuelos
 CREATE PROCEDURE AERO.vuelosDisponibles(@fecha DATETIME)
 AS BEGIN
-	Select v.ID as ID,a.MATRICULA as matricula,AERO.cantButacasLibres(v.ID) as 'Butacas Libres',
-	v.FECHA_SALIDA as 'Fecha Salida',AERO.kgLibres(v.ID) as 'kg Disponibles', a.CANT_BUTACAS as 'total butacas',
-	o.NOMBRE as Origen,d.NOMBRE as Destino
+	Select v.ID as ID ,v.FECHA_SALIDA as 'Salida', v.FECHA_LLEGADA_ESTIMADA as 'Llegada Estimada', o.NOMBRE as Origen, d.NOMBRE as Destino,
+	 AERO.cantButacasLibres(v.ID) as 'Butacas Libres', AERO.kgLibres(v.ID) as 'Kg Disponibles'
 	from AERO.vuelos v
 	join AERO.rutas r on r.ID = v.RUTA_ID
 	join AERO.aeropuertos o on r.ORIGEN_ID = o.ID
@@ -1221,6 +1238,41 @@ or v.FECHA_LLEGADA_ESTIMADA between @fechaSalida and @fechaLlegadaEstimada)
 END
 GO
 
+--BUTACAS POR VUELO
+CREATE PROCEDURE AERO.migracionButacasPorVuelo
+AS BEGIN
+declare @cantAeronaves int
+select @cantAeronaves = count(ID) from aero.aeronaves
+declare @j int
+set @j = 1
+	while(@j != @cantAeronaves+1)
+	begin
+	declare @cantButacas int
+	SELECT @cantButacas = a.CANT_BUTACAS from AERO.aeronaves a where a.ID = @j
+	declare @i int
+	set @i = 1
+		WHILE(@i != @cantButacas+1)
+		begin
+			IF((SELECT count(b.ID) FROM AERO.butacas b, AERO.vuelos v
+			where v.INVALIDO = 0 and b.AERONAVE_ID = @j and v.AERONAVE_ID = @j and b.NUMERO = @i) = 0)
+				begin
+				INSERT INTO AERO.butacas_por_vuelo(BUTACA_ID, VUELO_ID, ESTADO)
+				SELECT b.ID, v.ID,'LIBRE' FROM AERO.butacas b, AERO.vuelos v
+				where v.INVALIDO = 0 and b.AERONAVE_ID = @j and v.AERONAVE_ID = @j and b.NUMERO = @i
+				end
+			else
+				begin
+				INSERT INTO AERO.butacas_por_vuelo(BUTACA_ID, VUELO_ID, ESTADO)
+				SELECT b.ID, v.ID,'COMPRADO' FROM AERO.butacas b, AERO.vuelos v
+				where v.INVALIDO = 0 and b.AERONAVE_ID = @j and v.AERONAVE_ID = @j and b.NUMERO = @i
+				end
+		set @i = @i+1
+		end
+	set @j = @j+1
+	end
+END
+GO
+
 -- MILLAS
 CREATE PROCEDURE AERO.consultarMillas (@dni numeric(18,0))
 AS BEGIN
@@ -1297,6 +1349,34 @@ SET STOCK = STOCK - @cantidad
 where ID = @idProducto
 END
 GO
+
+-- TARJETAS
+CREATE PROCEDURE AERO.altaTarjeta (@idCliente int, @nroTarjeta numeric(18,0), @idTipo int, @fechaVto varchar(255))
+AS BEGIN
+INSERT INTO AERO.tarjetas_de_credito (CLIENTE_ID, NUMERO, TIPO_TARJETA_ID, FECHA_VTO)
+VALUES (@idCliente, @nroTarjeta, @idTipo, convert(datetime, @fechaVto,109))
+END
+GO
+
+-- CIUDADES
+/* NO TENEMOS QUE HACER DELETE, TENDRIAMOS QUE HACER UNA BAJA LOGICA (PONERLE UN CAMPO BAJA A RUTAS, AEROPUERTOS Y CIUDADES)
+PORQUE SINO VAMOS A TENER QUE ELIMINAR VUELOS, BOLETOS DE COMPRA (LOS QUE ESTEN ASOCIADOS A ESOS Y VAMOS A ROMPER TODO)
+
+CREATE PROCEDURE AERO.bajaCiudad (@idCiudad int)
+AS BEGIN
+UPDATE AERO.vuelos
+SET INVALIDO = 1
+WHERE RUTA_ID IN (SELECT ID FROM AERO.rutas WHERE ORIGEN_ID IN(SELECT ID FROM AERO.aeropuertos WHERE CIUDAD_ID = @idCiudad) 
+OR DESTINO_ID IN(SELECT ID FROM AERO.aeropuertos WHERE CIUDAD_ID = @idCiudad))
+DELETE AERO.rutas
+WHERE ORIGEN_ID IN(SELECT ID FROM AERO.aeropuertos WHERE CIUDAD_ID = @idCiudad) 
+OR DESTINO_ID IN(SELECT ID FROM AERO.aeropuertos WHERE CIUDAD_ID = @idCiudad)
+DELETE AERO.aeropuertos
+WHERE CIUDAD_ID = @idCiudad
+DELETE AERO.ciudades
+WHERE ID = @idCiudad
+END
+GO*/
 
 -----------------------------------------------------------------------
 -- TRIGGERS
@@ -1394,8 +1474,8 @@ WHERE m.[Ruta_Codigo] = r.CODIGO AND m.[Ruta_Ciudad_Origen] = p1.NOMBRE AND p1.I
 AND p2.ID = r.DESTINO_ID AND a.MATRICULA = m.[Aeronave_Matricula]
 GROUP BY m.[FechaSalida], m.[Fecha_LLegada_Estimada], m.[FechaLLegada], a.ID, r.ID
 
---TODO: INSERTAR EN TABLA ASOCIATIVA BUTACA POR VUELO
-
+/*ejecucion de procedure que migra la tabla de butacas por vuelo*/
+EXEC AERO.migracionButacasPorVuelo
 -----------------------------------------------------------------------
 -- EJECUCION DE PROCEDURES
 
@@ -1427,11 +1507,9 @@ EXEC AERO.addFuncionalidad @rol='cliente', @func ='Realizar Canje';
 -----------------------------------------------------------------------
 -- CONSULTA DE LISTADOS
 
+/*
 --set de datos para prueba 3
 insert into AERO.butacas_por_vuelo values(1,37,'COMPRADO')
-
-select * from AERO.butacas_por_vuelo
---select * from AERO.pasajes
 
 --set de datos para prueba 4
 insert into AERO.boletos_de_compra values(ABS(CHECKSUM(NewId())) % 7,CURRENT_TIMESTAMP,1,'efectivo',1,22,1)
@@ -1448,19 +1526,9 @@ insert into AERO.pasajes values(100,1,37,1,1,NULL)
 insert into AERO.pasajes values(100,2,37,1,2,NULL)
 insert into AERO.pasajes values(100,3,37,1,4,NULL)
 insert into AERO.pasajes values(100,4,37,1,5,NULL)
-/*
-select * from AERO.aeropuertos
-select * from AERO.tipos_de_servicio
-select * from AERO.rutas
-select * from AERO.butacas
-select * from AERO.clientes
-select * from AERO.boletos_de_compra
-select * from AERO.pasajes
-select * from AERO.cancelaciones
-*/
+
 EXEC AERO.top5DestinosCancelados @fechaFrom='01/01/2000', @fechaTo ='01/01/2999';
 
-/*
 --set de datos para prueba5
 insert into AERO.periodos_de_inactividad values('01/01/2015','30/05/2015')
 insert into AERO.periodos_de_inactividad values('20/01/2015','30/12/2015')
@@ -1470,17 +1538,6 @@ insert into AERO.aeronaves_por_periodos values(1,1)
 insert into AERO.aeronaves_por_periodos values(1,2)
 insert into AERO.aeronaves_por_periodos values(2,3)
 insert into AERO.aeronaves_por_periodos values(2,4)
-select * from AERO.aeronaves
-select * from AERO.aeronaves_por_periodos
-select * from AERO.periodos_de_inactividad
-*/
-/*
+
 EXEC AERO.top5AeronavesFueraDeServicio @fechaFrom='01/01/2015', @fechaTo ='01/06/2015';
 */
-
-
-
-
-
-
-

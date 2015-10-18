@@ -156,11 +156,18 @@
             // 
             // dataGridViajes
             // 
+            this.dataGridViajes.AllowUserToAddRows = false;
+            this.dataGridViajes.AllowUserToDeleteRows = false;
+            this.dataGridViajes.AllowUserToResizeColumns = false;
+            this.dataGridViajes.AllowUserToResizeRows = false;
             this.dataGridViajes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViajes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViajes.Location = new System.Drawing.Point(39, 216);
+            this.dataGridViajes.MultiSelect = false;
             this.dataGridViajes.Name = "dataGridViajes";
+            this.dataGridViajes.ReadOnly = true;
             this.dataGridViajes.RowHeadersVisible = false;
+            this.dataGridViajes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViajes.ShowCellToolTips = false;
             this.dataGridViajes.ShowEditingIcon = false;
             this.dataGridViajes.Size = new System.Drawing.Size(689, 270);
@@ -206,6 +213,11 @@
             // 
             this.numericUpDownEncomiendas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDownEncomiendas.Location = new System.Drawing.Point(313, 54);
+            this.numericUpDownEncomiendas.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.numericUpDownEncomiendas.Name = "numericUpDownEncomiendas";
             this.numericUpDownEncomiendas.Size = new System.Drawing.Size(125, 26);
             this.numericUpDownEncomiendas.TabIndex = 1;
@@ -219,6 +231,11 @@
             this.numericUpDownPasajes.Size = new System.Drawing.Size(121, 26);
             this.numericUpDownPasajes.TabIndex = 0;
             this.numericUpDownPasajes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDownPasajes.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // botonVolver
             // 
