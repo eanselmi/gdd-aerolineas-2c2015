@@ -65,23 +65,11 @@
     <Compile Include="Abm Aeronave\modificacionDeAeronave.Designer.cs">
       <DependentUpon>modificacionDeAeronave.cs</DependentUpon>
     </Compile>
-    <Compile Include="Abm Ciudad\altaDeCiudad.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Ciudad\altaDeCiudad.Designer.cs">
-      <DependentUpon>altaDeCiudad.cs</DependentUpon>
-    </Compile>
     <Compile Include="Abm Ciudad\bajaModificacionDeCiudad.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Abm Ciudad\bajaModificacionDeCiudad.Designer.cs">
       <DependentUpon>bajaModificacionDeCiudad.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Abm Ciudad\modificacionDeCiudad.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Abm Ciudad\modificacionDeCiudad.Designer.cs">
-      <DependentUpon>modificacionDeCiudad.cs</DependentUpon>
     </Compile>
     <Compile Include="Abm Rol\altaModificacionDeRol.cs">
       <SubType>Form</SubType>
@@ -241,14 +229,8 @@
     <EmbeddedResource Include="Abm Aeronave\modificacionDeAeronave.resx">
       <DependentUpon>modificacionDeAeronave.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Abm Ciudad\altaDeCiudad.resx">
-      <DependentUpon>altaDeCiudad.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Abm Ciudad\bajaModificacionDeCiudad.resx">
       <DependentUpon>bajaModificacionDeCiudad.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Abm Ciudad\modificacionDeCiudad.resx">
-      <DependentUpon>modificacionDeCiudad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Abm Rol\altaModificacionDeRol.resx">
       <DependentUpon>altaModificacionDeRol.cs</DependentUpon>
