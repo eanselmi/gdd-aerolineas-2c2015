@@ -253,12 +253,12 @@ namespace AerolineaFrba
             return listado;
         }
 
-       public static DataTable consultarViajesDisponibles(DataGridView datagridview)
+       public static DataTable consultarViajesDisponibles(DataGridView datagridview,string fecha)
         {
             List<string> lista = new List<string>();
             lista.Add("@fecha");
             DataTable listado;
-            listado = SqlConnector.obtenerTablaSegunProcedure("AERO.vuelosDisponibles", lista,String.Format("{0:yyyyMMdd HH:mm:ss}",DateTime.Today));
+            listado = SqlConnector.obtenerTablaSegunProcedure("AERO.vuelosDisponibles", lista,fecha);
             datagridview.DataSource = listado;
             datagridview.Columns[0].Visible = false;
             return listado;

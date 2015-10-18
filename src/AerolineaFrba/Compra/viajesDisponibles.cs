@@ -17,18 +17,7 @@ namespace AerolineaFrba.Compra
         public viajesDisponibles()
         {
             InitializeComponent();
-            listado = funcionesComunes.consultarViajesDisponibles(this.dataGridViajes);
-        }
-
-        private void consultarViajes()
-        {
-            List<string> lista = new List<string>();
-            lista.Add("@fecha");
-
-            listado = SqlConnector.obtenerTablaSegunProcedure("AERO.vuelosDisponibles", lista,
-             Convert.ToDateTime(timePickerFecha.Value));
-            dataGridViajes.DataSource = listado;
-            dataGridViajes.Columns[0].Visible = false;
+            funcionesComunes.consultarViajesDisponibles(this.dataGridViajes, String.Format("{0:yyyyMMdd HH:mm:ss}", this.timePickerFecha.Value));
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
@@ -48,7 +37,8 @@ namespace AerolineaFrba.Compra
 
                    if (timePickerFecha.Value >= DateTime.Today)
                       {
-                          filtrarViajes();
+                         this.dataGridViajes.DataSource = filtrarViajes();
+                         this.dataGridViajes.Columns[0].Visible = false;
                       }
                    else
                       {
@@ -59,16 +49,33 @@ namespace AerolineaFrba.Compra
             }
         }
 
-        private void filtrarViajes()
-        {   
-           
+        private DataTable filtrarViajes()
+        {
+            listado = funcionesComunes.consultarViajesDisponibles(this.dataGridViajes, String.Format("{0:yyyyMMdd HH:mm:ss}", this.timePickerFecha.Value));
+            var final_rol = "";
+            var posFiltro = true;
+            var filtrosBusqueda = new List<string>();
+            filtrosBusqueda.Add("Origen LIKE '%" + this.comboBoxOrigen.Text + "%'");
+            filtrosBusqueda.Add("Destino LIKE '%" + this.comboBoxDestino.Text + "%'");
+            
+            foreach (var filtro in filtrosBusqueda)
+            {
+                if (!posFiltro)
+                    final_rol += " AND " + filtro;
+                else
+                {
+                    final_rol += filtro;
+                    posFiltro = false;
+                }
+            }
+            if (listado != null)
+                listado.DefaultView.RowFilter = final_rol;
+            return listado;
         }
 
         private void botonLimpiar_Click(object sender, EventArgs e)
         {
             Limpiar();
-            this.comboBoxOrigen.SelectedIndex = -1;
-            this.comboBoxDestino.SelectedIndex = -1;
         }
 
         private void Limpiar()
@@ -76,8 +83,9 @@ namespace AerolineaFrba.Compra
             this.timePickerFecha.ResetText();
             this.numericUpDownEncomiendas.ResetText();
             this.numericUpDownPasajes.ResetText();
-            this.comboBoxOrigen.SelectedIndex = -1;
-            this.comboBoxDestino.SelectedIndex = -1;
+            this.comboBoxOrigen.SelectedIndex = 0;
+            this.comboBoxDestino.SelectedIndex = 0;
+            funcionesComunes.consultarViajesDisponibles(this.dataGridViajes, String.Format("{0:yyyyMMdd HH:mm:ss}", this.timePickerFecha.Value));
         }
 
         private void viajesDisponibles_Load(object sender, EventArgs e)
@@ -97,7 +105,6 @@ namespace AerolineaFrba.Compra
             comboBoxDestino.DataSource = dt2;
             comboBoxDestino.DisplayMember = "NOMBRE";
             comboBoxDestino.ValueMember = "ID";
-            Limpiar();
         }
     }
 }

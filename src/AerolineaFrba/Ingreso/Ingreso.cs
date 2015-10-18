@@ -72,6 +72,7 @@ namespace AerolineaFrba.Ingreso
         private void botonInvitado_Click(object sender, EventArgs e)
         {
             //Apertura formulario menu para invitado
+            this.botonLimpiar.PerformClick();
             funcionesComunes.setRol("cliente");
             funcionesComunes.deshabilitarVentanaYAbrirNueva(new menuPrincipal());
         } 
@@ -93,5 +94,7 @@ namespace AerolineaFrba.Ingreso
                 MessageBox.Show("El rol de cliente no puede ser seteado");
             }
         }
+
+        
     }
 }
