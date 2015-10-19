@@ -32,7 +32,7 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         private void altaModificacionDeCliente_Load(object sender, EventArgs e)
         {
-            if (textBoxTipoForm.Text == "0")
+            if (textBoxTipoForm.Text == "0" || textBoxTipoForm.Text == "1")
             {
                 botonModificar.Visible = false;
             }
@@ -88,6 +88,8 @@ namespace AerolineaFrba.Registro_de_Usuario
                     {
                         MessageBox.Show("Se guardo exitosamente");
                         botonLimpiar.PerformClick();
+                        if (this.textBoxTipoForm.Text == "1")
+                            funcionesComunes.habilitarAnterior();
                     }
                 }
                 else
