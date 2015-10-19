@@ -38,21 +38,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.botonGuardar = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.botonActualizarDatosPas = new System.Windows.Forms.Button();
-            this.textBoxFechaNacPas = new System.Windows.Forms.TextBox();
-            this.textBoxTelefonoPas = new System.Windows.Forms.TextBox();
-            this.botonNuevoPasajero = new System.Windows.Forms.Button();
-            this.textBoxMailPas = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBoxDireccionPas = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxNombrePas = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBoxApellidoPas = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxDniPas = new System.Windows.Forms.TextBox();
             this.dataGridPasaje = new System.Windows.Forms.DataGridView();
@@ -95,14 +80,29 @@
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.botonVolver = new System.Windows.Forms.Button();
             this.botonComprar = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxApellidoPas = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxNombrePas = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxDireccionPas = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxMailPas = new System.Windows.Forms.TextBox();
+            this.botonNuevoPasajero = new System.Windows.Forms.Button();
+            this.textBoxTelefonoPas = new System.Windows.Forms.TextBox();
+            this.textBoxFechaNacPas = new System.Windows.Forms.TextBox();
+            this.botonActualizarDatosPas = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPasaje)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEnco)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -223,184 +223,7 @@
             this.botonGuardar.TabIndex = 25;
             this.botonGuardar.Text = "Buscar";
             this.botonGuardar.UseVisualStyleBackColor = true;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.botonActualizarDatosPas);
-            this.groupBox2.Controls.Add(this.textBoxFechaNacPas);
-            this.groupBox2.Controls.Add(this.textBoxTelefonoPas);
-            this.groupBox2.Controls.Add(this.botonNuevoPasajero);
-            this.groupBox2.Controls.Add(this.textBoxMailPas);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.textBoxDireccionPas);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.textBoxNombrePas);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.textBoxApellidoPas);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(133, 9);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(343, 160);
-            this.groupBox2.TabIndex = 31;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Datos del Pasajero";
-            // 
-            // botonActualizarDatosPas
-            // 
-            this.botonActualizarDatosPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonActualizarDatosPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonActualizarDatosPas.Location = new System.Drawing.Point(275, 112);
-            this.botonActualizarDatosPas.Name = "botonActualizarDatosPas";
-            this.botonActualizarDatosPas.Size = new System.Drawing.Size(62, 42);
-            this.botonActualizarDatosPas.TabIndex = 35;
-            this.botonActualizarDatosPas.Text = "Actualizar Datos";
-            this.botonActualizarDatosPas.UseVisualStyleBackColor = true;
-            // 
-            // textBoxFechaNacPas
-            // 
-            this.textBoxFechaNacPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxFechaNacPas.BackColor = System.Drawing.Color.White;
-            this.textBoxFechaNacPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxFechaNacPas.Location = new System.Drawing.Point(146, 124);
-            this.textBoxFechaNacPas.Name = "textBoxFechaNacPas";
-            this.textBoxFechaNacPas.ReadOnly = true;
-            this.textBoxFechaNacPas.Size = new System.Drawing.Size(115, 20);
-            this.textBoxFechaNacPas.TabIndex = 44;
-            // 
-            // textBoxTelefonoPas
-            // 
-            this.textBoxTelefonoPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxTelefonoPas.BackColor = System.Drawing.Color.White;
-            this.textBoxTelefonoPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxTelefonoPas.Location = new System.Drawing.Point(146, 79);
-            this.textBoxTelefonoPas.Name = "textBoxTelefonoPas";
-            this.textBoxTelefonoPas.ReadOnly = true;
-            this.textBoxTelefonoPas.Size = new System.Drawing.Size(115, 20);
-            this.textBoxTelefonoPas.TabIndex = 43;
-            // 
-            // botonNuevoPasajero
-            // 
-            this.botonNuevoPasajero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonNuevoPasajero.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonNuevoPasajero.Location = new System.Drawing.Point(275, 67);
-            this.botonNuevoPasajero.Name = "botonNuevoPasajero";
-            this.botonNuevoPasajero.Size = new System.Drawing.Size(62, 42);
-            this.botonNuevoPasajero.TabIndex = 32;
-            this.botonNuevoPasajero.Text = "Nuevo";
-            this.botonNuevoPasajero.UseVisualStyleBackColor = true;
-            // 
-            // textBoxMailPas
-            // 
-            this.textBoxMailPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxMailPas.BackColor = System.Drawing.Color.White;
-            this.textBoxMailPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxMailPas.Location = new System.Drawing.Point(146, 35);
-            this.textBoxMailPas.Name = "textBoxMailPas";
-            this.textBoxMailPas.ReadOnly = true;
-            this.textBoxMailPas.Size = new System.Drawing.Size(115, 20);
-            this.textBoxMailPas.TabIndex = 42;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(143, 108);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(93, 13);
-            this.label7.TabIndex = 41;
-            this.label7.Text = "Fecha Nacimiento";
-            // 
-            // label6
-            // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(143, 19);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(26, 13);
-            this.label6.TabIndex = 39;
-            this.label6.Text = "Mail";
-            // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(143, 63);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(49, 13);
-            this.label5.TabIndex = 37;
-            this.label5.Text = "Teléfono";
-            // 
-            // textBoxDireccionPas
-            // 
-            this.textBoxDireccionPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxDireccionPas.BackColor = System.Drawing.Color.White;
-            this.textBoxDireccionPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDireccionPas.Location = new System.Drawing.Point(9, 124);
-            this.textBoxDireccionPas.Name = "textBoxDireccionPas";
-            this.textBoxDireccionPas.ReadOnly = true;
-            this.textBoxDireccionPas.Size = new System.Drawing.Size(115, 20);
-            this.textBoxDireccionPas.TabIndex = 36;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 108);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 13);
-            this.label4.TabIndex = 35;
-            this.label4.Text = "Dirección";
-            // 
-            // textBoxNombrePas
-            // 
-            this.textBoxNombrePas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxNombrePas.BackColor = System.Drawing.Color.White;
-            this.textBoxNombrePas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxNombrePas.Location = new System.Drawing.Point(9, 79);
-            this.textBoxNombrePas.Name = "textBoxNombrePas";
-            this.textBoxNombrePas.ReadOnly = true;
-            this.textBoxNombrePas.Size = new System.Drawing.Size(115, 20);
-            this.textBoxNombrePas.TabIndex = 34;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 63);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
-            this.label3.TabIndex = 33;
-            this.label3.Text = "Nombre";
-            // 
-            // textBoxApellidoPas
-            // 
-            this.textBoxApellidoPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxApellidoPas.BackColor = System.Drawing.Color.White;
-            this.textBoxApellidoPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxApellidoPas.Location = new System.Drawing.Point(9, 35);
-            this.textBoxApellidoPas.Name = "textBoxApellidoPas";
-            this.textBoxApellidoPas.ReadOnly = true;
-            this.textBoxApellidoPas.Size = new System.Drawing.Size(115, 20);
-            this.textBoxApellidoPas.TabIndex = 32;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 19);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(44, 13);
-            this.label2.TabIndex = 31;
-            this.label2.Text = "Apellido";
+            this.botonGuardar.Click += new System.EventHandler(this.botonGuardar_Click);
             // 
             // label1
             // 
@@ -418,9 +241,11 @@
             this.textBoxDniPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxDniPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxDniPas.Location = new System.Drawing.Point(10, 53);
+            this.textBoxDniPas.MaxLength = 8;
             this.textBoxDniPas.Name = "textBoxDniPas";
             this.textBoxDniPas.Size = new System.Drawing.Size(117, 26);
             this.textBoxDniPas.TabIndex = 29;
+            this.textBoxDniPas.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.valida);
             // 
             // dataGridPasaje
             // 
@@ -829,6 +654,184 @@
             this.botonComprar.UseVisualStyleBackColor = true;
             this.botonComprar.Click += new System.EventHandler(this.botonComprar_Click);
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(6, 19);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 31;
+            this.label2.Text = "Apellido";
+            // 
+            // textBoxApellidoPas
+            // 
+            this.textBoxApellidoPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxApellidoPas.BackColor = System.Drawing.Color.White;
+            this.textBoxApellidoPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxApellidoPas.Location = new System.Drawing.Point(9, 35);
+            this.textBoxApellidoPas.Name = "textBoxApellidoPas";
+            this.textBoxApellidoPas.ReadOnly = true;
+            this.textBoxApellidoPas.Size = new System.Drawing.Size(115, 20);
+            this.textBoxApellidoPas.TabIndex = 32;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(6, 63);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 13);
+            this.label3.TabIndex = 33;
+            this.label3.Text = "Nombre";
+            // 
+            // textBoxNombrePas
+            // 
+            this.textBoxNombrePas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxNombrePas.BackColor = System.Drawing.Color.White;
+            this.textBoxNombrePas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxNombrePas.Location = new System.Drawing.Point(9, 79);
+            this.textBoxNombrePas.Name = "textBoxNombrePas";
+            this.textBoxNombrePas.ReadOnly = true;
+            this.textBoxNombrePas.Size = new System.Drawing.Size(115, 20);
+            this.textBoxNombrePas.TabIndex = 34;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(6, 108);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 13);
+            this.label4.TabIndex = 35;
+            this.label4.Text = "Dirección";
+            // 
+            // textBoxDireccionPas
+            // 
+            this.textBoxDireccionPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxDireccionPas.BackColor = System.Drawing.Color.White;
+            this.textBoxDireccionPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxDireccionPas.Location = new System.Drawing.Point(9, 124);
+            this.textBoxDireccionPas.Name = "textBoxDireccionPas";
+            this.textBoxDireccionPas.ReadOnly = true;
+            this.textBoxDireccionPas.Size = new System.Drawing.Size(115, 20);
+            this.textBoxDireccionPas.TabIndex = 36;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(143, 63);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(49, 13);
+            this.label5.TabIndex = 37;
+            this.label5.Text = "Teléfono";
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(143, 19);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(26, 13);
+            this.label6.TabIndex = 39;
+            this.label6.Text = "Mail";
+            // 
+            // label7
+            // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(143, 108);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(93, 13);
+            this.label7.TabIndex = 41;
+            this.label7.Text = "Fecha Nacimiento";
+            // 
+            // textBoxMailPas
+            // 
+            this.textBoxMailPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxMailPas.BackColor = System.Drawing.Color.White;
+            this.textBoxMailPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxMailPas.Location = new System.Drawing.Point(146, 35);
+            this.textBoxMailPas.Name = "textBoxMailPas";
+            this.textBoxMailPas.ReadOnly = true;
+            this.textBoxMailPas.Size = new System.Drawing.Size(115, 20);
+            this.textBoxMailPas.TabIndex = 42;
+            // 
+            // botonNuevoPasajero
+            // 
+            this.botonNuevoPasajero.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.botonNuevoPasajero.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonNuevoPasajero.Location = new System.Drawing.Point(275, 67);
+            this.botonNuevoPasajero.Name = "botonNuevoPasajero";
+            this.botonNuevoPasajero.Size = new System.Drawing.Size(62, 42);
+            this.botonNuevoPasajero.TabIndex = 32;
+            this.botonNuevoPasajero.Text = "Nuevo";
+            this.botonNuevoPasajero.UseVisualStyleBackColor = true;
+            // 
+            // textBoxTelefonoPas
+            // 
+            this.textBoxTelefonoPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxTelefonoPas.BackColor = System.Drawing.Color.White;
+            this.textBoxTelefonoPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTelefonoPas.Location = new System.Drawing.Point(146, 79);
+            this.textBoxTelefonoPas.Name = "textBoxTelefonoPas";
+            this.textBoxTelefonoPas.ReadOnly = true;
+            this.textBoxTelefonoPas.Size = new System.Drawing.Size(115, 20);
+            this.textBoxTelefonoPas.TabIndex = 43;
+            // 
+            // textBoxFechaNacPas
+            // 
+            this.textBoxFechaNacPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxFechaNacPas.BackColor = System.Drawing.Color.White;
+            this.textBoxFechaNacPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxFechaNacPas.Location = new System.Drawing.Point(146, 124);
+            this.textBoxFechaNacPas.Name = "textBoxFechaNacPas";
+            this.textBoxFechaNacPas.ReadOnly = true;
+            this.textBoxFechaNacPas.Size = new System.Drawing.Size(115, 20);
+            this.textBoxFechaNacPas.TabIndex = 44;
+            // 
+            // botonActualizarDatosPas
+            // 
+            this.botonActualizarDatosPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.botonActualizarDatosPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonActualizarDatosPas.Location = new System.Drawing.Point(275, 112);
+            this.botonActualizarDatosPas.Name = "botonActualizarDatosPas";
+            this.botonActualizarDatosPas.Size = new System.Drawing.Size(62, 42);
+            this.botonActualizarDatosPas.TabIndex = 35;
+            this.botonActualizarDatosPas.Text = "Actualizar Datos";
+            this.botonActualizarDatosPas.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.botonActualizarDatosPas);
+            this.groupBox2.Controls.Add(this.textBoxFechaNacPas);
+            this.groupBox2.Controls.Add(this.textBoxTelefonoPas);
+            this.groupBox2.Controls.Add(this.botonNuevoPasajero);
+            this.groupBox2.Controls.Add(this.textBoxMailPas);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.textBoxDireccionPas);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.textBoxNombrePas);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.textBoxApellidoPas);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(133, 9);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(343, 160);
+            this.groupBox2.TabIndex = 31;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Datos del Pasajero";
+            // 
             // cargaDeDatos
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -846,8 +849,6 @@
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridPasaje)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -856,6 +857,8 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEnco)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -864,7 +867,6 @@
 
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView dataGridPasaje;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxDniPas;
         private System.Windows.Forms.Button botonLimpiarPas;
@@ -875,20 +877,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button botonGuardar;
-        private System.Windows.Forms.Button botonActualizarDatosPas;
-        private System.Windows.Forms.TextBox textBoxFechaNacPas;
-        private System.Windows.Forms.TextBox textBoxTelefonoPas;
-        private System.Windows.Forms.Button botonNuevoPasajero;
-        private System.Windows.Forms.TextBox textBoxMailPas;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBoxDireccionPas;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBoxNombrePas;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxApellidoPas;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button botonLimpiarEnco;
         private System.Windows.Forms.Button botonCargarEnco;
@@ -929,5 +917,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.Button botonEliminarPasaje;
         private System.Windows.Forms.Button botonEliminarEnco;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button botonActualizarDatosPas;
+        private System.Windows.Forms.TextBox textBoxFechaNacPas;
+        private System.Windows.Forms.TextBox textBoxTelefonoPas;
+        private System.Windows.Forms.Button botonNuevoPasajero;
+        private System.Windows.Forms.TextBox textBoxMailPas;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxDireccionPas;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBoxNombrePas;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBoxApellidoPas;
+        private System.Windows.Forms.Label label2;
     }
 }
