@@ -30,6 +30,9 @@ namespace AerolineaFrba.Compra
             if (compraValida())
             {
                 Form frmCargaDeDatos = new Compra.cargaDeDatos();
+                ((TextBox)frmCargaDeDatos.Controls["textBoxTipoForm"]).Text = this.numericUpDownPasajes.Value.ToString();
+                ((TextBox)frmCargaDeDatos.Controls["textBox1"]).Text = this.numericUpDownEncomiendas.Value.ToString();
+                
                 funcionesComunes.deshabilitarVentanaYAbrirNueva(frmCargaDeDatos);
             }
         }

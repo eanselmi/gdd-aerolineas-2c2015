@@ -47,6 +47,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textNombre = new System.Windows.Forms.TextBox();
             this.lblApellido = new System.Windows.Forms.Label();
+            this.textBoxTipoForm = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridListadoClientes)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -257,12 +258,23 @@
             this.lblApellido.TabIndex = 6;
             this.lblApellido.Text = "Nombre";
             // 
+            // textBoxTipoForm
+            // 
+            this.textBoxTipoForm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxTipoForm.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxTipoForm.Location = new System.Drawing.Point(32, 39);
+            this.textBoxTipoForm.Name = "textBoxTipoForm";
+            this.textBoxTipoForm.Size = new System.Drawing.Size(33, 26);
+            this.textBoxTipoForm.TabIndex = 78;
+            this.textBoxTipoForm.Visible = false;
+            // 
             // bajaModificacionDeCliente
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(722, 481);
             this.ControlBox = false;
+            this.Controls.Add(this.textBoxTipoForm);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.botonLimpiar);
             this.Controls.Add(this.dataGridListadoClientes);
@@ -278,6 +290,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -302,5 +315,6 @@
         private System.Windows.Forms.Button botonBuscar;
         private System.Windows.Forms.TextBox textDireccion;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxTipoForm;
     }
 }

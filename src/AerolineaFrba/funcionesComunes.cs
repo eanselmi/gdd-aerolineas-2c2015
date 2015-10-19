@@ -52,6 +52,10 @@ namespace AerolineaFrba
                 ventanaAnterior.Show();
             }
         }
+        public static Form getVentanaAnterior() 
+        {
+            return ventanaAnterior;        
+        }
 
         //esta funcion permite volver al menu principal
         public static void volverAMenuPrincipal()

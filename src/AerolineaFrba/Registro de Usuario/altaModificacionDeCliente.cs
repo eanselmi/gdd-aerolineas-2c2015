@@ -72,24 +72,17 @@ namespace AerolineaFrba.Registro_de_Usuario
             {
                 if (TimePickerNacimiento.Value < DateTime.Today)
                 {
-                    List<string> lista = new List<string>();
-                    lista.Add("@rol_id");
-                    lista.Add("@nombreCliente");
-                    lista.Add("@apellidoCliente");
-                    lista.Add("@documentoCliente");
-                    lista.Add("@direccion");
-                    lista.Add("@telefono");
-                    lista.Add("@mail");
-                    lista.Add("@fechaNac");
-                    bool resultado = SqlConnector.executeProcedure("AERO.agregarCliente", lista, 
-                        funcionesComunes.getIdRolCliente(), nombre, apellido, dni, direccion,
-                        telefono, mail, String.Format("{0:yyyyMMdd HH:mm:ss}", this.TimePickerNacimiento.Value));
+                    bool resultado=true;
+                    if (this.textBoxTipoForm.Text == "1")
+                    {
+                        this.setearParaCompras();
+                    }
+                    else
+                       resultado=  this.persistirCliente();
                     if (resultado)
                     {
                         MessageBox.Show("Se guardo exitosamente");
                         botonLimpiar.PerformClick();
-                        if (this.textBoxTipoForm.Text == "1")
-                            funcionesComunes.habilitarAnterior();
                     }
                 }
                 else
@@ -103,6 +96,50 @@ namespace AerolineaFrba.Registro_de_Usuario
                 MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, 
                     MessageBoxIcon.Error);
             }
+        }
+
+        private void setearParaCompras()
+        {
+            Form anterior = funcionesComunes.getVentanaAnterior();
+            foreach (Control gb in anterior.Controls)
+            {
+                if (gb is GroupBox)
+                {
+                    if (gb.Name == "groupBox1")
+                    {
+                        foreach (Control subgb in gb.Controls)
+                        {
+                            if (subgb.Name == "groupBox2")
+                            {
+                                ((TextBox)subgb.Controls["textBoxApellidoPas"]).Text = this.textBoxApellido.Text;
+                                ((TextBox)subgb.Controls["textBoxNombrePas"]).Text = this.textBoxNombre.Text;
+                                ((TextBox)subgb.Controls["textBoxDireccionPas"]).Text = this.textBoxDireccion.Text;
+                                ((TextBox)subgb.Controls["textBoxMailPas"]).Text = this.textBoxMail.Text;
+                                ((TextBox)subgb.Controls["textBoxTelefonoPas"]).Text = this.textBoxTelefono.Text;
+                                ((DateTimePicker)subgb.Controls["timePickerFecha"]).Value = this.TimePickerNacimiento.Value;
+                            }
+                        }
+                    }
+                }
+            }
+            funcionesComunes.habilitarAnterior();
+        }
+
+        private bool persistirCliente()
+        {
+            List<string> lista = new List<string>();
+            lista.Add("@rol_id");
+            lista.Add("@nombreCliente");
+            lista.Add("@apellidoCliente");
+            lista.Add("@documentoCliente");
+            lista.Add("@direccion");
+            lista.Add("@telefono");
+            lista.Add("@mail");
+            lista.Add("@fechaNac");
+            bool resultado = SqlConnector.executeProcedure("AERO.agregarCliente", lista,
+                funcionesComunes.getIdRolCliente(), nombre, apellido, dni, direccion,
+                telefono, mail, String.Format("{0:yyyyMMdd HH:mm:ss}", this.TimePickerNacimiento.Value));
+            return resultado;
         }
 
         private void botonModificar_Click(object sender, EventArgs e)

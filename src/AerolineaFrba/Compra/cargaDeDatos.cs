@@ -54,6 +54,7 @@ namespace AerolineaFrba.Compra
                     if (validarDni(dni))
                     {
                         //TODO Hacer que mueste un nueva vista tal vez con los resultados de clientes con ese dni para elegir uno 
+
                     }
                     else
                     {
