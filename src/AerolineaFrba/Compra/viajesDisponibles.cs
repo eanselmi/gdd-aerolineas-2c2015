@@ -17,7 +17,7 @@ namespace AerolineaFrba.Compra
         public viajesDisponibles()
         {
             InitializeComponent();
-            funcionesComunes.consultarViajesDisponibles(this.dataGridViajes, String.Format("{0:yyyyMMdd HH:mm:ss}", this.timePickerFecha.Value));
+            funcionesComunes.consultarViajesDisponibles(this.dataGridViajes, String.Format("{0:yyyyMMdd HH:mm:ss}", DateTime.Today.Subtract(TimeSpan.FromDays(1))));
         }
 
         private void botonVolver_Click(object sender, EventArgs e)
@@ -27,8 +27,29 @@ namespace AerolineaFrba.Compra
 
         private void botonComprar_Click(object sender, EventArgs e)
         {
-            Form frmCargaDeDatos = new Compra.cargaDeDatos();
-            funcionesComunes.deshabilitarVentanaYAbrirNueva(frmCargaDeDatos);
+            if (compraValida())
+            {
+                Form frmCargaDeDatos = new Compra.cargaDeDatos();
+                funcionesComunes.deshabilitarVentanaYAbrirNueva(frmCargaDeDatos);
+            }
+        }
+
+        private bool compraValida()
+        {
+            if (this.numericUpDownPasajes.Value == 0 && this.numericUpDownEncomiendas.Value == 0) {
+                MessageBox.Show("Debes eleccionar una cantidad de pasajes o kg");
+                return false;
+            }
+            if (this.numericUpDownPasajes.Value > Int32.Parse( dataGridViajes.SelectedCells[5].Value.ToString())) {
+                MessageBox.Show("No hay esa cantidad de pasajes disponibles para ese vuelo");
+                return false;
+            }
+            if (this.numericUpDownEncomiendas.Value > Int32.Parse(dataGridViajes.SelectedCells[6].Value.ToString()))
+            {
+                MessageBox.Show("No hay esa cantidad de Kg disponibles para ese vuelo");
+                return false;
+            }
+            return true;
         }
 
         private void botonBuscar_Click(object sender, EventArgs e)
@@ -81,8 +102,8 @@ namespace AerolineaFrba.Compra
         private void Limpiar()
         {
             this.timePickerFecha.ResetText();
-            this.numericUpDownEncomiendas.ResetText();
-            this.numericUpDownPasajes.ResetText();
+            this.numericUpDownEncomiendas.Value=0;
+            this.numericUpDownPasajes.Value=0;
             this.comboBoxOrigen.SelectedIndex = 0;
             this.comboBoxDestino.SelectedIndex = 0;
             funcionesComunes.consultarViajesDisponibles(this.dataGridViajes, String.Format("{0:yyyyMMdd HH:mm:ss}", this.timePickerFecha.Value));

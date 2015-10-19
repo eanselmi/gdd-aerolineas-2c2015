@@ -231,11 +231,6 @@
             this.numericUpDownPasajes.Size = new System.Drawing.Size(121, 26);
             this.numericUpDownPasajes.TabIndex = 0;
             this.numericUpDownPasajes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDownPasajes.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // botonVolver
             // 

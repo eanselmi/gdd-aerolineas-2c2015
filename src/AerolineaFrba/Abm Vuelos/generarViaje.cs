@@ -127,6 +127,11 @@ namespace AerolineaFrba.Abm_Vuelos
 
         private bool validar() 
         {
+            if (this.timePickerSalida.Value < DateTime.Today) 
+            {
+                MessageBox.Show("La fecha de salida no puede ser posterior a la de hoy");
+                return false;
+            }
             if (this.timePickerSalida.Value > this.timePickerLlegadaEstimada.Value){
                 MessageBox.Show("No puede haber una fecha de salida despues de la estima");
                 return false;
