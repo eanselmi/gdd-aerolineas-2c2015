@@ -207,7 +207,7 @@ CREATE TABLE AERO.clientes (
 
 CREATE TABLE AERO.boletos_de_compra (
     ID INT IDENTITY(1,1)    PRIMARY KEY,
-    CODIGO_COMPRA    NUMERIC(18,0)    NOT NULL,
+    CODIGO_COMPRA    INT IDENTITY(100000,1) NOT NULL,
     FECHA_COMPRA    DATETIME          NOT NULL,
     PRECIO_COMPRA    NUMERIC(18,2)	NOT NULL,
     TIPO_COMPRA    NVARCHAR(255),
@@ -1510,11 +1510,46 @@ GROUP BY m.[FechaSalida], m.[Fecha_LLegada_Estimada], m.[FechaLLegada], a.ID, r.
 /*ejecucion de procedure que migra la tabla de butacas por vuelo*/
 EXEC AERO.migracionButacasPorVuelo
 
+
 /*CUANDO MIGREMOS LOS PASAJES, PAQUETES Y BOLETOS DE COMPRA HABRIA QUE HACER TODO JUNTO, LAS MILLAS DEL BOLETO DE COMPRA
 SE CALCULA COMO PRECIO TOTAL / 10 (PONEMOS SOLO LA PARTE ENTERA) Y EL PRECIO TOTAL COMO LA SUMATORIA DE LOS PRECIOS PARCIALES
 DE LOS PASAJES Y PAQUETES ADQUIRIDOS, LOS PRECIOS PARCIALES TENEMOS QUE CALCULARLOS ASI: TENEMOS EL VUELO_ID EN EL BOLETO DE COMPRA, 
 CON ESE ID LE PEGAMOS AL VUELO QUE TIENE UNA RUTA_ID, ESA RUTA TIENE UN PRECIO BASE PASAJE (QUE ES EL PRECIO QUE LE PONEMOS A CADA PASAJE)
 Y UN PRECIO BASE KG QUE LO MULTIPLICAMOS POR LOS KG DEL PAQUETE*/
+
+/* MIGRACION DE BOLETO DE COMPRA, PASAJES y PAQUETES
+
+FALTARIA UPDATE DE MILLAS Y PRECIO DE COMPRA PARA EL BOLETO DE COMPRA Y UNIFICAR FILAS QUE TENGAN MISMO CLIENTE, MISMO VUELO Y MISMA FECHA
+
+INSERT INTO AERO.boletos_de_compra (CLIENTE_ID, FECHA_COMPRA, MILLAS, PRECIO_COMPRA, TIPO_COMPRA, VUELO_ID)
+
+SELECT C.ID, CASE WHEN Paquete_FechaCompra != 0 THEN Paquete_FechaCompra ELSE Pasaje_FechaCompra END AS FechaCompra, NULL as Millas, 0 as Precio, 'EFECTIVO', v.ID
+FROM GD2C2015.gd_esquema.Maestra M
+join AERO.clientes C on C.APELLIDO = SUBSTRING(UPPER (m.Cli_Apellido), 1, 1) + SUBSTRING (LOWER (m.Cli_Apellido), 2,LEN(m.Cli_Apellido))
+and C.NOMBRE = SUBSTRING(UPPER (m.Cli_Nombre), 1, 1) + SUBSTRING (LOWER (m.Cli_Nombre), 2,LEN(m.Cli_Nombre))
+and C.DNI = M.Cli_Dni
+join AERO.aeronaves a on m.Aeronave_Matricula = a.MATRICULA
+join AERO.vuelos v on v.AERONAVE_ID = a.ID and v.RUTA_ID = (SELECT r.id from AERO.rutas r 
+join AERO.aeropuertos p1 on m.[Ruta_Ciudad_Origen] = p1.NOMBRE AND p1.ID = r.ORIGEN_ID
+join AERO.aeropuertos p2 on m.[Ruta_Ciudad_Destino] = p2.NOMBRE AND p2.ID = r.DESTINO_ID
+where m.[Ruta_Codigo] = r.CODIGO and m.FechaSalida = v.FECHA_SALIDA and m.Fecha_LLegada_Estimada = v.FECHA_LLEGADA_ESTIMADA and
+m.FechaLLegada = v.FECHA_LLEGADA)
+
+
+INSERT INTO AERO.pasajes (CODIGO, CLIENTE_ID, BUTACA_ID, CANCELACION_ID, BOLETO_COMPRA_ID, PRECIO)
+SELECT M.Pasaje_Codigo, C.ID, B.ID, NULL, bc.ID, M.Pasaje_Precio FROM GD2C2015.gd_esquema.Maestra M
+join AERO.clientes C on C.APELLIDO = SUBSTRING(UPPER (m.Cli_Apellido), 1, 1) + SUBSTRING (LOWER (m.Cli_Apellido), 2,LEN(m.Cli_Apellido))
+and C.NOMBRE = SUBSTRING(UPPER (m.Cli_Nombre), 1, 1) + SUBSTRING (LOWER (m.Cli_Nombre), 2,LEN(m.Cli_Nombre))
+and C.DNI = M.Cli_Dni
+join AERO.aeronaves A on M.Aeronave_Matricula = A.MATRICULA
+join AERO.butacas B on B.NUMERO = M.Butaca_Nro and A.ID = B.AERONAVE_ID
+join AERO.boletos_de_compra bc on m.Pasaje_FechaCompra = bc.FECHA_COMPRA and bc.CLIENTE_ID = c.ID
+where M.Pasaje_Codigo != 0
+
+INSERT INTO AERO.paquetes (CODIGO, KG, BOLETO_COMPRA_ID, CANCELACION_ID, PRECIO)
+SELECT M.Paquete_Codigo, M.Paquete_KG, bc.ID, NULL, M.Paquete_Precio FROM GD2C2015.gd_esquema.Maestra M
+join AERO.boletos_de_compra bc on m.Paquete_FechaCompra = bc.FECHA_COMPRA and bc.CLIENTE_ID = c.ID
+where M.Paquete_Codigo != 0*/
 
 -----------------------------------------------------------------------
 -- EJECUCION DE PROCEDURES
