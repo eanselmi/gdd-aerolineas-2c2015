@@ -660,6 +660,18 @@ IF OBJECT_ID('AERO.corrigeMail') IS NOT NULL
     DROP FUNCTION AERO.corrigeMail
 GO
 
+IF OBJECT_ID('AERO.cantButacasLibres') IS NOT NULL
+BEGIN
+    DROP FUNCTION AERO.cantButacasLibres
+END;
+GO
+
+IF OBJECT_ID('AERO.kgLibres') IS NOT NULL
+BEGIN
+    DROP FUNCTION AERO.kgLibres
+END;
+GO
+
 IF OBJECT_ID('AERO.addFuncionalidad') IS NOT NULL
 BEGIN
 	DROP PROCEDURE AERO.addFuncionalidad;
@@ -681,18 +693,6 @@ GO
 IF OBJECT_ID('AERO.agregarRol') IS NOT NULL
 BEGIN
 	DROP PROCEDURE AERO.agregarRol;
-END;
-GO
-
-IF OBJECT_ID('AERO.cantButacasLibres') IS NOT NULL
-BEGIN
-    DROP FUNCTION AERO.cantButacasLibres
-END;
-GO
-
-IF OBJECT_ID('AERO.kgLibres') IS NOT NULL
-BEGIN
-    DROP FUNCTION AERO.kgLibres
 END;
 GO
 
@@ -1158,7 +1158,7 @@ join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID
 join AERO.vuelos v on bc.VUELO_ID=v.ID 
 join AERO.rutas r on v.RUTA_ID=r.ID
 join AERO.aeropuertos a on r.DESTINO_ID=a.ID
-where bc.id not in (select BOLETO_COMPRA_ID from AERO.cancelaciones)
+where bc.id NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones)
 and bc.FECHA_COMPRA between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109)
 group by a.nombre 
 order by 2 desc
@@ -1168,12 +1168,12 @@ GO
 --TOP 5 de los destinos con más pasajes cancelados 
 CREATE PROCEDURE AERO.top5DestinosCancelados(@fechaFrom varchar(50), @fechaTo varchar(50))
 AS BEGIN
-select top 5 a.NOMBRE as Destino, count(p.ID) as 'cancelaciones por aeronave' from AERO.pasajes p
+select top 5 a.NOMBRE as Destino, count(p.ID) as Cancelaciones from AERO.pasajes p
 join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID = bc.ID
 join AERO.vuelos v on bc.VUELO_ID = v.ID
 join AERO.rutas r on v.RUTA_ID=r.ID
 join AERO.aeropuertos a on r.DESTINO_ID=a.ID
-where p.CANCELACION_ID is not NULL AND
+where p.CANCELACION_ID IS NOT NULL AND
 bc.FECHA_COMPRA between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109)
 group by a.NOMBRE 
 order by 2 desc
@@ -1235,7 +1235,8 @@ GO
 
 CREATE PROCEDURE AERO.top5AeronavesFueraDeServicio(@fechaFrom varchar(50), @fechaTo varchar(50))
 AS BEGIN
-select top 5 a.matricula as 'Nombre Aeronave', sum(DATEDIFF(day,pi.desde,pi.hasta)) as 'Cantidad de días fuera de servicio'  from AERO.aeronaves_por_periodos ap
+select top 5 a.matricula as 'Nombre Aeronave', sum(DATEDIFF(day,pi.desde,pi.hasta)) as 'Cantidad de días fuera de servicio'
+from AERO.aeronaves_por_periodos ap
 join Aero.periodos_de_inactividad pi on ap.periodo_id=pi.id
 join AERO.aeronaves a on ap.aeronave_id= a.id
 where pi.desde between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109) AND
@@ -1508,6 +1509,13 @@ GROUP BY m.[FechaSalida], m.[Fecha_LLegada_Estimada], m.[FechaLLegada], a.ID, r.
 
 /*ejecucion de procedure que migra la tabla de butacas por vuelo*/
 EXEC AERO.migracionButacasPorVuelo
+
+/*CUANDO MIGREMOS LOS PASAJES, PAQUETES Y BOLETOS DE COMPRA HABRIA QUE HACER TODO JUNTO, LAS MILLAS DEL BOLETO DE COMPRA
+SE CALCULA COMO PRECIO TOTAL / 10 (PONEMOS SOLO LA PARTE ENTERA) Y EL PRECIO TOTAL COMO LA SUMATORIA DE LOS PRECIOS PARCIALES
+DE LOS PASAJES Y PAQUETES ADQUIRIDOS, LOS PRECIOS PARCIALES TENEMOS QUE CALCULARLOS ASI: TENEMOS EL VUELO_ID EN EL BOLETO DE COMPRA, 
+CON ESE ID LE PEGAMOS AL VUELO QUE TIENE UNA RUTA_ID, ESA RUTA TIENE UN PRECIO BASE PASAJE (QUE ES EL PRECIO QUE LE PONEMOS A CADA PASAJE)
+Y UN PRECIO BASE KG QUE LO MULTIPLICAMOS POR LOS KG DEL PAQUETE*/
+
 -----------------------------------------------------------------------
 -- EJECUCION DE PROCEDURES
 
@@ -1539,7 +1547,7 @@ EXEC AERO.addFuncionalidad @rol='cliente', @func ='Alta de Tarjeta de Crédito';
 -----------------------------------------------------------------------
 --PRUEBAS DE LISTADOS ESTADISTICOS
 --set de datos para prueba 1
-insert into AERO.clientes values(2,'pepe','asd','37013085','asd','123','asd@gmail.com','15/12/2015',0)
+insert into AERO.clientes values(2,'pepe','asd','37013085','asd','123','asd@gmail.com',CONVERT(datetime,'20151215',109),0)
 --select * from AERO.clientes
 
 insert into AERO.tipos_de_servicio values('asd')
@@ -1592,7 +1600,7 @@ insert into AERO.pasajes values(40,4,4,1,3,NULL)
 --select * from AERO.pasajes
 GO
 
-exec AERO.top5DestinosConPasajes @fechaFrom='FEB 01 2000', @fechaTo='FEB 01 2999'
+exec AERO.top5DestinosConPasajes @fechaFrom='20000201', @fechaTo='29990201'
 GO
 
 --SET PARA PROBAR 2((AGREGADO A LOS ANTERIORES)
@@ -1609,11 +1617,11 @@ insert into AERO.butacas_por_vuelo values(2,3,'LIBRE')
 --SELECT * FROM AERO.butacas_por_vuelo
 GO
 
-exec AERO.top5DestinosAeronavesVacias @fechaFrom='FEB 01 2000', @fechaTo='FEB 01 2999'
+exec AERO.top5DestinosAeronavesVacias @fechaFrom='20000201', @fechaTo='29990201'
 GO
 
 --MILLAS CLIENTES
-exec AERO.top5ClientesMillas @fechaFrom='FEB 01 2000', @fechaTo='FEB 01 2999'
+exec AERO.top5ClientesMillas @fechaFrom='20000201', @fechaTo='29990201'
 GO
 
 --SET PARA PROBAR 4(AGREGADO A LOS ANTERIORES)
@@ -1627,13 +1635,13 @@ update AERO.pasajes set CANCELACION_ID=2 where ID=4
 --select * from AERO.pasajes
 GO
 
-exec AERO.top5DestinosCancelados @fechaFrom='FEB 01 2000', @fechaTo='FEB 01 2999'
+exec AERO.top5DestinosCancelados @fechaFrom='20000201', @fechaTo='29990201'
 GO
 
-insert into AERO.periodos_de_inactividad values('01/01/2015','30/05/2015')
-insert into AERO.periodos_de_inactividad values('20/01/2015','30/12/2015')
-insert into AERO.periodos_de_inactividad values('01/01/2015','10/01/2015')
-insert into AERO.periodos_de_inactividad values('01/02/2015','10/02/2015')
+insert into AERO.periodos_de_inactividad values('20150101','20150530')
+insert into AERO.periodos_de_inactividad values('20150120','20151230')
+insert into AERO.periodos_de_inactividad values('20150101','20150110')
+insert into AERO.periodos_de_inactividad values('20150201','20150210')
 --SELECT * FROM AERO.periodos_de_inactividad
 
 insert into AERO.aeronaves_por_periodos values(1,1)
@@ -1643,5 +1651,5 @@ insert into AERO.aeronaves_por_periodos values(2,4)
 --SELECT * FROM AERO.aeronaves_por_periodos
 GO
 
-EXEC AERO.top5AeronavesFueraDeServicio @fechaFrom='ENE 01 2015', @fechaTo ='JUN 01 2015';
+EXEC AERO.top5AeronavesFueraDeServicio @fechaFrom='20150101', @fechaTo ='20150601';
 GO
