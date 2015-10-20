@@ -31,6 +31,7 @@ namespace AerolineaFrba.Compra
             {
                 Form frmCargaDeDatos = new Compra.cargaDeDatos();
                 ((TextBox)frmCargaDeDatos.Controls["textBoxTipoForm"]).Text = this.numericUpDownPasajes.Value.ToString();
+                ((TextBox)frmCargaDeDatos.Controls["textBoxIDVuelo"]).Text = this.dataGridViajes.SelectedCells[0].Value.ToString();
                 ((TextBox)frmCargaDeDatos.Controls["textBox1"]).Text = this.numericUpDownEncomiendas.Value.ToString();
                 
                 funcionesComunes.deshabilitarVentanaYAbrirNueva(frmCargaDeDatos);
