@@ -56,13 +56,9 @@ namespace AerolineaFrba.Compra
                         //TODO Hacer que mueste un nueva vista tal vez con los resultados de clientes con ese dni para elegir uno 
                         Form listadoClientes = new Registro_de_Usuario.bajaModificacionDeCliente();
                         int valor = 1;
-                        foreach (Control gb in listadoClientes.Controls) {
-                            if (gb is GroupBox) {
-                                if (gb.Name == "groupBox1")
-                                    ((TextBox)gb.Controls["textDni"]).Text = this.textBoxDniPas.Text;
-                            }
-                        }
+                       
                         ((TextBox)listadoClientes.Controls["textBoxTipoForm"]).Text = valor.ToString();
+                        ((TextBox)listadoClientes.Controls["textBoxDniCompra"]).Text = dni;
                         funcionesComunes.deshabilitarVentanaYAbrirNueva(listadoClientes);
                     }
                     else
@@ -95,7 +91,6 @@ namespace AerolineaFrba.Compra
                 from AERO.clientes where BAJA = 0 AND DNI = "+ dni);
             return tablaClientes.Rows.Count != 0; 
         }
-
        
     }
 

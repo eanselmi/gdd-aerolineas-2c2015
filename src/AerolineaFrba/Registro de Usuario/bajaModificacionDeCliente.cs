@@ -20,15 +20,20 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         private void botonVolver_Click(object sender, EventArgs e)
         {
+            if (this.textBoxTipoForm.Text == "1") {
+                this.setearParaCompras();
+            }
             funcionesComunes.habilitarAnterior();
         }
 
         private void bajaModificacionDeCliente_Load(object sender, EventArgs e)
         {
-            listado = funcionesComunes.consultarClientes(dataGridListadoClientes); 
+            listado = funcionesComunes.consultarClientes(dataGridListadoClientes);
+            
             if (this.textBoxTipoForm.Text == "1")
             {
                 
+                this.textDni.Text = this.textBoxDniCompra.Text;
                 this.botonBaja.Visible = false;
                 this.botonLimpiar.Visible = false;
                 this.botonVolver.Text = "Seleccionar";
@@ -92,7 +97,7 @@ namespace AerolineaFrba.Registro_de_Usuario
         private void botonModificacion_Click(object sender, EventArgs e)
         {
             Form modificarCliente = new Registro_de_Usuario.altaModificacionDeCliente();
-            int valor = 1;
+            int valor = 2;
             ((Label)modificarCliente.Controls["campoRequeridoApellido"]).Visible= false;
             ((Label)modificarCliente.Controls["campoRequeridoNombre"]).Visible = false;
             ((Label)modificarCliente.Controls["campoRequeridoDNI"]).Visible = false;
@@ -123,9 +128,39 @@ namespace AerolineaFrba.Registro_de_Usuario
         }
 
         private void bajaModificacionDeCliente_Enter(object sender, EventArgs e)
-        {   
-            if(this.textBoxTipoForm.Text != "1")
-                limpiar();
+        {
+            limpiar();
+            if (this.textBoxTipoForm.Text == "1") {
+                this.groupBox1.Visible = true;
+                this.textDni.Text = this.textBoxDniCompra.Text;
+                this.botonBuscar.PerformClick();
+                this.groupBox1.Visible = false;  
+            }
+        }
+        private void setearParaCompras()
+        {
+            Form anterior = funcionesComunes.getVentanaAnterior();
+            foreach (Control gb in anterior.Controls)
+            {
+                if (gb is GroupBox)
+                {
+                    if (gb.Name == "groupBox1")
+                    {
+                        foreach (Control subgb in gb.Controls)
+                        {
+                            if (subgb.Name == "groupBox2")
+                            {
+                                ((TextBox)subgb.Controls["textBoxApellidoPas"]).Text = dataGridListadoClientes.SelectedCells[2].Value.ToString();
+                                ((TextBox)subgb.Controls["textBoxNombrePas"]).Text = dataGridListadoClientes.SelectedCells[1].Value.ToString();
+                                ((TextBox)subgb.Controls["textBoxDireccionPas"]).Text = dataGridListadoClientes.SelectedCells[4].Value.ToString();
+                                ((TextBox)subgb.Controls["textBoxMailPas"]).Text = dataGridListadoClientes.SelectedCells[6].Value.ToString();
+                                ((TextBox)subgb.Controls["textBoxTelefonoPas"]).Text = dataGridListadoClientes.SelectedCells[5].Value.ToString();
+                                ((DateTimePicker)subgb.Controls["timePickerFecha"]).Value = Convert.ToDateTime(dataGridListadoClientes.SelectedCells[7].Value.ToString());
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

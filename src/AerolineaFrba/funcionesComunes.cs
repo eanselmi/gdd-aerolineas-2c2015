@@ -54,7 +54,8 @@ namespace AerolineaFrba
         }
         public static Form getVentanaAnterior() 
         {
-            return ventanaAnterior;        
+            pos = listaVentanas.Count();
+            return listaVentanas[pos-2];        
         }
 
         //esta funcion permite volver al menu principal

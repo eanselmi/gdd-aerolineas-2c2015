@@ -48,6 +48,7 @@
             this.textNombre = new System.Windows.Forms.TextBox();
             this.lblApellido = new System.Windows.Forms.Label();
             this.textBoxTipoForm = new System.Windows.Forms.TextBox();
+            this.textBoxDniCompra = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridListadoClientes)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -268,12 +269,23 @@
             this.textBoxTipoForm.TabIndex = 78;
             this.textBoxTipoForm.Visible = false;
             // 
+            // textBoxDniCompra
+            // 
+            this.textBoxDniCompra.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxDniCompra.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxDniCompra.Location = new System.Drawing.Point(32, 103);
+            this.textBoxDniCompra.Name = "textBoxDniCompra";
+            this.textBoxDniCompra.Size = new System.Drawing.Size(33, 26);
+            this.textBoxDniCompra.TabIndex = 79;
+            this.textBoxDniCompra.Visible = false;
+            // 
             // bajaModificacionDeCliente
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(722, 481);
             this.ControlBox = false;
+            this.Controls.Add(this.textBoxDniCompra);
             this.Controls.Add(this.textBoxTipoForm);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.botonLimpiar);
@@ -316,5 +328,6 @@
         private System.Windows.Forms.TextBox textDireccion;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBoxTipoForm;
+        private System.Windows.Forms.TextBox textBoxDniCompra;
     }
 }

@@ -39,6 +39,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.botonGuardar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.timePickerFecha = new System.Windows.Forms.DateTimePicker();
             this.textBoxTelefonoPas = new System.Windows.Forms.TextBox();
             this.textBoxMailPas = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -67,16 +68,16 @@
             this.textBoxTipoForm = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridEnco = new System.Windows.Forms.DataGridView();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.botonCargarEnco = new System.Windows.Forms.Button();
             this.botonLimpiarEnco = new System.Windows.Forms.Button();
             this.botonEliminarEnco = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.timePickerFecha = new System.Windows.Forms.DateTimePicker();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -84,32 +85,28 @@
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEnco)).BeginInit();
             this.groupBox4.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.botonEliminarPasaje);
-            this.groupBox1.Controls.Add(this.botonLimpiarPas);
-            this.groupBox1.Controls.Add(this.botonCargarPas);
-            this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.botonGuardar);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.textBoxDniPas);
-            this.groupBox1.Controls.Add(this.dataGridPasaje);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(12, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(752, 304);
+            this.groupBox1.Size = new System.Drawing.Size(752, 185);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Pasajes";
+            this.groupBox1.Text = "Pasajero";
             // 
             // botonEliminarPasaje
             // 
             this.botonEliminarPasaje.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonEliminarPasaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonEliminarPasaje.Location = new System.Drawing.Point(645, 20);
+            this.botonEliminarPasaje.Location = new System.Drawing.Point(277, 25);
             this.botonEliminarPasaje.Name = "botonEliminarPasaje";
             this.botonEliminarPasaje.Size = new System.Drawing.Size(79, 42);
             this.botonEliminarPasaje.TabIndex = 40;
@@ -120,7 +117,7 @@
             // 
             this.botonLimpiarPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonLimpiarPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonLimpiarPas.Location = new System.Drawing.Point(645, 68);
+            this.botonLimpiarPas.Location = new System.Drawing.Point(277, 73);
             this.botonLimpiarPas.Name = "botonLimpiarPas";
             this.botonLimpiarPas.Size = new System.Drawing.Size(79, 42);
             this.botonLimpiarPas.TabIndex = 37;
@@ -131,7 +128,7 @@
             // 
             this.botonCargarPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonCargarPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonCargarPas.Location = new System.Drawing.Point(645, 117);
+            this.botonCargarPas.Location = new System.Drawing.Point(277, 143);
             this.botonCargarPas.Name = "botonCargarPas";
             this.botonCargarPas.Size = new System.Drawing.Size(79, 42);
             this.botonCargarPas.TabIndex = 36;
@@ -145,7 +142,7 @@
             this.groupBox3.Controls.Add(this.label12);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(482, 9);
+            this.groupBox3.Location = new System.Drawing.Point(18, 21);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(132, 160);
             this.groupBox3.TabIndex = 33;
@@ -198,7 +195,7 @@
             // 
             this.botonGuardar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonGuardar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonGuardar.Location = new System.Drawing.Point(42, 85);
+            this.botonGuardar.Location = new System.Drawing.Point(62, 109);
             this.botonGuardar.Name = "botonGuardar";
             this.botonGuardar.Size = new System.Drawing.Size(117, 27);
             this.botonGuardar.TabIndex = 25;
@@ -221,12 +218,23 @@
             this.groupBox2.Controls.Add(this.textBoxApellidoPas);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(209, 9);
+            this.groupBox2.Location = new System.Drawing.Point(216, 21);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(261, 160);
             this.groupBox2.TabIndex = 31;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Datos del Pasajero";
+            // 
+            // timePickerFecha
+            // 
+            this.timePickerFecha.CustomFormat = "dd/MM/yyyy";
+            this.timePickerFecha.Enabled = false;
+            this.timePickerFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.timePickerFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.timePickerFecha.Location = new System.Drawing.Point(146, 124);
+            this.timePickerFecha.Name = "timePickerFecha";
+            this.timePickerFecha.Size = new System.Drawing.Size(109, 26);
+            this.timePickerFecha.TabIndex = 44;
             // 
             // textBoxTelefonoPas
             // 
@@ -354,7 +362,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(38, 28);
+            this.label1.Location = new System.Drawing.Point(58, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 20);
             this.label1.TabIndex = 30;
@@ -364,7 +372,7 @@
             // 
             this.textBoxDniPas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxDniPas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDniPas.Location = new System.Drawing.Point(42, 53);
+            this.textBoxDniPas.Location = new System.Drawing.Point(62, 71);
             this.textBoxDniPas.MaxLength = 8;
             this.textBoxDniPas.Name = "textBoxDniPas";
             this.textBoxDniPas.Size = new System.Drawing.Size(117, 26);
@@ -382,7 +390,7 @@
             this.Column4,
             this.Column5,
             this.Column6});
-            this.dataGridPasaje.Location = new System.Drawing.Point(6, 175);
+            this.dataGridPasaje.Location = new System.Drawing.Point(30, 396);
             this.dataGridPasaje.Name = "dataGridPasaje";
             this.dataGridPasaje.RowHeadersVisible = false;
             this.dataGridPasaje.Size = new System.Drawing.Size(734, 120);
@@ -423,9 +431,9 @@
             this.groupBox5.Controls.Add(this.textBoxKg);
             this.groupBox5.Controls.Add(this.label8);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(384, 9);
+            this.groupBox5.Location = new System.Drawing.Point(15, 34);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(132, 160);
+            this.groupBox5.Size = new System.Drawing.Size(132, 124);
             this.groupBox5.TabIndex = 33;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Peso";
@@ -435,7 +443,7 @@
             this.textBoxKg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxKg.BackColor = System.Drawing.Color.White;
             this.textBoxKg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxKg.Location = new System.Drawing.Point(24, 79);
+            this.textBoxKg.Location = new System.Drawing.Point(24, 61);
             this.textBoxKg.Name = "textBoxKg";
             this.textBoxKg.ReadOnly = true;
             this.textBoxKg.Size = new System.Drawing.Size(80, 20);
@@ -446,7 +454,7 @@
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(21, 63);
+            this.label8.Location = new System.Drawing.Point(21, 45);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(20, 13);
             this.label8.TabIndex = 33;
@@ -456,7 +464,7 @@
             // 
             this.botonVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonVolver.Location = new System.Drawing.Point(384, 645);
+            this.botonVolver.Location = new System.Drawing.Point(384, 654);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(105, 42);
             this.botonVolver.TabIndex = 28;
@@ -468,7 +476,7 @@
             // 
             this.botonComprar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonComprar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonComprar.Location = new System.Drawing.Point(276, 645);
+            this.botonComprar.Location = new System.Drawing.Point(273, 654);
             this.botonComprar.Name = "botonComprar";
             this.botonComprar.Size = new System.Drawing.Size(105, 42);
             this.botonComprar.TabIndex = 27;
@@ -506,44 +514,44 @@
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
             this.Column7});
-            this.dataGridEnco.Location = new System.Drawing.Point(6, 175);
+            this.dataGridEnco.Location = new System.Drawing.Point(30, 526);
             this.dataGridEnco.Name = "dataGridEnco";
             this.dataGridEnco.RowHeadersVisible = false;
             this.dataGridEnco.Size = new System.Drawing.Size(734, 122);
             this.dataGridEnco.TabIndex = 0;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "Precio";
-            this.Column7.Name = "Column7";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Kg";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "DNI";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Apellido";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
             // dataGridViewTextBoxColumn1
             // 
             this.dataGridViewTextBoxColumn1.HeaderText = "Nombre";
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Apellido";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "DNI";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Kg";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Precio";
+            this.Column7.Name = "Column7";
+            // 
             // botonCargarEnco
             // 
             this.botonCargarEnco.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonCargarEnco.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonCargarEnco.Location = new System.Drawing.Point(645, 127);
+            this.botonCargarEnco.Location = new System.Drawing.Point(253, 82);
             this.botonCargarEnco.Name = "botonCargarEnco";
-            this.botonCargarEnco.Size = new System.Drawing.Size(79, 42);
+            this.botonCargarEnco.Size = new System.Drawing.Size(94, 42);
             this.botonCargarEnco.TabIndex = 36;
             this.botonCargarEnco.Text = "Cargar";
             this.botonCargarEnco.UseVisualStyleBackColor = true;
@@ -552,9 +560,9 @@
             // 
             this.botonLimpiarEnco.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonLimpiarEnco.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonLimpiarEnco.Location = new System.Drawing.Point(645, 79);
+            this.botonLimpiarEnco.Location = new System.Drawing.Point(255, 130);
             this.botonLimpiarEnco.Name = "botonLimpiarEnco";
-            this.botonLimpiarEnco.Size = new System.Drawing.Size(79, 42);
+            this.botonLimpiarEnco.Size = new System.Drawing.Size(81, 42);
             this.botonLimpiarEnco.TabIndex = 38;
             this.botonLimpiarEnco.Text = "Limpiar";
             this.botonLimpiarEnco.UseVisualStyleBackColor = true;
@@ -563,38 +571,40 @@
             // 
             this.botonEliminarEnco.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.botonEliminarEnco.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonEliminarEnco.Location = new System.Drawing.Point(645, 28);
+            this.botonEliminarEnco.Location = new System.Drawing.Point(253, 21);
             this.botonEliminarEnco.Name = "botonEliminarEnco";
-            this.botonEliminarEnco.Size = new System.Drawing.Size(79, 42);
+            this.botonEliminarEnco.Size = new System.Drawing.Size(92, 42);
             this.botonEliminarEnco.TabIndex = 39;
             this.botonEliminarEnco.Text = "Eliminar";
             this.botonEliminarEnco.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.groupBox5);
             this.groupBox4.Controls.Add(this.botonEliminarEnco);
             this.groupBox4.Controls.Add(this.botonLimpiarEnco);
             this.groupBox4.Controls.Add(this.botonCargarEnco);
-            this.groupBox4.Controls.Add(this.groupBox5);
-            this.groupBox4.Controls.Add(this.dataGridEnco);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(12, 313);
+            this.groupBox4.Location = new System.Drawing.Point(0, 190);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(752, 303);
+            this.groupBox4.Size = new System.Drawing.Size(378, 200);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Encomiendas";
             // 
-            // timePickerFecha
+            // groupBox6
             // 
-            this.timePickerFecha.CustomFormat = "dd/MM/yyyy";
-            this.timePickerFecha.Enabled = false;
-            this.timePickerFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timePickerFecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.timePickerFecha.Location = new System.Drawing.Point(146, 124);
-            this.timePickerFecha.Name = "timePickerFecha";
-            this.timePickerFecha.Size = new System.Drawing.Size(109, 26);
-            this.timePickerFecha.TabIndex = 44;
+            this.groupBox6.Controls.Add(this.botonEliminarPasaje);
+            this.groupBox6.Controls.Add(this.groupBox3);
+            this.groupBox6.Controls.Add(this.botonLimpiarPas);
+            this.groupBox6.Controls.Add(this.botonCargarPas);
+            this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox6.Location = new System.Drawing.Point(386, 190);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(378, 200);
+            this.groupBox6.TabIndex = 80;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Pasajes";
             // 
             // cargaDeDatos
             // 
@@ -602,10 +612,13 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(776, 699);
             this.ControlBox = false;
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.textBoxTipoForm);
             this.Controls.Add(this.botonVolver);
+            this.Controls.Add(this.dataGridPasaje);
             this.Controls.Add(this.botonComprar);
+            this.Controls.Add(this.dataGridEnco);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
             this.Name = "cargaDeDatos";
@@ -622,6 +635,7 @@
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridEnco)).EndInit();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -678,5 +692,6 @@
         private System.Windows.Forms.Button botonEliminarEnco;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.DateTimePicker timePickerFecha;
+        private System.Windows.Forms.GroupBox groupBox6;
     }
 }
