@@ -1212,7 +1212,7 @@ select c.NOMBRE+' '+c.APELLIDO, sum(bc.millas)
 from AERO.clientes c
 join AERO.pasajes p on c.ID=p.CLIENTE_ID 
 join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID 
-where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones) and -- WHERE P.CANCELACION_ID IS NOT NULL AND
+where P.CANCELACION_ID IS NULL AND
 bc.FECHA_COMPRA between DATEADD(YYYY, -1, CURRENT_TIMESTAMP) and CURRENT_TIMESTAMP
 group by c.nombre, c.APELLIDO
 
@@ -1222,7 +1222,7 @@ select c.NOMBRE+' '+c.APELLIDO, sum(bc.millas)
 from AERO.clientes c  
 join AERO.boletos_de_compra bc on bc.CLIENTE_ID=c.ID
 join AERO.paquetes p on bc.ID = p.BOLETO_COMPRA_ID
-where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones) and -- WHERE P.CANCELACION_ID IS NOT NULL AND
+where P.CANCELACION_ID IS NULL AND
 bc.FECHA_COMPRA between DATEADD(YYYY, -1, CURRENT_TIMESTAMP) and CURRENT_TIMESTAMP
 group by c.nombre, c.APELLIDO
 
