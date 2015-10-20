@@ -25,7 +25,17 @@ namespace AerolineaFrba.Registro_de_Usuario
 
         private void bajaModificacionDeCliente_Load(object sender, EventArgs e)
         {
-            listado =funcionesComunes.consultarClientes(dataGridListadoClientes);
+            listado = funcionesComunes.consultarClientes(dataGridListadoClientes); 
+            if (this.textBoxTipoForm.Text == "1")
+            {
+                
+                this.botonBaja.Visible = false;
+                this.botonLimpiar.Visible = false;
+                this.botonVolver.Text = "Seleccionar";
+                this.botonBuscar.PerformClick();
+                this.groupBox1.Visible = false;
+            }
+            
         }
 
         private void botonBuscar_Click(object sender, EventArgs e)
@@ -113,8 +123,9 @@ namespace AerolineaFrba.Registro_de_Usuario
         }
 
         private void bajaModificacionDeCliente_Enter(object sender, EventArgs e)
-        {
-            limpiar();
+        {   
+            if(this.textBoxTipoForm.Text != "1")
+                limpiar();
         }
     }
 }
