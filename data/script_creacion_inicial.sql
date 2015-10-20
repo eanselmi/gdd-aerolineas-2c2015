@@ -1159,21 +1159,22 @@ join AERO.vuelos v on bc.VUELO_ID=v.ID
 join AERO.rutas r on v.RUTA_ID=r.ID
 join AERO.aeropuertos a on r.DESTINO_ID=a.ID
 where bc.id not in (select BOLETO_COMPRA_ID from AERO.cancelaciones)
-and  bc.FECHA_COMPRA between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109)
+and bc.FECHA_COMPRA between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109)
 group by a.nombre 
 order by 2 desc
 END
 GO
 
---TOP 5 de los destinos con más pasajes cancelados (ESTAMOS CONTANDO BOLETO DE COMPRA CANCELADO Y NO PASAJES!!!)
+--TOP 5 de los destinos con más pasajes cancelados 
 CREATE PROCEDURE AERO.top5DestinosCancelados(@fechaFrom varchar(50), @fechaTo varchar(50))
 AS BEGIN
-select top 5 a.NOMBRE as AERONAVE, count(c.ID) as 'cancelaciones por aeronave' from AERO.cancelaciones c
-join AERO.boletos_de_compra bc on c.BOLETO_COMPRA_ID = bc.ID
+select top 5 a.NOMBRE as Destino, count(p.ID) as 'cancelaciones por aeronave' from AERO.pasajes p
+join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID = bc.ID
 join AERO.vuelos v on bc.VUELO_ID = v.ID
 join AERO.rutas r on v.RUTA_ID=r.ID
 join AERO.aeropuertos a on r.DESTINO_ID=a.ID
-where bc.FECHA_COMPRA between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109)
+where p.CANCELACION_ID is not NULL AND
+bc.FECHA_COMPRA between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109)
 group by a.NOMBRE 
 order by 2 desc
 END
@@ -1182,13 +1183,12 @@ GO
 --TOP 5 de los destino con aeronaves mas vacias
 CREATE PROCEDURE AERO.top5DestinosAeronavesVacias(@fechaFrom varchar(50), @fechaTo varchar(50))
 AS BEGIN
-select a.NOMBRE as Destino, count(b.ID) as 'Butacas Vacias' 
-from AERO.aeronaves naves 
-join AERO.butacas b on naves.ID = b.Aeronave_id 
-join AERO.vuelos v on naves.ID=v.AERONAVE_ID 
+select a.NOMBRE as Destino, count(buV.VUELO_ID) as 'Butacas Vacias' 
+from AERO.butacas_por_vuelo buV 
+--join AERO.butacas b on naves.ID = b.Aeronave_id 
+join AERO.vuelos v on buV.VUELO_ID=v.ID 
 join AERO.rutas r on v.RUTA_ID=r.ID 
 join AERO.aeropuertos a on r.DESTINO_ID=a.ID 
-join AERO.butacas_por_vuelo buV on v.ID=buV.VUELO_ID
 where buV.ESTADO = 'LIBRE' and
 v.FECHA_SALIDA between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109) and
 v.FECHA_LLEGADA between convert(datetime, @fechaFrom,109) and convert(datetime, @fechaTo,109)
@@ -1212,7 +1212,7 @@ select c.NOMBRE+' '+c.APELLIDO, sum(bc.millas)
 from AERO.clientes c
 join AERO.pasajes p on c.ID=p.CLIENTE_ID 
 join AERO.boletos_de_compra bc on p.BOLETO_COMPRA_ID=bc.ID 
-where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones) and
+where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones) and -- WHERE P.CANCELACION_ID IS NOT NULL AND
 bc.FECHA_COMPRA between DATEADD(YYYY, -1, CURRENT_TIMESTAMP) and CURRENT_TIMESTAMP
 group by c.nombre, c.APELLIDO
 
@@ -1222,7 +1222,7 @@ select c.NOMBRE+' '+c.APELLIDO, sum(bc.millas)
 from AERO.clientes c  
 join AERO.boletos_de_compra bc on bc.CLIENTE_ID=c.ID
 join AERO.paquetes p on bc.ID = p.BOLETO_COMPRA_ID
-where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones) and
+where bc.ID NOT IN (select BOLETO_COMPRA_ID from AERO.cancelaciones) and -- WHERE P.CANCELACION_ID IS NOT NULL AND
 bc.FECHA_COMPRA between DATEADD(YYYY, -1, CURRENT_TIMESTAMP) and CURRENT_TIMESTAMP
 group by c.nombre, c.APELLIDO
 
@@ -1537,39 +1537,111 @@ EXEC AERO.addFuncionalidad @rol='cliente', @func ='Realizar Canje';
 EXEC AERO.addFuncionalidad @rol='cliente', @func ='Alta de Tarjeta de Crédito';
 
 -----------------------------------------------------------------------
--- CONSULTA DE LISTADOS
+--PRUEBAS DE LISTADOS ESTADISTICOS
+--set de datos para prueba 1
+insert into AERO.clientes values(2,'pepe','asd','37013085','asd','123','asd@gmail.com','15/12/2015',0)
+--select * from AERO.clientes
 
-/*
---set de datos para prueba 3
-insert into AERO.butacas_por_vuelo values(1,37,'COMPRADO')
+insert into AERO.tipos_de_servicio values('asd')
+--select * from AERO.tipos_de_servicio
 
---set de datos para prueba 4
-insert into AERO.boletos_de_compra values(ABS(CHECKSUM(NewId())) % 7,CURRENT_TIMESTAMP,1,'efectivo',1,22,1)
-insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22,1)
-insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22,2)
-insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,1,'efectivo',1,22,2)
-insert into AERO.boletos_de_compra values(1,DATEADD(YYYY,-4,CURRENT_TIMESTAMP),1,'efectivo',1,22,2)
-insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(1, CURRENT_TIMESTAMP, 'porque me pinto!');
-insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(1, CURRENT_TIMESTAMP, 'porque me pinto!');
-insert into AERO.cancelaciones (BOLETO_COMPRA_ID, FECHA_DEVOLUCION, MOTIVO) values(3, CURRENT_TIMESTAMP, 'porque me pinto!');
+insert into AERO.fabricantes values('luisito')
+--select * from AERO.fabricantes
 
---set de datos para prueba
-insert into AERO.pasajes values(100,1,37,1,1,NULL)
-insert into AERO.pasajes values(100,2,37,1,2,NULL)
-insert into AERO.pasajes values(100,3,37,1,4,NULL)
-insert into AERO.pasajes values(100,4,37,1,5,NULL)
+insert into AERO.aeronaves values('123','asd',123,1,1,NULL,CURRENT_TIMESTAMP,99,NULL)
+insert into AERO.aeronaves values('999','asd',999,1,1,NULL,CURRENT_TIMESTAMP,99,NULL)
+--select * from AERO.aeronaves
 
-EXEC AERO.top5DestinosCancelados @fechaFrom='01/01/2000', @fechaTo ='01/01/2999';
+insert into AERO.ciudades values('ciudad1')
+insert into AERO.ciudades values('ciudad2')
+--select * from AERO.ciudades
 
---set de datos para prueba5
+insert into AERO.aeropuertos values('aerp1',1)
+insert into AERO.aeropuertos values('aerp2',2)
+--select * from AERO.aeropuertos
+
+insert into AERO.rutas values(1,100,100,1,2,1,0)
+insert into AERO.rutas values(2,100,100,2,1,1,0)
+--select * from AERO.rutas
+
+insert into AERO.vuelos values(CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,1,1,0)
+insert into AERO.vuelos values(dateadd(MM,1,CURRENT_TIMESTAMP),dateadd(MM,1,CURRENT_TIMESTAMP),CURRENT_TIMESTAMP,2,2,0)
+--select * from AERO.vuelos
+
+insert into AERO.boletos_de_compra values(1,CURRENT_TIMESTAMP,300,'efectivo',1,22,1)
+insert into AERO.boletos_de_compra values(2,CURRENT_TIMESTAMP,30,'efectivo',1,22,1)
+insert into AERO.boletos_de_compra values(3,DATEADD(YYYY,-4,CURRENT_TIMESTAMP),40,'efectivo',1,22,2)
+--select * from AERO.boletos_de_compra
+
+insert into AERO.butacas values(1,'PASILLO',1,1)
+insert into AERO.butacas values(2,'PASILLO',1,1)
+insert into AERO.butacas values(3,'PASILLO',1,1)
+insert into AERO.butacas values(1,'PASILLO',1,2)
+--select * from AERO.butacas
+
+insert into AERO.butacas_por_vuelo values(1,1,'COMPRADO')
+insert into AERO.butacas_por_vuelo values(1,2,'COMPRADO')
+insert into AERO.butacas_por_vuelo values(1,3,'COMPRADO')
+insert into AERO.butacas_por_vuelo values(2,1,'COMPRADO')
+--select * from AERO.butacas_por_vuelo
+
+insert into AERO.pasajes values(100,1,1,1,1,NULL)
+insert into AERO.pasajes values(200,2,2,1,1,NULL)
+insert into AERO.pasajes values(30,3,3,1,2,NULL)
+insert into AERO.pasajes values(40,4,4,1,3,NULL)
+--select * from AERO.pasajes
+GO
+
+exec AERO.top5DestinosConPasajes @fechaFrom='FEB 01 2000', @fechaTo='FEB 01 2999'
+GO
+
+--SET PARA PROBAR 2((AGREGADO A LOS ANTERIORES)
+insert into AERO.butacas values(4,'PASILLO',1,1)
+insert into AERO.butacas values(5,'PASILLO',1,1)
+insert into AERO.butacas values(6,'PASILLO',1,1)
+insert into AERO.butacas values(2,'PASILLO',1,2)
+--select * from AERO.butacas
+
+insert into AERO.butacas_por_vuelo values(1,4,'LIBRE')
+insert into AERO.butacas_por_vuelo values(1,5,'LIBRE')
+insert into AERO.butacas_por_vuelo values(2,2,'LIBRE')
+insert into AERO.butacas_por_vuelo values(2,3,'LIBRE')
+--SELECT * FROM AERO.butacas_por_vuelo
+GO
+
+exec AERO.top5DestinosAeronavesVacias @fechaFrom='FEB 01 2000', @fechaTo='FEB 01 2999'
+GO
+
+--MILLAS CLIENTES
+exec AERO.top5ClientesMillas @fechaFrom='FEB 01 2000', @fechaTo='FEB 01 2999'
+GO
+
+--SET PARA PROBAR 4(AGREGADO A LOS ANTERIORES)
+insert into AERO.cancelaciones values(CURRENT_TIMESTAMP,1,'asd')
+insert into AERO.cancelaciones values(CURRENT_TIMESTAMP,3,'asd')
+--select * from AERO.cancelaciones
+
+update AERO.pasajes set CANCELACION_ID=1 where ID=1
+update AERO.pasajes set CANCELACION_ID=1 where ID=2
+update AERO.pasajes set CANCELACION_ID=2 where ID=4
+--select * from AERO.pasajes
+GO
+
+exec AERO.top5DestinosCancelados @fechaFrom='FEB 01 2000', @fechaTo='FEB 01 2999'
+GO
+
 insert into AERO.periodos_de_inactividad values('01/01/2015','30/05/2015')
 insert into AERO.periodos_de_inactividad values('20/01/2015','30/12/2015')
 insert into AERO.periodos_de_inactividad values('01/01/2015','10/01/2015')
 insert into AERO.periodos_de_inactividad values('01/02/2015','10/02/2015')
+--SELECT * FROM AERO.periodos_de_inactividad
+
 insert into AERO.aeronaves_por_periodos values(1,1)
 insert into AERO.aeronaves_por_periodos values(1,2)
 insert into AERO.aeronaves_por_periodos values(2,3)
 insert into AERO.aeronaves_por_periodos values(2,4)
+--SELECT * FROM AERO.aeronaves_por_periodos
+GO
 
-EXEC AERO.top5AeronavesFueraDeServicio @fechaFrom='01/01/2015', @fechaTo ='01/06/2015';
-*/
+EXEC AERO.top5AeronavesFueraDeServicio @fechaFrom='ENE 01 2015', @fechaTo ='JUN 01 2015';
+GO
