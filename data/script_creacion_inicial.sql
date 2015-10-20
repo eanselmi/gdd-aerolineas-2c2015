@@ -1049,6 +1049,29 @@ WHERE ID=@id;
 END
 GO
 
+--BUTACAS
+CREATE PROCEDURE AERO.crearButacas (@idAeronave int, @butacas int)
+AS BEGIN
+declare @i int
+declare @tipo varchar(50)
+set @i = 1
+	WHILE(@i != @butacas+1)
+	begin
+		if((@i%2) = 0)
+		begin
+		set @tipo = 'Ventanilla'
+		end
+		else
+		begin
+		set @tipo = 'Pasillo'
+		end
+		INSERT INTO AERO.butacas (AERONAVE_ID, NUMERO, PISO, TIPO)
+		VALUES (@idAeronave, @i, 1, @tipo)
+		set @i = @i+1
+	end
+END
+GO
+
 -- AERONAVES
 CREATE PROCEDURE AERO.agregarAeronave(@matricula nvarchar(255), @modelo nvarchar(255), @kg_disponibles numeric(18,0), 
 @fabricante nvarchar(255), @tipo_servicio nvarchar(255), @alta varchar(50), @cantButacas int)
@@ -1244,29 +1267,6 @@ select COUNT(v.ID) from AERO.vuelos v
 where v.AERONAVE_ID = @id and (v.FECHA_SALIDA between convert(datetime, @fechaSalida,109) and convert(datetime, @fechaLlegadaEstimada,109)
 or v.FECHA_LLEGADA between convert(datetime, @fechaSalida,109) and convert(datetime, @fechaLlegadaEstimada,109)
 or v.FECHA_LLEGADA_ESTIMADA between convert(datetime, @fechaSalida,109) and convert(datetime, @fechaLlegadaEstimada,109))
-END
-GO
-
---BUTACAS
-CREATE PROCEDURE AERO.crearButacas (@idAeronave int, @butacas int)
-AS BEGIN
-declare @i int
-declare @tipo varchar(50)
-set @i = 1
-	WHILE(@i != @butacas+1)
-	begin
-		if((@i%2) = 0)
-		begin
-		set @tipo = 'Ventanilla'
-		end
-		else
-		begin
-		set @tipo = 'Pasillo'
-		end
-		INSERT INTO AERO.butacas (AERONAVE_ID, NUMERO, PISO, TIPO)
-		VALUES (@idAeronave, @i, 1, @tipo)
-		set @i = @i+1
-	end
 END
 GO
 
