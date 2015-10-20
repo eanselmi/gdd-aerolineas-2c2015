@@ -858,6 +858,12 @@ BEGIN
 END;
 GO
 
+IF OBJECT_ID('AERO.crearButacas') IS NOT NULL
+BEGIN
+	DROP PROCEDURE AERO.crearButacas;
+END;
+GO
+
 --CREATE
 CREATE FUNCTION AERO.corrigeMail (@s NVARCHAR (255)) 
 RETURNS NVARCHAR(255)
@@ -1049,6 +1055,9 @@ CREATE PROCEDURE AERO.agregarAeronave(@matricula nvarchar(255), @modelo nvarchar
 AS BEGIN
 	INSERT INTO AERO.aeronaves(MATRICULA, MODELO, KG_DISPONIBLES, FABRICANTE_ID, TIPO_SERVICIO_ID, FECHA_ALTA, CANT_BUTACAS)
 	VALUES (@matricula, @modelo, @kg_disponibles, @fabricante, @tipo_servicio, convert(datetime, @alta,109), @cantButacas)
+	declare @id int
+	set @id = SCOPE_IDENTITY()
+	EXEC AERO.crearButacas @idAeronave = @id, @butacas = @cantButacas
 END
 GO
 
@@ -1238,7 +1247,30 @@ or v.FECHA_LLEGADA_ESTIMADA between convert(datetime, @fechaSalida,109) and conv
 END
 GO
 
---BUTACAS POR VUELO
+--BUTACAS
+CREATE PROCEDURE AERO.crearButacas (@idAeronave int, @butacas int)
+AS BEGIN
+declare @i int
+declare @tipo varchar(50)
+set @i = 1
+	WHILE(@i != @butacas+1)
+	begin
+		if((@i%2) = 0)
+		begin
+		set @tipo = 'Ventanilla'
+		end
+		else
+		begin
+		set @tipo = 'Pasillo'
+		end
+		INSERT INTO AERO.butacas (AERONAVE_ID, NUMERO, PISO, TIPO)
+		VALUES (@idAeronave, @i, 1, @tipo)
+		set @i = @i+1
+	end
+END
+GO
+
+-- BUTACAS POR VUELO
 CREATE PROCEDURE AERO.migracionButacasPorVuelo
 AS BEGIN
 declare @cantAeronaves int
