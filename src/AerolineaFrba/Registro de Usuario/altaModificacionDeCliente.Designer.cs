@@ -55,6 +55,7 @@
             this.botonModificar = new System.Windows.Forms.Button();
             this.textBoxTipoForm = new System.Windows.Forms.TextBox();
             this.textBoxId = new System.Windows.Forms.TextBox();
+            this.textBoxVolver = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // campoRequeridoDNI
@@ -351,12 +352,23 @@
             this.textBoxId.TabIndex = 78;
             this.textBoxId.Visible = false;
             // 
+            // textBoxVolver
+            // 
+            this.textBoxVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxVolver.Location = new System.Drawing.Point(12, 104);
+            this.textBoxVolver.Name = "textBoxVolver";
+            this.textBoxVolver.Size = new System.Drawing.Size(33, 26);
+            this.textBoxVolver.TabIndex = 79;
+            this.textBoxVolver.Visible = false;
+            // 
             // altaModificacionDeCliente
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(490, 468);
             this.ControlBox = false;
+            this.Controls.Add(this.textBoxVolver);
             this.Controls.Add(this.textBoxId);
             this.Controls.Add(this.textBoxTipoForm);
             this.Controls.Add(this.botonModificar);
@@ -422,5 +434,6 @@
         private System.Windows.Forms.Button botonModificar;
         private System.Windows.Forms.TextBox textBoxTipoForm;
         private System.Windows.Forms.TextBox textBoxId;
+        private System.Windows.Forms.TextBox textBoxVolver;
     }
 }

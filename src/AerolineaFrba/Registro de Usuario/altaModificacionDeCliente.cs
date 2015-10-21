@@ -83,6 +83,10 @@ namespace AerolineaFrba.Registro_de_Usuario
                     {
                         MessageBox.Show("Se guardo exitosamente");
                         botonLimpiar.PerformClick();
+                        if (textBoxVolver.Text == "1")
+                        {
+                            funcionesComunes.habilitarAnterior();
+                        }
                     }
                 }
                 else
