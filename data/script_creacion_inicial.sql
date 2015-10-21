@@ -206,8 +206,7 @@ CREATE TABLE AERO.clientes (
 )
 
 CREATE TABLE AERO.boletos_de_compra (
-    ID INT IDENTITY(1,1)    PRIMARY KEY,
-    CODIGO_COMPRA    INT IDENTITY(100000,1) NOT NULL,
+    ID INT IDENTITY(100000,1)    PRIMARY KEY,
     FECHA_COMPRA    DATETIME          NOT NULL,
     PRECIO_COMPRA    NUMERIC(18,2)	NOT NULL,
     TIPO_COMPRA    NVARCHAR(255),
@@ -1628,10 +1627,10 @@ insert into AERO.butacas_por_vuelo values(1,3,'COMPRADO')
 insert into AERO.butacas_por_vuelo values(2,1,'COMPRADO')
 --select * from AERO.butacas_por_vuelo
 
-insert into AERO.pasajes values(100,1,1,1,1,NULL)
-insert into AERO.pasajes values(200,2,2,1,1,NULL)
-insert into AERO.pasajes values(30,3,3,1,2,NULL)
-insert into AERO.pasajes values(40,4,4,1,3,NULL)
+insert into AERO.pasajes values(100,1,1,1,100000,NULL)
+insert into AERO.pasajes values(200,2,2,1,100000,NULL)
+insert into AERO.pasajes values(30,3,3,1,100001,NULL)
+insert into AERO.pasajes values(40,4,4,1,100002,NULL)
 --select * from AERO.pasajes
 GO
 
@@ -1660,8 +1659,8 @@ exec AERO.top5ClientesMillas @fechaFrom='20000201', @fechaTo='29990201'
 GO
 
 --SET PARA PROBAR 4(AGREGADO A LOS ANTERIORES)
-insert into AERO.cancelaciones values(CURRENT_TIMESTAMP,1,'asd')
-insert into AERO.cancelaciones values(CURRENT_TIMESTAMP,3,'asd')
+insert into AERO.cancelaciones values(CURRENT_TIMESTAMP,100000,'asd')
+insert into AERO.cancelaciones values(CURRENT_TIMESTAMP,100002,'asd')
 --select * from AERO.cancelaciones
 
 update AERO.pasajes set CANCELACION_ID=1 where ID=1
