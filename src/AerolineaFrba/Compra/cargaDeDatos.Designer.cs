@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.butonDesElegir = new System.Windows.Forms.Button();
             this.botonBuscar = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.timePickerFecha = new System.Windows.Forms.DateTimePicker();
@@ -54,12 +55,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.dataGridPasaje = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.textBoxKg = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -68,17 +63,25 @@
             this.textBoxTipoForm = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.dataGridEnco = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.botonCargarEnco = new System.Windows.Forms.Button();
             this.botonLimpiarEnco = new System.Windows.Forms.Button();
             this.botonEliminarEnco = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.butonDesElegir = new System.Windows.Forms.Button();
             this.textBoxIDVuelo = new System.Windows.Forms.TextBox();
+            this.textBoxIdCliente = new System.Windows.Forms.TextBox();
+            this.IdCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -102,6 +105,18 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pasajero";
+            // 
+            // butonDesElegir
+            // 
+            this.butonDesElegir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.butonDesElegir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.butonDesElegir.Location = new System.Drawing.Point(206, 92);
+            this.butonDesElegir.Name = "butonDesElegir";
+            this.butonDesElegir.Size = new System.Drawing.Size(91, 27);
+            this.butonDesElegir.TabIndex = 32;
+            this.butonDesElegir.Text = "Limpiar";
+            this.butonDesElegir.UseVisualStyleBackColor = true;
+            this.butonDesElegir.Click += new System.EventHandler(this.butonDesElegir_Click);
             // 
             // botonBuscar
             // 
@@ -323,6 +338,7 @@
             this.botonCargarPas.TabIndex = 36;
             this.botonCargarPas.Text = "Cargar";
             this.botonCargarPas.UseVisualStyleBackColor = true;
+            this.botonCargarPas.Click += new System.EventHandler(this.botonCargarPas_Click);
             // 
             // groupBox3
             // 
@@ -386,6 +402,7 @@
             this.dataGridPasaje.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridPasaje.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridPasaje.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IdCliente,
             this.Column1,
             this.Column2,
             this.Column3,
@@ -397,36 +414,6 @@
             this.dataGridPasaje.RowHeadersVisible = false;
             this.dataGridPasaje.Size = new System.Drawing.Size(734, 120);
             this.dataGridPasaje.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Nombre";
-            this.Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Apellido";
-            this.Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "DNI";
-            this.Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Butaca";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.HeaderText = "Ubicación";
-            this.Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            this.Column6.HeaderText = "Precio";
-            this.Column6.Name = "Column6";
             // 
             // groupBox5
             // 
@@ -447,7 +434,6 @@
             this.textBoxKg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxKg.Location = new System.Drawing.Point(24, 69);
             this.textBoxKg.Name = "textBoxKg";
-            this.textBoxKg.ReadOnly = true;
             this.textBoxKg.Size = new System.Drawing.Size(80, 20);
             this.textBoxKg.TabIndex = 34;
             // 
@@ -511,41 +497,17 @@
             this.dataGridEnco.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridEnco.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridEnco.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5,
             this.Column7});
             this.dataGridEnco.Location = new System.Drawing.Point(24, 458);
             this.dataGridEnco.Name = "dataGridEnco";
             this.dataGridEnco.RowHeadersVisible = false;
             this.dataGridEnco.Size = new System.Drawing.Size(734, 122);
             this.dataGridEnco.TabIndex = 0;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Nombre";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Apellido";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "DNI";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "Kg";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "Precio";
-            this.Column7.Name = "Column7";
             // 
             // botonCargarEnco
             // 
@@ -557,6 +519,7 @@
             this.botonCargarEnco.TabIndex = 36;
             this.botonCargarEnco.Text = "Cargar";
             this.botonCargarEnco.UseVisualStyleBackColor = true;
+            this.botonCargarEnco.Click += new System.EventHandler(this.botonCargarEnco_Click);
             // 
             // botonLimpiarEnco
             // 
@@ -598,18 +561,6 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Pasajes/Encomiendas";
             // 
-            // butonDesElegir
-            // 
-            this.butonDesElegir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.butonDesElegir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.butonDesElegir.Location = new System.Drawing.Point(206, 92);
-            this.butonDesElegir.Name = "butonDesElegir";
-            this.butonDesElegir.Size = new System.Drawing.Size(91, 27);
-            this.butonDesElegir.TabIndex = 32;
-            this.butonDesElegir.Text = "Limpiar";
-            this.butonDesElegir.UseVisualStyleBackColor = true;
-            this.butonDesElegir.Click += new System.EventHandler(this.butonDesElegir_Click);
-            // 
             // textBoxIDVuelo
             // 
             this.textBoxIDVuelo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -620,12 +571,90 @@
             this.textBoxIDVuelo.TabIndex = 80;
             this.textBoxIDVuelo.Visible = false;
             // 
+            // textBoxIdCliente
+            // 
+            this.textBoxIdCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxIdCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxIdCliente.Location = new System.Drawing.Point(406, 595);
+            this.textBoxIdCliente.Name = "textBoxIdCliente";
+            this.textBoxIdCliente.Size = new System.Drawing.Size(33, 26);
+            this.textBoxIdCliente.TabIndex = 81;
+            this.textBoxIdCliente.Visible = false;
+            // 
+            // IdCliente
+            // 
+            this.IdCliente.HeaderText = "IdCliente";
+            this.IdCliente.Name = "IdCliente";
+            this.IdCliente.Visible = false;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Nombre";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Apellido";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "DNI";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Butaca";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Ubicación";
+            this.Column5.Name = "Column5";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Precio";
+            this.Column6.Name = "Column6";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "IdCliente";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Nombre";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Apellido";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "DNI";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Kg";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Precio";
+            this.Column7.Name = "Column7";
+            // 
             // cargaDeDatos
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(776, 633);
             this.ControlBox = false;
+            this.Controls.Add(this.textBoxIdCliente);
             this.Controls.Add(this.textBoxIDVuelo);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.textBoxTipoForm);
@@ -674,12 +703,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button botonVolver;
         private System.Windows.Forms.Button botonComprar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Button botonEliminarPasaje;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox textBoxTelefonoPas;
@@ -696,11 +719,6 @@
         private System.Windows.Forms.TextBox textBoxTipoForm;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView dataGridEnco;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.Button botonCargarEnco;
         private System.Windows.Forms.Button botonLimpiarEnco;
         private System.Windows.Forms.Button botonEliminarEnco;
@@ -708,5 +726,19 @@
         private System.Windows.Forms.DateTimePicker timePickerFecha;
         private System.Windows.Forms.Button butonDesElegir;
         private System.Windows.Forms.TextBox textBoxIDVuelo;
+        private System.Windows.Forms.TextBox textBoxIdCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
     }
 }

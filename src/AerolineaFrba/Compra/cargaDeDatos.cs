@@ -13,6 +13,9 @@ namespace AerolineaFrba.Compra
 {
     public partial class cargaDeDatos : Form
     {
+        Int32 cantidadPasajes = 0;
+        Int32 cantidadKg = 0;
+
         public cargaDeDatos()
         {
             InitializeComponent();
@@ -95,30 +98,28 @@ namespace AerolineaFrba.Compra
 
         private void cargaDeDatos_Enter(object sender, EventArgs e)
         {   
-            // Si no eligio ninguna cantidad de kg para enviar
+            // Si no eligio ninguna cantidad de pasajes a comprar
             if (this.textBoxTipoForm.Text == "0") {
-                groupBox4.Text = "Encomiendas";
                 groupBox3.Enabled = false;
                 this.botonLimpiarPas.Enabled = false;
                 this.botonEliminarPasaje.Enabled = false;
                 this.botonCargarPas.Enabled = false;
                 this.dataGridPasaje.Enabled = false;
+                this.comboBoxNumeroButaca.Enabled = false;
             }
-            //Si no eligio ninguna cantidad de pasajes a comprar
+            //Si no eligio ninguna cantidad de kg a enviar
             if (this.textBox1.Text == "0") {
-                groupBox4.Text = "Pasajes";
                 groupBox5.Enabled = false;
                 this.botonCargarEnco.Enabled = false;
                 this.botonEliminarEnco.Enabled = false;
                 this.botonLimpiarEnco.Enabled = false;
                 this.dataGridEnco.Enabled = false;
-                funcionesComunes.llenarCombobox(this.comboBoxNumeroButaca, "NUMERO", @"SELECT b.ID,b.NUMERO
-                                                                                    FROM AERO.butacas_por_vuelo bxv
-                                                                                    join AERO.butacas b on b.ID = bxv.BUTACA_ID
-                                                                                    where bxv.VUELO_ID =" + this.textBoxIDVuelo.Text + " AND bxv.ESTADO = 'LIBRE' ");
+                
             }
             if (this.textBoxNombrePas.Text != "")
                 this.textBoxDniPas.Enabled = false;
+            this.cantidadPasajes = Int32.Parse(this.textBoxTipoForm.Text);
+            this.cantidadKg = Int32.Parse(this.textBox1.Text);
         }
 
         private void butonDesElegir_Click(object sender, EventArgs e)
@@ -140,8 +141,91 @@ namespace AerolineaFrba.Compra
 
         private void settearUbicacion(object sender, EventArgs e)
         {
-            //this.textBoxUbicacion.Text = SqlConnector.obtenerTablaSegunConsultaString(@"SELECT b.TIPO
-                                         //FROM AERO.butacas b where b.ID = " + this.comboBoxNumeroButaca.SelectedValue).Rows[0].; 
+            DataGridView tabla = new DataGridView();
+            tabla.DataSource = SqlConnector.obtenerTablaSegunConsultaString(@"SELECT b.TIPO as Tipo
+                                         FROM AERO.butacas b where b.ID = " + this.comboBoxNumeroButaca.SelectedValue);
+            this.textBoxUbicacion.Text = tabla.SelectedCells[0].Value.ToString();
+        }
+
+        private void botonCargarPas_Click(object sender, EventArgs e)
+        {
+            if (validarCargaPasaje())
+            {
+                MessageBox.Show(" Carga valida de pasaje");
+                this.limpiarPasaje();
+            }
+            else
+            {
+                MessageBox.Show(" Carga invalida de pasaje");
+            }
+        }
+
+        private void limpiarPasaje()
+        {
+            this.limpiarDatosPasajero();
+            this.resetearComboBox();
+        }
+
+        private void resetearComboBox()
+        {
+            this.comboBoxNumeroButaca.DataSource = null;
+            funcionesComunes.llenarCombobox(this.comboBoxNumeroButaca, "NUMERO", @"SELECT b.ID,b.NUMERO FROM AERO.butacas_por_vuelo bxv
+            join AERO.butacas b on b.ID = bxv.BUTACA_ID where bxv.VUELO_ID = " + this.textBoxIDVuelo.Text + "AND bxv.ESTADO = 'LIBRE'");
+        }
+
+        private bool validarCargaPasaje()
+        {
+            if(!ingresoPasajero())
+                return false;
+
+            if (!seleccionButaca())
+                return false;
+            return true;
+        }
+
+        private bool seleccionButaca()
+        {
+            return this.comboBoxNumeroButaca.SelectedText != "";
+        }
+
+        private bool ingresoPasajero()
+        {
+            return this.textBoxIdCliente.Text != "";
+        }
+
+        private void botonCargarEnco_Click(object sender, EventArgs e)
+        {
+            if (validarCargaEncomienda())
+            {
+                MessageBox.Show(" Carga valida encomienda");
+                this.limpiarEncomienda();
+            }
+            else
+            {
+                MessageBox.Show(" Carga invalida encomienda");
+            }
+        }
+
+        private void limpiarEncomienda()
+        {
+            this.limpiarDatosPasajero();
+            this.textBoxIdCliente.Text = "";
+            this.textBoxKg.Text = "";
+        }
+
+        private bool validarCargaEncomienda()
+        {
+            if (!ingresoPasajero())
+                return false;
+
+            if (!seleccionKg())
+                return false;
+            return true;
+        }
+
+        private bool seleccionKg()
+        {
+            return this.textBoxKg.Text != "";
         }       
     }
 

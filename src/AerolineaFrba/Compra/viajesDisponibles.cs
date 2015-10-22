@@ -44,11 +44,11 @@ namespace AerolineaFrba.Compra
                 MessageBox.Show("Debes eleccionar una cantidad de pasajes o kg");
                 return false;
             }
-            if (this.numericUpDownPasajes.Value <= Int32.Parse( dataGridViajes.SelectedCells[5].Value.ToString())) {
+            if (this.numericUpDownPasajes.Value > Int32.Parse( dataGridViajes.SelectedCells[5].Value.ToString())) {
                 MessageBox.Show("No hay esa cantidad de pasajes disponibles para ese vuelo");
                 return false;
             }
-            if (this.numericUpDownEncomiendas.Value <= Int32.Parse(dataGridViajes.SelectedCells[6].Value.ToString()))
+            if (this.numericUpDownEncomiendas.Value > Int32.Parse(dataGridViajes.SelectedCells[6].Value.ToString()))
             {
                 MessageBox.Show("No hay esa cantidad de Kg disponibles para ese vuelo");
                 return false;

@@ -140,6 +140,7 @@ namespace AerolineaFrba.Registro_de_Usuario
         private void setearParaCompras()
         {
             Form anterior = funcionesComunes.getVentanaAnterior();
+            ((TextBox)anterior.Controls["textBoxIdCliente"]).Text = dataGridListadoClientes.SelectedCells[0].Value.ToString();
             foreach (Control gb in anterior.Controls)
             {
                 if (gb is GroupBox)

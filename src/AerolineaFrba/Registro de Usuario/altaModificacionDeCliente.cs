@@ -76,6 +76,7 @@ namespace AerolineaFrba.Registro_de_Usuario
                     if (this.textBoxTipoForm.Text == "1")
                     {
                         this.setearParaCompras();
+                        return ;
                     }
                     else
                        resultado=  this.persistirCliente();
@@ -105,6 +106,7 @@ namespace AerolineaFrba.Registro_de_Usuario
         private void setearParaCompras()
         {
             Form anterior = funcionesComunes.getVentanaAnterior();
+            ((TextBox)anterior.Controls["textBoxIdCliente"]).Text = "0";
             foreach (Control gb in anterior.Controls)
             {
                 if (gb is GroupBox)
