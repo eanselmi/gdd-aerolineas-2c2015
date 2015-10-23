@@ -51,7 +51,7 @@
             // 
             this.botonBaja.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.botonBaja.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonBaja.Location = new System.Drawing.Point(13, 425);
+            this.botonBaja.Location = new System.Drawing.Point(12, 425);
             this.botonBaja.Name = "botonBaja";
             this.botonBaja.Size = new System.Drawing.Size(117, 46);
             this.botonBaja.TabIndex = 5;
@@ -63,7 +63,7 @@
             // 
             this.botonVolver.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.botonVolver.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonVolver.Location = new System.Drawing.Point(200, 425);
+            this.botonVolver.Location = new System.Drawing.Point(218, 425);
             this.botonVolver.Name = "botonVolver";
             this.botonVolver.Size = new System.Drawing.Size(117, 46);
             this.botonVolver.TabIndex = 8;
@@ -75,7 +75,7 @@
             // 
             this.botonModificacion.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.botonModificacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonModificacion.Location = new System.Drawing.Point(408, 425);
+            this.botonModificacion.Location = new System.Drawing.Point(441, 425);
             this.botonModificacion.Name = "botonModificacion";
             this.botonModificacion.Size = new System.Drawing.Size(117, 46);
             this.botonModificacion.TabIndex = 9;
@@ -88,7 +88,7 @@
             this.botonLimpiar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.botonLimpiar.AutoSize = true;
             this.botonLimpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonLimpiar.Location = new System.Drawing.Point(607, 425);
+            this.botonLimpiar.Location = new System.Drawing.Point(658, 425);
             this.botonLimpiar.Name = "botonLimpiar";
             this.botonLimpiar.Size = new System.Drawing.Size(117, 46);
             this.botonLimpiar.TabIndex = 11;
