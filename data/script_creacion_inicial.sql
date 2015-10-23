@@ -1311,7 +1311,7 @@ AS BEGIN
 
 /*creo tabla temporal, para poder insertar de ambas queries*/
 create table #tablaMillas(
-FECHA_COMPRA datetime,
+Fecha datetime,
 Motivo varchar(255),
 Millas int
 )
@@ -1579,7 +1579,8 @@ EXEC AERO.addFuncionalidad @rol='cliente', @func ='Realizar Canje';
 EXEC AERO.addFuncionalidad @rol='cliente', @func ='Alta de Tarjeta de Crédito';
 
 -----------------------------------------------------------------------
---PRUEBAS DE LISTADOS ESTADISTICOS
+--PRUEBAS DE LISTADOS ESTADISTICOS 
+/*
 --set de datos para prueba 1
 insert into AERO.clientes values(2,'pepe','asd','37013085','asd','123','asd@gmail.com',CONVERT(datetime,'20151215',109),0)
 --select * from AERO.clientes
@@ -1687,3 +1688,4 @@ GO
 
 EXEC AERO.top5AeronavesFueraDeServicio @fechaFrom='20150101', @fechaTo ='20150601';
 GO
+*/

@@ -36,15 +36,25 @@ namespace AerolineaFrba.Consulta_Millas
         {
             String dni = this.textBoxDNI.Text;
             if (dni != "") {
-                List<string> lista = new List<string>();
-                lista.Add("@dni");
-                DataTable resultado = SqlConnector.obtenerTablaSegunProcedure("AERO.consultarMillas", lista, dni);
-                dataGridConsultaMillas.DataSource = resultado;
-                Int32 millas = 0;
-                foreach (DataRow row in resultado.Rows){
-                    millas += Int32.Parse(row.ItemArray[2].ToString());
+                DataTable tablaClientes = SqlConnector.obtenerTablaSegunConsultaString(@"select ID as Id 
+                from AERO.clientes where BAJA = 0 AND DNI = " + dni);
+                if (tablaClientes.Rows.Count > 0)
+                {
+                    List<string> lista = new List<string>();
+                    lista.Add("@dni");
+                    DataTable resultado = SqlConnector.obtenerTablaSegunProcedure("AERO.consultarMillas", lista, dni);
+                    dataGridConsultaMillas.DataSource = resultado;
+                    Int32 millas = 0;
+                    foreach (DataRow row in resultado.Rows)
+                    {
+                        millas += Int32.Parse(row.ItemArray[2].ToString());
+                    }
+                    textBoxTotal.Text = millas.ToString();
                 }
-                textBoxTotal.Text = millas.ToString();
+                else
+                {
+                    MessageBox.Show("No se encuentra el cliente. Por favor ingrese nuevamente el DNI");
+                }
             }else 
                 MessageBox.Show("Complete los campos requeridos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }

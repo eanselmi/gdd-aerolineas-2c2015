@@ -20,40 +20,9 @@ namespace AerolineaFrba.Tarjeta
             funcionesComunes.llenarCombobox(this.comboBoxTipoTarjeta, "NOMBRE", "select ID, NOMBRE from AERO.tipos_tarjeta");
         }
 
-        private void botonCancelar_Click(object sender, EventArgs e)
-        {
-            funcionesComunes.habilitarAnterior();
-        }
-
         //este boton borra el contenido de todos los campos
-        private void botonLimpiar_Click(object sender, EventArgs e)
-        {
-            this.textBoxDni.Clear();
-            this.textBoxNumero.Clear();
-            this.comboBoxTipoTarjeta.SelectedIndex = -1;
-            this.dataGridCliente.DataSource = null;
-            this.fechavencimiento.ResetText();
-        }
 
-        private void botonGuardar_Click(object sender, EventArgs e)
-        {
-            if (validarDatos()) {
-                List<string> lista = new List<string>();
-                lista.Add("@idCliente");
-                lista.Add("@nroTarjeta");
-                lista.Add("@idTipo");
-                lista.Add("@fechaVto");
-                bool resultado = SqlConnector.executeProcedure("AERO.altaTarjeta", lista, Int32.Parse(dataGridCliente.SelectedCells[0].Value.ToString()), Int32.Parse(this.textBoxNumero.Text),
-                                              this.comboBoxTipoTarjeta.SelectedValue, String.Format("{0:yyyyMMdd HH:mm:ss}", this.fechavencimiento.Value));
-                if(resultado){
-                    MessageBox.Show("Se dio de alta la tarjeta exitosamente");
-                    funcionesComunes.habilitarAnterior();
-                }
-                 
-                
-            }
-        }
-
+    
         private void consultarContactos()
         {
             String dni = this.textBoxDni.Text;
@@ -98,11 +67,11 @@ namespace AerolineaFrba.Tarjeta
 
         private bool validarDatos()
         {
-            Int32 numero;
+            long numero;
             if (this.textBoxNumero.Text == "")
                 numero = 0;
             else
-                numero = Int32.Parse(this.textBoxNumero.Text);
+                numero = long.Parse(this.textBoxNumero.Text);
             if (this.dataGridCliente.DataSource != null && numero > 0 && this.comboBoxTipoTarjeta.SelectedValue != null) {
                 if (this.fechavencimiento.Value <= DateTime.Today.AddDays(1))
                 {
@@ -131,5 +100,43 @@ namespace AerolineaFrba.Tarjeta
         {
             consultarContactos();
         }
+
+        private void botonGuardar_Click(object sender, EventArgs e)
+        {
+            if (validarDatos())
+            {
+                List<string> lista = new List<string>();
+                lista.Add("@idCliente");
+                lista.Add("@nroTarjeta");
+                lista.Add("@idTipo");
+                lista.Add("@fechaVto");
+                bool resultado = SqlConnector.executeProcedure("AERO.altaTarjeta", lista, long.Parse(dataGridCliente.SelectedCells[0].Value.ToString()), long.Parse(this.textBoxNumero.Text),
+                                              this.comboBoxTipoTarjeta.SelectedValue, String.Format("{0:yyyyMMdd HH:mm:ss}", this.fechavencimiento.Value));
+                if (resultado)
+                {
+                    MessageBox.Show("Se dio de alta la tarjeta exitosamente");
+                    funcionesComunes.habilitarAnterior();
+                }
+
+
+            }
+        }
+
+        private void botonCancelar_Click(object sender, EventArgs e)
+        {
+            funcionesComunes.habilitarAnterior();
+        }
+
+        private void botonLimpiar_Click(object sender, EventArgs e)
+        {
+            this.textBoxDni.Clear();
+            this.textBoxNumero.Clear();
+            this.comboBoxTipoTarjeta.SelectedIndex = -1;
+            this.dataGridCliente.DataSource = null;
+            this.fechavencimiento.ResetText();
+        }
+
+
+
     }
 }

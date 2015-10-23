@@ -25,7 +25,16 @@ namespace AerolineaFrba.Compra
 
         private void botonConfirmar_Click(object sender, EventArgs e)
         {
-            funcionesComunes.deshabilitarVentanaYAbrirNueva(new Compra.procesoCompraExitoso());
+            if (comboBoxCuotas.SelectedIndex != -1 && textBoxCodigo.Text != "")
+            {
+                /* Si guarda bien en boleto de compra el pago entonces muestra el procesocompraexitoso */
+                funcionesComunes.deshabilitarVentanaYAbrirNueva(new Compra.procesoCompraExitoso());
+            }
+            else
+            {
+                MessageBox.Show("Complete los campos requeridos");
+            }
+           
         }
 
         private void textBoxDni_KeyPress(object sender, KeyPressEventArgs e)
@@ -101,7 +110,7 @@ namespace AerolineaFrba.Compra
                     timePickerNacimiento.Value = (DateTime)row["Fecha de Nacimiento"];
 
                     DataTable tablaTarjetas = SqlConnector.obtenerTablaSegunConsultaString(@"select tc.ID as Id, tc.NUMERO as Número, tc.FECHA_VTO as Vencimiento, t.NOMBRE as Nombre, t.CUOTAS as cuotas
-                    from AERO.tarjetas_de_credito tc inner join AERO.tipos_tarjeta t on tc.TIPO_TARJETA_ID = t.ID where tc.CLIENTE_ID =" + textBoxIdTitular);
+                    from AERO.tarjetas_de_credito tc inner join AERO.tipos_tarjeta t on tc.TIPO_TARJETA_ID = t.ID where tc.CLIENTE_ID =" + Convert.ToInt32(textBoxIdTitular.Text));
                     if (tablaTarjetas.Rows.Count > 0)
                     {
                         DataRow rowTarj = tablaTarjetas.Rows[0];

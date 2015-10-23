@@ -52,6 +52,9 @@
             this.textBoxDni = new System.Windows.Forms.TextBox();
             this.botonLimpiarTitular = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.botonNuevaTarj = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.comboBoxCuotas = new System.Windows.Forms.ComboBox();
             this.textBoxTipo = new System.Windows.Forms.TextBox();
             this.textBoxIdTarj = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -63,9 +66,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.botonVolver = new System.Windows.Forms.Button();
             this.botonConfirmar = new System.Windows.Forms.Button();
-            this.comboBoxCuotas = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.botonNuevaTarj = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -356,7 +359,9 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label16);
             this.groupBox3.Controls.Add(this.botonNuevaTarj);
+            this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.label13);
             this.groupBox3.Controls.Add(this.comboBoxCuotas);
             this.groupBox3.Controls.Add(this.textBoxTipo);
@@ -375,6 +380,38 @@
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Tarjeta";
+            // 
+            // botonNuevaTarj
+            // 
+            this.botonNuevaTarj.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.botonNuevaTarj.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.botonNuevaTarj.Location = new System.Drawing.Point(414, 18);
+            this.botonNuevaTarj.Name = "botonNuevaTarj";
+            this.botonNuevaTarj.Size = new System.Drawing.Size(62, 42);
+            this.botonNuevaTarj.TabIndex = 64;
+            this.botonNuevaTarj.Text = "Nueva";
+            this.botonNuevaTarj.UseVisualStyleBackColor = true;
+            this.botonNuevaTarj.Click += new System.EventHandler(this.botonNuevaTarj_Click);
+            // 
+            // label13
+            // 
+            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(367, 70);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(60, 20);
+            this.label13.TabIndex = 63;
+            this.label13.Text = "Cuotas";
+            // 
+            // comboBoxCuotas
+            // 
+            this.comboBoxCuotas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxCuotas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxCuotas.Location = new System.Drawing.Point(371, 93);
+            this.comboBoxCuotas.Name = "comboBoxCuotas";
+            this.comboBoxCuotas.Size = new System.Drawing.Size(46, 28);
+            this.comboBoxCuotas.TabIndex = 62;
             // 
             // textBoxTipo
             // 
@@ -503,37 +540,38 @@
             this.botonConfirmar.UseVisualStyleBackColor = true;
             this.botonConfirmar.Click += new System.EventHandler(this.botonConfirmar_Click);
             // 
-            // comboBoxCuotas
+            // label14
             // 
-            this.comboBoxCuotas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCuotas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBoxCuotas.Location = new System.Drawing.Point(350, 93);
-            this.comboBoxCuotas.Name = "comboBoxCuotas";
-            this.comboBoxCuotas.Size = new System.Drawing.Size(46, 28);
-            this.comboBoxCuotas.TabIndex = 62;
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Red;
+            this.label14.Location = new System.Drawing.Point(360, 388);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(140, 16);
+            this.label14.TabIndex = 79;
+            this.label14.Text = "*Campos Obligatorios";
             // 
-            // label13
+            // label15
             // 
-            this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(346, 70);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(60, 20);
-            this.label13.TabIndex = 63;
-            this.label13.Text = "Cuotas";
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Red;
+            this.label15.Location = new System.Drawing.Point(344, 93);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(15, 20);
+            this.label15.TabIndex = 78;
+            this.label15.Text = "*";
             // 
-            // botonNuevaTarj
+            // label16
             // 
-            this.botonNuevaTarj.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonNuevaTarj.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonNuevaTarj.Location = new System.Drawing.Point(414, 18);
-            this.botonNuevaTarj.Name = "botonNuevaTarj";
-            this.botonNuevaTarj.Size = new System.Drawing.Size(62, 42);
-            this.botonNuevaTarj.TabIndex = 64;
-            this.botonNuevaTarj.Text = "Nueva";
-            this.botonNuevaTarj.UseVisualStyleBackColor = true;
-            this.botonNuevaTarj.Click += new System.EventHandler(this.botonNuevaTarj_Click);
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.Red;
+            this.label16.Location = new System.Drawing.Point(423, 93);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(15, 20);
+            this.label16.TabIndex = 79;
+            this.label16.Text = "*";
             // 
             // registrarPagoTarjeta
             // 
@@ -541,6 +579,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(512, 461);
             this.ControlBox = false;
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.botonVolver);
             this.Controls.Add(this.botonConfirmar);
             this.Controls.Add(this.botonLimpiarTitular);
@@ -556,6 +595,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -599,5 +639,8 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox comboBoxCuotas;
         private System.Windows.Forms.Button botonNuevaTarj;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
     }
 }
